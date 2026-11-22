@@ -19,7 +19,20 @@ EMU = os.path.normpath(os.environ.get("FOA_AZAHAR_DIR") or os.path.join(ROOT, ".
 sys.path.insert(0, os.path.join(EMU, "scripting"))
 from AzaharRPC import AzaharRPC  # noqa: E402
 
-NM = os.path.join(os.environ.get("DEVKITARM") or r"C:\msys64\opt\devkitpro\devkitARM", "bin", "arm-none-eabi-nm")
+def find_nm():
+    import shutil
+    cands = [os.path.join(os.environ.get("DEVKITARM", ""), "bin", "arm-none-eabi-nm"),
+             shutil.which("arm-none-eabi-nm") or "",
+             os.path.join(os.environ.get("SystemDrive", "C:") + os.sep, "msys64", "opt", "devkitpro", "devkitARM", "bin",
+                          "arm-none-eabi-nm.exe"),
+             os.path.join(os.environ.get("SystemDrive", "C:") + os.sep, "devkitPro", "devkitARM", "bin", "arm-none-eabi-nm.exe")]
+    for c in cands:
+        if c and (os.path.exists(c) or os.path.exists(c + ".exe")):
+            return c
+    raise SystemExit("arm-none-eabi-nm not found: install devkitPro 3ds-dev or set DEVKITARM")
+
+
+NM = find_nm()
 SDLOG = os.path.join(EMU, "user", "sdmc", "foa_log.txt")
 
 
