@@ -1,0 +1,22 @@
+<Root>
+    <!-- Animations used during the intro and ending cutscenes for the Varkonos fight. -->
+    <File Name="object_varkon_anime2" Segment="6">
+        <Animation Name="gVarkonosTurnAroundAnim" Offset="0x1F58"/> <!-- Original name is "G_furimuku" ("to turn around") -->
+        <Animation Name="gVarkonosStandIdleAnim" Offset="0x3018"/> <!-- Original name is "G_n_wait" -->
+        <Animation Name="gVarkonosStandUpFromOrganAnim" Offset="0x4304"/> <!-- Original name is "G_okosu" ("to stand up") -->
+        <Animation Name="gVarkonosStopPlayingOrganAnim" Offset="0x4F64"/> <!-- Original name is "G_or_end" -->
+        <Animation Name="gVarkonosPlayOrganAnim" Offset="0x5FFC"/> <!-- Original name is "G_or_hikuL" ("to play (a keyboard instrument)") -->
+        <Animation Name="gVarkonosLeanOnOrganAnim" Offset="0x6AF4"/> <!-- Original name is "G_tame" ("to hesitate") -->
+        <Animation Name="gVarkonosRaiseHandStartAnim" Offset="0x7268"/> <!-- Original name is "G_te_ageru" ("to raise") -->
+        <Animation Name="gVarkonosRaiseHandLoopAnim" Offset="0x7A64"/> <!-- Original name is "G_te_hikaru" ("to shine") -->
+        <Animation Name="gVarkonosStandBackwardsAnim" Offset="0x89F8"/> <!-- Original name is "G_usiro_wait" ("back-facing") -->
+        <Animation Name="gVarkonosLaughWhileLeaningAnim" Offset="0x9AE0"/> <!-- Unused. Original name is "G_warau" ("to laugh") -->
+        <Animation Name="gVarkonosCollapseAnim" Offset="0xADDC"/> <!-- Original name is "g_demo_down" -->
+        <Animation Name="gVarkonosVomitStartAnim" Offset="0xB668"/> <!-- Original name is "g_demo_hedohaki" ("to vomit") -->
+        <Animation Name="gVarkonosVomitLoopAnim" Offset="0xBE38"/> <!-- Original name is "g_demo_hedohaki_wait" -->
+        <Animation Name="gVarkonosDefeatedStartAnim" Offset="0xEA00"/> <!-- Original name is "g_demo_hizaoti" ("fall on your knees") -->
+        <Animation Name="gVarkonosDefeatedLoopAnim" Offset="0xF19C"/> <!-- Original name is "g_demo_hizaoti_wait" -->
+        <Animation Name="gVarkonosYellStartAnim" Offset="0x10298"/> <!-- Original name is "g_demo_sakebi" ("shout, yell") -->
+        <Animation Name="gVarkonosYellLoopAnim" Offset="0x10514"/> <!-- Original name is "g_demo_sakebi_wait" -->
+    </File>
+</Root>

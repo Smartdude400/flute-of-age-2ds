@@ -1,0 +1,201 @@
+<Root>
+    <File Name="object_fw" Segment="6">
+        <!-- Ember Dancer Enflamed Skeleton -->
+        <Skeleton Name="gEmberDancerSkel" Type="Flex" LimbType="Standard" Offset="0x5810"/>
+
+        <Limb Name="gEmberDancerRootLimb" LimbType="Standard" Offset="0x5670"/>
+        <Limb Name="gEmberDancerLowerBodyRootLimb" LimbType="Standard" Offset="0x567C"/>
+        <Limb Name="gEmberDancerUpperRightLegLimb" LimbType="Standard" Offset="0x5688"/>
+        <Limb Name="gEmberDancerLowerRightLegBaseLimb" LimbType="Standard" Offset="0x5694"/>
+        <Limb Name="gEmberDancerRightStiltLimb" LimbType="Standard" Offset="0x56A0"/>
+        <Limb Name="gEmberDancerLowerRightLegLimb" LimbType="Standard" Offset="0x56AC"/>
+        <Limb Name="gEmberDancerUpperLeftLegLimb" LimbType="Standard" Offset="0x56B8"/>
+        <Limb Name="gEmberDancerLowerLeftLegBaseLimb" LimbType="Standard" Offset="0x56C4"/>
+        <Limb Name="gEmberDancerLeftStiltLimb" LimbType="Standard" Offset="0x56D0"/>
+        <Limb Name="gEmberDancerLowerLeftLegLimb" LimbType="Standard" Offset="0x56DC"/>
+        <Limb Name="gEmberDancerUpperBodyRootLimb" LimbType="Standard" Offset="0x56E8"/>
+        <Limb Name="gEmberDancerDressLimb" LimbType="Standard" Offset="0x56F4"/>
+        <Limb Name="gEmberDancerFuseLimb" LimbType="Standard" Offset="0x5700"/>
+        <Limb Name="gEmberDancerRightUpperArmLimb" LimbType="Standard" Offset="0x570C"/>
+        <Limb Name="gEmberDancerRightForearmLimb" LimbType="Standard" Offset="0x5718"/>
+        <Limb Name="gEmberDancerRightSwordLimb" LimbType="Standard" Offset="0x5724"/>
+        <Limb Name="gEmberDancerLeftUpperArmLimb" LimbType="Standard" Offset="0x5730"/>
+        <Limb Name="gEmberDancerLeftForearmLimb" LimbType="Standard" Offset="0x573C"/>
+        <Limb Name="gEmberDancerLeftSwordLimb" LimbType="Standard" Offset="0x5748"/>
+        <Limb Name="gEmberDancerHeadLimb" LimbType="Standard" Offset="0x5754"/>
+        <Limb Name="gEmberDancerTorsoLimb" LimbType="Standard" Offset="0x5760"/>
+        <Limb Name="gEmberDancerUpperFireHairLimb" LimbType="Standard" Offset="0x576C"/>
+        <Limb Name="gEmberDancerMiddleFireHair1Limb" LimbType="Standard" Offset="0x5778"/>
+        <Limb Name="gEmberDancerMiddleFireHair2Limb" LimbType="Standard" Offset="0x5784"/>
+        <Limb Name="gEmberDancerMiddleFireHair3Limb" LimbType="Standard" Offset="0x5790"/>
+        <Limb Name="gEmberDancerLowerFireHairLimb" LimbType="Standard" Offset="0x579C"/>
+
+        <!-- Ember Dancer Enflamed DisplayLists -->
+        <DList Name="gEmberDancerUpperRightLegDL" Offset="0x3FC0"/>
+        <DList Name="gEmberDancerRightStiltDL" Offset="0x41B8"/>
+        <DList Name="gEmberDancerLowerRightLegDL" Offset="0x40C8"/>
+        <DList Name="gEmberDancerUpperLeftLegDL" Offset="0x4260"/>
+        <DList Name="gEmberDancerLeftStiltDL" Offset="0x4498"/>
+        <DList Name="gEmberDancerLowerLeftLegDL" Offset="0x4368"/>
+        <DList Name="gEmberDancerDressDL" Offset="0x4640"/>
+        <DList Name="gEmberDancerFuseDL" Offset="0x47B8"/>
+        <DList Name="gEmberDancerRightUpperArmDL" Offset="0x48C0"/>
+        <DList Name="gEmberDancerRightForearmDL" Offset="0x4A00"/>
+        <DList Name="gEmberDancerRightSwordDL" Offset="0x4B38"/>
+        <DList Name="gEmberDancerLeftUpperArmDL" Offset="0x4C98"/>
+        <DList Name="gEmberDancerLeftForearmDL" Offset="0x4DD8"/>
+        <DList Name="gEmberDancerLeftSwordDL" Offset="0x4F08"/>
+        <DList Name="gEmberDancerHeadDL" Offset="0x5058"/>
+        <DList Name="gEmberDancerTorsoDL" Offset="0x4540"/>
+        <DList Name="gEmberDancerUpperFireHairDL" Offset="0x5160"/>
+        <DList Name="gEmberDancerMiddleFireHair1DL" Offset="0x5248"/>
+        <DList Name="gEmberDancerMiddleFireHair2DL" Offset="0x5348"/>
+        <DList Name="gEmberDancerMiddleFireHair3DL" Offset="0x5448"/>
+        <DList Name="gEmberDancerLowerFireHairDL" Offset="0x5548"/>
+
+        <!-- Ember Dancer Core Skeleton -->
+        <Skeleton Name="gEmberDancerCoreSkel" Type="Flex" LimbType="Standard" Offset="0x7C30"/>
+
+        <!-- Ember Dancer Core Limbs -->
+        <Limb Name="gEmberDancerCoreRootLimb" LimbType="Standard" Offset="0x7B90"/>
+        <Limb Name="gEmberDancerCoreBodyLimb" LimbType="Standard" Offset="0x7B9C"/>
+        <Limb Name="gEmberDancerCoreFuseLimb" LimbType="Standard" Offset="0x7BA8"/>
+        <Limb Name="gEmberDancerCoreLegsRootLimb" LimbType="Standard" Offset="0x7BB4"/>
+        <Limb Name="gEmberDancerCoreUpperRightLegLimb" LimbType="Standard" Offset="0x7BC0"/>
+        <Limb Name="gEmberDancerCoreLowerRightLegLimb" LimbType="Standard" Offset="0x7BCC"/>
+        <Limb Name="gEmberDancerCoreRightFootLimb" LimbType="Standard" Offset="0x7BD8"/>
+        <Limb Name="gEmberDancerCoreUpperLeftLegLimb" LimbType="Standard" Offset="0x7BE4"/>
+        <Limb Name="gEmberDancerCoreLowerLeftLegLimb" LimbType="Standard" Offset="0x7BF0"/>
+        <Limb Name="gEmberDancerCoreLeftFootLimb" LimbType="Standard" Offset="0x7BFC"/>
+
+        <!-- Ember Dancer Core DisplayLists -->
+        <DList Name="gEmberDancerCoreBodyDL" Offset="0x7410"/>
+        <DList Name="gEmberDancerCoreFuseDL" Offset="0x7510"/>
+        <DList Name="gEmberDancerCoreUpperRightLegDL" Offset="0x7618"/>
+        <DList Name="gEmberDancerCoreLowerRightLegDL" Offset="0x7680"/>
+        <DList Name="gEmberDancerCoreRightFootDL" Offset="0x7708"/>
+        <DList Name="gEmberDancerCoreUpperLeftLegDL" Offset="0x7790"/>
+        <DList Name="gEmberDancerCoreLowerLeftLegDL" Offset="0x77F8"/>
+        <DList Name="gEmberDancerCoreLeftFootDL" Offset="0x7880"/>
+
+        <!-- Particle DisplayLists -->
+        <DList Name="gEmberDancerDL_7928" Offset="0x7928"/>
+        <DList Name="gEmberDancerSquareParticleDL" Offset="0x7938"/>
+        <DList Name="gEmberDancerDL_79F8" Offset="0x79F8"/>
+        <DList Name="gEmberDancerTriangleParticleDL" Offset="0x7A78"/>
+
+        <!-- Ember Dancer DisplayList Textures -->
+        <Texture Name="gEmberDancerBlueFlameTex" Format="rgba16" Width="4" Height="4" Offset="0x10D0"/>
+        <Texture Name="gEmberDancerFireTex" Format="i8" Width="32" Height="64" Offset="0x10F0"/>
+        <Texture Name="gEmberDancerFirePatternTex" Format="i8" Width="32" Height="64" Offset="0x18F0"/>
+        <Texture Name="gEmberDancerFuseTex" Format="rgba16" Width="16" Height="32" Offset="0x20F0"/>
+        <Texture Name="gEmberDancerSwordHiltTex" Format="rgba16" Width="16" Height="16" Offset="0x24F0"/>
+        <Texture Name="gEmberDancerCoreBodyTex" Format="rgba16" Width="16" Height="32" Offset="0x26F0"/>
+        <Texture Name="object_fw_007A90_Tex" Format="i8" Width="16" Height="16" Offset="0x7A90"/>
+
+        <!-- Ember Dancer Animations -->
+        <Animation Name="gEmberDancerCastingFireAnim" Offset="0x10B4"/>
+        <Animation Name="gEmberDancerBackflipAnim" Offset="0x5C64"/>
+        <Animation Name="gEmberDancerGettingUpAnim" Offset="0x6044"/>
+        <Animation Name="gEmberDancerChasingAnim" Offset="0x6A18"/>
+        <Animation Name="gEmberDancerTwirlAnim" Offset="0x6B64"/>
+        <Animation Name="gEmberDancerCoreInitRunCycleAnim" Offset="0x6CF8"/>
+        <Animation Name="gEmberDancerCoreRunCycleAnim" Offset="0x7CD0"/>
+        <Animation Name="gEmberDancerCoreEndRunCycleAnim" Offset="0x7DC8"/>
+
+        <!-- Vertices -->
+        <Array Name="gEmberDancerRightStiltVtx" Count="12" Offset="0x2AF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLowerRightLegVtx" Count="9" Offset="0x2BB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerUpperRightLegVtx" Count="12" Offset="0x2C40">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLeftStiltVtx" Count="12" Offset="0x2D00">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLowerLeftLegVtx" Count="12" Offset="0x2DC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerUpperLeftLegVtx" Count="12" Offset="0x2E80">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerDressVtx" Count="30" Offset="0x2F40">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerFuseVtx" Count="23" Offset="0x3120">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerRightSwordVtx" Count="40" Offset="0x3290">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerRightForearmVtx" Count="16" Offset="0x3510">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerRightUpperArmVtx" Count="16" Offset="0x3610">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLeftSwordVtx" Count="40" Offset="0x3710">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLeftForearmVtx" Count="13" Offset="0x3990">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLeftUpperArmVtx" Count="16" Offset="0x3A60">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerHeadVtx" Count="16" Offset="0x3B60">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerTorsoVtx" Count="20" Offset="0x3C60">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerLowerFireHairVtx" Count="10" Offset="0x3DA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerMiddleFireHair3Vtx" Count="6" Offset="0x3E40">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerMiddleFireHair2Vtx" Count="6" Offset="0x3EA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerMiddleFireHair1Vtx" Count="6" Offset="0x3F00">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerUpperFireHairVtx" Count="6" Offset="0x3F60">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreFuseVtx" Count="23" Offset="0x6D10">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreBodyVtx" Count="20" Offset="0x6E80">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreRightFootVtx" Count="12" Offset="0x6FC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreLowerRightLegVtx" Count="12" Offset="0x7080">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreUpperRightLegVtx" Count="8" Offset="0x7140">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreLeftFootVtx" Count="17" Offset="0x71C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreLowerLeftLegVtx" Count="12" Offset="0x72D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerCoreUpperLeftLegVtx" Count="8" Offset="0x7390">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerSquareParticleVtx" Count="4" Offset="0x7988">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberDancerTriangleParticleVtx" Count="3" Offset="0x79C8">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

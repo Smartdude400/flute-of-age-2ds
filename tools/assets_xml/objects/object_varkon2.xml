@@ -1,0 +1,313 @@
+<Root>
+    <!-- Assets for Varkon -->
+    <File Name="object_varkon2" Segment="6">
+        <!-- Varkon Animations -->
+        <Animation Name="gVarkonFinalBlowAnim" Offset="0x3B1C"/> <!-- Original name is "Last_hit_motion1" -->
+        <Animation Name="gVarkonDeadStartAnim" Offset="0x7288"/> <!-- Original name is "Last_hit_motion2" -->
+        <Animation Name="gVarkonDeadLoopAnim" Offset="0x8EB8"/> <!-- Original name is "Last_mogaki" ("writhing") -->
+        <Animation Name="gVarkonGuardToWalk" Offset="0x9654"/> <!-- Unused. Original name is "gn2_K_to_walk" -->
+        <Animation Name="gVarkonLeftSwordSwingAnim" Offset="0xADD0"/> <!-- Original name is "gn2_Katack01L" -->
+        <Animation Name="gVarkonRightSwordSwingAnim" Offset="0xCAF8"/> <!-- Original name is "gn2_Katack01R" -->
+        <Animation Name="gVarkonDamageAnim" Offset="0xDFF0"/> <!-- Original name is "gn2_Kdamage" -->
+        <Animation Name="gVarkonGuardWalkAnim" Offset="0xE8EC"/> <!-- Original name is "gn2_Kfrontwalk" -->
+        <Animation Name="gVarkonGuardSidestepAnim" Offset="0xF1D0"/> <!-- Unused. Original name is "gn2_Ksidewalk" -->
+        <Animation Name="gVarkonGuardIdleAnim" Offset="0xFFE4"/> <!-- Original name is "gn2_Kwait" -->
+
+        <!-- Varkon Limb Vertices -->
+        <Array Name="gVarkonRightHair3Vtx" Count="19" Offset="0x10000">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightHair2Vtx" Count="17" Offset="0x10130">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightHair1Vtx" Count="5" Offset="0x10240">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftHair3Vtx" Count="19" Offset="0x10290">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftHair2Vtx" Count="17" Offset="0x103C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftHair1Vtx" Count="5" Offset="0x104D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonMiddleHair3Vtx" Count="30" Offset="0x10520">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonMiddleHair2Vtx" Count="25" Offset="0x10700">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonMiddleHair1Vtx" Count="11" Offset="0x10890">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonJawVtx" Count="60" Offset="0x10940">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonMouthVtx" Count="62" Offset="0x10D00">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonSnoutVtx" Count="15" Offset="0x110E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonHeadVtx" Count="204" Offset="0x111D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonNeckVtx" Count="32" Offset="0x11E90">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightWristVtx" Count="16" Offset="0x12090">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightForearmVtx" Count="45" Offset="0x12190">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightUpperArmVtx" Count="71" Offset="0x12460">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightShoulderVtx" Count="35" Offset="0x128D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftWristVtx" Count="16" Offset="0x12B00">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftForearmVtx" Count="45" Offset="0x12C00">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftUpperArmVtx" Count="71" Offset="0x12ED0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftShoulderVtx" Count="35" Offset="0x13340">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTorsoVtx" Count="130" Offset="0x13570">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftFootVtx" Count="55" Offset="0x13D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftShinVtx" Count="70" Offset="0x14100">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftThighVtx" Count="79" Offset="0x14560">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightFootVtx" Count="55" Offset="0x14A50">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightShinVtx" Count="69" Offset="0x14DC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightThighVtx" Count="79" Offset="0x15210">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTail1Vtx" Count="18" Offset="0x15700">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTail2Vtx" Count="18" Offset="0x15820">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTail3Vtx" Count="24" Offset="0x15940">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTail4Vtx" Count="36" Offset="0x15AC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonTail5Vtx" Count="32" Offset="0x15D00">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonPelvisVtx" Count="79" Offset="0x15F00">
+            <Vtx/>
+        </Array>
+
+        <!-- Varkon Limb DisplayLists -->
+        <DList Name="gVarkonPelvisDL" Offset="0x163F0"/>
+        <DList Name="gVarkonTail1DL" Offset="0x16630"/>
+        <DList Name="gVarkonTail2DL" Offset="0x16740"/>
+        <DList Name="gVarkonTail3DL" Offset="0x168E0"/>
+        <DList Name="gVarkonTail4DL" Offset="0x16AA8"/>
+        <DList Name="gVarkonTail5DL" Offset="0x16BE8"/>
+        <DList Name="gVarkonRightShinDL" Offset="0x16D10"/>
+        <DList Name="gVarkonRightFootDL" Offset="0x16F80"/>
+        <DList Name="gVarkonRightThighDL" Offset="0x17160"/>
+        <DList Name="gVarkonLeftShinDL" Offset="0x17620"/>
+        <DList Name="gVarkonLeftFootDL" Offset="0x17910"/>
+        <DList Name="gVarkonLeftThighDL" Offset="0x17AF0"/>
+        <DList Name="gVarkonNeckDL" Offset="0x17FB0"/>
+        <DList Name="gVarkonHeadDL" Offset="0x180E0"/>
+        <DList Name="gVarkonRightHair3DL" Offset="0x18650"/>
+        <DList Name="gVarkonRightHair2DL" Offset="0x18740"/>
+        <DList Name="gVarkonRightHair1DL" Offset="0x18828"/>
+        <DList Name="gVarkonLeftHair3DL" Offset="0x188D8"/>
+        <DList Name="gVarkonLeftHair2DL" Offset="0x189C8"/>
+        <DList Name="gVarkonLeftHair1DL" Offset="0x18AB0"/>
+        <DList Name="gVarkonJawDL" Offset="0x18B60"/>
+        <DList Name="gVarkonMouthDL" Offset="0x18EA0"/>
+        <DList Name="gVarkonSnoutDL" Offset="0x19210"/>
+        <DList Name="gVarkonMiddleHair3DL" Offset="0x19330"/>
+        <DList Name="gVarkonMiddleHair2DL" Offset="0x19420"/>
+        <DList Name="gVarkonMiddleHair1DL" Offset="0x19510"/>
+        <DList Name="gVarkonTorsoDL" Offset="0x195C0"/>
+        <DList Name="gVarkonRightShoulderDL" Offset="0x19A40"/>
+        <DList Name="gVarkonRightForearmDL" Offset="0x19C68"/>
+        <DList Name="gVarkonRightWristDL" Offset="0x19F48"/>
+        <DList Name="gVarkonRightUpperArmDL" Offset="0x1A050"/>
+        <DList Name="gVarkonLeftShoulderDL" Offset="0x1A4E0"/>
+        <DList Name="gVarkonLeftForearmDL" Offset="0x1A708"/>
+        <DList Name="gVarkonLeftWristDL" Offset="0x1A9E8"/>
+        <DList Name="gVarkonLeftUpperArmDL" Offset="0x1AAF0"/>
+
+        <!-- Varkon Textures -->
+        <Texture Name="gVarkonBodyTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1AF80"/>
+        <Texture Name="gVarkonHairFringeTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1B180"/>
+        <Texture Name="gVarkonUnusedTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1B380"/>
+        <Texture Name="gVarkonDuneanFabricTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1B580"/>
+        <Texture Name="gVarkonRedFabricTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1B780"/>
+        <Texture Name="gVarkonBlackLeatherAndPauldronTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1B980"/>
+        <Texture Name="gVarkonLeatherTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1BB80"/>
+        <Texture Name="gVarkonHoofTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1BD80"/>
+        <Texture Name="gVarkonTailTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1BF80"/>
+        <Texture Name="gVarkonHairTex" Format="rgba16" Width="8" Height="16" Offset="0x1C180"/>
+        <Texture Name="gVarkonMouthTex" Format="rgba16" Width="8" Height="16" Offset="0x1C280"/>
+        <Texture Name="gVarkonFacialHairTex" Format="rgba16" Width="8" Height="8" Offset="0x1C380"/>
+        <Texture Name="gVarkonBodyTex" Format="ci8" Width="32" Height="32" Offset="0x1C400" TlutOffset="0x1AF80"/>
+        <Texture Name="gVarkonSnoutFrontTex" Format="rgba16" Width="8" Height="16" Offset="0x1C800"/>
+        <Texture Name="gVarkonSnoutSideTex" Format="rgba16" Width="8" Height="16" Offset="0x1C900"/>
+        <Texture Name="gVarkonHairFringeTex" Format="ci8" Width="32" Height="16" Offset="0x1CA00" TlutOffset="0x1B180"/>
+        <Texture Name="gVarkonDuneanFabricTex" Format="ci8" Width="16" Height="16" Offset="0x1CC00" TlutOffset="0x1B580"/>
+        <Texture Name="gVarkonFurTuftTex" Format="rgba16" Width="16" Height="16" Offset="0x1CD00"/>
+        <Texture Name="gVarkonRedFabricTex" Format="ci8" Width="16" Height="16" Offset="0x1CF00" TlutOffset="0x1B780"/>
+        <Texture Name="gVarkonPauldronTex" Format="ci8" Width="16" Height="16" Offset="0x1D000" TlutOffset="0x1B980"/>
+        <Texture Name="gVarkonCapeFasteningTex" Format="ci8" Width="16" Height="16" Offset="0x1D100" TlutOffset="0x1B780"/>
+        <Texture Name="gVarkonBlackLeatherTex" Format="ci8" Width="16" Height="16" Offset="0x1D200" TlutOffset="0x1B980"/>
+        <Texture Name="gVarkonLeatherTex" Format="ci8" Width="16" Height="16" Offset="0x1D300" TlutOffset="0x1BB80"/>
+        <Texture Name="gVarkonHoofTex" Format="ci8" Width="16" Height="16" Offset="0x1D400" TlutOffset="0x1BD80"/>
+        <Texture Name="gVarkonUnderSkirtTex" Format="rgba16" Width="4" Height="16" Offset="0x1D500"/>
+        <Texture Name="gVarkonTailTex" Format="ci8" Width="16" Height="32" Offset="0x1D580" TlutOffset="0x1BF80"/>
+        <Texture Name="gVarkonEyesTLUT" Format="rgba16" Width="4" Height="4" Offset="0x1D780"/>
+        <Texture Name="gVarkonHandTLUT" Format="rgba16" Width="16" Height="11" Offset="0x1D7A8"/>
+        <Texture Name="gVarkonHandTex" Format="ci8" Width="32" Height="32" Offset="0x1D908" TlutOffset="0x1D7A8"/>
+        <Texture Name="gVarkonJewelTex" Format="rgba16" Width="16" Height="32" Offset="0x1DD08"/>
+        <Texture Name="gVarkonClawAndTeethTex" Format="rgba16" Width="8" Height="8" Offset="0x1E108"/>
+        <Texture Name="gVarkonEyeOpenTex" Format="ci4" Width="16" Height="16" Offset="0x1E188" TlutOffset="0x1D780"/>
+        <Texture Name="gVarkonLipsTex" Format="rgba16" Width="8" Height="8" Offset="0x1E208"/>
+        <Texture Name="gVarkonHornBaseTex" Format="rgba16" Width="16" Height="16" Offset="0x1E288"/>
+        <Texture Name="gVarkonHornTex" Format="rgba16" Width="16" Height="8" Offset="0x1E488"/>
+        <Texture Name="gVarkonSwordBladeTex" Format="i4" Width="32" Height="32" Offset="0x1E588"/>
+        <Texture Name="gVarkonSwordGuardTex" Format="rgba16" Width="8" Height="16" Offset="0x1E788"/>
+        <Texture Name="gVarkonSwordGripTex" Format="rgba16" Width="8" Height="16" Offset="0x1E888"/>
+        <Texture Name="gVarkonEyeHalfTex" Format="ci4" Width="16" Height="16" Offset="0x1E988" TlutOffset="0x1D780"/>
+        <Texture Name="gVarkonEyeClosedTex" Format="ci4" Width="16" Height="16" Offset="0x1EA08" TlutOffset="0x1D780"/>
+
+        <!-- Varkon Limb Vertices -->
+        <Array Name="gVarkonEyesVtx" Count="10" Offset="0x1EA88">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonJewelVtx" Count="10" Offset="0x1EB28">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightHornVtx" Count="58" Offset="0x1EBC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftHornVtx" Count="56" Offset="0x1EF68">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightHandVtx" Count="79" Offset="0x1F2E8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftHandVtx" Count="79" Offset="0x1F7D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonRightSwordVtx" Count="100" Offset="0x1FCC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonLeftSwordVtx" Count="97" Offset="0x20308">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonOuterTeethVtx" Count="22" Offset="0x20918">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonInnerTeethVtx" Count="10" Offset="0x20A78">
+            <Vtx/>
+        </Array>
+
+        <!-- Varkon Limb DisplayLists -->
+        <DList Name="gVarkonEyesDL" Offset="0x20B18"/>
+        <DList Name="gVarkonJewelDL" Offset="0x20BE0"/>
+        <DList Name="gVarkonRightHornDL" Offset="0x20C80"/>
+        <DList Name="gVarkonLeftHornDL" Offset="0x20DE8"/>
+        <DList Name="gVarkonRightHandDL" Offset="0x20F50"/>
+        <DList Name="gVarkonLeftHandDL" Offset="0x21120"/>
+        <DList Name="gVarkonRightSwordDL" Offset="0x212F0"/>
+        <DList Name="gVarkonLeftSwordDL" Offset="0x215D0"/>
+        <DList Name="gVarkonOuterTeethDL" Offset="0x218B8"/>
+        <DList Name="gVarkonInnerTeethDL" Offset="0x219D8"/>
+
+        <!-- Varkon Title Card Texture -->
+        <Texture Name="gVarkonTitleCardTex" Format="ia8" Width="128" Height="80" Offset="0x21A90"/>
+
+        <!-- Varkon Limbs -->
+        <Limb Name="gVarkonRootLimb" LimbType="Standard" Offset="0x24290"/>
+        <Limb Name="gVarkonTorsoLimb" LimbType="Standard" Offset="0x2429C"/>
+        <Limb Name="gVarkonLeftShoulderLimb" LimbType="Standard" Offset="0x242A8"/>
+        <Limb Name="gVarkonLeftUpperArmLimb" LimbType="Standard" Offset="0x242B4"/>
+        <Limb Name="gVarkonLeftForearmLimb" LimbType="Standard" Offset="0x242C0"/>
+        <Limb Name="gVarkonLeftWristLimb" LimbType="Standard" Offset="0x242CC"/>
+        <Limb Name="gVarkonLeftSwordLimb" LimbType="Standard" Offset="0x242D8"/>
+        <Limb Name="gVarkonLeftHandLimb" LimbType="Standard" Offset="0x242E4"/>
+        <Limb Name="gVarkonRightShoulderLimb" LimbType="Standard" Offset="0x242F0"/>
+        <Limb Name="gVarkonRightUpperArmLimb" LimbType="Standard" Offset="0x242FC"/>
+        <Limb Name="gVarkonRightForearmLimb" LimbType="Standard" Offset="0x24308"/>
+        <Limb Name="gVarkonRightWristLimb" LimbType="Standard" Offset="0x24314"/>
+        <Limb Name="gVarkonRightSwordLimb" LimbType="Standard" Offset="0x24320"/>
+        <Limb Name="gVarkonRightHandLimb" LimbType="Standard" Offset="0x2432C"/>
+        <Limb Name="gVarkonNeckLimb" LimbType="Standard" Offset="0x24338"/>
+        <Limb Name="gVarkonJewelLimb" LimbType="Standard" Offset="0x24344"/>
+        <Limb Name="gVarkonSnoutLimb" LimbType="Standard" Offset="0x24350"/>
+        <Limb Name="gVarkonOuterTeethLimb" LimbType="Standard" Offset="0x2435C"/>
+        <Limb Name="gVarkonMouthLimb" LimbType="Standard" Offset="0x24368"/>
+        <Limb Name="gVarkonInnerTeethLimb" LimbType="Standard" Offset="0x24374"/>
+        <Limb Name="gVarkonJawLimb" LimbType="Standard" Offset="0x24380"/>
+        <Limb Name="gVarkonMiddleHair1Limb" LimbType="Standard" Offset="0x2438C"/>
+        <Limb Name="gVarkonMiddleHair2Limb" LimbType="Standard" Offset="0x24398"/>
+        <Limb Name="gVarkonMiddleHair3Limb" LimbType="Standard" Offset="0x243A4"/>
+        <Limb Name="gVarkonLeftHair1Limb" LimbType="Standard" Offset="0x243B0"/>
+        <Limb Name="gVarkonLeftHair2Limb" LimbType="Standard" Offset="0x243BC"/>
+        <Limb Name="gVarkonLeftHair3Limb" LimbType="Standard" Offset="0x243C8"/>
+        <Limb Name="gVarkonRightHair1Limb" LimbType="Standard" Offset="0x243D4"/>
+        <Limb Name="gVarkonRightHair2Limb" LimbType="Standard" Offset="0x243E0"/>
+        <Limb Name="gVarkonRightHair3Limb" LimbType="Standard" Offset="0x243EC"/>
+        <Limb Name="gVarkonEyesLimb" LimbType="Standard" Offset="0x243F8"/>
+        <Limb Name="gVarkonHeadLimb" LimbType="Standard" Offset="0x24404"/>
+        <Limb Name="gVarkonLeftHornLimb" LimbType="Standard" Offset="0x24410"/>
+        <Limb Name="gVarkonRightHornLimb" LimbType="Standard" Offset="0x2441C"/>
+        <Limb Name="gVarkonPelvisLimb" LimbType="Standard" Offset="0x24428"/>
+        <Limb Name="gVarkonLeftThighLimb" LimbType="Standard" Offset="0x24434"/>
+        <Limb Name="gVarkonLeftShinLimb" LimbType="Standard" Offset="0x24440"/>
+        <Limb Name="gVarkonLeftFootLimb" LimbType="Standard" Offset="0x2444C"/>
+        <Limb Name="gVarkonRightThighLimb" LimbType="Standard" Offset="0x24458"/>
+        <Limb Name="gVarkonRightShinLimb" LimbType="Standard" Offset="0x24464"/>
+        <Limb Name="gVarkonRightFootLimb" LimbType="Standard" Offset="0x24470"/>
+        <Limb Name="gVarkonTail1Limb" LimbType="Standard" Offset="0x2447C"/>
+        <Limb Name="gVarkonTail2Limb" LimbType="Standard" Offset="0x24488"/>
+        <Limb Name="gVarkonTail3Limb" LimbType="Standard" Offset="0x24494"/>
+        <Limb Name="gVarkonTail4Limb" LimbType="Standard" Offset="0x244A0"/>
+        <Limb Name="gVarkonTail5Limb" LimbType="Standard" Offset="0x244AC"/>
+
+        <!-- Varkon Skeleton -->
+        <Skeleton Name="gVarkonSkel" Type="Flex" LimbType="Standard" Offset="0x24570"/>
+
+        <!-- Varkon Animations -->
+        <Animation Name="gVarkonStunStartAnim" Offset="0x25110"/> <!-- Original name is "gn2_Lhit" -->
+        <Animation Name="gVarkonStunLoopAnim" Offset="0x256F4"/> <!-- Original name is "gn2_Lmahi" ("paralysis, stupor") -->
+        <Animation Name="gVarkonStunEndAnim" Offset="0x26424"/> <!-- Original name is "gn2_Lmahi_to_K" -->
+        <Animation Name="gVarkonDownedStartAnim" Offset="0x29448"/> <!-- Original name is "gn2_downDEMO" -->
+        <Animation Name="gVarkonStunEndToWalkAnim" Offset="0x2A128"/> <!-- Unused, similar to gVarkonStunEndAnim. Transitions into walk instead of guard. -->
+        <Animation Name="gVarkonDuplicateStunStartAnim" Offset="0x2ACD0"/> <!-- Unused duplicate of gVarkonStunStartAnim -->
+        <Animation Name="gVarkonDuplicateStunLoopAnim" Offset="0x2B2B4"/> <!-- Unused duplicate of gVarkonStunLoopAnim -->
+        <Animation Name="gVarkonGetUpAnim" Offset="0x320F8"/> <!-- Original name is "gn2_hukkiDEMO" ("return, comeback") -->
+        <Animation Name="gVarkonDownedLoopAnim" Offset="0x32E78"/> <!-- Original name is "gn2_mahiDEMO" -->
+        <Animation Name="gVarkonWalkAnim" Offset="0x33FC0"/> <!-- Original name is "gn2_walk" -->
+        <Animation Name="gVarkonWalkToGuardAnim" Offset="0x347DC"/> <!-- Unused. Original name is "gn2_walk_to_K" -->
+    </File>
+</Root>

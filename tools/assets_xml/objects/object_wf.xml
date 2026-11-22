@@ -1,0 +1,231 @@
+<Root>
+    <File Name="object_wf" Segment="6">
+        <Texture Name="gHowlerWhiteFurTex" Format="rgba16" Width="8" Height="16" Offset="0x0"/>
+        <Texture Name="gHowlerWhiteTeethClawsTex" Format="rgba16" Width="8" Height="8" Offset="0x100"/>
+        <Texture Name="gHowlerWhiteMouthTex" Format="rgba16" Width="8" Height="8" Offset="0x180"/>
+        <Texture Name="gHowlerWhiteTongueTex" Format="rgba16" Width="8" Height="8" Offset="0x200"/>
+        <Texture Name="gHowlerWhiteNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x280"/>
+        <Texture Name="gHowlerWhiteEyeOpenTex" Format="rgba16" Width="16" Height="16" Offset="0x300"/>
+        <Array Name="gHowlerWhiteLeftFootVtx" Count="19" Offset="0x500">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftAnkleVtx" Count="12" Offset="0x630">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftShinVtx" Count="21" Offset="0x6F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftThighVtx" Count="23" Offset="0x840">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightFootVtx" Count="19" Offset="0x9B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightAnkleVtx" Count="12" Offset="0xAE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightShinVtx" Count="21" Offset="0xBA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightThighVtx" Count="23" Offset="0xCF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightForearmVtx" Count="29" Offset="0xE60">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightArmVtx" Count="35" Offset="0x1030">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftForearmVtx" Count="29" Offset="0x1260">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftArmVtx" Count="35" Offset="0x1430">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteTorsoVtx" Count="34" Offset="0x1660">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteWaistVtx" Count="26" Offset="0x1880">
+            <Vtx/>
+        </Array>
+        <DList Name="gHowlerWhiteWaistDL" Offset="0x1A20"/>
+        <DList Name="gHowlerWhiteRightThighDL" Offset="0x1AE8"/>
+        <DList Name="gHowlerWhiteRightShinDL" Offset="0x1BD8"/>
+        <DList Name="gHowlerWhiteRightAnkleDL" Offset="0x1CC8"/>
+        <DList Name="gHowlerWhiteRightFootDL" Offset="0x1D98"/>
+        <DList Name="gHowlerWhiteLeftThighDL" Offset="0x1E98"/>
+        <DList Name="gHowlerWhiteLeftShinDL" Offset="0x1F88"/>
+        <DList Name="gHowlerWhiteLeftAnkleDL" Offset="0x2078"/>
+        <DList Name="gHowlerWhiteLeftFootDL" Offset="0x2148"/>
+        <DList Name="gHowlerWhiteTorsoDL" Offset="0x2248"/>
+        <DList Name="gHowlerWhiteLeftArmDL" Offset="0x2368"/>
+        <DList Name="gHowlerWhiteLeftForearmDL" Offset="0x2490"/>
+        <DList Name="gHowlerWhiteRightArmDL" Offset="0x25A0"/>
+        <DList Name="gHowlerWhiteRightForearmDL" Offset="0x26C8"/>
+        <Texture Name="gHowlerWhiteEyeHalfTex" Format="rgba16" Width="16" Height="16" Offset="0x27D8"/>
+        <Texture Name="gHowlerWhiteEyeClosedTex" Format="rgba16" Width="16" Height="16" Offset="0x29D8"/>
+        <Array Name="gHowlerWhiteTailVtx" Count="5" Offset="0x2BD8">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteLeftClawsVtx" Count="18" Offset="0x2C28">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteRightClawsVtx" Count="18" Offset="0x2D48">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteHeadVtx" Count="90" Offset="0x2E68">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerWhiteEyesVtx" Count="8" Offset="0x3408">
+            <Vtx/>
+        </Array>
+        <DList Name="gHowlerWhiteTailDL" Offset="0x3488"/>
+        <DList Name="gHowlerWhiteLeftClawsDL" Offset="0x3528"/>
+        <DList Name="gHowlerWhiteRightClawsDL" Offset="0x35F0"/>
+        <DList Name="gHowlerWhiteHeadDL" Offset="0x36B8"/>
+        <DList Name="gHowlerWhiteEyesDL" Offset="0x39D8"/>
+        <Limb Name="gHowlerWhiteRootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_ROOT" Offset="0x3A70"/>
+        <Limb Name="gHowlerWhiteLeftThighLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_THIGH" Offset="0x3A7C"/>
+        <Limb Name="gHowlerWhiteLeftShinLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_SHIN" Offset="0x3A88"/>
+        <Limb Name="gHowlerWhiteLeftAnkleLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_ANKLE" Offset="0x3A94"/>
+        <Limb Name="gHowlerWhiteLeftFootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_FOOT" Offset="0x3AA0"/>
+        <Limb Name="gHowlerWhiteTailLimb" LimbType="Standard" EnumName="HOWLER_LIMB_TAIL" Offset="0x3AAC"/>
+        <Limb Name="gHowlerWhiteWaistLimb" LimbType="Standard" EnumName="HOWLER_LIMB_WAIST" Offset="0x3AB8"/>
+        <Limb Name="gHowlerWhiteRightThighLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_THIGH" Offset="0x3AC4"/>
+        <Limb Name="gHowlerWhiteRightShinLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_SHIN" Offset="0x3AD0"/>
+        <Limb Name="gHowlerWhiteRightAnkleLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_ANKLE" Offset="0x3ADC"/>
+        <Limb Name="gHowlerWhiteRightFootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_FOOT" Offset="0x3AE8"/>
+        <Limb Name="gHowlerWhiteTorsoLimb" LimbType="Standard" EnumName="HOWLER_LIMB_TORSO" Offset="0x3AF4"/>
+        <Limb Name="gHowlerWhiteRightArmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_ARM" Offset="0x3B00"/>
+        <Limb Name="gHowlerWhiteRightForearmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_FOREARM" Offset="0x3B0C"/>
+        <Limb Name="gHowlerWhiteRightClawsLimb" LimbType="Standard" EnumName="HOWLER_LIMB_RIGHT_CLAWS" Offset="0x3B18"/>
+        <Limb Name="gHowlerWhiteHeadRootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_HEAD_ROOT" Offset="0x3B24"/>
+        <Limb Name="gHowlerWhiteHeadLimb" LimbType="Standard" EnumName="HOWLER_LIMB_HEAD" Offset="0x3B30"/>
+        <Limb Name="gHowlerWhiteEyesLimb" LimbType="Standard" EnumName="HOWLER_LIMB_EYES" Offset="0x3B3C"/>
+        <Limb Name="gHowlerWhiteLeftArmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_ARM" Offset="0x3B48"/>
+        <Limb Name="gHowlerWhiteLeftForearmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_FOREARM" Offset="0x3B54"/>
+        <Limb Name="gHowlerWhiteLeftClawsLimb" LimbType="Standard" EnumName="HOWLER_LIMB_LEFT_CLAWS" Offset="0x3B60"/>
+        <Skeleton Name="gHowlerWhiteSkel" Type="Flex" LimbType="Standard" LimbNone="HOWLER_LIMB_NONE" LimbMax="HOWLER_LIMB_MAX" EnumName="HowlerLimb" Offset="0x3BC0"/>
+        <Animation Name="gHowlerAttackAnim" Offset="0x4638"/>
+        <Blob Name="object_wf_zeroes_Blob_004648" Size="0x48" Offset="0x4648"/>
+        <Animation Name="gHowlerBackflipAnim" Offset="0x4AD0"/>
+        <Blob Name="object_wf_zeroes_Blob_004AE0" Size="0x20" Offset="0x4AE0"/>
+        <Animation Name="gHowlerBlockAnim" Offset="0x4CA4"/>
+        <Animation Name="gHowlerHowlAnim" Offset="0x5430"/>
+        <Blob Name="object_wf_zeroes_Blob_005440" Size="0x40" Offset="0x5440"/>
+        <Animation Name="gHowlerRunAnim" Offset="0x57A0"/>
+        <Blob Name="object_wf_zeroes_Blob_0057B0" Size="0x20" Offset="0x57B0"/>
+        <Array Name="gHowlerGrayLeftFootVtx" Count="19" Offset="0x57D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftAnkleVtx" Count="12" Offset="0x5900">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftShinVtx" Count="23" Offset="0x59C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftThighVtx" Count="26" Offset="0x5B30">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightFootVtx" Count="19" Offset="0x5CD0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightAnkleVtx" Count="12" Offset="0x5E00">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightShinVtx" Count="23" Offset="0x5EC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightThighVtx" Count="26" Offset="0x6030">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightForearmVtx" Count="40" Offset="0x61D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightArmVtx" Count="26" Offset="0x6450">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftForearmVtx" Count="40" Offset="0x65F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftArmVtx" Count="26" Offset="0x6870">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayTorsoVtx" Count="34" Offset="0x6A10">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayWaistVtx" Count="26" Offset="0x6C30">
+            <Vtx/>
+        </Array>
+        <DList Name="gHowlerGrayWaistDL" Offset="0x6DD0"/>
+        <DList Name="gHowlerGrayRightThighDL" Offset="0x6E98"/>
+        <DList Name="gHowlerGrayRightShinDL" Offset="0x6F88"/>
+        <DList Name="gHowlerGrayRightAnkleDL" Offset="0x7078"/>
+        <DList Name="gHowlerGrayRightFootDL" Offset="0x7148"/>
+        <DList Name="gHowlerGrayLeftThighDL" Offset="0x7248"/>
+        <DList Name="gHowlerGrayLeftShinDL" Offset="0x7338"/>
+        <DList Name="gHowlerGrayLeftAnkleDL" Offset="0x7428"/>
+        <DList Name="gHowlerGrayLeftFootDL" Offset="0x74F8"/>
+        <DList Name="gHowlerGrayTorsoDL" Offset="0x75F8"/>
+        <DList Name="gHowlerGrayLeftArmDL" Offset="0x7718"/>
+        <DList Name="gHowlerGrayLeftForearmDL" Offset="0x7830"/>
+        <DList Name="gHowlerGrayRightArmDL" Offset="0x7940"/>
+        <DList Name="gHowlerGrayRightForearmDL" Offset="0x7A58"/>
+        <Texture Name="gHowlerGrayEyeOpenTex" Format="rgba16" Width="16" Height="16" Offset="0x7B68"/>
+        <Texture Name="gHowlerGrayFurTex" Format="rgba16" Width="16" Height="32" Offset="0x7D68"/>
+        <Texture Name="gHowlerGrayMouthTex" Format="rgba16" Width="8" Height="8" Offset="0x8168"/>
+        <Texture Name="gHowlerGrayTongueTex" Format="rgba16" Width="8" Height="8" Offset="0x81E8"/>
+        <Texture Name="gHowlerGrayTeethClawsTex" Format="rgba16" Width="8" Height="8" Offset="0x8268"/>
+        <Texture Name="gHowlerGrayNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x82E8"/>
+        <Texture Name="gHowlerGrayEyeHalfTex" Format="rgba16" Width="16" Height="16" Offset="0x8368"/>
+        <Texture Name="gHowlerGrayEyeClosedTex" Format="rgba16" Width="16" Height="16" Offset="0x8568"/>
+        <Array Name="gHowlerGrayTailVtx" Count="5" Offset="0x8768">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayLeftClawsVtx" Count="12" Offset="0x87B8">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayRightClawsVtx" Count="12" Offset="0x8878">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayHeadVtx" Count="90" Offset="0x8938">
+            <Vtx/>
+        </Array>
+        <Array Name="gHowlerGrayEyesVtx" Count="8" Offset="0x8ED8">
+            <Vtx/>
+        </Array>
+        <DList Name="gHowlerGrayTailDL" Offset="0x8F58"/>
+        <DList Name="gHowlerGrayLeftClawsDL" Offset="0x8FF8"/>
+        <DList Name="gHowlerGrayRightClawsDL" Offset="0x90C0"/>
+        <DList Name="gHowlerGrayHeadDL" Offset="0x9188"/>
+        <DList Name="gHowlerGrayEyesDL" Offset="0x94A8"/>
+        <Limb Name="gHowlerGrayRootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_ROOT" Offset="0x9540"/>
+        <Limb Name="gHowlerGrayLeftThighLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_THIGH" Offset="0x954C"/>
+        <Limb Name="gHowlerGrayLeftShinLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_SHIN" Offset="0x9558"/>
+        <Limb Name="gHowlerGrayLeftAnkleLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_ANKLE" Offset="0x9564"/>
+        <Limb Name="gHowlerGrayLeftFootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_FOOT" Offset="0x9570"/>
+        <Limb Name="gHowlerGrayTailLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_TAIL" Offset="0x957C"/>
+        <Limb Name="gHowlerGrayWaistLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_WAIST" Offset="0x9588"/>
+        <Limb Name="gHowlerGrayRightThighLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_THIGH" Offset="0x9594"/>
+        <Limb Name="gHowlerGrayRightShinLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_SHIN" Offset="0x95A0"/>
+        <Limb Name="gHowlerGrayRightAnkleLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_ANKLE" Offset="0x95AC"/>
+        <Limb Name="gHowlerGrayRightFootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_FOOT" Offset="0x95B8"/>
+        <Limb Name="gHowlerGrayTorsoLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_TORSO" Offset="0x95C4"/>
+        <Limb Name="gHowlerGrayRightArmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_ARM" Offset="0x95D0"/>
+        <Limb Name="gHowlerGrayRightForearmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_FOREARM" Offset="0x95DC"/>
+        <Limb Name="gHowlerGrayRightClawsLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_RIGHT_CLAWS" Offset="0x95E8"/>
+        <Limb Name="gHowlerGrayHeadRootLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_HEAD_ROOT" Offset="0x95F4"/>
+        <Limb Name="gHowlerGrayHeadLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_HEAD" Offset="0x9600"/>
+        <Limb Name="gHowlerGrayEyesLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_EYES" Offset="0x960C"/>
+        <Limb Name="gHowlerGrayLeftArmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_ARM" Offset="0x9618"/>
+        <Limb Name="gHowlerGrayLeftForearmLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_FOREARM" Offset="0x9624"/>
+        <Limb Name="gHowlerGrayLeftClawsLimb" LimbType="Standard" EnumName="HOWLER_LIMB_GRAY_LEFT_CLAWS" Offset="0x9630"/>
+        <Skeleton Name="gHowlerGraySkel" Type="Flex" LimbType="Standard" LimbNone="HOWLER_LIMB_GRAY_NONE" LimbMax="HOWLER_LIMB_GRAY_MAX" EnumName="HowlerLimbGray" Offset="0x9690"/>
+        <Animation Name="gHowlerSideStepAnim" Offset="0x98C8"/>
+        <Blob Name="object_wf_zeroes_Blob_0098D8" Size="0x18" Offset="0x98D8"/>
+        <Animation Name="gHowlerDamagedAnim" Offset="0x9B20"/>
+        <Blob Name="object_wf_zeroes_Blob_009B30" Size="0x10" Offset="0x9B30"/>
+        <Animation Name="gHowlerIdleAnim" Offset="0xA4AC"/>
+        <Blob Name="object_wf_zeroes_Blob_00A4BC" Size="0x44" Offset="0xA4BC"/>
+    </File>
+</Root>

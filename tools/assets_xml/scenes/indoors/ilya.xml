@@ -1,0 +1,8 @@
+<Root>
+    <File Name="ilya_scene" Segment="2">
+        <Scene Name="ilya_scene" Offset="0x0"/>
+    </File>
+    <File Name="ilya_room_0" Segment="3">
+        <Room Name="ilya_room_0" Offset="0x0"/>
+    </File>
+</Root>

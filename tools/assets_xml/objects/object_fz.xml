@@ -1,0 +1,32 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_fz" Segment="6">
+        <DList Name="gFrostmawIntactDL" Offset="0x1130"/>
+        <DList Name="gFrostmawTopRightHornChippedDL" Offset="0x21A0"/>
+        <DList Name="gFrostmawHeadChippedDL" Offset="0x2CA0"/>
+        <DList Name="gFrostmawSteamStartDL" Offset="0x30A0"/>
+        <DList Name="gFrostmawSteamDL" Offset="0x3158"/>
+        <DList Name="gFrostmawIceTriangleDL" Offset="0x3260"/>
+        <DList Name="gFrostmawIceRockDL" Offset="0x33F0"/>
+        <Texture Name="gFrostmawSteamTex" Format="i4" Width="32" Height="32" Offset="0x2E70"/>
+
+        <Array Name="gFrostmawIntactVtx" Count="275" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostmawTopRightHornChippedVtx" Count="219" Offset="0x13F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostmawHeadChippedVtx" Count="139" Offset="0x23F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostmawSteamVtx" Count="3" Offset="0x3070">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostmawIceTriangleVtx" Count="14" Offset="0x3180">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostmawIceRockVtx" Count="14" Offset="0x3310">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

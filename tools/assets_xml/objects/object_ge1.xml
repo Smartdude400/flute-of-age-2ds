@@ -1,0 +1,134 @@
+<Root>
+    <File Name="object_ge1" Segment="6">
+
+        <!-- White-clothed Dunean Skeleton -->
+        <Skeleton Name="gDuneanWhiteSkel" Type="Flex" LimbType="Standard" LimbNone="DUNEAN_WHITE_LIMB_NONE" LimbMax="DUNEAN_WHITE_LIMB_MAX" EnumName="DuneanWhiteLimb" Offset="0x0330"/>
+
+        <!-- White-clothed Dunean Limbs -->
+        <Limb Name="gDuneanWhiteWaistLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_WAIST" Offset="0x0240"/>
+        <Limb Name="gDuneanWhiteLeftThighLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_THIGH" Offset="0x024C"/>
+        <Limb Name="gDuneanWhiteLeftShinLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_SHIN" Offset="0x0258"/>
+        <Limb Name="gDuneanWhiteLeftFootLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_FOOT" Offset="0x0264"/>
+        <Limb Name="gDuneanWhiteRightThighLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_THIGH" Offset="0x0270"/>
+        <Limb Name="gDuneanWhiteRightShinLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_SHIN" Offset="0x027C"/>
+        <Limb Name="gDuneanWhiteRightFootLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_FOOT" Offset="0x0288"/>
+        <Limb Name="gDuneanWhiteTorsoLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_TORSO" Offset="0x0294"/>
+        <Limb Name="gDuneanWhiteLeftUpperArmLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_UPPER_ARM" Offset="0x02A0"/>
+        <Limb Name="gDuneanWhiteLeftForearmLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_FOREARM" Offset="0x02AC"/>
+        <Limb Name="gDuneanWhiteLeftHandLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_L_HAND" Offset="0x02B8"/>
+        <Limb Name="gDuneanWhiteRightUpperArmLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_UPPER_ARM" Offset="0x02C4"/>
+        <Limb Name="gDuneanWhiteRightForearmLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_FOREARM" Offset="0x02D0"/>
+        <Limb Name="gDuneanWhiteRightHandLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_R_HAND" Offset="0x02DC"/>
+        <Limb Name="gDuneanWhiteHeadLimb" LimbType="Standard" EnumName="DUNEAN_WHITE_LIMB_HEAD" Offset="0x02E8"/>
+
+        <!-- White-clothed Dunean Limb DisplayLists -->
+        <DList Name="gDuneanWhiteWaistDL" Offset="0x69E0"/>
+        <DList Name="gDuneanWhiteLeftThighDL" Offset="0x70B0"/>
+        <DList Name="gDuneanWhiteLeftShinDL" Offset="0x71E0"/>
+        <DList Name="gDuneanWhiteLeftFootDL" Offset="0x73A8"/>
+        <DList Name="gDuneanWhiteRightThighDL" Offset="0x6AD0"/>
+        <DList Name="gDuneanWhiteRightShinDL" Offset="0x6C00"/>
+        <DList Name="gDuneanWhiteRightFootDL" Offset="0x6E50"/>
+        <DList Name="gDuneanWhiteTorsoDL" Offset="0x5608"/>
+        <DList Name="gDuneanWhiteLeftUpperArmDL" Offset="0x6510"/>
+        <DList Name="gDuneanWhiteLeftForearmDL" Offset="0x66B8"/>
+        <DList Name="gDuneanWhiteLeftHandDL" Offset="0x67E8"/>
+        <DList Name="gDuneanWhiteRightUpperArmDL" Offset="0x6040"/>
+        <DList Name="gDuneanWhiteRightForearmDL" Offset="0x61E8"/>
+        <DList Name="gDuneanWhiteRightHandDL" Offset="0x6318"/>
+        <DList Name="gDuneanWhiteHeadDL" Offset="0x5C38"/>
+
+        <!-- White-clothed Dunean palettes -->
+        <Texture Name="gDuneanWhiteGeneralTLUT" Format="rgba16" Width="16" Height="16" Offset="0x0348"/>
+        <Texture Name="gDuneanWhiteHairTLUT" Format="rgba16" Width="16" Height="16" Offset="0x2808"/>
+
+        <!-- White-clothed Dunean Displaylist textures -->
+        <Texture Name="gDuneanWhiteSkinGradientTex" Format="ci8" Width="8" Height="8" Offset="0x0548" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteWhiteFabricLipsTex" Format="ci8" Width="16" Height="16" Offset="0x0588" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteEarTex" Format="ci8" Width="8" Height="16" Offset="0x0688" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteFingersTex" Format="ci8" Width="32" Height="32" Offset="0x1F08" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteArmletTex" Format="ci8" Width="8" Height="16" Offset="0x2308" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteJacketTex" Format="ci8" Width="16" Height="16" Offset="0x2388" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteTubeTopTex" Format="ci8" Width="16" Height="16" Offset="0x2488" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteNavelTex" Format="ci8" Width="16" Height="16" Offset="0x2588" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteCleavageTex" Format="ci8" Width="8" Height="8" Offset="0x2688" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteShoeUpperTex" Format="ci8" Width="8" Height="16" Offset="0x26C8" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteShoeSoleTex" Format="ci8" Width="8" Height="8" Offset="0x2748" TlutOffset="0x0348"/>
+        <Texture Name="gDuneanWhiteCrotchTex" Format="rgba16" Width="8" Height="8" Offset="0x2788"/>
+
+        <!-- White-clothed Dunean Hairstyle DisplayLists -->
+        <DList Name="gDuneanWhiteHairstyleBobDL" Offset="0x9198"/>
+        <DList Name="gDuneanWhiteHairstyleStraightFringeDL" Offset="0x9430"/>
+        <DList Name="gDuneanWhiteHairstyleSpikyDL" Offset="0x9690"/>
+
+        <!-- White-clothed Dunean Hair textures -->
+        <Texture Name="gDuneanWhiteHairTex" Format="ci8" Width="16" Height="16" Offset="0x2A08" TlutOffset="0x2808"/>
+
+        <!-- White-clothed Dunean Eye Textures -->
+        <Texture Name="gDuneanWhiteEyeOpenTex" Format="rgba16" Width="32" Height="32" Offset="0x0708"/>
+        <Texture Name="gDuneanWhiteEyeHalfTex" Format="rgba16" Width="32" Height="32" Offset="0x0F08"/>
+        <Texture Name="gDuneanWhiteEyeClosedTex" Format="rgba16" Width="32" Height="32" Offset="0x1708"/>
+
+        <!-- White-clothed Dunean Animations -->
+        <Animation Name="gDuneanWhiteUnusedFoldingArmsAnim" Offset="0x0168"/>
+        <Animation Name="gDuneanWhiteIdleAnim" Offset="0x0228"/>
+        <Animation Name="gDuneanWhiteClapAnim" Offset="0xA048"/>
+        <Animation Name="gDuneanWhiteDismissiveAnim" Offset="0xA498"/>
+
+        <!-- Vertices -->
+        <Array Name="gDuneanWhiteHeadVtx" Count="123" Offset="0x2B08">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftHandVtx" Count="55" Offset="0x32B8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftForearmVtx" Count="24" Offset="0x3628">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftUpperArmVtx" Count="24" Offset="0x37A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightHandVtx" Count="55" Offset="0x3928">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightForearmVtx" Count="24" Offset="0x3C98">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightUpperArmVtx" Count="24" Offset="0x3E18">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteTorsoVtx" Count="118" Offset="0x3F98">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftFootVtx" Count="49" Offset="0x46F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftShinVtx" Count="32" Offset="0x4A08">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteLeftThighVtx" Count="28" Offset="0x4C08">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightFootVtx" Count="49" Offset="0x4DC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightShinVtx" Count="32" Offset="0x50D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteRightThighVtx" Count="28" Offset="0x52D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteWaistVtx" Count="23" Offset="0x5498">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteHairstyleBobVtx" Count="161" Offset="0x7588">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteHairstyleStraightFringeVtx" Count="125" Offset="0x7F98">
+            <Vtx/>
+        </Array>
+        <Array Name="gDuneanWhiteHairstyleSpikyVtx" Count="163" Offset="0x8768">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

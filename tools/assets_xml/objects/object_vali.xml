@@ -1,0 +1,95 @@
+<Root>
+    <File Name="object_vali" Segment="6">
+        <Animation Name="gStormbellAttackAnim" Offset="0x710"/>
+        <Animation Name="gStormbellDamagedAnim" Offset="0x854"/>
+        <Animation Name="gStormbellRecoverAnim" Offset="0xB34"/>
+        <Animation Name="gStormbellAgitatedAnim" Offset="0xD9C"/> <!-- unused -->
+        <Animation Name="gStormbellIdleAnim" Offset="0x14AC"/>
+        <Array Name="gStormbellCoreVtx" Count="53" Offset="0x14C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellNucleusVtx" Count="4" Offset="0x1810">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellHoodVtx" Count="46" Offset="0x1850">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellRightFangVtx" Count="18" Offset="0x1B30">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellLeftFangVtx" Count="18" Offset="0x1C50">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellRightTentacleSpikeVtx" Count="12" Offset="0x1D70">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellRightTentacleSpikeJointVtx" Count="18" Offset="0x1E30">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellRightTentacleBodyVtx" Count="19" Offset="0x1F50">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellRightTentacleJointVtx" Count="20" Offset="0x2080">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellLeftTentacleSpikeVtx" Count="12" Offset="0x21C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellLeftTentacleSpikeJointVtx" Count="18" Offset="0x2280">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellLeftTentacleBodyVtx" Count="19" Offset="0x23A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gStormbellLeftTentacleJointVtx" Count="20" Offset="0x24D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gStormbellCoreDL" Offset="0x2610"/>
+        <DList Name="gStormbellNucleusDL" Offset="0x2740"/>
+        <DList Name="gStormbellHoodDL" Offset="0x27D8"/>
+        <DList Name="gStormbellRightFangDL" Offset="0x2968"/>
+        <DList Name="gStormbellLeftFangDL" Offset="0x2A28"/>
+        <DList Name="gStormbellRightTentacleSpikeDL" Offset="0x2AE8"/>
+        <DList Name="gStormbellRightTentacleSpikeJointDL" Offset="0x2B80"/>
+        <DList Name="gStormbellRightTentacleBodyDL" Offset="0x2C20"/>
+        <DList Name="gStormbellRightTentacleJointDL" Offset="0x2D50"/>
+        <DList Name="gStormbellLeftTentacleSpikeDL" Offset="0x2DF8"/>
+        <DList Name="gStormbellLeftTentacleSpikeJointDL" Offset="0x2E90"/>
+        <DList Name="gStormbellLeftTentacleBodyDL" Offset="0x2F30"/>
+        <DList Name="gStormbellLeftTentacleJointDL" Offset="0x3060"/>
+        <Texture Name="gStormbellNucleusTex" Format="ia16" Width="32" Height="32" Offset="0x3108"/>
+        <Texture Name="gStormbellPartsTex" Format="ia16" Width="8" Height="8" Offset="0x3908"/> <!-- fangs and tentacles parts -->
+        <Texture Name="gStormbellBodyTex" Format="ia16" Width="16" Height="32" Offset="0x3988"/> <!-- hood top and tentacles body -->
+        <Texture Name="gStormbellHoodBottomTex" Format="ia16" Width="8" Height="16" Offset="0x3D88"/>
+        <Texture Name="gStormbellCoreTex" Format="ia16" Width="32" Height="32" Offset="0x3E88"/>
+        <Limb Name="gStormbellRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_ROOT" Offset="0x4688"/>
+        <Limb Name="gStormbellNucleusLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_NUCLEUS" Offset="0x4694"/>
+        <Limb Name="gStormbellRightFangRootRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_FANG_ROOT_ROOT" Offset="0x46A0"/>
+        <Limb Name="gStormbellRightFangRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_FANG_ROOT" Offset="0x46AC"/>
+        <Limb Name="gStormbellRightFangLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_FANG" Offset="0x46B8"/>
+        <Limb Name="gStormbellLeftFangRootRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_FANG_ROOT_ROOT" Offset="0x46C4"/>
+        <Limb Name="gStormbellLeftFangRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_FANG_ROOT" Offset="0x46D0"/>
+        <Limb Name="gStormbellLeftFangLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_FANG" Offset="0x46DC"/>
+        <Limb Name="gStormbellLeftTentacleRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_ROOT" Offset="0x46E8"/>
+        <Limb Name="gStormbellLeftTentacleJointRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_JOINT_ROOT" Offset="0x46F4"/>
+        <Limb Name="gStormbellLeftTentacleBodyRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_BODY_ROOT" Offset="0x4700"/>
+        <Limb Name="gStormbellLeftTentacleSpikeJointRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_SPIKE_JOINT_ROOT" Offset="0x470C"/>
+        <Limb Name="gStormbellLeftTentacleSpikeRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_SPIKE_ROOT" Offset="0x4718"/>
+        <Limb Name="gStormbellLeftTentacleSpikeLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_SPIKE" Offset="0x4724"/>
+        <Limb Name="gStormbellLeftTentacleSpikeJointLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_SPIKE_JOINT" Offset="0x4730"/>
+        <Limb Name="gStormbellLeftTentacleBodyLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_BODY" Offset="0x473C"/>
+        <Limb Name="gStormbellLeftTentacleJointLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_LEFT_TENTACLE_JOINT" Offset="0x4748"/>
+        <Limb Name="gStormbellRightTentacleRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_ROOT" Offset="0x4754"/>
+        <Limb Name="gStormbellRightTentacleJointRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_JOINT_ROOT" Offset="0x4760"/>
+        <Limb Name="gStormbellRightTentacleBodyRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_BODY_ROOT" Offset="0x476C"/>
+        <Limb Name="gStormbellRightTentacleSpikeJointRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_SPIKE_JOINT_ROOT" Offset="0x4778"/>
+        <Limb Name="gStormbellRightTentacleSpikeRootLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_SPIKE_ROOT" Offset="0x4784"/>
+        <Limb Name="gStormbellRightTentacleSpikeLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_SPIKE" Offset="0x4790"/>
+        <Limb Name="gStormbellRightTentacleSpikeJointLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_SPIKE_JOINT" Offset="0x479C"/>
+        <Limb Name="gStormbellRightTentacleBodyLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_BODY" Offset="0x47A8"/>
+        <Limb Name="gStormbellRightTentacleJointLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_RIGHT_TENTACLE_JOINT" Offset="0x47B4"/>
+        <Limb Name="gStormbellCoreLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_CORE" Offset="0x47C0"/>
+        <Limb Name="gStormbellHoodLimb" LimbType="Standard" EnumName="STORMBELL_LIMB_HOOD" Offset="0x47CC"/>
+        <Skeleton Name="gStormbellSkel" Type="Normal" LimbType="Standard" LimbNone="STORMBELL_LIMB_NONE" LimbMax="STORMBELL_LIMB_MAX" EnumName="StormbellLimb" Offset="0x4848"/>
+    </File>
+</Root>

@@ -1,0 +1,46 @@
+<Root>
+    <File Name="object_spot01_matoya" Segment="6">
+        <!-- Oakridge Shooting Gallery -->
+        <Array Name="gOakridgeShootingGalleryVtx" Count="50" Offset="0x1208">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeShootingGalleryDL" Offset="0x1528"/>
+        <Array Name="gOakridgeShootingGallerySignVtx" Count="4" Offset="0x2740">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeShootingGallerySignDL" Offset="0x2780"/>
+        <Texture Name="gOakridgeShootingGalleryRoofEdgeTex" Format="ci8" Width="32" Height="32" Offset="0x208" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeShootingGalleryRoofTex" Format="ci8" Width="16" Height="32" Offset="0x608" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeShootingGalleryDoorShadowTex" Format="ci8" Width="16" Height="32" Offset="0x808" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeShootingGalleryWallTex" Format="ci8" Width="32" Height="64" Offset="0xA08" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeShootingGallerySignTex" Format="rgba16" Width="32" Height="32" Offset="0x1F40"/>
+        <Collision Name="gOakridgeShootingGalleryCol" Offset="0x1A38"/>
+
+        <!-- Oakridge Potion Shop -->
+        <Array Name="gOakridgePotionShopSignVtx" Count="4" Offset="0x1E70">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgePotionShopSignDL" Offset="0x1EB0"/>
+        <Texture Name="gOakridgePotionShopSignTex" Format="rgba16" Width="32" Height="16" Offset="0x1A70"/>
+
+        <!-- Oakridge Bazaar -->
+        <Array Name="gOakridgeBazaarSignVtx" Count="4" Offset="0x3038">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeBazaarSignDL" Offset="0x3078"/>
+        <Texture Name="gOakridgeBazaarSignTex" Format="ci4" Width="64" Height="64" Offset="0x2838" TlutOffset="0x2810"/>
+
+        <!-- BOTW Stone -->
+        <Array Name="gOakridgeBOTWStoneVtx" Count="30" Offset="0x3940">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeBOTWStoneDL" Offset="0x3B20"/>
+        <Texture Name="gOakridgeBOTWStoneTex" Format="rgba16" Width="32" Height="32" Offset="0x3140"/>
+        <Collision Name="gOakridgeBOTWStoneCol" Offset="0x3C64"/>
+
+        <!-- Palettes -->
+        <Texture Name="gOakridgeShootingGalleryTLUT" Format="rgba16" Width="16" Height="16" Offset="0x0"/>
+        <Blob Name="object_spot01_matoya_000200_Blob" Size="0x8" Offset="0x200"/>
+        <Texture Name="gOakridgeBazaarSignTLUT" Format="rgba16" Width="4" Height="4" Offset="0x2810"/>
+    </File>
+</Root>

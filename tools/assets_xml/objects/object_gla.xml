@@ -1,0 +1,125 @@
+<Root>
+    <File Name="object_gla" Segment="6">
+        <Animation Name="gObjectGlaAttackAnim" Offset="0x324"/>
+        <Animation Name="gObjectGlaRecoverFromAttackAnim" Offset="0x780"/>
+        <Animation Name="gObjectGlaFaintAnim" Offset="0x11F4"/>
+        <Animation Name="gObjectGlaKneelAnim" Offset="0x15D0"/>
+        <Animation Name="gObjectGlaKneelingAnim" Offset="0x1B3C"/>
+        <Array Name="gObjectGlaRightForearmVtx" Count="30" Offset="0x1B50">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaRightArmVtx" Count="25" Offset="0x1D30">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaLeftForearmVtx" Count="30" Offset="0x1EC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaLeftArmVtx" Count="25" Offset="0x20A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaTorsoVtx" Count="97" Offset="0x2230">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaLeftShinVtx" Count="53" Offset="0x2840">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaLeftThighVtx" Count="32" Offset="0x2B90">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaRightShinVtx" Count="53" Offset="0x2D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaRightThighVtx" Count="32" Offset="0x30E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaPelvisVtx" Count="38" Offset="0x32E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gObjectGlaTorsoDL" Offset="0x3540"/>
+        <DList Name="gObjectGlaRightArmDL" Offset="0x39E0"/>
+        <DList Name="gObjectGlaRightForearmDL" Offset="0x3B18"/>
+        <DList Name="gObjectGlaLeftArmDL" Offset="0x3D18"/>
+        <DList Name="gObjectGlaLeftForearmDL" Offset="0x3E50"/>
+        <DList Name="gObjectGlaPelvisDL" Offset="0x4050"/>
+        <DList Name="gObjectGlaRightThighDL" Offset="0x41E8"/>
+        <DList Name="gObjectGlaRightShinDL" Offset="0x42F8"/>
+        <DList Name="gObjectGlaLeftThighDL" Offset="0x44B8"/>
+        <DList Name="gObjectGlaLeftShinDL" Offset="0x45C8"/>
+        <Texture Name="gObjectGla1TLUT" Format="rgba16" Width="16" Height="16" Offset="0x4788"/>
+        <Texture Name="gObjectGlaBodySkinTex" Format="ci8" Width="8" Height="8" Offset="0x4988" TlutOffset="0x4788"/>
+        <Texture Name="gObjectGlaRedClothTex" Format="ci8" Width="8" Height="8" Offset="0x49C8" TlutOffset="0x4788"/>
+        <Texture Name="gObjectGlaBellyTex" Format="ci8" Width="16" Height="16" Offset="0x4A08" TlutOffset="0x4788"/>
+        <Texture Name="gObjectGlaNeckJewelTex" Format="ci8" Width="16" Height="16" Offset="0x4B08" TlutOffset="0x4788"/>
+        <Texture Name="gObjectGlaPantsTex" Format="i8" Width="16" Height="16" Offset="0x4C08"/>
+        <Texture Name="gObjectGlaFaceSkinTex" Format="ci8" Width="8" Height="8" Offset="0x4EB8" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaEarTex" Format="ci8" Width="8" Height="16" Offset="0x4EF8" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGla2TLUT" Format="rgba16" Width="18" Height="12" Offset="0x4D08"/>
+        <Texture Name="gObjectGlaEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x4F78" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaSpearElementTex" Format="ci8" Width="8" Height="8" Offset="0x5378" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaClothAndSpearBladeTex" Format="i8" Width="16" Height="16" Offset="0x53B8"/>
+        <Texture Name="gObjectGlaShoeTex" Format="ci8" Width="8" Height="16" Offset="0x54B8" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaShoeSoleAndSpearHandleTex" Format="ci8" Width="8" Height="8" Offset="0x5538" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x5578" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaMetalTex" Format="i8" Width="8" Height="16" Offset="0x5978"/>
+        <Texture Name="gObjectGlaHairTex" Format="ci8" Width="16" Height="16" Offset="0x59F8" TlutOffset="0x4D08"/>
+        <Texture Name="gObjectGlaGlovesTex" Format="i8" Width="16" Height="16" Offset="0x5AF8"/>
+        <Texture Name="gObjectGlaEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x5BF8" TlutOffset="0x4D08"/>
+        <Array Name="gObjectGlaLeftFootVtx" Count="43" Offset="0x5FF8">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaRightFootVtx" Count="43" Offset="0x62A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaLeftHandVtx" Count="34" Offset="0x6558">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaRightHandVtx" Count="34" Offset="0x6778">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaSpearVtx" Count="25" Offset="0x6998">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaVeilVtx" Count="12" Offset="0x6B28">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaPonytailVtx" Count="14" Offset="0x6BE8">
+            <Vtx/>
+        </Array>
+        <Array Name="gObjectGlaHeadVtx" Count="203" Offset="0x6CC8">
+            <Vtx/>
+        </Array>
+        <DList Name="gObjectGlaLeftFootDL" Offset="0x7978"/>
+        <DList Name="gObjectGlaRightFootDL" Offset="0x7B38"/>
+        <DList Name="gObjectGlaLeftHandDL" Offset="0x7CF8"/>
+        <DList Name="gObjectGlaRightHandDL" Offset="0x7E60"/>
+        <DList Name="gObjectGlaSpearDL" Offset="0x7FC8"/>
+        <DList Name="gObjectGlaVeilDL" Offset="0x81B8"/>
+        <DList Name="gObjectGlaPonytailDL" Offset="0x8270"/>
+        <DList Name="gObjectGlaHeadDL" Offset="0x8360"/>
+        <Limb Name="gObjectGlaRootLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_ROOT" Offset="0x8818"/>
+        <Limb Name="gObjectGlaTorsoLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_TORSO" Offset="0x8824"/>
+        <Limb Name="gObjectGlaHeadRootLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_HEAD_ROOT" Offset="0x8830"/>
+        <Limb Name="gObjectGlaPonytailLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_PONYTAIL" Offset="0x883C"/>
+        <Limb Name="gObjectGlaVeilLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_VEIL" Offset="0x8848"/>
+        <Limb Name="gObjectGlaHeadLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_HEAD" Offset="0x8854"/>
+        <Limb Name="gObjectGlaRightArmLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_ARM" Offset="0x8860"/>
+        <Limb Name="gObjectGlaRightForearmLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_FOREARM" Offset="0x886C"/>
+        <Limb Name="gObjectGlaRightHandRootLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_HAND_ROOT" Offset="0x8878"/>
+        <Limb Name="gObjectGlaRightHandLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_HAND" Offset="0x8884"/>
+        <Limb Name="gObjectGlaSpearLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_SPEAR" Offset="0x8890"/>
+        <Limb Name="gObjectGlaLeftArmLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_ARM" Offset="0x889C"/>
+        <Limb Name="gObjectGlaLeftForearmLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_FOREARM" Offset="0x88A8"/>
+        <Limb Name="gObjectGlaLeftHandLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_HAND" Offset="0x88B4"/>
+        <Limb Name="gObjectGlaLeftThighLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_THIGH" Offset="0x88C0"/>
+        <Limb Name="gObjectGlaLeftShinLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_SHIN" Offset="0x88CC"/>
+        <Limb Name="gObjectGlaLeftFootLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_LEFT_FOOT" Offset="0x88D8"/>
+        <Limb Name="gObjectGlaRightThighLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_THIGH" Offset="0x88E4"/>
+        <Limb Name="gObjectGlaRightShinLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_SHIN" Offset="0x88F0"/>
+        <Limb Name="gObjectGlaRightFootLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_RIGHT_FOOT" Offset="0x88FC"/>
+        <Limb Name="gObjectGlaPelvisLimb" LimbType="Standard" EnumName="OBJECT_GLA_LIMB_PELVIS" Offset="0x8908"/>
+        <Skeleton Name="gObjectGlaSkel" Type="Flex" LimbType="Standard" LimbNone="OBJECT_GLA_LIMB_NONE" LimbMax="OBJECT_GLA_LIMB_MAX" EnumName="ObjectGlaLimb" Offset="0x8968"/>
+        <Animation Name="gObjectGlaRunAnim" Offset="0x8D60"/>
+        <Animation Name="gObjectGlaIdleAnim" Offset="0x98AC"/>
+        <Animation Name="gObjectGlaWalkAnim" Offset="0x9ED4"/>
+    </File>
+</Root>

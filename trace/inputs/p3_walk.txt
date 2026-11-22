@@ -1,0 +1,7 @@
+# P3: walk forward, turn right, walk, then roll (A while running) - retrace numbers (60/s)
+120 UP
+360 RIGHT
+420 UP
+540 UP A
+552 UP
+640 -

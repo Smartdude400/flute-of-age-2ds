@@ -1,0 +1,38 @@
+<Root>
+    <File Name="ovl_En_Clear_Tag">
+        <DList Name="gStarfighterDL" Offset="0x0"/>
+        <Array Name="gStarfighterVtx" Count="148" Offset="0x2D8">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterLaserDL" Offset="0x3C98"/>
+        <Array Name="gStarfighterLaserVtx" Count="6" Offset="0x3D08">
+            <Vtx/>
+        </Array>
+        <Array Name="gStarfighterBackfireVtx" Count="3" Offset="0x3F68">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterBackfireDL" Offset="0x3F98"/>
+        <Array Name="gStarfighterDebrisEffectVtx" Count="3" Offset="0x4318">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterDebrisEffectMaterialDL" Offset="0x4348"/>
+        <DList Name="gStarfighterDebrisEffectDL" Offset="0x43C8"/>
+        <Array Name="gStarfighterFireEffectVtx" Count="3" Offset="0x49E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterFireEffectMaterialDL" Offset="0x4A10"/>
+        <DList Name="gStarfighterFireEffectDL" Offset="0x4AB8"/>
+        <Array Name="gStarfighterFlashEffectVtx" Count="4" Offset="0x5AD8">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterFlashEffectDL" Offset="0x5B18"/>
+        <Array Name="gStarfighterFlashEffectGroundVtx" Count="3" Offset="0x5D98">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterFlashEffectGroundDL" Offset="0x5DC8"/>
+        <Array Name="gStarfighterShadowVtx" Count="3" Offset="0x6250">
+            <Vtx/>
+        </Array>
+        <DList Name="gStarfighterShadowDL" Offset="0x6280"/>
+    </File>
+</Root>

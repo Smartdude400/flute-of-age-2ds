@@ -1,0 +1,19 @@
+<Root>
+    <File Name="object_spot12_obj" Segment="6">
+        <!-- Dunean Fortress Wasteland Gate -->
+        <Array Name="gDuneanFortressWastelandGateVtx" Count="8" Offset="0x1000">
+            <Vtx/>
+        </Array>
+        <DList Name="gDuneanFortressWastelandGateDL" Offset="0x1080"/>
+        <Texture Name="gDuneanFortressWastelandGateTex" Format="rgba16" Width="16" Height="128" Offset="0x0"/>
+        <Collision Name="gDuneanFortressWastelandGateCol" Offset="0x11EC"/>
+
+        <!-- Dunean Fortress GTG Shutter -->
+        <Array Name="gDuneanFortressGTGShutterVtx" Count="4" Offset="0x2220">
+            <Vtx/>
+        </Array>
+        <DList Name="gDuneanFortressGTGShutterDL" Offset="0x2260"/>
+        <Texture Name="gDuneanFortressGTGShutterTex" Format="rgba16" Width="32" Height="64" Offset="0x1220"/>
+        <Collision Name="gDuneanFortressGTGShutterCol" Offset="0x238C"/>
+    </File>
+</Root>

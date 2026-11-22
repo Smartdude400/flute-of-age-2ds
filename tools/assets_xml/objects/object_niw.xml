@@ -1,0 +1,75 @@
+<Root>
+    <File Name="object_niw" Segment="6">
+        <!-- Clucker Skeleton -->
+        <Skeleton Name="gCluckerSkel" Type="Flex" LimbType="Standard" Offset="0x2530"/>
+
+        <!-- Clucker Limbs -->
+        <Limb Name="gCluckerRootLimb" LimbType="Standard" Offset="0x2440"/>
+        <Limb Name="gCluckerLimb_244C" LimbType="Standard" Offset="0x244C"/>
+        <Limb Name="gCluckerLimb_2458" LimbType="Standard" Offset="0x2458"/>
+        <Limb Name="gCluckerTailAndUndersideLimb" LimbType="Standard" Offset="0x2464"/>
+        <Limb Name="gCluckerLeftFootRootLimb" LimbType="Standard" Offset="0x2470"/>
+        <Limb Name="gCluckerLeftFootLimb" LimbType="Standard" Offset="0x247C"/>
+        <Limb Name="gCluckerLeftWingRootLimb" LimbType="Standard" Offset="0x2488"/>
+        <Limb Name="gCluckerLeftWingLimb" LimbType="Standard" Offset="0x2494"/>
+        <Limb Name="gCluckerRightFootRootLimb" LimbType="Standard" Offset="0x24A0"/>
+        <Limb Name="gCluckerRightFootLimb" LimbType="Standard" Offset="0x24AC"/>
+        <Limb Name="gCluckerRightWingRootLimb" LimbType="Standard" Offset="0x24B8"/>
+        <Limb Name="gCluckerRightWingLimb" LimbType="Standard" Offset="0x24C4"/>
+        <Limb Name="gCluckerUpperBodyRootLimb" LimbType="Standard" Offset="0x24D0"/>
+        <Limb Name="gCluckerNeckLimb" LimbType="Standard" Offset="0x24DC"/>
+        <Limb Name="gCluckerHeadLimb" LimbType="Standard" Offset="0x24E8"/>
+
+        <!-- Clucker Limb Vertices -->
+        <Array Name="gCluckerHeadVtx" Count="62" Offset="0x100">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerNeckVtx" Count="15" Offset="0x4E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerRightWingVtx" Count="8" Offset="0x5D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLeftWingVtx" Count="8" Offset="0x650">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLeftFootVtx" Count="3" Offset="0x6D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerRightFootVtx" Count="3" Offset="0x700">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerTailAndUndersideVtx" Count="41" Offset="0x730">
+            <Vtx/>
+        </Array>
+
+        <!-- Clucker Limb DisplayLists -->
+        <DList Name="gCluckerTailAndUndersideDL" Offset="0x0DF0"/>
+        <DList Name="gCluckerLeftFootDL" Offset="0x11E0"/>
+        <DList Name="gCluckerLeftWingDL" Offset="0x1128"/>
+        <DList Name="gCluckerRightFootDL" Offset="0x1088"/>
+        <DList Name="gCluckerRightWingDL" Offset="0x0FD0"/>
+        <DList Name="gCluckerNeckDL" Offset="0x09C0"/>
+        <DList Name="gCluckerHeadDL" Offset="0x0A98"/>
+
+        <!-- Other Clucker Vertices and DisplayLists -->
+        <DList Name="gCluckerEffectFeatherMaterialDL" Offset="0x23B0"/>
+        <Array Name="gCluckerEffectFeatherModelVtx" Count="3" Offset="0x2380">
+            <Vtx/>
+        </Array>
+        <DList Name="gCluckerEffectFeatherModelDL" Offset="0x2428"/>
+
+        <!-- Clucker DisplayList Textures -->
+        <Texture Name="gCluckerEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x1280"/>
+        <Texture Name="gCluckerHeadFeathersTex" Format="rgba16" Width="8" Height="16" Offset="0x1480"/>
+        <Texture Name="gCluckerBaseFeathersTex" Format="rgba16" Width="8" Height="8" Offset="0x1580"/>
+        <Texture Name="gCluckerBeakTex" Format="rgba16" Width="8" Height="8" Offset="0x1600"/>
+        <Texture Name="gCluckerCombTex" Format="rgba16" Width="16" Height="16" Offset="0x1680"/>
+        <Texture Name="gCluckerTailFeathersTex" Format="rgba16" Width="32" Height="32" Offset="0x1880"/>
+        <Texture Name="gCluckerClawTex" Format="rgba16" Width="8" Height="16" Offset="0x2080"/>
+        <Texture Name="gCluckerTex_2180" Format="rgba16" Width="16" Height="16" Offset="0x2180"/>
+
+        <!-- Clucker Animations -->
+        <Animation Name="gCluckerAnim" Offset="0xE8"/>
+    </File>
+</Root>

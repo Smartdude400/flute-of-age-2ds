@@ -1,0 +1,119 @@
+<Root>
+    <File Name="object_ahg" Segment="6">
+        <!--Skeleton -->
+        <!-- The textures used by these limbs aren't 64-bit aligned -->
+        <Limb Name="gEldranMan1PelvisLimb" LimbType="Standard" Offset="0x0"/>
+        <Limb Name="gEldranMan1LeftThighLimb" LimbType="Standard" Offset="0xC"/>
+        <Limb Name="gEldranMan1LeftShinLimb" LimbType="Standard" Offset="0x18"/>
+        <Limb Name="gEldranMan1LeftFootLimb" LimbType="Standard" Offset="0x24"/>
+        <Limb Name="gEldranMan1RightThighLimb" LimbType="Standard" Offset="0x30"/>
+        <Limb Name="gEldranMan1RightShinLimb" LimbType="Standard" Offset="0x3C"/>
+        <Limb Name="gEldranMan1RightFootLimb" LimbType="Standard" Offset="0x48"/>
+        <Limb Name="gEldranMan1TorsoLimb" LimbType="Standard" Offset="0x54"/>
+        <Limb Name="gEldranMan1LeftUpperArmLimb" LimbType="Standard" Offset="0x60"/>
+        <Limb Name="gEldranMan1LeftForearmLimb" LimbType="Standard" Offset="0x6C"/>
+        <Limb Name="gEldranMan1LeftHandLimb" LimbType="Standard" Offset="0x78"/>
+        <Limb Name="gEldranMan1RightUpperArmLimb" LimbType="Standard" Offset="0x84"/>
+        <Limb Name="gEldranMan1RightForearmLimb" LimbType="Standard" Offset="0x90"/>
+        <Limb Name="gEldranMan1RightHandLimb" LimbType="Standard" Offset="0x9C"/>
+        <Limb Name="gEldranMan1HeadLimb" LimbType="Standard" Offset="0xA8"/>
+        <Skeleton Name="gEldranMan1Skel" Type="Flex" LimbType="Standard" Offset="0xF0"/>
+
+        <!-- Textures -->
+        <!-- 32-bit aligned textures. -->
+        <Texture Name="gEldranMan1TLUT" Format="rgba16" Width="16" Height="16" Offset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedSkinHairTex" Format="ci8" Width="16" Height="16" Offset="0x2FC" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedHairTex" Format="ci8" Width="16" Height="16" Offset="0x3FC" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedEarTex" Format="ci8" Width="8" Height="8" Offset="0x4FC" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedSkinTex" Format="ci8" Width="8" Height="8" Offset="0x53C" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedEyeOpenTex" Format="ci8" Width="16" Height="16" Offset="0x57C" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedEyeHalfTex" Format="ci8" Width="16" Height="16" Offset="0x67C" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1BeardedEyeClosedTex" Format="ci8" Width="16" Height="16" Offset="0x77C" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1FingersTex" Format="ci8" Width="16" Height="16" Offset="0x87C" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1ShirtTex" Format="i8" Width="8" Height="8" Offset="0x97C"/>
+        <Texture Name="gEldranMan1ShoesTex" Format="i8" Width="8" Height="8" Offset="0x9BC"/>
+        <Texture Name="gEldranMan1PantsTex" Format="ci8" Width="32" Height="16" Offset="0x9FC" TlutOffset="0xFC"/>
+        <Texture Name="gEldranMan1PantsBeltTex" Format="ci8" Width="16" Height="16" Offset="0xBFC" TlutOffset="0xFC"/>
+
+        <!-- Vertices -->
+        <Array Name="gEldranMan1BeardedHeadVtx" Count="126" Offset="0xD00">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftHandVtx" Count="47" Offset="0x14E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftForearmVtx" Count="24" Offset="0x17D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftUpperArmVtx" Count="25" Offset="0x1950">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightHandVtx" Count="47" Offset="0x1AE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightForearmVtx" Count="24" Offset="0x1DD0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightUpperArmVtx" Count="25" Offset="0x1F50">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1TorsoVtx" Count="61" Offset="0x20E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightFootVtx" Count="34" Offset="0x24B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightShinVtx" Count="24" Offset="0x26D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1RightThighVtx" Count="26" Offset="0x2850">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftFootVtx" Count="34" Offset="0x29F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftShinVtx" Count="24" Offset="0x2C10">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1LeftThighVtx" Count="26" Offset="0x2D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1PelvisVtx" Count="28" Offset="0x2F30">
+            <Vtx/>
+        </Array>
+
+        <!-- DLs -->
+        <DList Name="gEldranMan1BeardedHeadDL" Offset="0x30F0"/>
+        <DList Name="gEldranMan1RightHandDL" Offset="0x3500"/>
+        <DList Name="gEldranMan1RightForearmDL" Offset="0x3670"/>
+        <DList Name="gEldranMan1RightUpperArmDL" Offset="0x37A0"/>
+        <DList Name="gEldranMan1LeftHandDL" Offset="0x38D8"/>
+        <DList Name="gEldranMan1LeftForearmDL" Offset="0x3A48"/>
+        <DList Name="gEldranMan1LeftUpperArmDL" Offset="0x3B78"/>
+        <DList Name="gEldranMan1TorsoDL" Offset="0x3CB0"/>
+        <DList Name="gEldranMan1RightFootDL" Offset="0x3ED8"/>
+        <DList Name="gEldranMan1RightShinDL" Offset="0x4018"/>
+        <DList Name="gEldranMan1RightThighDL" Offset="0x4148"/>
+        <DList Name="gEldranMan1LeftFootDL" Offset="0x4280"/>
+        <DList Name="gEldranMan1LeftShinDL" Offset="0x43C0"/>
+        <DList Name="gEldranMan1LeftThighDL" Offset="0x44F0"/>
+        <DList Name="gEldranMan1PelvisDL" Offset="0x4628"/>
+
+        <!-- Alternate Heads Textures -->
+        <Texture Name="gEldranMan1ShavedBowlCutTLUT" Format="rgba16" Width="16" Height="12" Offset="0x47C8"/>
+        <Texture Name="gEldranMan1ShavedBowlSkinEarTex" Format="ci8" Width="8" Height="8" Offset="0x4948" TlutOffset="0x47C8"/>
+        <Texture Name="gEldranMan1ShavedBowlMouthTex" Format="ci8" Width="32" Height="16" Offset="0x4988" TlutOffset="0x47C8"/>
+        <Texture Name="gEldranMan1ShavedBowlEyeTex" Format="ci8" Width="16" Height="16" Offset="0x4B88" TlutOffset="0x47C8"/>
+        <Texture Name="gEldranMan1BowlCutHairTex" Format="ci8" Width="8" Height="16" Offset="0x4C88" TlutOffset="0x47C8"/>
+
+        <!-- Alternate Heads -->
+        <Array Name="gEldranMan1ShavedHeadVtx" Count="62" Offset="0x4D08">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranMan1BowlCutHeadVtx" Count="66" Offset="0x50E8">
+            <Vtx/>
+        </Array>
+        <DList Name="gEldranMan1ShavedHeadDL" Offset="0x5508"/>
+        <DList Name="gEldranMan1BowlCutHeadDL" Offset="0x5728"/>
+    </File>
+</Root>

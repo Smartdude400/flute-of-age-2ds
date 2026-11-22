@@ -1,0 +1,127 @@
+<Root>
+    <File Name="object_ma2" Segment="6">
+        <Texture Name="gMerylAdultClothesTLUT" Format="rgba16" Width="16" Height="16" Offset="0x7F0"/>
+        <Texture Name="gMerylAdultFingersTex" Format="rgba16" Width="16" Height="16" Offset="0x9F0"/>
+        <Texture Name="gMerylAdultShirtTex" Format="ci8" Width="16" Height="16" Offset="0xBF0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultShirtCuffTex" Format="ci8" Width="8" Height="16" Offset="0xCF0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultScarfTex" Format="ci8" Width="8" Height="8" Offset="0xD70" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylDrakeTex" Format="rgba16" Width="16" Height="32" Offset="0xDB0"/>
+        <Texture Name="gMerylAdultMiddleDressTex" Format="ci8" Width="16" Height="16" Offset="0x11B0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultFrontDressTex" Format="rgba16" Width="16" Height="32" Offset="0x12B0"/>
+        <Texture Name="gMerylAdultDressPatternTex" Format="ci8" Width="16" Height="32" Offset="0x16B0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultBootTex" Format="ci8" Width="64" Height="16" Offset="0x18B0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultBeltTex" Format="ci8" Width="32" Height="16" Offset="0x1CB0" TlutOffset="0x7F0"/>
+        <Texture Name="gMerylAdultHairTLUT" Format="rgba16" Width="96" Height="1" Offset="0x1EB0"/>
+        <Texture Name="gMerylAdultGradientTex" Format="rgba16" Width="8" Height="8" Offset="0x2170"/>
+        <Texture Name="gMerylAdultNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x21F0"/>
+        <Texture Name="gMerylAdultEarTex" Format="rgba16" Width="16" Height="16" Offset="0x2270"/>
+        <Texture Name="gMerylAdultHairTex" Format="ci8" Width="16" Height="16" Offset="0x2470" TlutOffset="0x1EB0"/>
+
+        <Texture Name="gMerylAdultFaceTLUT" Format="rgba16" Width="16" Height="16" Offset="0x1F70"/>
+        <Texture Name="gMerylAdultEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x2570" TlutOffset="0x1F70"/>
+        <Texture Name="gMerylAdultEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x2C70" TlutOffset="0x1F70"/>
+        <Texture Name="gMerylAdultEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x3070" TlutOffset="0x1F70"/>
+
+        <Texture Name="gMerylAdultBasketTex" Format="rgba16" Width="8" Height="16" Offset="0x2B70"/>
+        <Texture Name="gMerylAdultBasketInsideTex" Format="rgba16" Width="8" Height="16" Offset="0x3470"/>
+
+        <Texture Name="gMerylAdultMouthNeutralTex" Format="ci8" Width="32" Height="16" Offset="0x2970" TlutOffset="0x1F70"/>
+        <Texture Name="gMerylAdultMouthSadTex" Format="ci8" Width="32" Height="16" Offset="0x3570" TlutOffset="0x1F70"/>
+        <Texture Name="gMerylAdultMouthHappyTex" Format="ci8" Width="32" Height="16" Offset="0x3770" TlutOffset="0x1F70"/>
+
+        <Array Name="gMerylAdultHeadVtx" Count="234" Offset="0x3970">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultBasketVtx" Count="61" Offset="0x4810">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftHandVtx" Count="40" Offset="0x55F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftArmVtx" Count="24" Offset="0x5878">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftShoulderVtx" Count="40" Offset="0x59F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightHandVtx" Count="40" Offset="0x5C78">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightArmVtx" Count="24" Offset="0x5EF8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightShoulderVtx" Count="40" Offset="0x6078">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultChestAndNeckVtx" Count="91" Offset="0x62F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultDressVtx" Count="44" Offset="0x68A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftFootVtx" Count="31" Offset="0x6B68">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftLegVtx" Count="19" Offset="0x6D58">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultLeftThighVtx" Count="3" Offset="0x6E88">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightFootVtx" Count="31" Offset="0x6EB8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightLegVtx" Count="19" Offset="0x70A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultRightThighVtx" Count="3" Offset="0x71D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gMerylAdultTorsoVtx" Count="54" Offset="0x7208">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gMerylAdultHeadDL" Offset="0x4BE0"/>
+        <DList Name="gMerylAdultBasketDL" Offset="0x5420"/>
+        <DList Name="gMerylAdultChestAndNeckDL" Offset="0x7568"/>
+        <DList Name="gMerylAdultRightShoulderDL" Offset="0x7980"/>
+        <DList Name="gMerylAdultRightArmDL" Offset="0x7BB0"/>
+        <DList Name="gMerylAdultRightHandDL" Offset="0x7CA8"/>
+        <DList Name="gMerylAdultLeftShoulderDL" Offset="0x7E40"/>
+        <DList Name="gMerylAdultLeftArmDL" Offset="0x8070"/>
+        <DList Name="gMerylAdultLeftHandDL" Offset="0x8168"/>
+        <DList Name="gMerylAdultDressDL" Offset="0x8300"/>
+        <DList Name="gMerylAdultTorsoDL" Offset="0x8530"/>
+        <DList Name="gMerylAdultRightThighDL" Offset="0x87A0"/>
+        <DList Name="gMerylAdultRightLegDL" Offset="0x87F8"/>
+        <DList Name="gMerylAdultRightFootDL" Offset="0x88E8"/>
+        <DList Name="gMerylAdultLeftThighDL" Offset="0x8A08"/>
+        <DList Name="gMerylAdultLeftLegDL" Offset="0x8A60"/>
+        <DList Name="gMerylAdultLeftFootDL" Offset="0x8B50"/>
+
+        <Skeleton Name="gMerylAdultSkel" Type="Flex" LimbType="Standard" LimbNone="MERYL_ADULT_LIMB_NONE" LimbMax="MERYL_ADULT_LIMB_MAX" EnumName="MerylAdultLimb" Offset="0x8D90"/>
+        <Limb Name="gMerylAdultRootLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_ROOT" Offset="0x8C70"/>
+        <Limb Name="gMerylAdultLowerControlLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LOWER_CONTROL" Offset="0x8C7C"/>
+        <Limb Name="gMerylAdultLeftThighLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_THIGH" Offset="0x8C88"/>
+        <Limb Name="gMerylAdultLeftLegLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_LEG" Offset="0x8C94"/>
+        <Limb Name="gMerylAdultLeftFootLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_FOOT" Offset="0x8CA0"/>
+        <Limb Name="gMerylAdultRightThighLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_THIGH" Offset="0x8CAC"/>
+        <Limb Name="gMerylAdultRightLegLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_LEG" Offset="0x8CB8"/>
+        <Limb Name="gMerylAdultRightFootLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_FOOT" Offset="0x8CC4"/>
+        <Limb Name="gMerylAdultTorsoLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_TORSO" Offset="0x8CD0"/>
+        <Limb Name="gMerylAdultDressLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_DRESS" Offset="0x8CDC"/>
+        <Limb Name="gMerylAdultChestAndNeckLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_CHEST_AND_NECK" Offset="0x8CE8"/>
+        <Limb Name="gMerylAdultLeftShoulderLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_SHOULDER" Offset="0x8CF4"/>
+        <Limb Name="gMerylAdultLeftArmLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_ARM" Offset="0x8D00"/>
+        <Limb Name="gMerylAdultLeftHandLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_LEFT_HAND" Offset="0x8D0C"/>
+        <Limb Name="gMerylAdultRightShoulderLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_SHOULDER" Offset="0x8D18"/>
+        <Limb Name="gMerylAdultRightArmLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_ARM" Offset="0x8D24"/>
+        <Limb Name="gMerylAdultRightHandLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_RIGHT_HAND" Offset="0x8D30"/>
+        <Limb Name="gMerylAdultHeadLimb" LimbType="Standard" EnumName="MERYL_ADULT_LIMB_HEAD" Offset="0x8D3C"/>
+        <Animation Name="gMerylAdultIdleAnim" Offset="0x7D4"/>
+        <Animation Name="gMerylAdultSingToIdleAnim" Offset="0x92F0"/> <!-- Unused -->
+        <Animation Name="gMerylAdultStandStillAnim" Offset="0x93BC"/>
+        <Animation Name="gMerylAdultSingAnim" Offset="0x9EE0"/>
+
+    </File>
+</Root>

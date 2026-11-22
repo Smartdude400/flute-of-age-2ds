@@ -1,0 +1,280 @@
+<Root>
+    <File Name="object_goma" Segment="6">
+        <!-- Animations 1 -->
+        <Animation Name="gVekraStandAnim" Offset="0xAE8"/>
+        <Animation Name="gVekraHangAnim" Offset="0x193C"/> <!-- hang from the ceiling -->
+        <Animation Name="gVekraWalkAnim" Offset="0x2360"/>
+        <Animation Name="gVekraPrepareEggsAnim" Offset="0x29F0"/> <!-- hanging, shaking -->
+        <Animation Name="gVekraViolentAttackAnim" Offset="0x39D0"/> <!-- unused -->
+        <Animation Name="gVekraAttackAnim" Offset="0x4318"/>
+        <Animation Name="gVekraRestAfterAttackAnim" Offset="0x4A20"/>
+        <Animation Name="gVekraRecoverAfterAttackAnim" Offset="0x5330"/>
+        <Animation Name="gVekraCrashAnim" Offset="0x58C0"/> <!-- when struck down from the ceiling -->
+        <Animation Name="gVekraLandAnim" Offset="0x5F28"/> <!-- when jumping down from the ceiling -->
+        <Animation Name="gVekraClimbAnim" Offset="0x66DC"/> <!-- when climbing a wall -->
+        <Animation Name="gVekraDamageAnim" Offset="0x6E60"/>
+        <Animation Name="gVekraDeathAnim" Offset="0xB2FC"/>
+        <Animation Name="gVekraPrepareAttackAnim" Offset="0xC468"/>
+        <Animation Name="gVekraStunnedAnim" Offset="0xCCD8"/>
+        <Animation Name="gVekraInitialLandingAnim" Offset="0xF70C"/> <!-- when landing in the pre-fight cutscene -->
+        <Animation Name="gVekraEyeRollAnim" Offset="0x10918"/>
+        <Animation Name="gVekraLayEggsAnim" Offset="0x113BC"/>
+        <Animation Name="gVekraIdleCrouchedAnim" Offset="0x12678"/>
+
+        <!-- Vertices and DLists -->
+        <Array Name="gVekraLeftAntennaBodyVtx" Count="14" Offset="0x12690">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftAntennaBodyDL" Offset="0x12770"/>
+        <Array Name="gVekraLeftAntennaShellVtx" Count="45" Offset="0x12828">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftAntennaShellDL" Offset="0x12AF8"/>
+        <Array Name="gVekraRightAntennaBodyVtx" Count="14" Offset="0x12C90">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightAntennaBodyDL" Offset="0x12D70"/>
+        <Array Name="gVekraRightAntennaShellVtx" Count="48" Offset="0x12E28">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightAntennaShellDL" Offset="0x13128"/>
+        <Array Name="gVekraRightMandibles1Vtx" Count="6" Offset="0x132C0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightMandibles1DL" Offset="0x13320"/>
+        <Array Name="gVekraRightMandibles2Vtx" Count="11" Offset="0x133D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightMandibles2DL" Offset="0x13480"/>
+        <Array Name="gVekraLeftMandibles1Vtx" Count="6" Offset="0x13590">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftMandibles1DL" Offset="0x135F0"/>
+        <Array Name="gVekraLeftMandibles2Vtx" Count="11" Offset="0x136A0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftMandibles2DL" Offset="0x13750"/>
+        <Array Name="gVekraBodyVtx" Count="32" Offset="0x13860">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraBodyDL" Offset="0x13A60"/>
+        <Array Name="gVekraBodyShellVtx" Count="117" Offset="0x13B48">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraBodyShellDL" Offset="0x14298"/>
+        <Array Name="gVekraBodyShellBackVtx" Count="9" Offset="0x14420">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraBodyShellBackDL" Offset="0x144B0"/>
+        <Array Name="gVekraLeftThighShellVtx" Count="14" Offset="0x14560">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftThighShellDL" Offset="0x14640"/>
+        <Array Name="gVekraRightThighShellVtx" Count="14" Offset="0x146F0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightThighShellDL" Offset="0x147D0"/>
+        <Array Name="gVekraEyeVtx" Count="25" Offset="0x14880">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraEyeDL" Offset="0x14A10"/>
+        <Array Name="gVekraLeftFeetVtx" Count="40" Offset="0x14B40">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftFeetDL" Offset="0x14DC0"/>
+        <Array Name="gVekraRightFeetVtx" Count="37" Offset="0x14F18">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightFeetDL" Offset="0x15168"/>
+        <Array Name="gVekraIrisVtx" Count="9" Offset="0x152A8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraIrisDL" Offset="0x15338"/>
+        <Array Name="gVekraLeftKneeVtx" Count="47" Offset="0x153E8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftKneeDL" Offset="0x156D8"/>
+        <Array Name="gVekraRightKneeVtx" Count="48" Offset="0x15828">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightKneeDL" Offset="0x15B28"/>
+        <Array Name="gVekraLeftFeetBackVtx" Count="13" Offset="0x15C78">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftFeetBackDL" Offset="0x15D48"/>
+        <Array Name="gVekraRightFeetBackVtx" Count="13" Offset="0x15E58">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightFeetBackDL" Offset="0x15F28"/>
+        <Array Name="gVekraLeftThighVtx" Count="49" Offset="0x16038">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftThighDL" Offset="0x16348"/>
+        <Array Name="gVekraRightThighVtx" Count="49" Offset="0x16490">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightThighDL" Offset="0x167A0"/>
+        <Array Name="gVekraEyeLidTopVtx" Count="29" Offset="0x168E8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraEyeLidTopDL" Offset="0x16AB8"/>
+        <Array Name="gVekraEyeLidBottomVtx" Count="29" Offset="0x16BD0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraEyeLidBottomDL" Offset="0x16DA0"/>
+        <Array Name="gVekraMandiblesBodyVtx" Count="20" Offset="0x16EA8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraMandiblesBodyDL" Offset="0x16FE8"/>
+        <Array Name="gVekraLeftShinVtx" Count="22" Offset="0x17108">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftShinDL" Offset="0x17268"/>
+        <Array Name="gVekraRightShinVtx" Count="22" Offset="0x173A0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightShinDL" Offset="0x17500"/>
+        <Array Name="gVekraTail1Vtx" Count="19" Offset="0x17638">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraTail1DL" Offset="0x17768"/>
+        <Array Name="gVekraTail2Vtx" Count="19" Offset="0x17830">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraTail2DL" Offset="0x17960"/>
+        <Array Name="gVekraTail3Vtx" Count="14" Offset="0x17A28">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraTail3DL" Offset="0x17B08"/>
+        <Array Name="gVekraTail4Vtx" Count="25" Offset="0x17BF0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraTail4DL" Offset="0x17D80"/>
+        <Array Name="gVekraLeftAntennaClawVtx" Count="26" Offset="0x17E68">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraLeftAntennaClawDL" Offset="0x18008"/>
+        <Array Name="gVekraRightAntennaClawVtx" Count="23" Offset="0x18120">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraRightAntennaClawDL" Offset="0x18290"/>
+
+        <!-- Limb textures -->
+        <Texture Name="gVekraBodyTex" Format="rgba16" Width="16" Height="16" Offset="0x183A8"/>
+        <Texture Name="gVekraShellUndersideTex" Format="rgba16" Width="16" Height="16" Offset="0x185A8"/>
+        <Texture Name="gVekraDarkShellTex" Format="rgba16" Width="16" Height="16" Offset="0x187A8"/>
+        <Texture Name="gVekraShellTex" Format="rgba16" Width="32" Height="32" Offset="0x189A8"/>
+        <Texture Name="gVekraEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x191A8"/>
+        <Texture Name="gVekraIrisTex" Format="rgba16" Width="32" Height="32" Offset="0x193A8"/>
+
+        <!-- Boss title card -->
+        <Version Pattern="ntsc-.*|gc-jp.*|gc-us.*|ique-cn">
+            <Texture Name="gVekraTitleCardTex" Format="ia8" Width="128" Height="80" Offset="0x19BA8"/>
+        </Version>
+        <Version Pattern="pal-.*|gc-eu.*">
+            <Texture Name="gVekraTitleCardTex" Format="ia8" Width="128" Height="120" Offset="0x19BA8"/>
+        </Version>
+
+        <!-- Limbs -->
+        <Limb Name="gVekraRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraBodyLimb" LimbType="Standard"/>
+        <Limb Name="gVekraBodyShellLimb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTailRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTail1RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTail2RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTail3RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTail4RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraTail4Limb" LimbType="Standard"/>
+        <Limb Name="gVekraTail3Limb" LimbType="Standard"/>
+        <Limb Name="gVekraTail2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraTail1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightLegRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightThighRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightLegLowerRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightFeetRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightFeetBackRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightFeetBackRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightFeetBackLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightFeetLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightShinLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightKneeRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightKneeRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightKneeLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightThighShellRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightThighShellRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightThighShellLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightThighLimb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidBottomRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidBottomRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidBottomLimb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidTopRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidTopRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraEyeLidTopLimb" LimbType="Standard"/>
+        <Limb Name="gVekraIrisRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraIrisRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraIrisLimb" LimbType="Standard"/>
+        <Limb Name="gVekraMandiblesRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraMandiblesRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraMandiblesBodyLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftMandiblesRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftMandibles1RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftMandibles2RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftMandibles2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftMandibles1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightMandiblesRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightMandibles1RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightMandibles2RootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightMandibles2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraRightMandibles1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaBodyRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaShellRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaClawRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaClawLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaShellLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftAntennaBodyLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaBodyRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaShellRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaClawRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaClawLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaShellLimb" LimbType="Standard"/>
+        <Limb Name="gVekraRightAntennaBodyLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftLegRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftThighRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftLegLowerRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftFeetRootLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftFeetBackRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftFeetBackRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftFeetBackLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftFeetLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftShinLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftKneeRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftKneeRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftKneeLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftThighShellRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftThighShellRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftThighShellLimb" LimbType="Standard"/>
+        <Limb Name="gVekraLeftThighLimb" LimbType="Standard"/>
+        <Limb Name="gVekraBodyShellBackRoot1Limb" LimbType="Standard"/>
+        <Limb Name="gVekraBodyShellBackRoot2Limb" LimbType="Standard"/>
+        <Limb Name="gVekraBodyShellBackLimb" LimbType="Standard"/>
+
+        <!-- Skeleton -->
+        <LimbTable Name="gVekraLimbs" LimbType="Standard" Count="85"/>
+        <Skeleton Name="gVekraSkel" Type="Normal" LimbType="Standard"/>
+
+        <!-- Animations 2 -->
+        <Animation Name="gVekraWalkCrouchedAnim" Offset=".+0xE4C"/>
+
+        <!-- Door -->
+        <Array Name="gVekraDoorVtx" Count="12" Offset=".+0x4">
+            <Vtx/>
+        </Array>
+        <DList Name="gVekraDoorDL" Length="22"/>
+        <Collision Name="gVekraDoorCol" Offset=".+0x100"/>
+        <Texture Name="gVekraDoorTex" Format="rgba16" Width="32" Height="32" Offset=".+0x4"/>
+    </File>
+</Root>

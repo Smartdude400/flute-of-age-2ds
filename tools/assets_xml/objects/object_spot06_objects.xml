@@ -1,0 +1,39 @@
+<Root>
+    <File Name="object_spot06_objects" Segment="6">
+        <!-- Lake Elden Low Water -->
+        <Array Name="gLakeEldenLowWaterVtx" Count="18" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gLakeEldenLowWaterDL" Offset="0x0120"/>
+
+        <!-- Lake Elden High Water -->
+        <Array Name="gLakeEldenHighWaterVtx" Count="36" Offset="0x230">
+            <Vtx/>
+        </Array>
+        <DList Name="gLakeEldenHighWaterDL" Offset="0x0470"/>
+        <Texture Name="gLakeEldenWaterTex" Format="rgba16" Width="32" Height="32" Offset="0x25A0"/>
+
+        <!-- Lake Elden Water Temple Gate -->
+        <Array Name="gLakeEldenWaterTempleGateVtx" Count="4" Offset="0xDD0">
+            <Vtx/>
+        </Array>
+        <DList Name="gLakeEldenWaterTempleGateDL" Offset="0x0E10"/>
+        <Texture Name="gLakeEldenWaterTempleGateTex" Format="rgba16" Width="16" Height="64" Offset="0x05D0"/>
+        <Collision Name="gLakeEldenWaterTempleGateCol" Offset="0x0EE8"/>
+
+        <!-- Lake Elden Neri Shortcut Iceblock -->
+        <Array Name="gLakeEldenNeriShortcutIceblockVtx" Count="4" Offset="0x1120">
+            <Vtx/>
+        </Array>
+        <DList Name="gLakeEldenNeriShortcutIceblockDL" Offset="0x1160"/>
+        <Texture Name="gLakeEldenNeriShortcutIceblockTex" Format="rgba16" Width="16" Height="16" Offset="0x0F20"/>
+        <Collision Name="gLakeEldenNeriShortcutIceblockCol" Offset="0x1238"/>
+
+        <!-- Lake Elden Water Temple Key -->
+        <Array Name="gLakeEldenWaterTempleKeyVtx" Count="34" Offset="0x2270">
+            <Vtx/>
+        </Array>
+        <DList Name="gLakeEldenWaterTempleKeyDL" Offset="0x2490"/>
+        <Texture Name="gLakeEldenWaterTempleKeyTex" Format="rgba16" Width="32" Height="64" Offset="0x1270"/>
+    </File>
+</Root>

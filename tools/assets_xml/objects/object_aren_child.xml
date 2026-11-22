@@ -1,0 +1,477 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_aren_child" Segment="6">
+        <Skeleton Name="gArenChildSkel" Type="Flex" LimbType="LOD" LimbNone="PLAYER_LIMB_NONE" LimbMax="PLAYER_LIMB_MAX" EnumName="PlayerLimb" Offset="0x2CF6C"/>
+        <LimbTable Name="gArenChildLimbs" LimbType="LOD" Count="21" Offset="0x2CF18"/>
+
+        <!--Far Limb DLists-->
+        <Array Name="gArenChildLeftHandFarVtx" Count="39" Offset="0xF220">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftHandFarDL" Offset="0x16280"/>
+        <Array Name="gArenChildRightHandFarVtx" Count="51" Offset="0xF6C0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandFarDL" Offset="0x164E0"/>
+        <Array Name="gArenChildBackSylvanSwordInSheathFarVtx" Count="31" Offset="0x10B70">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackSylvanSwordInSheathFarDL" Offset="0x17360"/>
+        <Array Name="gArenChildWaistFarVtx" Count="34" Offset="0x193F8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildWaistFarDL" Offset="0x1AEC8"/>
+        <Array Name="gArenChildRightThighFarVtx" Count="41" Offset="0x18B18">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightThighFarDL" Offset="0x1B0F8"/>
+        <Array Name="gArenChildRightShinFarVtx" Count="34" Offset="0x188F8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightShinFarDL" Offset="0x1B2B8"/>
+        <Array Name="gArenChildRightFootFarVtx" Count="26" Offset="0x18758">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightFootFarDL" Offset="0x1B510"/>
+        <Array Name="gArenChildLeftThighFarVtx" Count="40" Offset="0x19178">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftThighFarDL" Offset="0x1B638"/>
+        <Array Name="gArenChildLeftShinFarVtx" Count="35" Offset="0x18F48">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftShinFarDL" Offset="0x1B7F8"/>
+        <Array Name="gArenChildLeftFootFarVtx" Count="26" Offset="0x18DA8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFootFarDL" Offset="0x1BA50"/>
+        <Array Name="gArenChildCollarFarVtx" Count="8" Offset="0x19D88">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildCollarFarDL" Offset="0x1BB78"/>
+        <Array Name="gArenChildTorsoFarVtx" Count="27" Offset="0x1AD18">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildTorsoFarDL" Offset="0x1BBD8"/>
+        <Array Name="gArenChildHeadFarVtx" Count="98" Offset="0x19768">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildHeadFarDL" Offset="0x1BDA0"/>
+        <Array Name="gArenChildHatFarVtx" Count="21" Offset="0x19618">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildHatFarDL" Offset="0x1C2A8"/>
+        <Array Name="gArenChildRightShoulderFarVtx" Count="38" Offset="0x1A838">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightShoulderFarDL" Offset="0x1C398"/>
+        <Array Name="gArenChildRightForearmFarVtx" Count="26" Offset="0x1A698">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightForearmFarDL" Offset="0x1C558"/>
+        <Array Name="gArenChildLeftShoulderFarVtx" Count="38" Offset="0x1A1C8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftShoulderFarDL" Offset="0x1C688"/>
+        <Array Name="gArenChildLeftForearmFarVtx" Count="25" Offset="0x1A038">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftForearmFarDL" Offset="0x1C848"/>
+
+        <!--Near Limb DLists-->
+        <Array Name="gArenChildLeftHandNearVtx" Count="54" Offset="0xABF0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftHandNearDL" Offset="0x13CB0"/>
+        <Array Name="gArenChildRightHandNearVtx" Count="31" Offset="0xB6B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandNearDL" Offset="0x141C0"/>
+        <Array Name="gArenChildBackSylvanSwordInSheathNearVtx" Count="35" Offset="0xD1C0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackSylvanSwordInSheathNearDL" Offset="0x15248"/>
+        <Array Name="gArenChildWaistNearVtx" Count="42" Offset="0x1DA28">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildWaistNearDL" Offset="0x202A8"/>
+        <Array Name="gArenChildRightThighNearVtx" Count="50" Offset="0x1CEB8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightThighNearDL" Offset="0x204F0"/>
+        <Array Name="gArenChildRightShinNearVtx" Count="48" Offset="0x1CBB8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightShinNearDL" Offset="0x206E8"/>
+        <Array Name="gArenChildRightFootNearVtx" Count="36" Offset="0x1C978">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightFootNearDL" Offset="0x20978"/>
+        <Array Name="gArenChildLeftThighNearVtx" Count="49" Offset="0x1D718">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftThighNearDL" Offset="0x20AD8"/>
+        <Array Name="gArenChildLeftShinNearVtx" Count="48" Offset="0x1D418">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftShinNearDL" Offset="0x20CD0"/>
+        <Array Name="gArenChildLeftFootNearVtx" Count="36" Offset="0x1D1D8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFootNearDL" Offset="0x20F60"/>
+        <Array Name="gArenChildCollarNearVtx" Count="10" Offset="0x1EA98">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildCollarNearDL" Offset="0x210C0"/>
+        <Array Name="gArenChildTorsoNearVtx" Count="74" Offset="0x1FE08">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildTorsoNearDL" Offset="0x21130"/>
+        <Array Name="gArenChildHeadNearVtx" Count="183" Offset="0x1DF28">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildHeadNearDL" Offset="0x21360"/>
+        <Array Name="gArenChildHatNearVtx" Count="38" Offset="0x1DCC8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildHatNearDL" Offset="0x219B0"/>
+        <Array Name="gArenChildRightShoulderNearVtx" Count="46" Offset="0x1F748">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightShoulderNearDL" Offset="0x21AE8"/>
+        <Array Name="gArenChildRightForearmNearVtx" Count="34" Offset="0x1F528">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightForearmNearDL" Offset="0x21CB8"/>
+        <Array Name="gArenChildLeftShoulderNearVtx" Count="47" Offset="0x1EFC8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftShoulderNearDL" Offset="0x21E18"/>
+        <Array Name="gArenChildLeftForearmNearVtx" Count="34" Offset="0x1EDA8">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftForearmNearDL" Offset="0x21FE8"/>
+
+        <!--Limbs-->
+        <Limb Name="gArenChildRootLimb" LimbType="LOD" EnumName="PLAYER_LIMB_ROOT" Offset="0x2CDC8"/>
+        <Limb Name="gArenChildWaistLimb" LimbType="LOD" EnumName="PLAYER_LIMB_WAIST" Offset="0x2CDD8"/>
+        <Limb Name="gArenChildLowerControlLimb" LimbType="LOD" EnumName="PLAYER_LIMB_LOWER" Offset="0x2CDE8"/>
+        <Limb Name="gArenChildRightThighLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_THIGH" Offset="0x2CDF8"/>
+        <Limb Name="gArenChildRightShinLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_SHIN" Offset="0x2CE08"/>
+        <Limb Name="gArenChildRightFootLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_FOOT" Offset="0x2CE18"/>
+        <Limb Name="gArenChildLeftThighLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_THIGH" Offset="0x2CE28"/>
+        <Limb Name="gArenChildLeftShinLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_SHIN" Offset="0x2CE38"/>
+        <Limb Name="gArenChildLeftFootLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_FOOT" Offset="0x2CE48"/>
+        <Limb Name="gArenChildUpperControlLimb" LimbType="LOD" EnumName="PLAYER_LIMB_UPPER" Offset="0x2CE58"/>
+        <Limb Name="gArenChildHeadLimb" LimbType="LOD" EnumName="PLAYER_LIMB_HEAD" Offset="0x2CE68"/>
+        <Limb Name="gArenChildHatLimb" LimbType="LOD" EnumName="PLAYER_LIMB_HAT" Offset="0x2CE78"/>
+        <Limb Name="gArenChildCollarLimb" LimbType="LOD" EnumName="PLAYER_LIMB_COLLAR" Offset="0x2CE88"/>
+        <Limb Name="gArenChildLeftshoulderLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_SHOULDER" Offset="0x2CE98"/>
+        <Limb Name="gArenChildLeftForearmLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_FOREARM" Offset="0x2CEA8"/>
+        <Limb Name="gArenChildLeftHandLimb" LimbType="LOD" EnumName="PLAYER_LIMB_L_HAND" Offset="0x2CEB8"/>
+        <Limb Name="gArenChildRightshoulderLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_SHOULDER" Offset="0x2CEC8"/>
+        <Limb Name="gArenChildRightForearmLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_FOREARM" Offset="0x2CED8"/>
+        <Limb Name="gArenChildRightHandLimb" LimbType="LOD" EnumName="PLAYER_LIMB_R_HAND" Offset="0x2CEE8"/>
+        <Limb Name="gArenChildBackLimb" LimbType="LOD" EnumName="PLAYER_LIMB_BACK" Offset="0x2CEF8"/>
+        <Limb Name="gArenChildTorsoLimb" LimbType="LOD" EnumName="PLAYER_LIMB_TORSO" Offset="0x2CF08"/>
+
+        <!--General DLists-->
+        <Array Name="gArenChildArenRootStickVtx" Count="36" Offset="0x6A80">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildArenRootStickDL" Offset="0x6CC0"/>
+        <Array Name="gArenChildLeftHandHoldingDawnbladeVtx" Count="163" Offset="0xD4E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftHandHoldingDawnbladeDL" Offset="0x15540"/>
+        <!-- TODO distinguish gArenChildCairnBraceletVtx1 and Vtx2 -->
+        <Array Name="gArenChildCairnBraceletVtx1" Count="17" Offset="0xF110">
+            <Vtx/>
+        </Array>
+        <Array Name="gArenChildCairnBraceletVtx2" Count="8" Offset="0x137D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildCairnBraceletDL" Offset="0x16118"/>
+
+        <!--Body Parts not used in Limbs-->
+        <Array Name="gArenChildLeftFistNearVtx" Count="38" Offset="0xAF50">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistNearDL" Offset="0x13E18"/>
+        <Array Name="gArenChildRightHandClosedNearVtx" Count="38" Offset="0xB8A0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandClosedNearDL" Offset="0x14320"/>
+        <Array Name="gArenChildRightHandClosedFarVtx" Count="35" Offset="0xF9F0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandClosedFarDL" Offset="0x16620"/>
+        <Array Name="gArenChildLeftFistFarVtx" Count="35" Offset="0xF490">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistFarDL" Offset="0x163C0"/>
+        <Array Name="gArenChildLeftFistAndSylvanSwordNearVtx" Count="80" Offset="0xB1B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistAndSylvanSwordNearDL" Offset="0x13F38"/>
+        <Array Name="gArenChildLeftFistAndSylvanSwordFarVtx" Count="81" Offset="0x10E50">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistAndSylvanSwordFarDL" Offset="0x17630"/>
+        <Array Name="gArenChildRightFistAndRootShieldNearVtx" Count="79" Offset="0xBB00">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightFistAndRootShieldNearDL" Offset="0x14440"/>
+        <Array Name="gArenChildRightFistAndRootShieldFarVtx" Count="45" Offset="0xFC20">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightFistAndRootShieldFarDL" Offset="0x16740"/>
+        <Array Name="gArenChildLeftFistAndBoomerangNearVtx" Count="89" Offset="0xBFF0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistAndBoomerangNearDL" Offset="0x14660"/>
+        <Array Name="gArenChildLeftFistAndBoomerangFarVtx" Count="50" Offset="0xFEF0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftFistAndBoomerangFarDL" Offset="0x16908"/>
+        <Array Name="gArenChildBackEldranShieldSwordInSheathNearVtx" Count="51" Offset="0xC580">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackEldranShieldSwordInSheathNearDL" Offset="0x148A8"/>
+        <Array Name="gArenChildBackEldranShieldSwordInSheathFarVtx" Count="44" Offset="0x10210">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackEldranShieldSwordInSheathFarDL" Offset="0x16A98"/>
+        <Array Name="gArenChildBackEldranShieldSylvanSheathNearVtx" Count="31" Offset="0xC8B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackEldranShieldSylvanSheathNearDL" Offset="0x14B40"/>
+        <Array Name="gArenChildBackEldranShieldSylvanSheathFarVtx" Count="28" Offset="0x104D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackEldranShieldSylvanSheathFarDL" Offset="0x16CF8"/>
+        <Array Name="gArenChildBackRootShieldSylvanSwordInSheathNearVtx" Count="67" Offset="0xCAA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackRootShieldSylvanSwordInSheathNearDL" Offset="0x14D68"/>
+        <Array Name="gArenChildBackRootShieldSylvanSwordInSheathFarVtx" Count="47" Offset="0x10690">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackRootShieldSylvanSwordInSheathFarDL" Offset="0x16EE8"/>
+        <Array Name="gArenChildBackRootShieldSylvanSheathNearVtx" Count="47" Offset="0xCED0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackRootShieldSylvanSheathNearDL" Offset="0x15010"/>
+        <Array Name="gArenChildBackRootShieldSylvanSheathFarVtx" Count="31" Offset="0x10980">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackRootShieldSylvanSheathFarDL" Offset="0x17150"/>
+        <Array Name="gArenChildBackSylvanSheathNearVtx" Count="15" Offset="0xD3F0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackSylvanSheathNearDL" Offset="0x15408"/>
+        <Array Name="gArenChildBackSylvanSheathFarVtx" Count="15" Offset="0x10D60">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBackSylvanSheathFarDL" Offset="0x17500"/>
+        <Array Name="gArenChildRightHandAndOotNearVtx" Count="76" Offset="0xDF10">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandAndOotNearDL" Offset="0x15958"/>
+        <Array Name="gArenChildRightHandHoldingOOTFarVtx" Count="76" Offset="0x11360">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandHoldingOOTFarDL" Offset="0x178A0"/>
+        <Array Name="gArenChildRightHandHoldingFairyFluteNearVtx" Count="89" Offset="0xE3D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandHoldingFairyFluteNearDL" Offset="0x15BA8"/>
+        <Array Name="gArenChildRightHandHoldingFairyFluteFarVtx" Count="89" Offset="0x11820">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandHoldingFairyFluteFarDL" Offset="0x17AF0"/>
+        <Array Name="gArenChildRightHandHoldingSlingshotNearVtx" Count="84" Offset="0xE960">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandHoldingSlingshotNearDL" Offset="0x15DF0"/>
+        <Array Name="gArenChildRightHandHoldingSlingshotFarVtx" Count="76" Offset="0x11DB0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightHandHoldingSlingshotFarDL" Offset="0x17D38"/>
+        <Array Name="gArenChildLeftHandUpNearVtx" Count="39" Offset="0xEEA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftHandUpNearDL" Offset="0x15FD0"/>
+        <Array Name="gArenChildLeftHandUpFarVtx" Count="39" Offset="0x12270">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildLeftHandUpFarDL" Offset="0x17F00"/>
+
+        <Array Name="gArenChildRightArmStretchedSlingshotVtx" Count="269" Offset="0x124E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRightArmStretchedSlingshotDL" Offset="0x18048"/>
+        <Array Name="gArenChildBottleVtx" Count="34" Offset="0x135B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBottleDL" Offset="0x18478"/>
+        <Array Name="gArenChildDL_18580_Vtx" Count="36" Offset="0x13850">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildDL_18580" Offset="0x18580"/>
+        <Array Name="gArenChildBottle2Vtx" Count="34" Offset="0x13A90">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBottle2DL" Offset="0x18648"/>
+        <Array Name="gArenChildSlingshotStringVtx" Count="6" Offset="0x22148">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildSlingshotStringDL" Offset="0x221A8"/>
+        <Array Name="gArenChildRootShieldVtx" Count="47" Offset="0x22208">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildRootShieldDL" Offset="0x224F8"/>
+        <Mtx Name="gArenChildRootShieldMtx"  Offset="0x22648"/>
+        <DList Name="gArenChildBackRootShieldDL" Offset="0x22688"/>
+
+        <!--Masks-->
+        <Array Name="gArenChildSkullMaskVtx" Count="69" Offset="0x29220">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildSkullMaskDL" Offset="0x2AD40"/>
+        <Array Name="gArenChildSpookyMaskVtx" Count="28" Offset="0x29670">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildSpookyMaskDL" Offset="0x2AF70"/>
+        <Array Name="gArenChildFoxlingMaskVtx" Count="59" Offset="0x29830">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildFoxlingMaskDL" Offset="0x2B060"/>
+        <Array Name="gArenChildMaskOfTruthVtx" Count="42" Offset="0x29BE0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildMaskOfTruthDL" Offset="0x2B1F0"/>
+        <Array Name="gArenChildCairnMaskVtx" Count="54" Offset="0x29E80">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildCairnMaskDL" Offset="0x2B350"/>
+        <Array Name="gArenChildNeriMaskVtx" Count="50" Offset="0x2A1E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildNeriMaskDL" Offset="0x2B580"/>
+        <Array Name="gArenChildDuneanMaskVtx" Count="132" Offset="0x2A500">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildDuneanMaskDL" Offset="0x2B788"/>
+        <Array Name="gArenChildBunnyHoodVtx" Count="97" Offset="0x2C428">
+            <Vtx/>
+        </Array>
+        <DList Name="gArenChildBunnyHoodDL" Offset="0x2CA38"/>
+
+        <!--Textures-->
+        <Texture Name="gArenChildNoseTex" Format="ci8" Width="16" Height="16" Offset="0x5000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildUnusedHandTex" Format="ci8" Width="16" Height="16" Offset="0x5100" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEarTex" Format="ci8" Width="16" Height="16" Offset="0x5200" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildUnused1Tex" Format="ci8" Width="16" Height="16" Offset="0x5900" TlutOffset="0x5700"/>
+        <Texture Name="gArenChildUnused2Tex" Format="ci8" Width="32" Height="16" Offset="0x5A00" TlutOffset="0x5300"/>
+        <Texture Name="gArenChildLowerBootTex" Format="ci8" Width="32" Height="32" Offset="0x5C00" TlutOffset="0x5300"/>
+        <Texture Name="gArenChildBootTex" Format="ci8" Width="32" Height="32" Offset="0x6000" TlutOffset="0x5300"/>
+        <Texture Name="gArenChildWaistTex" Format="i8" Width="32" Height="32" Offset="0x6400"/>
+        <Texture Name="gArenChildBeltTex" Format="ci8" Width="8" Height="16" Offset="0x6800" TlutOffset="0x5300"/>
+        <Texture Name="gArenChildBeltClaspTex" Format="ci8" Width="32" Height="16" Offset="0x6880" TlutOffset="0x5300"/>
+        <Texture Name="gArenChildFairyFluteTex" Format="rgba16" Width="32" Height="16" Offset="0x6E08"/>
+        <Texture Name="gArenChildRootShieldBackTex" Format="rgba16" Height="32" Width="32" Offset="0x7688"/>
+        <Texture Name="gArenChildRootShieldFrontTex" Format="rgba16" Width="32" Height="64" Offset="0x7E88"/>
+        <Texture Name="gArenChildEldranShieldBackTex" Format="rgba16" Height="32" Width="16" Offset="0x8E88"/>
+        <Texture Name="gArenChildSlingshotTex" Format="rgba16" Width="16" Height="32" Offset="0x9288"/>
+        <Texture Name="gArenChildSlingshotSeedTex" Format="rgba16" Width="32" Height="32" Offset="0x9688"/>
+        <Texture Name="gArenChildHandTex" Format="ci8" Width="16" Height="16" Offset="0xA1F0" TlutOffset="0x9E88"/>
+        <Texture Name="gArenChildSylvanSwordSheathTex" Format="ci8" Height="16" Width="16" Offset="0xA2F0" TlutOffset="0x9F10"/>
+        <Texture Name="gArenChildSwordJewelTex" Format="ci8" Width="32" Height="16" Offset="0xA3F0" TlutOffset="0xA118"/>
+        <Texture Name="gArenChildDawnbladePommelTex" Format="ci8" Height="16" Width="16" Offset="0xA5F0" TlutOffset="0x9F10"/>
+        <Texture Name="gArenChildDawnbladeGuardTex" Format="ci8" Height="32" Width="32" Offset="0xA6F0" TlutOffset="0x9F10"/>
+        <Texture Name="gArenChildDawnbladeEmblemTex" Format="ci8" Height="16" Width="16" Offset="0xAAF0" TlutOffset="0x9F10"/>
+        <Texture Name="gArenChildCairnBraceletTex" Format="rgba16" Width="8" Height="8" Offset="0x7208"/>
+        <Texture Name="gArenChildCairnSymbolTex" Format="ia16" Width="16" Height="32" Offset="0x7288"/>
+
+        <Texture Name="gArenChildSkullMaskTeethTex" Format="rgba16" Width="8" Height="8" Offset="0x26BA0"/>
+        <Texture Name="gArenChildSkullMaskNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x27520"/>
+        <Texture Name="gArenChildSkullMaskEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x23B20"/>
+
+        <Texture Name="gArenChildSpookyMaskTex" Format="ia16" Width="32" Height="64" Offset="0x226A0"/>
+        <Texture Name="gArenChildFoxlingMaskEyeBrowTex" Format="rgba16" Width="32" Height="16" Offset="0x236A0"/>
+        <Texture Name="gArenChildFoxlingMaskEarTex" Format="rgba16" Width="8" Height="8" Offset="0x23AA0"/>
+        <Texture Name="gArenChildMaskOfTruthCurveTex" Format="rgba16" Width="16" Height="32" Offset="0x24D20"/>
+        <Texture Name="gArenChildMaskOfTruthTex" Format="rgba16" Width="32" Height="64" Offset="0x23D20"/>
+
+        <Texture Name="gArenChildCairnMaskMouthTex" Format="rgba16" Width="64" Height="32" Offset="0x25120"/>
+        <Texture Name="gArenChildCairnMaskEyeTex" Format="rgba16" Width="32" Height="32" Offset="0x26120"/>
+        <Texture Name="gArenChildCairnMaskNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x26920"/>
+        <Texture Name="gArenChildCairnMaskHairTex" Format="rgba16" Width="16" Height="16" Offset="0x269A0"/>
+        <Texture Name="gArenChildCairnMaskEarTex" Format="rgba16" Width="8" Height="8" Offset="0x26C20"/><!--TODO verify this-->
+
+        <Texture Name="gArenChildNeriMaskEyeBoarderTex" Format="rgba16" Width="8" Height="8" Offset="0x26CA0"/>
+        <Texture Name="gArenChildNeriMaskEarTex" Format="rgba16" Width="32" Height="32" Offset="0x26D20"/>
+        <Texture Name="gArenChildNeriMaskEyeTex" Format="rgba16" Width="32" Height="32" Offset="0x275A0"/>
+        <Texture Name="gArenChildNeriMaskMouthTex" Format="rgba16" Width="32" Height="32" Offset="0x27DA0"/>
+
+        <Texture Name="gArenChildDuneanMaskEyeTex" Format="rgba16" Width="32" Height="32" Offset="0x285A0"/>
+        <Texture Name="gArenChildDuneanMaskMouthTex" Format="rgba16" Width="16" Height="16" Offset="0x28DA0"/>
+        <Texture Name="gArenChildDuneanMaskHairTex" Format="rgba16" Width="16" Height="16" Offset="0x28FA0"/>
+        <Texture Name="gArenChildDuneanMaskNoseTex" Format="rgba16" Width="8" Height="8" Offset="0x291A0"/>
+
+        <Texture Name="gArenChildBunnyHoodEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x2BA28"/>
+        <Texture Name="gArenChildBunnyHoodTex" Format="rgba16" Width="16" Height="32" Offset="0x2BC28"/>
+        <Texture Name="gArenChildBunnyHoodEarTex" Format="rgba16" Width="16" Height="32" Offset="0x2C028"/>
+
+        <!--TLUTs-->
+        <Texture Name="gArenChildBeltTLUT" Format="rgba16" Width="16" Height="16" Offset="0x5300"/>
+        <Texture Name="gArenChildSkinTLUT" Format="rgba16" Width="16" Height="16" Offset="0x5500"/>
+        <Texture Name="gArenChildUnusedTLUT" Format="rgba16" Width="16" Height="16" Offset="0x5700"/>
+        <Texture Name="gArenChildHandTLUT" Format="rgba16" Width="17" Height="4" Offset="0x9E88"/>
+        <Texture Name="gArenChildSwordsTLUT" Format="rgba16" Width="16" Height="16" Offset="0x9F10"/> <!--For both the sylvan sword sheath and dawnblade-->
+        <Blob Name="gArenChild_A110_Blob" Size="8" Offset="0xA110" />
+        <Texture Name="gArenChildSwordTLUT" Format="rgba16" Width="27" Height="4" Offset="0xA118"/>
+
+        <!--Eyes-->
+        <Texture Name="gArenChildEyesOpenTex" Format="ci8" Width="64" Height="32" Offset="0x0000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesHalfTex" Format="ci8" Width="64" Height="32" Offset="0x0800" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesClosedTex" Format="ci8" Width="64" Height="32" Offset="0x1000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesLeftTex" Format="ci8" Width="64" Height="32" Offset="0x1800" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesRightTex" Format="ci8" Width="64" Height="32" Offset="0x2000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesWideTex" Format="ci8" Width="64" Height="32" Offset="0x2800" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesDownTex" Format="ci8" Width="64" Height="32" Offset="0x3000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildEyesWincingTex" Format="ci8" Width="64" Height="32" Offset="0x3800" TlutOffset="0x5500"/>
+
+        <!--Mouth-->
+        <Texture Name="gArenChildMouthClosedTex" Format="ci8" Width="32" Height="32" Offset="0x4000" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildMouthHalfTex" Format="ci8" Width="32" Height="32" Offset="0x4400" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildMouthOpenTex" Format="ci8" Width="32" Height="32" Offset="0x4800" TlutOffset="0x5500"/>
+        <Texture Name="gArenChildMouthSmileTex" Format="ci8" Width="32" Height="32" Offset="0x4C00" TlutOffset="0x5500"/>
+
+        <!--Unused Vtx-->
+        <Array Name="gArenChildVtx_019E08" Count="35" Offset="0x19E08">
+            <Vtx/>
+        </Array>
+
+        <Array Name="gArenChildVtx_01A428" Count="39" Offset="0x1A428">
+            <Vtx/>
+        </Array>
+
+        <Array Name="gArenChildVtx_01AA98" Count="40" Offset="0x1AA98">
+            <Vtx/>
+        </Array>
+
+        <Array Name="gArenChildVtx_01EB38" Count="39" Offset="0x1EB38">
+            <Vtx/>
+        </Array>
+
+        <Array Name="gArenChildVtx_01F2B8" Count="39" Offset="0x1F2B8">
+            <Vtx/>
+        </Array>
+
+        <Array Name="gArenChildVtx_01FA28" Count="62" Offset="0x1FA28">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

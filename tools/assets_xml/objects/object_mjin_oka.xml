@@ -1,0 +1,11 @@
+<Root>
+    <File Name="object_mjin_oka" Segment="6">
+        <Array Name="gFluteWarpPadVtx" Count="20" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gFluteWarpPadDL" Offset="0x140"/>
+        <Collision Name="gFluteWarpPadCol" Offset="0x330"/>
+        <Texture Name="gFluteWarpPadSideTex" Format="rgba16" Width="64" Height="16" Offset="0x360"/>
+        <Texture Name="gFluteWarpPadFluteTex" Format="i8" Width="64" Height="64" Offset="0xB60"/>
+    </File>
+</Root>

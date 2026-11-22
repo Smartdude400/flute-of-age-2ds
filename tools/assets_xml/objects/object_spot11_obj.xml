@@ -1,0 +1,15 @@
+<Root>
+    <File Name="object_spot11_obj" Segment="6">
+        <Texture Name="gDesertSentinelOasisWaterTex" Format="rgba16" Width="32" Height="32" Offset="0x0"/>
+        <Array Name="gDesertSentinelOasisVtx" Count="7" Offset="0x800">
+            <Vtx/>
+        </Array>
+        <DList Name="gDesertSentinelOasisDL" Offset="0x870"/>
+        <Texture Name="gDesertSentinelBombableWallTex" Format="rgba16" Width="32" Height="64" Offset="0x940"/>
+        <Array Name="gDesertSentinelBombableWallVtx" Count="4" Offset="0x1940">
+            <Vtx/>
+        </Array>
+        <DList Name="gDesertSentinelBombableWallDL" Offset="0x1980"/>
+        <Collision Name="gDesertSentinelBombableWallCol" Offset="0x1A58"/>
+    </File>
+</Root>

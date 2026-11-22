@@ -1,0 +1,10 @@
+<Root>
+    <File Name="object_timeblock" Segment="6">
+        <Array Name="gSongOfAgesBlockVtx" Count="24" Offset="0x800">
+            <Vtx/>
+        </Array>
+        <DList Name="gSongOfAgesBlockDL" Offset="0x980"/>
+        <Texture Name="gSongOfAgesBlockTex" Format="i4" Width="64" Height="64" Offset="0x0"/>
+        <Collision Name="gSongOfAgesBlockCol" Offset="0xB30"/>
+    </File>
+</Root>

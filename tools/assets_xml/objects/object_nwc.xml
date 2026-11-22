@@ -1,0 +1,28 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_nwc" Segment="6">
+        <Texture Name="gCluckerChickBodyTex" Format="rgba16" Width="32" Height="32" Offset="0x0"/>
+        <Texture Name="gCluckerChickEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x8E0"/>
+        <Texture Name="gCluckerChickBeakTex" Format="rgba16" Width="4" Height="4" Offset="0xAE0"/>
+        <DList Name="gCluckerChickSetupBodyDL" Offset="0x840"/>
+        <Array Name="gCluckerChickBodyVtx" Count="4" Offset="0x800">
+            <Vtx/>
+        </Array>
+        <DList Name="gCluckerChickBodyDL" Offset="0x8B0"/>
+        <DList Name="gCluckerChickSetupEyeDL" Offset="0xBF0"/>
+        <Array Name="gCluckerChickEyesVtx" Count="6" Offset="0xB90">
+            <Vtx/>
+        </Array>
+        <DList Name="gCluckerChickEyesDL" Offset="0xC68"/>
+        <DList Name="gCluckerChickSetupBeakDL" Offset="0xC88"/>
+        <Array Name="gCluckerChickBeakVtx" Count="9" Offset="0xB00">
+            <Vtx/>
+        </Array>
+        <DList Name="gCluckerChickBeakDL" Offset="0xCE0"/>
+        <DList Name="gCluckerChickSetupShadowDL" Offset="0xD10"/>
+        <Array Name="gCluckerChickShadowVtx" Count="3" Offset="0xD68">
+            <Vtx/>
+        </Array>
+        <DList Name="gCluckerChickShadowDL" Offset="0xD50"/>
+    </File>
+</Root>

@@ -1,0 +1,105 @@
+<Root>
+    <!-- Eldran Woman who owns Rafferty (DogLady) -->
+    <File Name="object_aob" Segment="6">
+        <!-- Skeleton -->
+        <Limb Name="gEldranWoman1PelvisLimb" LimbType="Standard" Offset="0x000"/>
+        <Limb Name="gEldranWoman1LeftThighLimb" LimbType="Standard" Offset="0x00C"/>
+        <Limb Name="gEldranWoman1LeftShinLimb" LimbType="Standard" Offset="0x018"/>
+        <Limb Name="gEldranWoman1LeftFootLimb" LimbType="Standard" Offset="0x024"/>
+        <Limb Name="gEldranWoman1RightThighLimb" LimbType="Standard" Offset="0x030"/>
+        <Limb Name="gEldranWoman1RightShinLimb" LimbType="Standard" Offset="0x03C"/>
+        <Limb Name="gEldranWoman1RightFootLimb" LimbType="Standard" Offset="0x048"/>
+        <Limb Name="gEldranWoman1TorsoLimb" LimbType="Standard" Offset="0x054"/>
+        <Limb Name="gEldranWoman1LeftUpperArmLimb" LimbType="Standard" Offset="0x060"/>
+        <Limb Name="gEldranWoman1LeftForearmLimb" LimbType="Standard" Offset="0x06C"/>
+        <Limb Name="gEldranWoman1LeftHandLimb" LimbType="Standard" Offset="0x078"/>
+        <Limb Name="gEldranWoman1RightUpperArmLimb" LimbType="Standard" Offset="0x084"/>
+        <Limb Name="gEldranWoman1RightForearmLimb" LimbType="Standard" Offset="0x090"/>
+        <Limb Name="gEldranWoman1RightHandLimb" LimbType="Standard" Offset="0x09C"/>
+        <Limb Name="gEldranWoman1HeadLimb" LimbType="Standard" Offset="0x0A8"/>
+        <Skeleton Name="gEldranWoman1Skel" Type="Flex" LimbType="Standard" Offset="0xF0"/>
+
+
+        <!-- DLs -->
+        <DList Name="gEldranWoman1PelvisDL" Offset="0x5588"/>
+        <DList Name="gEldranWoman1LeftThighDL" Offset="0x54B8"/>
+        <DList Name="gEldranWoman1LeftShinDL" Offset="0x53E8"/>
+        <DList Name="gEldranWoman1LeftFootDL" Offset="0x5318"/>
+        <DList Name="gEldranWoman1RightThighDL" Offset="0x5248"/>
+        <DList Name="gEldranWoman1RightShinDL" Offset="0x5178"/>
+        <DList Name="gEldranWoman1RightFootDL" Offset="0x50A8"/>
+        <DList Name="gEldranWoman1TorsoDL" Offset="0x4E08"/>
+        <DList Name="gEldranWoman1LeftUpperArmDL" Offset="0x4C60"/>
+        <DList Name="gEldranWoman1LeftForearmDL" Offset="0x4B30"/>
+        <DList Name="gEldranWoman1LeftHandDL" Offset="0x4928"/>
+        <DList Name="gEldranWoman1RightUpperArmDL" Offset="0x4780"/>
+        <DList Name="gEldranWoman1RightForearmDL" Offset="0x4650"/>
+        <DList Name="gEldranWoman1RightHandDL" Offset="0x4448"/>
+        <DList Name="gEldranWoman1HeadDL" Offset="0x3C88"/>
+
+        <!-- TLUTs -->
+        <Texture Name="gEldranWoman1TLUT" Format="rgba16" Width="16" Height="16" Offset="0x0108"/>
+
+        <!-- Textures -->
+        <Texture Name="gEldranWoman1HairTex" Format="ci8" Width="16" Height="16" Offset="0x0308" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1SkinTex" Format="ci8" Width="8" Height="8" Offset="0x0408" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1EarTex" Format="ci8" Width="16" Height="16" Offset="0x0448" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1MouthTex" Format="ci8" Width="8" Height="8" Offset="0x0548" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1NostrilTex" Format="ci8" Width="8" Height="8" Offset="0x0588" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1FingersTex" Format="ci8" Width="16" Height="16" Offset="0x1DC8" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1SleevesTex" Format="ci8" Width="8" Height="8" Offset="0x1EC8" TlutOffset="0x0108"/>
+        <Texture Name="gEldranWoman1DressTex" Format="ci8" Width="8" Height="8" Offset="0x1F08" TlutOffset="0x0108"/>
+
+        <!-- Eye Textures -->
+        <Texture Name="gEldranWoman1EyeOpenTex" Format="rgba16" Width="32" Height="32" Offset="0x05C8"/>
+        <Texture Name="gEldranWoman1EyeHalfTex" Format="rgba16" Width="32" Height="32" Offset="0x0DC8"/>
+        <Texture Name="gEldranWoman1EyeClosedTex" Format="rgba16" Width="32" Height="32" Offset="0x15C8"/>
+
+        <!-- Vertices -->
+        <Array Name="gEldranWoman1HeadVtx" Count="174" Offset="0x1F48">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftHandVtx" Count="45" Offset="0x2A28">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftForearmVtx" Count="24" Offset="0x2CF8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftUpperArmVtx" Count="25" Offset="0x2E78">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightHandVtx" Count="45" Offset="0x3008">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightForearmVtx" Count="24" Offset="0x32D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightUpperArmVtx" Count="25" Offset="0x3458">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1TorsoVtx" Count="68" Offset="0x35E8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftFootVtx" Count="3" Offset="0x3A28">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftShinVtx" Count="3" Offset="0x3A58">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1LeftThighVtx" Count="3" Offset="0x3A88">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightFootVtx" Count="3" Offset="0x3AB8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightShinVtx" Count="3" Offset="0x3AE8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1RightThighVtx" Count="3" Offset="0x3B18">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranWoman1PelvisVtx" Count="20" Offset="0x3B48">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

@@ -1,0 +1,129 @@
+<Root>
+    <File Name="object_ru1" Segment="6">
+        <Animation Name="gMiraChildWaitHandsBehindBackAnim" Offset="0x690"/>
+        <Animation Name="gMiraChildWaitHandsOnHipsAnim" Offset="0xE54"/>
+        <Animation Name="gMiraChildTransitionHandsOnHipToCrossArmsAndLegsAnim" Offset="0x1488"/>
+        <Animation Name="gMiraChildWaitSittingAnim" Offset="0x2058"/>
+        <Animation Name="gMiraChildWaitInBlueWarpAnim" Offset="0x2990"/>
+        <Animation Name="gMiraChildBringHandsDownAnim" Offset="0x2EC0"/>
+        <Animation Name="gMiraChildHoldArmsUpAnim" Offset="0x3608"/>
+        <Animation Name="gMiraChildBringArmsUpAnim" Offset="0x3784"/>
+        <Animation Name="gMiraChildTurnAroundAnim" Offset="0x4074"/>
+        <Animation Name="gMiraChildSquirmAnim" Offset="0x4350"/>
+        <Animation Name="gMiraChildSeesSapphireAnim" Offset="0x4648"/>
+        <Animation Name="gMiraChildShutterAnim" Offset="0x4BF0"/>
+        <Animation Name="gMiraChildWalkToAndHoldUpSapphireAnim" Offset="0x63F4"/>
+        <Animation Name="gMiraChildSittingAnim" Offset="0x6B9C"/>
+        <Animation Name="gMiraChildSitAnim" Offset="0x7534"/>
+        <Animation Name="gMiraChildWalkAnim" Offset="0x78E4"/>
+        <Animation Name="gMiraChildTransitionFromSwimOnBackAnim" Offset="0x8100"/>
+        <Animation Name="gMiraChildTransitionToSwimOnBackAnim" Offset="0x8AA8"/>
+        <Animation Name="gMiraChildResurfaceAnim" Offset="0x9060"/>
+        <Animation Name="gMiraChildWait2Anim" Offset="0x97B8"/>
+        <Animation Name="gMiraChildSwimOnBackAnim" Offset="0x12E94"/>
+        <Animation Name="gMiraChildTreadWaterAnim" Offset="0x13A64"/>
+
+        <Array Name="gMiraChildLeftFootVtx" Count="26" Offset="0x97D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildLeftShinVtx" Count="59" Offset="0x9970">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildLeftThighVtx" Count="52" Offset="0x9D20">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightFootVtx" Count="26" Offset="0xA060">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightShinVtx" Count="59" Offset="0xA200">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightThighVtx" Count="52" Offset="0xA5B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildChestVtx" Count="104" Offset="0xA8F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightHandVtx" Count="56" Offset="0xAF70">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightFinVtx" Count="39" Offset="0xB2F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildRightUpperArmVtx" Count="34" Offset="0xB560">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildLeftHandVtx" Count="56" Offset="0xB780">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildLeftFinVtx" Count="39" Offset="0xBB00">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildLeftUpperArmVtx" Count="34" Offset="0xBD70">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildTorsoVtx" Count="17" Offset="0xBF90">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiraChildHeadVtx" Count="188" Offset="0x10E38">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gMiraChildTorsoDL" Offset="0xC0A0"/>
+        <DList Name="gMiraChildLeftThighDL" Offset="0xC188"/>
+        <DList Name="gMiraChildLeftShinDL" Offset="0xC3D8"/>
+        <DList Name="gMiraChildLeftFootDL" Offset="0xC630"/>
+        <DList Name="gMiraChildRightThighDL" Offset="0xC7D0"/>
+        <DList Name="gMiraChildRightShinDL" Offset="0xCA20"/>
+        <DList Name="gMiraChildRightFootDL" Offset="0xCC78"/>
+        <DList Name="gMiraChildChestDL" Offset="0xCE18"/>
+        <DList Name="gMiraChildRightUpperArmDL" Offset="0xD0B8"/>
+        <DList Name="gMiraChildRightFinDL" Offset="0xD308"/>
+        <DList Name="gMiraChildRightHandDL" Offset="0xD5E0"/>
+        <DList Name="gMiraChildLeftUpperArmDL" Offset="0xD870"/>
+        <DList Name="gMiraChildLeftFinDL" Offset="0xDAC0"/>
+        <DList Name="gMiraChildLeftHandDL" Offset="0xDDA8"/>
+        <DList Name="gMiraChildHeadDL" Offset="0x119F8"/>
+
+        <Texture Name="gMiraChildEyeTLUT" Format="rgba16" Width="16" Height="16" Offset="0xE038"/>
+        <Texture Name="gMiraChildMouthTLUT" Format="rgba16" Width="16" Height="12" Offset="0xE238"/>
+
+        <Texture Name="gMiraChildEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0xE3B8" TlutOffset="0xE038"/>
+        <Texture Name="gMiraChildEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0xF238" TlutOffset="0xE038"/>
+        <Texture Name="gMiraChildEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0xF638" TlutOffset="0xE038"/>
+        <Texture Name="gMiraChildEyeRollLeftTex" Format="ci8" Width="32" Height="32" Offset="0xFE38" TlutOffset="0xE038"/>
+        <Texture Name="gMiraChildEyeHalf2Tex" Format="ci8" Width="32" Height="32" Offset="0x10238" TlutOffset="0xE038"/>
+        <Texture Name="gMiraChildEyeHalfWithBlushTex" Format="ci8" Width="32" Height="32" Offset="0x10A38" TlutOffset="0xE038"/>
+
+        <Texture Name="gMiraChildBlueSkinGradientTex" Format="rgba16" Width="8" Height="8" Offset="0xE7B8"/>
+
+        <Texture Name="gMiraChildMouthClosedTex" Format="ci8" Width="32" Height="32" Offset="0xE838" TlutOffset="0xE238"/>
+        <Texture Name="gMiraChildMouthFrownTex" Format="ci8" Width="32" Height="32" Offset="0xFA38" TlutOffset="0xE238"/>
+        <Texture Name="gMiraChildMouthOpenTex" Format="ci8" Width="32" Height="32" Offset="0x10638" TlutOffset="0xE238"/>
+
+        <Texture Name="gMiraChildEarTex" Format="rgba16" Width="16" Height="16" Offset="0xEC38"/>
+        <Texture Name="gMiraChildBlueSkinPatchesTex" Format="rgba16" Width="16" Height="16" Offset="0xEE38"/>
+        <Texture Name="gMiraChildUnkHeadCircleTex" Format="rgba16" Width="16" Height="16" Offset="0xF038"/> <!-- TODO rename me-->
+        <Texture Name="gMiraChildFingersTex" Format="rgba16" Width="16" Height="16" Offset="0x12200"/>
+        <Texture Name="gMiraChildCircleGradientTex" Format="rgba16" Width="16" Height="16" Offset="0x12400"/>
+
+        <Skeleton Name="gMiraChildSkel" Type="Flex" LimbType="Standard" Offset="0x12700"/>
+
+        <Limb Name="gMiraChildRootLimb" LimbType="Standard" Offset="0x12600"/>
+        <Limb Name="gMiraChildLeftThighLimb" LimbType="Standard" Offset="0x1260C"/>
+        <Limb Name="gMiraChildLeftShinLimb" LimbType="Standard" Offset="0x12618"/>
+        <Limb Name="gMiraChildLeftFootLimb" LimbType="Standard" Offset="0x12624"/>
+        <Limb Name="gMiraChildRightThighLimb" LimbType="Standard" Offset="0x12630"/>
+        <Limb Name="gMiraChildRightShinLimb" LimbType="Standard" Offset="0x1263C"/>
+        <Limb Name="gMiraChildRightFootLimb" LimbType="Standard" Offset="0x12648"/>
+        <Limb Name="gMiraChildChestLimb" LimbType="Standard" Offset="0x12654"/>
+        <Limb Name="gMiraChildLeftUpperArmLimb" LimbType="Standard" Offset="0x12660"/>
+        <Limb Name="gMiraChildLeftFinLimb" LimbType="Standard" Offset="0x1266C"/>
+        <Limb Name="gMiraChildLeftHandLimb" LimbType="Standard" Offset="0x12678"/>
+        <Limb Name="gMiraChildRightUpperArmLimb" LimbType="Standard" Offset="0x12684"/>
+        <Limb Name="gMiraChildRightFinLimb" LimbType="Standard" Offset="0x12690"/>
+        <Limb Name="gMiraChildRightHandLimb" LimbType="Standard" Offset="0x1269C"/>
+        <Limb Name="gMiraChildHeadLimb" LimbType="Standard" Offset="0x126A8"/>
+        <Limb Name="gMiraChildTorsoLimb" LimbType="Standard" Offset="0x126B4"/>
+    </File>
+</Root>

@@ -1,0 +1,134 @@
+<Root>
+    <File Name="object_md" Segment="6">
+        <!-- Milo Skeleton -->
+        <Skeleton Name="gMiloSkel" Type="Flex" LimbType="Standard" LimbNone="MILO_LIMB_NONE" LimbMax="MILO_LIMB_MAX" EnumName="MiloLimb" Offset="0x7FB8"/>
+
+        <!-- Milo Limbs -->
+        <Limb Name="gMiloRootLimb" LimbType="Standard" EnumName="MILO_LIMB_ROOT" Offset="0x7EB8"/>
+        <Limb Name="gMiloWaistLimb" LimbType="Standard" EnumName="MILO_LIMB_WAIST" Offset="0x7EC4"/>
+        <Limb Name="gMiloLeftThighLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_THIGH" Offset="0x7ED0"/>
+        <Limb Name="gMiloLeftLegLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_LEG" Offset="0x7EDC"/>
+        <Limb Name="gMiloLeftFootLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_FOOT" Offset="0x7EE8"/>
+        <Limb Name="gMiloRightThighLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_THIGH" Offset="0x7EF4"/>
+        <Limb Name="gMiloRightLegLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_LEG" Offset="0x7F00"/>
+        <Limb Name="gMiloRightFootLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_FOOT" Offset="0x7F0C"/>
+        <Limb Name="gMiloTorsoLimb" LimbType="Standard" EnumName="MILO_LIMB_TORSO" Offset="0x7F18"/>
+        <Limb Name="gMiloLeftUpperArmLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_UPPER_ARM" Offset="0x7F24"/>
+        <Limb Name="gMiloLeftForearmLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_FOREARM" Offset="0x7F30"/>
+        <Limb Name="gMiloLeftHandLimb" LimbType="Standard" EnumName="MILO_LIMB_LEFT_HAND" Offset="0x7F3C"/>
+        <Limb Name="gMiloRightUpperArmLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_UPPER_ARM" Offset="0x7F48"/>
+        <Limb Name="gMiloRightForearmLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_FOREARM" Offset="0x7F54"/>
+        <Limb Name="gMiloRightHandLimb" LimbType="Standard" EnumName="MILO_LIMB_RIGHT_HAND" Offset="0x7F60"/>
+        <Limb Name="gMiloHeadLimb" LimbType="Standard" EnumName="MILO_LIMB_HEAD" Offset="0x7F6C"/>
+
+        <!-- Milo Limb Vertices -->
+        <Array Name="gMiloLeftHandVtx" Count="48" Offset="0x15E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloLeftForearmVtx" Count="24" Offset="0x18E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloLeftUpperArmVtx" Count="24" Offset="0x1A60">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightHandVtx" Count="48" Offset="0x1BE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightForearmVtx" Count="24" Offset="0x1EE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightUpperArmVtx" Count="24" Offset="0x2060">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloTorsoVtx" Count="70" Offset="0x21E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloLeftFootVtx" Count="30" Offset="0x2640">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloLeftLegVtx" Count="22" Offset="0x2820">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloLeftThighVtx" Count="33" Offset="0x2980">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightFootVtx" Count="30" Offset="0x2B90">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightLegVtx" Count="22" Offset="0x2D70">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloRightThighVtx" Count="33" Offset="0x2ED0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloWaistVtx" Count="31" Offset="0x30E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gMiloHeadVtx" Count="229" Offset="0x6530">
+            <Vtx/>
+        </Array>
+
+        <!-- Milo Limb DisplayLists -->
+        <DList Name="gMiloWaistDL" Offset="0x4218"/>
+        <DList Name="gMiloLeftThighDL" Offset="0x47D0"/>
+        <DList Name="gMiloLeftLegDL" Offset="0x4978"/>
+        <DList Name="gMiloLeftFootDL" Offset="0x4B10"/>
+        <DList Name="gMiloRightThighDL" Offset="0x4350"/>
+        <DList Name="gMiloRightLegDL" Offset="0x44F8"/>
+        <DList Name="gMiloRightFootDL" Offset="0x4698"/>
+        <DList Name="gMiloTorsoDL" Offset="0x32D0"/>
+        <DList Name="gMiloLeftUpperArmDL" Offset="0x3CA8"/>
+        <DList Name="gMiloLeftForearmDL" Offset="0x3DE0"/>
+        <DList Name="gMiloLeftHandDL" Offset="0x3F18"/>
+        <DList Name="gMiloRightUpperArmDL" Offset="0x3740"/>
+        <DList Name="gMiloRightForearmDL" Offset="0x3878"/>
+        <DList Name="gMiloRightHandDL" Offset="0x39B0"/>
+        <DList Name="gMiloHeadDL" Offset="0x7380"/>
+
+        <!-- Milo Palettes -->
+        <Texture Name="gMilo1TLUT" Format="rgba16" Width="256" Height="1" Offset="0x02E0"/>
+        <Texture Name="gMilo2TLUT" Format="rgba16" Width="188" Height="1" Offset="0x4C48"/>
+        <Texture Name="gMilo3TLUT" Format="rgba16" Width="248" Height="1" Offset="0x4DC0"/>
+
+        <!-- Milo Eye Textures -->
+        <Texture Name="gMiloEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x4FF0" TlutOffset="0x4DC0"/>
+        <Texture Name="gMiloEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x5930" TlutOffset="0x4DC0"/>
+        <Texture Name="gMiloEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x5D30" TlutOffset="0x4DC0"/>
+        <Texture Name="gMiloEyeAngryTex" Format="ci8" Width="32" Height="32" Offset="0x6130" TlutOffset="0x4DC0"/>
+        <Texture Name="gMiloEyeLookingUpTex" Format="rgba16" Width="32" Height="32" Offset="0x520"/>
+
+        <!-- Milo DisplayList Textures -->
+        <Texture Name="gMiloGradientTex" Format="ci8" Width="8" Height="8" Offset="0x4E0" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloTex_D20" Format="rgba16" Width="8" Height="8" Offset="0xD20"/>
+        <Texture Name="gMiloTex_DA0" Format="ci8" Width="8" Height="16" Offset="0xDA0" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloHairCurl1Tex" Format="ci8" Width="32" Height="32" Offset="0xE20" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloTex_1220" Format="ci8" Width="8" Height="8" Offset="0x1220" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloTex_1260" Format="ci8" Width="8" Height="8" Offset="0x1260" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloBackOfHandTex" Format="ci8" Width="8" Height="8" Offset="0x12A0" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloClothesTex" Format="ci8" Width="8" Height="8" Offset="0x12E0" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloUndershirtTex" Format="i8" Width="8" Height="8" Offset="0x1320"/>
+        <Texture Name="gMiloShoeTex" Format="ci8" Width="8" Height="8" Offset="0x1360" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloAnkleTex" Format="ci8" Width="8" Height="8" Offset="0x13A0" TlutOffset="0x02E0"/>
+        <Texture Name="gMiloPantsTex" Format="rgba16" Width="16" Height="16" Offset="0x13E0"/>
+        <Texture Name="gMiloTex_4FB0" Format="ci8" Width="8" Height="8" Offset="0x4FB0" TlutOffset="0x4C48"/>
+        <Texture Name="gMiloTex_53F0" Format="ci8" Width="8" Height="8" Offset="0x53F0" TlutOffset="0x4C48"/>
+        <Texture Name="gMiloTex_5430" Format="ci8" Width="8" Height="8" Offset="0x5430" TlutOffset="0x4C48"/>
+        <Texture Name="gMiloHairCurl2Tex" Format="ci8" Width="32" Height="32" Offset="0x5470" TlutOffset="0x4C48"/>
+        <Texture Name="gMiloTex_5870" Format="ci8" Width="8" Height="16" Offset="0x5870" TlutOffset="0x4C48"/>
+        <Texture Name="gMiloTex_58F0" Format="ci8" Width="8" Height="8" Offset="0x58F0" TlutOffset="0x4C48"/>
+
+        <!-- Milo Animations -->
+        <Animation Name="gMiloIdleAnim" Offset="0x02C8"/>
+        <Animation Name="gMiloCuriousToAnnoyedAnim" Offset="0x8510"/>
+        <Animation Name="gMiloIdleToAnnoyedAnim" Offset="0x8738"/>
+        <Animation Name="gMiloCuriousAnim" Offset="0x8E84"/>
+        <Animation Name="gMiloIdleToSurpriseAnim" Offset="0x8FC0"/>
+        <Animation Name="gMiloIdleToHaltAnim" Offset="0x917C"/>
+        <Animation Name="gMiloIdleToWalkAnim" Offset="0x92B0"/>
+        <Animation Name="gMiloAnnoyedToHaltAnim" Offset="0x95BC"/>
+        <Animation Name="gMiloAnnoyedAnim" Offset="0x97F0"/>
+        <Animation Name="gMiloHaltToCuriousAnim" Offset="0x9B1C"/>
+        <Animation Name="gMiloHaltAnim" Offset="0x9E68"/>
+        <Animation Name="gMiloWalkAnim" Offset="0xA138"/>
+    </File>
+</Root>

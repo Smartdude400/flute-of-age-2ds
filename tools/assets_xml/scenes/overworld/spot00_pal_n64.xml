@@ -1,0 +1,28 @@
+<Root>
+    <File Name="spot00_scene" Segment="2">
+        <Cutscene Name="gEldoraFieldGetOoTCs" Offset="0xBB80"/>
+        <Cutscene Name="gEldoraFieldElaraSongOfAgesCs" Offset="0xF890"/>
+        <Cutscene Name="gEldoraFieldEastAsterJumpCs" Offset="0xFF20"/>
+        <Cutscene Name="gEldoraFieldIntroCs" Offset="0x13AC0"/>
+        <Cutscene Name="gEldoraFieldSouthAsterJumpCs" Offset="0xFA00"/>
+        <Cutscene Name="gEldoraFieldWestAsterJumpCs" Offset="0x10570"/>
+        <Cutscene Name="gEldoraFieldGateAsterJumpCs" Offset="0x10B50"/>
+        <Cutscene Name="gEldoraFieldElaraFlashbackCs" Offset="0xA000"/>
+        <Cutscene Name="gEldoraFieldTitleScreenCs" Offset="0xA920"/>
+        <Cutscene Name="gEldoraFieldCreditsCs" Offset="0xBF44"/>
+        <Cutscene Name="gEldoraFieldBeforeCreditsCs" Offset="0xC8D4"/>
+        <Cutscene Name="gEldoraFieldGateAsterJump2Cs" Offset="0xC130"/>
+        <Cutscene Name="gEldoraFieldIlyaCs" Offset="0xDCD0"/>
+        <Cutscene Name="gEldoraFieldElaraEscapeUnusedCs" Offset="0xE610"/>
+        <Cutscene Name="gEldoraFieldElaraEscapeCs" Offset="0x8494"/>
+        <Cutscene Name="gEldoraFieldIntroNightmareCs" Offset="0x12420"/>
+        <Path Name="spot00_scenePathList_011AB4" Offset="0x11AD4" NumPaths="2"/>
+        <Scene Name="spot00_scene" Offset="0x0"/>
+        <Scene Name="spot00_scene_unused" Offset="0x12360"/>
+        <Texture Name="spot00_scene_Tex_02A198" Format="ia8" Width="8" Height="16" Offset="0x2A1B8"/>
+    </File>
+    <File Name="spot00_room_0" Segment="3">
+        <Room Name="spot00_room_0" Offset="0x0"/>
+        <DList Name="spot00_room_0DL_012B20" Offset="0x12B20"/>
+    </File>
+</Root>

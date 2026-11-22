@@ -1,0 +1,175 @@
+<Root>
+    <!-- Assets for the young version of Varkonos (the one before the seven-year timeskip). -->
+    <File Name="object_gndd" Segment="6">
+        <!-- Young Varkonos Animations -->
+        <Animation Name="gYoungVarkonosHorsebackRideAnim" Offset="0x5B4"/> <!-- Original name is "gnd_anim_fastrun" -->
+        <Animation Name="gYoungVarkonosHorsebackMagicChargeUpStartAnim" Offset="0x8A0"/> <!-- Original name is "gnd_anim_mahou" ("magic, sorcery") -->
+        <Animation Name="gYoungVarkonosHorsebackMagicChargeUpLoopAnim" Offset="0xBC8"/> <!-- Original name is "gnd_anim_mahou_wait" -->
+        <Animation Name="gYoungVarkonosHorsebackLookSidewaysStartAnim" Offset="0xF54"/> <!-- Original name is "gnd_anim_nirami" ("glare, sharp look") -->
+        <Animation Name="gYoungVarkonosHorsebackLookSidewaysLoopAnim" Offset="0x14F4"/> <!-- Original name is "gnd_anim_nirami_wait" -->
+        <Animation Name="gYoungVarkonosHorsebackRearAnim" Offset="0x1D28"/> <!-- Original name is "gnd_anim_stand" -->
+        <Animation Name="gYoungVarkonosHorsebackIdleAnim" Offset="0x2928"/> <!-- Original name is "gnd_anim_wait" -->
+        <Animation Name="gYoungVarkonosKneelStartAnim" Offset="0x3284"/> <!-- Original name is "gnd_demo_ojigi" ("bowing") -->
+        <Animation Name="gYoungVarkonosKneelLookSidewaysAnim" Offset="0x3428"/> <!-- Original name is "gnd_demo_ojigi_furimuki" ("to turn one's face") -->
+        <Animation Name="gYoungVarkonosKneelLoopAnim" Offset="0x3D84"/> <!-- Original name is "gnd_demo_ojigi_wait" -->
+        <Animation Name="gYoungVarkonosArmsCrossedAnim" Offset="0x4260"/> <!-- Original name is "gnd_demo_ukabi_wait" ("to emerge (from obscurity)") -->
+        <Animation Name="gYoungVarkonosLaughStartAnim" Offset="0x4534"/> <!-- Original name is "gnd_demo_ukabi_warai" ("laughter") -->
+        <Animation Name="gYoungVarkonosLaughLoopAnim" Offset="0x48B0"/> <!-- Original name is "gnd_demo_ukabi_warai_wait" -->
+        <Animation Name="gYoungVarkonosWalkAnim" Offset="0x50A8"/> <!-- Original name is "gnd_walk" -->
+
+        <!-- Young Varkonos Limb Vertices and DisplayLists -->
+        <Array Name="gYoungVarkonosChinVtx" Count="43" Offset="0x50C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosJawVtx" Count="30" Offset="0x5370">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosHeadVtx" Count="161" Offset="0x5550">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightUpperLipVtx" Count="19" Offset="0x5F60">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftUpperLipVtx" Count="19" Offset="0x6090">
+            <Vtx/>
+        </Array>
+        <DList Name="gYoungVarkonosHeadDL" Offset="0x61C0"/>
+        <DList Name="gYoungVarkonosRightUpperLipDL" Offset="0x69F8"/>
+        <DList Name="gYoungVarkonosChinDL" Offset="0x6B78"/>
+        <DList Name="gYoungVarkonosJawDL" Offset="0x6D90"/>
+        <DList Name="gYoungVarkonosLeftUpperLipDL" Offset="0x6FC8"/>
+        <Array Name="gYoungVarkonosPelvisVtx" Count="110" Offset="0x70F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosTorsoVtx" Count="180" Offset="0x77D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosJewelVtx" Count="7" Offset="0x8318">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosKnifeVtx" Count="48" Offset="0x8388">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftUpperArmVtx" Count="42" Offset="0x8688">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightUpperArmVtx" Count="42" Offset="0x8928">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftForearmVtx" Count="44" Offset="0x8BC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightForearmVtx" Count="44" Offset="0x8E88">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftHandVtx" Count="53" Offset="0x9148">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightHandVtx" Count="53" Offset="0x9498">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftFootVtx" Count="44" Offset="0x97E8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightFootVtx" Count="44" Offset="0x9AA8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftThighVtx" Count="27" Offset="0x9D68">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosLeftShinVtx" Count="41" Offset="0x9F18">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightThighVtx" Count="27" Offset="0xA1A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosRightShinVtx" Count="41" Offset="0xA358">
+            <Vtx/>
+        </Array>
+        <Array Name="gYoungVarkonosTeethVtx" Count="12" Offset="0xA5E8">
+            <Vtx/>
+        </Array>
+        <DList Name="gYoungVarkonosPelvisDL" Offset="0xA6A8"/>
+        <DList Name="gYoungVarkonosTorsoDL" Offset="0xAB10"/>
+        <DList Name="gYoungVarkonosJewelDL" Offset="0xB410"/>
+        <DList Name="gYoungVarkonosKnifeDL" Offset="0xB4B0"/>
+        <DList Name="gYoungVarkonosLeftUpperArmDL" Offset="0xB918"/>
+        <DList Name="gYoungVarkonosRightUpperArmDL" Offset="0xBA90"/>
+        <DList Name="gYoungVarkonosLeftForearmDL" Offset="0xBC08"/>
+        <DList Name="gYoungVarkonosRightForearmDL" Offset="0xBEA0"/>
+        <DList Name="gYoungVarkonosLeftHandDL" Offset="0xC138"/>
+        <DList Name="gYoungVarkonosRightHandDL" Offset="0xC550"/>
+        <DList Name="gYoungVarkonosLeftFootDL" Offset="0xC968"/>
+        <DList Name="gYoungVarkonosRightFootDL" Offset="0xCBF8"/>
+        <DList Name="gYoungVarkonosLeftThighDL" Offset="0xCE88"/>
+        <DList Name="gYoungVarkonosLeftShinDL" Offset="0xD080"/>
+        <DList Name="gYoungVarkonosRightThighDL" Offset="0xD278"/>
+        <DList Name="gYoungVarkonosRightShinDL" Offset="0xD470"/>
+        <DList Name="gYoungVarkonosTeethDL" Offset="0xD668"/>
+        <Array Name="gYoungVarkonosOpenLeftHandVtx" Count="170" Offset="0xD708">
+            <Vtx/>
+        </Array>
+        <DList Name="gYoungVarkonosOpenLeftHandDL" Offset="0xE1A8"/>
+
+        <!-- Young Varkonos Textures -->
+        <Texture Name="gYoungVarkonosEyeTLUT" Format="rgba16" Width="16" Height="16" Offset="0xECB8"/>
+        <Texture Name="gYoungVarkonosInnerMouthTex" Format="rgba16" Width="8" Height="8" Offset="0xEEB8"/>
+        <Texture Name="gYoungVarkonosSideburnTex" Format="rgba16" Width="16" Height="16" Offset="0xEF38"/>
+        <Texture Name="gYoungVarkonosOuterMouthTex" Format="rgba16" Width="4" Height="8" Offset="0xF138"/>
+        <Texture Name="gYoungVarkonosEyeOpenTex" Format="ci8" Width="32" Height="16" Offset="0xF178" TlutOffset="0xECB8"/>
+        <Texture Name="gYoungVarkonosEyeHalfTex" Format="ci8" Width="32" Height="16" Offset="0xF378" TlutOffset="0xECB8"/>
+        <Texture Name="gYoungVarkonosEyeClosedTex" Format="ci8" Width="32" Height="16" Offset="0xF578" TlutOffset="0xECB8"/>
+        <Texture Name="gYoungVarkonosEyeLookingDownTex" Format="ci8" Width="32" Height="16" Offset="0xF778" TlutOffset="0xECB8"/>
+        <Texture Name="gYoungVarkonosUpperLipTex" Format="rgba16" Width="16" Height="16" Offset="0xF978"/>
+        <Texture Name="gYoungVarkonosEarTex" Format="rgba16" Width="8" Height="16" Offset="0xFB78"/>
+        <Texture Name="gYoungVarkonosNoseTex" Format="rgba16" Width="8" Height="8" Offset="0xFC78"/>
+        <Texture Name="gYoungVarkonosNoseBridgeTex" Format="rgba16" Width="4" Height="16" Offset="0xFCF8"/>
+        <Texture Name="gYoungVarkonosEyebrowTex" Format="rgba16" Width="16" Height="8" Offset="0xFD78"/>
+        <Texture Name="gYoungVarkonosJawTex" Format="rgba16" Width="16" Height="16" Offset="0xFE78"/>
+        <Texture Name="gYoungVarkonosBlackLeatherTex" Format="rgba16" Width="16" Height="16" Offset="0x10078"/>
+        <Texture Name="gYoungVarkonosDuneanFabricWithSunTex" Format="rgba16" Width="32" Height="16" Offset="0x10278"/>
+        <Texture Name="gYoungVarkonosLeatherTex" Format="rgba16" Width="16" Height="16" Offset="0x10678"/>
+        <Texture Name="gYoungVarkonosBodysuitTex" Format="rgba16" Width="8" Height="8" Offset="0x10878"/>
+        <Texture Name="gYoungVarkonosNeckTex" Format="rgba16" Width="8" Height="8" Offset="0x108F8"/>
+        <Texture Name="gYoungVarkonosChestAndKnifeJewelTex" Format="rgba16" Width="16" Height="16" Offset="0x10978"/>
+        <Texture Name="gYoungVarkonosDuneanFabricTex" Format="rgba16" Width="16" Height="16" Offset="0x10B78"/>
+        <Texture Name="gYoungVarkonosHairFringeTex" Format="rgba16" Width="16" Height="16" Offset="0x10D78"/>
+        <Texture Name="gYoungVarkonosJewelTex" Format="rgba16" Width="16" Height="32" Offset="0x10F78"/>
+        <Texture Name="gYoungVarkonosPauldronTex" Format="rgba16" Width="16" Height="16" Offset="0x11378"/> <!-- Also used for the sides of his gauntlets and knee guards. -->
+        <Texture Name="gYoungVarkonosThumbTex" Format="rgba16" Width="8" Height="8" Offset="0x11578"/>
+        <Texture Name="gYoungVarkonosHandSideTex" Format="rgba16" Width="8" Height="8" Offset="0x115F8"/>
+        <Texture Name="gYoungVarkonosFingerTex" Format="rgba16" Width="8" Height="8" Offset="0x11678"/>
+        <Texture Name="gYoungVarkonosTeethTex" Format="rgba16" Width="4" Height="4" Offset="0x116F8"/>
+        <Texture Name="gYoungVarkonosPalmMaskTex" Format="i8" Width="16" Height="16" Offset="0x11718"/>
+        <Texture Name="gYoungVarkonosFingerUndersideTex" Format="rgba16" Width="4" Height="8" Offset="0x11818"/>
+        <Texture Name="gYoungVarkonosFingernailTex" Format="rgba16" Width="4" Height="4" Offset="0x11858"/>
+
+        <!-- Young Varkonos Limbs -->
+        <Limb Name="gYoungVarkonosRootLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_ROOT" Offset="0x11878"/>
+        <Limb Name="gYoungVarkonosTorsoLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_TORSO" Offset="0x11884"/>
+        <Limb Name="gYoungVarkonosLeftUpperArmLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_UPPER_ARM" Offset="0x11890"/>
+        <Limb Name="gYoungVarkonosLeftForearmLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_FOREARM" Offset="0x1189C"/>
+        <Limb Name="gYoungVarkonosLeftHandLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_HAND" Offset="0x118A8"/>
+        <Limb Name="gYoungVarkonosRightUpperArmLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_UPPER_ARM" Offset="0x118B4"/>
+        <Limb Name="gYoungVarkonosRightForearmLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_FOREARM" Offset="0x118C0"/>
+        <Limb Name="gYoungVarkonosRightHandLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_HAND" Offset="0x118CC"/>
+        <Limb Name="gYoungVarkonosJewelLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_JEWEL" Offset="0x118D8"/>
+        <Limb Name="gYoungVarkonosLeftUpperLipLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_UPPER_LIP" Offset="0x118E4"/>
+        <Limb Name="gYoungVarkonosJawLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_JAW" Offset="0x118F0"/>
+        <Limb Name="gYoungVarkonosChinLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_CHIN" Offset="0x118FC"/>
+        <Limb Name="gYoungVarkonosRightUpperLipLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_UPPER_LIP" Offset="0x11908"/>
+        <Limb Name="gYoungVarkonosTeethLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_TEETH" Offset="0x11914"/>
+        <Limb Name="gYoungVarkonosHeadLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_HEAD" Offset="0x11920"/>
+        <Limb Name="gYoungVarkonosPelvisLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_PELVIS" Offset="0x1192C"/>
+        <Limb Name="gYoungVarkonosLeftThighLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_THIGH" Offset="0x11938"/>
+        <Limb Name="gYoungVarkonosLeftShinLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_SHIN" Offset="0x11944"/>
+        <Limb Name="gYoungVarkonosLeftFootLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_LEFT_FOOT" Offset="0x11950"/>
+        <Limb Name="gYoungVarkonosKnifeLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_KNIFE" Offset="0x1195C"/>
+        <Limb Name="gYoungVarkonosRightThighLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_THIGH" Offset="0x11968"/>
+        <Limb Name="gYoungVarkonosRightShinLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_SHIN" Offset="0x11974"/>
+        <Limb Name="gYoungVarkonosRightFootLimb" LimbType="Standard" EnumName="YOUNG_VARKONOS_LIMB_RIGHT_FOOT" Offset="0x11980"/>
+
+        <!-- Young Varkonos Skeleton -->
+        <Skeleton Name="gYoungVarkonosSkel" Type="Flex" LimbType="Standard" LimbNone="YOUNG_VARKONOS_LIMB_NONE" LimbMax="YOUNG_VARKONOS_LIMB_MAX" EnumName="YoungVarkonosLimb" Offset="0x119E8"/>
+    </File>
+</Root>

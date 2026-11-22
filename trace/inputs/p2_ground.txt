@@ -1,0 +1,7 @@
+# P2 scene viewer: descend to ground level, walk forward, turn (retrace numbers, 60 per second)
+300 L
+1120 -
+1125 UP
+1270 -
+1275 DL
+1350 -

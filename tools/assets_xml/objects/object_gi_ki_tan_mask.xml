@@ -1,0 +1,14 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_gi_ki_tan_mask" Segment="6">
+        <Texture Name="gGiFoxlingMaskEyeTex" Format="ia8" Width="8" Height="32" Offset="0x0"/>
+        <Array Name="gGiFoxlingMaskVtx" Count="148" Offset="0x100">
+            <Vtx/>
+        </Array>
+        <Array Name="gGiFoxlingMaskEyesVtx" Count="8" Offset="0xA40">
+            <Vtx/>
+        </Array>
+        <DList Name="gGiFoxlingMaskDL" Offset="0x0AC0"/>
+        <DList Name="gGiFoxlingMaskEyesDL" Offset="0x0D50"/>
+    </File>
+</Root>

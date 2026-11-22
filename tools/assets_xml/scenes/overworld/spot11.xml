@@ -1,0 +1,11 @@
+<Root>
+    <File Name="spot11_scene" Segment="2">
+        <Cutscene Name="gDesertSentinelIntroCs" Offset="0x7990"/>
+        <Cutscene Name="gDesertSentinelRequiemOfEchoesCs" Offset="0x4F10"/>
+        <Cutscene Name="gDesertSentinelSorayneCapturedCs" Offset="0x65F0"/>
+        <Scene Name="spot11_scene" Offset="0x0"/>
+    </File>
+    <File Name="spot11_room_0" Segment="3">
+        <Room Name="spot11_room_0" Offset="0x0"/>
+    </File>
+</Root>

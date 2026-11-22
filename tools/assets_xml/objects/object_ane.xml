@@ -1,0 +1,106 @@
+<Root>
+    <File Name="object_ane" Segment="6">
+        <!-- Clucker Lady Skeleton -->
+        <Skeleton Name="gCluckerLadySkel" Type="Flex" LimbType="Standard" Offset="0xF0"/>
+
+        <!-- Clucker Lady Skeleton Limbs -->
+        <Limb Name="gCluckerLadyRootLimb" LimbType="Standard" Offset="0x000"/>
+        <Limb Name="gCluckerLadyLimb_00C" LimbType="Standard" Offset="0x00C"/>
+        <Limb Name="gCluckerLadyLimb_018" LimbType="Standard" Offset="0x018"/>
+        <Limb Name="gCluckerLadyLimb_024" LimbType="Standard" Offset="0x024"/>
+        <Limb Name="gCluckerLadyLimb_030" LimbType="Standard" Offset="0x030"/>
+        <Limb Name="gCluckerLadyLimb_03C" LimbType="Standard" Offset="0x03C"/>
+        <Limb Name="gCluckerLadyLimb_048" LimbType="Standard" Offset="0x048"/>
+        <Limb Name="gCluckerLadyTorsoLimb" LimbType="Standard" Offset="0x054"/>
+        <Limb Name="gCluckerLadyLimb_060" LimbType="Standard" Offset="0x060"/>
+        <Limb Name="gCluckerLadyLimb_06C" LimbType="Standard" Offset="0x06C"/>
+        <Limb Name="gCluckerLadyLimb_078" LimbType="Standard" Offset="0x078"/>
+        <Limb Name="gCluckerLadyLimb_084" LimbType="Standard" Offset="0x084"/>
+        <Limb Name="gCluckerLadyLimb_090" LimbType="Standard" Offset="0x090"/>
+        <Limb Name="gCluckerLadyLimb_09C" LimbType="Standard" Offset="0x09C"/>
+        <Limb Name="gCluckerLadyHeadLimb" LimbType="Standard" Offset="0x0A8"/>
+
+        <!-- Clucker Lady Limb DisplayLists -->
+        <DList Name="gCluckerLadyDressDL" Offset="0x6DF0"/>
+        <DList Name="gCluckerLadyDL_6D20" Offset="0x6D20"/>
+        <DList Name="gCluckerLadyDL_6C38" Offset="0x6C38"/>
+        <DList Name="gCluckerLadyShoe1DL" Offset="0x69B0"/>
+        <DList Name="gCluckerLadyDL_68E0" Offset="0x68E0"/>
+        <DList Name="gCluckerLadyDL_67F8" Offset="0x67F8"/>
+        <DList Name="gCluckerLadyShoe2DL" Offset="0x6570"/>
+        <DList Name="gCluckerLadyTorsoDL" Offset="0x6280"/>
+        <DList Name="gCluckerLadyDL_6148" Offset="0x6148"/>
+        <DList Name="gCluckerLadyDL_6018" Offset="0x6018"/>
+        <DList Name="gCluckerLadyDL_5E28" Offset="0x5E28"/>
+        <DList Name="gCluckerLadyDL_5CF0" Offset="0x5CF0"/>
+        <DList Name="gCluckerLadyDL_5BC0" Offset="0x5BC0"/>
+        <DList Name="gCluckerLadyDL_59D0" Offset="0x59D0"/>
+        <DList Name="gCluckerLadyHeadDL" Offset="0x54D8"/>
+
+        <!-- Palettes -->
+        <Texture Name="gCluckerLadyTLUT" Format="rgba16" Width="16" Height="16" Offset="0x0108"/>
+
+        <!-- Textures -->
+        <Texture Name="gCluckerLadyHairTex" Format="ci8" Width="8" Height="16" Offset="0x0308" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadyTex_0388" Format="ci8" Width="8" Height="8" Offset="0x0388" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadyEarTex" Format="ci8" Width="16" Height="16" Offset="0x03C8" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadyMouthTex" Format="rgba16" Width="32" Height="16" Offset="0x04C8"/>
+        <Texture Name="gCluckerLadyBackOfHandTex" Format="ci8" Width="16" Height="16" Offset="0x20C8" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadySleeveTex" Format="ci8" Width="8" Height="16" Offset="0x21C8" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadyShirtButtonTex" Format="ci8" Width="8" Height="8" Offset="0x2248" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadyWaistTex" Format="ci8" Width="16" Height="16" Offset="0x2288" TlutOffset="0x0108"/>
+        <Texture Name="gCluckerLadySkirtTex" Format="ci8" Width="32" Height="32" Offset="0x2388" TlutOffset="0x0108"/>
+
+        <!-- Eye Textures -->
+        <Texture Name="gCluckerLadyEyeOpenTex" Format="rgba16" Width="32" Height="32" Offset="0x8C8"/>
+        <Texture Name="gCluckerLadyEyeHalfTex" Format="rgba16" Width="32" Height="32" Offset="0x10C8"/>
+        <Texture Name="gCluckerLadyEyeClosedTex" Format="rgba16" Width="32" Height="32" Offset="0x18C8"/>
+
+        <!-- Vertices -->
+        <Array Name="gCluckerLadyHeadVtx" Count="234" Offset="0x2788">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_003628" Count="41" Offset="0x3628">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_0038B8" Count="24" Offset="0x38B8">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_003A38" Count="29" Offset="0x3A38">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_003C08" Count="41" Offset="0x3C08">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_003E98" Count="24" Offset="0x3E98">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_004018" Count="29" Offset="0x4018">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLadyTorsoVtx" Count="107" Offset="0x41E8">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLadyShoe2Vtx" Count="53" Offset="0x4898">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_004BE8" Count="8" Offset="0x4BE8">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_004C68" Count="3" Offset="0x4C68">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLadyShoe1Vtx" Count="53" Offset="0x4C98">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_004FE8" Count="8" Offset="0x4FE8">
+            <Vtx/>
+        </Array>
+        <Array Name="object_ane_Vtx_005068" Count="3" Offset="0x5068">
+            <Vtx/>
+        </Array>
+        <Array Name="gCluckerLadyDressVtx" Count="68" Offset="0x5098">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

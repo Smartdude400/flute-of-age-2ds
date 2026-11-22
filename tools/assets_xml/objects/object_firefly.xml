@@ -1,0 +1,92 @@
+<Root>
+    <File Name="object_firefly" Segment="6">
+        <Animation Name="gCavebatFlyAnim" Offset="0x17C"/>
+
+        <Skeleton Name="gCavebatSkel" Type="Normal" LimbType="Standard" LimbNone="CAVEBAT_LIMB_NONE" LimbMax="CAVEBAT_LIMB_MAX" EnumName="CavebatLimb" Offset="0x18B8"/>
+
+        <DList Name="gCavebatEyesDL" Offset="0x1678"/>
+
+        <Texture Name="gCavebatEyeTex" Format="rgba16" Width="8" Height="8" Offset="0x190"/>
+        <Texture Name="gCavebatBodyTex" Format="rgba16" Width="8" Height="8" Offset="0x590"/>
+        <Texture Name="gCavebatTobinTex" Format="rgba16" Width="8" Height="16" Offset="0x610"/>
+        <Texture Name="gCavebatWingTex" Format="rgba16" Width="4" Height="16" Offset="0x710"/>
+        <Texture Name="gCavebatEarTex" Format="rgba16" Width="16" Height="8" Offset="0x790"/>
+
+        <Texture Name="gFireCavebatBodyTex" Format="rgba16" Width="8" Height="8" Offset="0x210"/>
+        <Texture Name="gFireCavebatEyeTex" Format="rgba16" Width="8" Height="8" Offset="0x290"/>
+        <Texture Name="gFireCavebatEarTex" Format="rgba16" Width="16" Height="8" Offset="0x310"/>
+        <Texture Name="gFireCavebatTobinTex" Format="rgba16" Width="8" Height="16" Offset="0x410"/>
+        <Texture Name="gFireCavebatWingTex" Format="rgba16" Width="4" Height="16" Offset="0x510"/>
+
+        <Array Name="gCavebatHeadVtx" Count="26" Offset="0x890">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatBodyVtx" Count="17" Offset="0xA30">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatLeftTobinVtx" Count="3" Offset="0xB40">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatRightTobinVtx" Count="4" Offset="0xB70">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatRightWingStartVtx" Count="3" Offset="0xBB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatRightWingMiddleVtx" Count="3" Offset="0xBE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatRightWingEndVtx" Count="3" Offset="0xC10">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatLeftWingEndVtx" Count="3" Offset="0xC40">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatLeftWingMiddleVtx" Count="3" Offset="0xC70">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatLeftWingStartVtx" Count="3" Offset="0xCA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCavebatEyesVtx" Count="6" Offset="0xCD0">
+            <Vtx/>
+        </Array>
+        <DList Name="gCavebatHeadDL" Offset="0xD30"/>
+        <DList Name="gCavebatBodyDL" Offset="0xF40"/>
+        <DList Name="gCavebatLeftTobinDL" Offset="0x1038"/>
+        <DList Name="gCavebatRightTobinDL" Offset="0x1100"/>
+        <DList Name="gCavebatRightWingStartDL" Offset="0x11C8"/>
+        <DList Name="gCavebatRightWingMiddleDL" Offset="0x1290"/>
+        <DList Name="gCavebatRightWingEndDL" Offset="0x1358"/>
+        <DList Name="gCavebatLeftWingEndDL" Offset="0x1420"/>
+        <DList Name="gCavebatLeftWingMiddleDL" Offset="0x14E8"/>
+        <DList Name="gCavebatLeftWingStartDL" Offset="0x15B0"/>
+        <Limb Name="gCavebatRootRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_ROOT_ROOT" Offset="0x1708"/>
+        <Limb Name="gCavebatRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_ROOT" Offset="0x1714"/>
+        <Limb Name="gCavebatTobinsRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_TOBINS_ROOT" Offset="0x1720"/>
+        <Limb Name="gCavebatRightTobinRootRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_TOBIN_ROOT_ROOT" Offset="0x172C"/>
+        <Limb Name="gCavebatRightTobinRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_TOBIN_ROOT" Offset="0x1738"/>
+        <Limb Name="gCavebatRightTobinLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_TOBIN" Offset="0x1744"/>
+        <Limb Name="gCavebatLeftTobinRootRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_TOBIN_ROOT_ROOT" Offset="0x1750"/>
+        <Limb Name="gCavebatLeftTobinRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_TOBIN_ROOT" Offset="0x175C"/>
+        <Limb Name="gCavebatLeftTobinLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_TOBIN" Offset="0x1768"/>
+        <Limb Name="gCavebatBodyLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_BODY" Offset="0x1774"/>
+        <Limb Name="gCavebatLeftWingRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_ROOT" Offset="0x1780"/>
+        <Limb Name="gCavebatLeftWingStartRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_START_ROOT" Offset="0x178C"/>
+        <Limb Name="gCavebatLeftWingMiddleRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_MIDDLE_ROOT" Offset="0x1798"/>
+        <Limb Name="gCavebatLeftWingEndRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_END_ROOT" Offset="0x17A4"/>
+        <Limb Name="gCavebatLeftWingEndLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_END" Offset="0x17B0"/>
+        <Limb Name="gCavebatLeftWingMiddleLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_MIDDLE" Offset="0x17BC"/>
+        <Limb Name="gCavebatLeftWingStartLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_LEFT_WING_START" Offset="0x17C8"/>
+        <Limb Name="gCavebatRightWingRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_ROOT" Offset="0x17D4"/>
+        <Limb Name="gCavebatRightWingStartRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_START_ROOT" Offset="0x17E0"/>
+        <Limb Name="gCavebatRightWingMiddleRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_MIDDLE_ROOT" Offset="0x17EC"/>
+        <Limb Name="gCavebatRightWingEndRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_END_ROOT" Offset="0x17F8"/>
+        <Limb Name="gCavebatRightWingEndLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_END" Offset="0x1804"/>
+        <Limb Name="gCavebatRightWingMiddleLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_MIDDLE" Offset="0x1810"/>
+        <Limb Name="gCavebatRightWingStartLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_RIGHT_WING_START" Offset="0x181C"/>
+        <Limb Name="gCavebatHeadRootRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_HEAD_ROOT_ROOT" Offset="0x1828"/>
+        <Limb Name="gCavebatHeadRootLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_HEAD_ROOT" Offset="0x1834"/>
+        <Limb Name="gCavebatHeadLimb" LimbType="Standard" EnumName="CAVEBAT_LIMB_HEAD" Offset="0x1840"/>
+    </File>
+</Root>

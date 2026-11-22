@@ -1,0 +1,58 @@
+<Root>
+    <File Name="object_vm" Segment="6">
+        <!-- Rayguard Skeleton -->
+        <Skeleton Name="gRayguardSkel" Type="Normal" LimbType="Standard" Offset="0x3F60"/>
+
+        <!-- Rayguard Skeleton Limbs -->
+        <Limb Name="gRayguardRootLimb" LimbType="Standard" Offset="0x3EC0"/>
+        <Limb Name="gRayguardLimb_3ECC" LimbType="Standard" Offset="0x3ECC"/>
+        <Limb Name="gRayguardLimb_3ED8" LimbType="Standard" Offset="0x3ED8"/>
+        <Limb Name="gRayguardLimb_3EE4" LimbType="Standard" Offset="0x3EE4"/>
+        <Limb Name="gRayguardTopEyelidLimb" LimbType="Standard" Offset="0x3EF0"/>
+        <Limb Name="gRayguardLimb_3EFC" LimbType="Standard" Offset="0x3EFC"/>
+        <Limb Name="gRayguardLimb_3F08" LimbType="Standard" Offset="0x3F08"/>
+        <Limb Name="gRayguardBottomEyelidLimb" LimbType="Standard" Offset="0x3F14"/>
+        <Limb Name="gRayguardEyeLimb" LimbType="Standard" Offset="0x3F20"/>
+        <Limb Name="gRayguardBodyLimb" LimbType="Standard" Offset="0x3F2C"/>
+
+        <!-- Rayguard Limb Vertices -->
+        <Array Name="gRayguardBodyVtx" Count="352" Offset="0x80">
+            <Vtx/>
+        </Array>
+        <Array Name="gRayguardTopEyelidVtx" Count="44" Offset="0x1680">
+            <Vtx/>
+        </Array>
+        <Array Name="gRayguardBottomEyelidVtx" Count="44" Offset="0x1940">
+            <Vtx/>
+        </Array>
+        <Array Name="gRayguardEyeVtx" Count="24" Offset="0x1C00">
+            <Vtx/>
+        </Array>
+
+        <!-- Rayguard Limb DisplayLists -->
+        <DList Name="gRayguardTopEyelidDL" Offset="0x22B0"/>
+        <DList Name="gRayguardBottomEyelidDL" Offset="0x2460"/>
+        <DList Name="gRayguardEyeDL" Offset="0x2610"/>
+        <DList Name="gRayguardBodyDL" Offset="0x1E00"/>
+
+        <!-- Rayguard DisplayList Textures -->
+        <Texture Name="gRayguardBodyGradientTex" Format="rgba16" Width="8" Height="8" Offset="0x27C0"/>
+        <Texture Name="gRayguardGrayMetalTex" Format="i4" Width="16" Height="32" Offset="0x2840"/>
+        <Texture Name="gRayguardBoltAndMetalTex" Format="rgba16" Width="16" Height="32" Offset="0x2940"/>
+        <Texture Name="gRayguardTex_2D40" Format="rgba16" Width="16" Height="8" Offset="0x2D40"/>
+        <Texture Name="gRayguardEyeOutlineTex" Format="rgba16" Width="16" Height="16" Offset="0x2E40"/>
+        <Texture Name="gRayguardEyeTex" Format="rgba16" Width="32" Height="16" Offset="0x3040"/>
+        <Texture Name="gRayguardBodyTex" Format="rgba16" Width="16" Height="16" Offset="0x3440"/>
+        <Texture Name="gRayguardLaserTex" Format="rgba16" Width="8" Height="8" Offset="0x3640"/>
+        <Texture Name="gRayguardTeethTex" Format="rgba16" Width="32" Height="32" Offset="0x36C0"/>
+
+        <!-- Rayguard Animations -->
+        <Animation Name="gRayguardAnim" Offset="0x68"/>
+
+        <!-- Rayguard Laser Vertices and DisplayList -->
+        <Array Name="gRayguardLaserVtx" Count="8" Offset="0x1D80">
+            <Vtx/>
+        </Array>
+        <DList Name="gRayguardLaserDL" Offset="0x2728"/>
+    </File>
+</Root>

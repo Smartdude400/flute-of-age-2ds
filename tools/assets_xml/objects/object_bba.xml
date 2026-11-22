@@ -1,0 +1,97 @@
+<Root>
+    <File Name="object_bba" Segment="6">
+        <!-- Skeleton -->
+        <Limb Name="gEldranOldWomanPelvisLimb" LimbType="Standard" Offset="0x0"/>
+        <Limb Name="gEldranOldWomanLeftThighLimb" LimbType="Standard" Offset="0xC"/>
+        <Limb Name="gEldranOldWomanLeftShinLimb" LimbType="Standard" Offset="0x18"/>
+        <Limb Name="gEldranOldWomanLeftFootLimb" LimbType="Standard" Offset="0x24"/>
+        <Limb Name="gEldranOldWomanRightThighLimb" LimbType="Standard" Offset="0x30"/>
+        <Limb Name="gEldranOldWomanRightShinLimb" LimbType="Standard" Offset="0x3C"/>
+        <Limb Name="gEldranOldWomanRightFootLimb" LimbType="Standard" Offset="0x48"/>
+        <Limb Name="gEldranOldWomanTorsoLimb" LimbType="Standard" Offset="0x54"/>
+        <Limb Name="gEldranOldWomanLeftUpperArmLimb" LimbType="Standard" Offset="0x60"/>
+        <Limb Name="gEldranOldWomanLeftForearmLimb" LimbType="Standard" Offset="0x6C"/>
+        <Limb Name="gEldranOldWomanLeftHandLimb" LimbType="Standard" Offset="0x78"/>
+        <Limb Name="gEldranOldWomanRightUpperArmLimb" LimbType="Standard" Offset="0x84"/>
+        <Limb Name="gEldranOldWomanRightForearmLimb" LimbType="Standard" Offset="0x90"/>
+        <Limb Name="gEldranOldWomanRightHandLimb" LimbType="Standard" Offset="0x9C"/>
+        <Limb Name="gEldranOldWomanHeadLimb" LimbType="Standard" Offset="0xA8"/>
+        <Skeleton Name="gEldranOldWomanSkel" Type="Flex" LimbType="Standard" Offset="0xF0"/>
+
+        <!-- Textures -->
+        <Texture Name="gEldranOldWomanTLUT" Format="rgba16" Width="16" Height="16" Offset="0x108"/>
+        <Texture Name="gEldranOldWomanMouthTex" Format="ci8" Width="8" Height="8" Offset="0x308" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanSkinTex" Format="ci8" Width="8" Height="8" Offset="0x348" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanHairTex" Format="ci8" Width="16" Height="16" Offset="0x388" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanEarTex" Format="ci8" Width="8" Height="8" Offset="0x488" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanEyeTex" Format="rgba16" Width="32" Height="32" Offset="0x4C8"/>
+        <Texture Name="gEldranOldWomanFingersTex" Format="ci8" Width="16" Height="16" Offset="0xCC8" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanCollarSleevesTex" Format="ci8" Width="8" Height="8" Offset="0xDC8" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanShirtTex" Format="ci8" Width="16" Height="16" Offset="0xE08" TlutOffset="0x108"/>
+        <Texture Name="gEldranOldWomanSkirtTex" Format="ci8" Width="16" Height="16" Offset="0xF08" TlutOffset="0x108"/>
+
+        <!-- Vertices -->
+        <Array Name="gEldranOldWomanHeadVtx" Count="160" Offset="0x1008">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftHandVtx" Count="23" Offset="0x1A08">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftForearmVtx" Count="19" Offset="0x1B78">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftUpperArmVtx" Count="24" Offset="0x1CA8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightHandVtx" Count="23" Offset="0x1E28">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightForearmVtx" Count="19" Offset="0x1F98">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightUpperArmVtx" Count="24" Offset="0x20C8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanTorsoVtx" Count="70" Offset="0x2248">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightFootVtx" Count="3" Offset="0x26A8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightShinVtx" Count="3" Offset="0x26D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanRightThighVtx" Count="3" Offset="0x2708">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftFootVtx" Count="3" Offset="0x2738">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftShinVtx" Count="3" Offset="0x2768">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanLeftThighVtx" Count="3" Offset="0x2798">
+            <Vtx/>
+        </Array>
+        <Array Name="gEldranOldWomanPelvisVtx" Count="24" Offset="0x27C8">
+            <Vtx/>
+        </Array>
+
+        <!-- DLs -->
+        <DList Name="gEldranOldWomanHeadDL" Offset="0x2948"/>
+        <DList Name="gEldranOldWomanRightHandDL" Offset="0x3298"/>
+        <DList Name="gEldranOldWomanRightForearmDL" Offset="0x33A8"/>
+        <DList Name="gEldranOldWomanRightUpperArmDL" Offset="0x34C8"/>
+        <DList Name="gEldranOldWomanLeftHandDL" Offset="0x35F0"/>
+        <DList Name="gEldranOldWomanLeftForearmDL" Offset="0x3700"/>
+        <DList Name="gEldranOldWomanLeftUpperArmDL" Offset="0x3820"/>
+        <DList Name="gEldranOldWomanTorsoDL" Offset="0x3948"/>
+        <DList Name="gEldranOldWomanRightFootDL" Offset="0x3C80"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanRightShinDL" Offset="0x3D50"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanRightThighDL" Offset="0x3E20"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanLeftFootDL" Offset="0x3EF0"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanLeftShinDL" Offset="0x3FC0"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanLeftThighDL" Offset="0x4090"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEldranOldWomanPelvisDL" Offset="0x4160"/>
+    </File>
+</Root>

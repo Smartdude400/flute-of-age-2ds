@@ -1,0 +1,137 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="ovl_Boss_Varkon">
+        <Texture Name="gVarkonosLightning1Tex" Format="i8" Width="32" Height="96" Offset="0x2F48"/>
+        <Texture Name="gVarkonosLightning2Tex" Format="i8" Width="32" Height="96" Offset="0x3B48"/>
+        <Texture Name="gVarkonosLightning3Tex" Format="i8" Width="32" Height="96" Offset="0x4748"/>
+        <Texture Name="gVarkonosLightning4Tex" Format="i8" Width="32" Height="96" Offset="0x5348"/>
+        <Texture Name="gVarkonosLightning5Tex" Format="i8" Width="32" Height="96" Offset="0x5F48"/>
+        <Texture Name="gVarkonosLightning6Tex" Format="i8" Width="32" Height="96" Offset="0x6B48"/>
+        <Texture Name="gVarkonosLightning7Tex" Format="i8" Width="32" Height="96" Offset="0x7748"/>
+        <Texture Name="gVarkonosLightning8Tex" Format="i8" Width="32" Height="96" Offset="0x8348"/>
+        <Texture Name="gVarkonosLightning9Tex" Format="i8" Width="32" Height="96" Offset="0x8F48"/>
+        <Texture Name="gVarkonosLightning10Tex" Format="i8" Width="32" Height="96" Offset="0x9B48"/>
+        <Texture Name="gVarkonosLightning11Tex" Format="i8" Width="32" Height="96" Offset="0xA748"/>
+        <Texture Name="gVarkonosLightning12Tex" Format="i8" Width="32" Height="96" Offset="0xB348"/>
+
+        <Texture Name="gVarkonosWindowShatterTemplateTex" Format="i8" Width="32" Height="64" Offset="0x1680"/>
+
+        <Array Name="gVarkonosLightStreak1Vtx" Count="10" Offset="0x10ED8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak2Vtx" Count="10" Offset="0x10F78">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak3Vtx" Count="10" Offset="0x11018">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak4Vtx" Count="10" Offset="0x110B8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak5Vtx" Count="10" Offset="0x11158">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak6Vtx" Count="10" Offset="0x111F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak7Vtx" Count="10" Offset="0x11298">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak8Vtx" Count="10" Offset="0x11338">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak9Vtx" Count="10" Offset="0x113D8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak10Vtx" Count="10" Offset="0x11478">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak11Vtx" Count="10" Offset="0x11518">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosLightStreak12Vtx" Count="8" Offset="0x115B8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightStreak1DL" Offset="0x11638"/>
+        <DList Name="gVarkonosLightStreak2DL" Offset="0x11670"/>
+        <DList Name="gVarkonosLightStreak3DL" Offset="0x116A8"/>
+        <DList Name="gVarkonosLightStreak4DL" Offset="0x116E0"/>
+        <DList Name="gVarkonosLightStreak5DL" Offset="0x11718"/>
+        <DList Name="gVarkonosLightStreak6DL" Offset="0x11750"/>
+        <DList Name="gVarkonosLightStreak7DL" Offset="0x11788"/>
+        <DList Name="gVarkonosLightStreak8DL" Offset="0x117C0"/>
+        <DList Name="gVarkonosLightStreak9DL" Offset="0x117F8"/>
+        <DList Name="gVarkonosLightStreak10DL" Offset="0x11830"/>
+        <DList Name="gVarkonosLightStreak11DL" Offset="0x11868"/>
+        <DList Name="gVarkonosLightStreak12DL" Offset="0x118A0"/>
+
+        <Array Name="gVarkonosShadowModelVtx" Count="4" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosShadowSetupDL" Offset="0x40"/>
+        <DList Name="gVarkonosShadowModelDL" Offset="0x60"/>
+        <Array Name="gVarkonosDawnsealVtx" Count="4" Offset="0x1090">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosDawnsealDL" Offset="0x10D0"/>
+        <Array Name="gVarkonosWindowShardModelVtx" Count="3" Offset="0x1590">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosWindowShardMaterialDL" Offset="0x15C0"/>
+        <DList Name="gVarkonosWindowShardModelDL" Offset="0x1668"/>
+        <Array Name="gVarkonosSquareVtx" Count="4" Offset="0x2E80">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightBallMaterialDL" Offset="0x2EC0"/>
+        <DList Name="gVarkonosSquareDL" Offset="0x2F30"/>
+        <Array Name="gVarkonosLightningVtx" Count="4" Offset="0xBF48">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightningDL" Offset="0xBF88"/>
+        <Array Name="gVarkonosUnusedVtx" Count="3" Offset="0xC008">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosUnusedDL" Offset="0xC038"/>
+        <Array Name="gVarkonosLightRayTriVtx" Count="3" Offset="0xC080">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightRayTriDL" Offset="0xC0B0"/>
+        <Array Name="gVarkonosLightFlecksVtx" Count="25" Offset="0xD8F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosBigMagicBGCircleVtx" Count="4" Offset="0xDA88">
+            <Vtx/>
+        </Array>
+        <Array Name="gVarkonosDotVtx" Count="4" Offset="0xDAC8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightFlecksDL" Offset="0xDB08"/>
+        <DList Name="gVarkonosBigMagicBGCircleDL" Offset="0xDBF8"/>
+        <DList Name="gVarkonosDotDL" Offset="0xDCA0"/>
+        <Array Name="gVarkonosShockwaveVtx" Count="26" Offset="0xE568">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosShockwaveDL" Offset="0xE708"/>
+        <Array Name="gVarkonosImpactVtx" Count="26" Offset="0xF400">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosImpactDarkDL" Offset="0xF5A0"/>
+        <DList Name="gVarkonosImpactLightDL" Offset="0xF6B8"/>
+        <Array Name="gVarkonosShockGlowVtx" Count="4" Offset="0x107D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosShockGlowDL" Offset="0x10810"/>
+        <Array Name="gVarkonosLightCoreVtx" Count="3" Offset="0x11B40">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosLightCoreDL" Offset="0x11B70"/>
+        <Array Name="gVarkonosShockVtx" Count="4" Offset="0x11BF8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosShockDL" Offset="0x11C38"/>
+        <Array Name="gVarkonosVortexVtx" Count="22" Offset="0x128B8">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonosVortexDL" Offset="0x12A18"/>
+    </File>
+</Root>

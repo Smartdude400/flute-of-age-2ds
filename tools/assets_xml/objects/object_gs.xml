@@ -1,0 +1,11 @@
+<Root>
+    <File Name="object_gs" Segment="6">
+        <Texture Name="gEchoStoneTex" Format="i8" Width="32" Height="64" Offset="0x0"/>
+        <Array Name="gEchoStoneVtx" Count="21" Offset="0x800">
+            <Vtx/>
+        </Array>
+        <DList Name="gEchoStoneMaterialDL" Offset="0x950"/>
+        <DList Name="gEchoStoneDL" Offset="0x9D0"/>
+        <DList Name="gEchoStoneSquishedDL" Offset="0xA60"/>
+    </File>
+</Root>

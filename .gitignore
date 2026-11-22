@@ -1,0 +1,34 @@
+# ---- never committed: your ROM and everything converted or derived from it (tools/setup_assets.py)
+baserom.z64
+*.z64
+*.n64
+*.v64
+romfs/
+.cache/
+source/game/assets_agg/
+source/game/include/segment_symbols.h
+source/game/include/misc_overlay_sizes.h
+source/game/include/text/message_data.h
+source/game/include/text/message_data_staff.h
+source/game/include/text/message_symbols.h
+source/game/code/actor_overlay_sizes.inc.h
+source/game/code/effect_ss_overlay_sizes.inc.h
+source/game/code/kanji_tex.c
+
+# ---- build output
+build/
+build_boot/
+build_h*/
+*.3dsx
+*.elf
+*.smdh
+*.map
+*.cia
+
+# ---- local test artefacts
+evidence/
+build_log.csv
+build_all_report.txt
+__pycache__/
+*.pyc
+last.png

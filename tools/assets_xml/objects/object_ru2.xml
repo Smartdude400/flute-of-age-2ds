@@ -1,0 +1,157 @@
+<Root>
+    <File Name="object_ru2" Segment="6">
+        <!-- Adult Mira Skeleton -->
+        <Skeleton Name="gAdultMiraSkel" Type="Flex" LimbType="Standard" Offset="0xC700"/>
+
+        <!-- Adult Mira Limbs -->
+        <Limb Name="gAdultMiraRootLimb" LimbType="Standard" Offset="0xC5A0"/>
+        <Limb Name="gAdultMiraLeftThighLimb" LimbType="Standard" Offset="0xC5AC"/>
+        <Limb Name="gAdultMiraLeftLegLimb" LimbType="Standard" Offset="0xC5B8"/>
+        <Limb Name="gAdultMiraLeftFootLimb" LimbType="Standard" Offset="0xC5C4"/>
+        <Limb Name="gAdultMiraLeftTailLimb" LimbType="Standard" Offset="0xC5D0"/>
+        <Limb Name="gAdultMiraRightThighLimb" LimbType="Standard" Offset="0xC5DC"/>
+        <Limb Name="gAdultMiraRightLegLimb" LimbType="Standard" Offset="0xC5E8"/>
+        <Limb Name="gAdultMiraRightFootLimb" LimbType="Standard" Offset="0xC5F4"/>
+        <Limb Name="gAdultMiraRightTailLimb" LimbType="Standard" Offset="0xC600"/>
+        <Limb Name="gAdultMiraTorsoLimb" LimbType="Standard" Offset="0xC60C"/>
+        <Limb Name="gAdultMiraLeftUpperArmLimb" LimbType="Standard" Offset="0xC618"/>
+        <Limb Name="gAdultMiraLeftUpperWingLimb" LimbType="Standard" Offset="0xC624"/>
+        <Limb Name="gAdultMiraLeftLowerWingLimb" LimbType="Standard" Offset="0xC630"/>
+        <Limb Name="gAdultMiraLeftForearmLimb" LimbType="Standard" Offset="0xC63C"/>
+        <Limb Name="gAdultMiraLeftHandLimb" LimbType="Standard" Offset="0xC648"/>
+        <Limb Name="gAdultMiraRightUpperArmLimb" LimbType="Standard" Offset="0xC654"/>
+        <Limb Name="gAdultMiraRightUpperWingLimb" LimbType="Standard" Offset="0xC660"/>
+        <Limb Name="gAdultMiraRightLowerWingLimb" LimbType="Standard" Offset="0xC66C"/>
+        <Limb Name="gAdultMiraRightForearmLimb" LimbType="Standard" Offset="0xC678"/>
+        <Limb Name="gAdultMiraRightHandLimb" LimbType="Standard" Offset="0xC684"/>
+        <Limb Name="gAdultMiraHeadLimb" LimbType="Standard" Offset="0xC690"/>
+        <Limb Name="gAdultMiraWaistLimb" LimbType="Standard" Offset="0xC69C"/>
+
+        <!-- Adult Mira Limb Vertices -->
+        <Array Name="gAdultMiraHeadVtx" Count="173" Offset="0x33E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftHandVtx" Count="55" Offset="0x5EC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftForearmVtx" Count="23" Offset="0x6230">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftLowerWingVtx" Count="8" Offset="0x63A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftUpperWingVtx" Count="6" Offset="0x6420">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftUpperArmVtx" Count="30" Offset="0x6480">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightHandVtx" Count="55" Offset="0x6660">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightForearmVtx" Count="23" Offset="0x69D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightLowerWingVtx" Count="8" Offset="0x6B40">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightUpperWingVtx" Count="6" Offset="0x6BC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightUpperArmVtx" Count="30" Offset="0x6C20">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraTorsoVtx" Count="128" Offset="0x6E00">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftFootVtx" Count="26" Offset="0x7600">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftLegVtx" Count="52" Offset="0x77A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftTailVtx" Count="15" Offset="0x7AE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraLeftThighVtx" Count="37" Offset="0x7BD0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightFootVtx" Count="26" Offset="0x7E20">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightLegVtx" Count="52" Offset="0x7FC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightTailVtx" Count="15" Offset="0x8300">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraRightThighVtx" Count="37" Offset="0x83F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gAdultMiraWaistVtx" Count="43" Offset="0x8640">
+            <Vtx/>
+        </Array>
+
+        <!-- Adult Mira Limb DisplayLists -->
+        <DList Name="gAdultMiraLeftThighDL" Offset="0xB8E0"/>
+        <DList Name="gAdultMiraLeftLegDL" Offset="0xBE38"/>
+        <DList Name="gAdultMiraLeftFootDL" Offset="0xC228"/>
+        <DList Name="gAdultMiraLeftTailDL" Offset="0xBD08"/>
+        <DList Name="gAdultMiraRightThighDL" Offset="0xAC20"/>
+        <DList Name="gAdultMiraRightLegDL" Offset="0xB178"/>
+        <DList Name="gAdultMiraRightFootDL" Offset="0xB568"/>
+        <DList Name="gAdultMiraRightTailDL" Offset="0xB048"/>
+        <DList Name="gAdultMiraTorsoDL" Offset="0x8D30"/>
+        <DList Name="gAdultMiraLeftUpperArmDL" Offset="0xA150"/>
+        <DList Name="gAdultMiraLeftUpperWingDL" Offset="0xAA20"/>
+        <DList Name="gAdultMiraLeftLowerWingDL" Offset="0xAB00"/>
+        <DList Name="gAdultMiraLeftForearmDL" Offset="0xA468"/>
+        <DList Name="gAdultMiraLeftHandDL" Offset="0xA650"/>
+        <DList Name="gAdultMiraRightUpperArmDL" Offset="0x9680"/>
+        <DList Name="gAdultMiraRightUpperWingDL" Offset="0x9F50"/>
+        <DList Name="gAdultMiraRightLowerWingDL" Offset="0xA030"/>
+        <DList Name="gAdultMiraRightForearmDL" Offset="0x9998"/>
+        <DList Name="gAdultMiraRightHandDL" Offset="0x9B80"/>
+        <DList Name="gAdultMiraHeadDL" Offset="0x3EB0"/>
+        <DList Name="gAdultMiraWaistDL" Offset="0x88F0"/>
+
+        <!-- Adult Mira Palettes -->
+        <Texture Name="gAdultMiraTLUT1" Format="rgba16" Width="144" Height="1" Offset="0xE00"/>
+        <Texture Name="gAdultMiraTLUT2" Format="rgba16" Width="16" Height="16" Offset="0x43C0"/>
+
+        <!-- Adult Mira Eye Textures -->
+        <Texture Name="gAdultMiraEyeOpenTex" Format="rgba16" Width="32" Height="32" Offset="0xF20"/>
+        <Texture Name="gAdultMiraEyeHalfTex" Format="rgba16" Width="32" Height="32" Offset="0x22E0"/>
+        <Texture Name="gAdultMiraEyeClosedTex" Format="rgba16" Width="32" Height="32" Offset="0x2AE0"/>
+
+        <!-- Adult Mira Textures -->
+        <Texture Name="gAdultMiraSkinGradient" Format="ci8" Width="8" Height="8" Offset="0x1720" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraEar1Tex" Format="ci8" Width="16" Height="16" Offset="0x1760" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraHeadGradientTex" Format="ci8" Width="16" Height="16" Offset="0x1860" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraHeadHoleTex" Format="ci8" Width="8" Height="8" Offset="0x1960" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraMouthTex" Format="rgba16" Width="32" Height="32" Offset="0x19A0"/>
+        <Texture Name="gAdultMiraTex_21A0" Format="ci8" Width="8" Height="8" Offset="0x21A0" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraEar2Tex" Format="ci8" Width="16" Height="16" Offset="0x21E0" TlutOffset="0xE00"/>
+        <Texture Name="gAdultMiraEarringTex" Format="rgba16" Width="8" Height="16" Offset="0x32E0"/>
+        <Texture Name="gAdultMiraTailGradientTex" Format="ci8" Width="8" Height="8" Offset="0x45C0" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraTex_4600" Format="ci8" Width="8" Height="8" Offset="0x4600" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraBackOfHandTex" Format="ci8" Width="16" Height="16" Offset="0x4640" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraTex_4740" Format="ci8" Width="16" Height="16" Offset="0x4740" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraSkinPattern1Tex" Format="ci8" Width="32" Height="64" Offset="0x4840" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraSkinPattern2Tex" Format="ci8" Width="32" Height="32" Offset="0x5040" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraTex_5440" Format="ci8" Width="8" Height="8" Offset="0x5440" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraTex_5480" Format="ci8" Width="16" Height="16" Offset="0x5480" TlutOffset="0x43C0"/>
+        <Texture Name="gAdultMiraTex_5580" Format="ci8" Width="8" Height="8" Offset="0x5580" TlutOffset="0x43C0"/>
+        <Texture Name="object_ru2_0055C0_Tex" Format="ci8" Width="8" Height="32" Offset="0x55C0" TlutOffset="0x43C0"/>
+        <Texture Name="object_ru2_0056C0_Tex" Format="rgba16" Width="32" Height="32" Offset="0x56C0"/>
+
+        <!-- Adult Mira Animations -->
+        <Animation Name="gAdultMiraCrossingArmsAnim" Offset="0x04CC"/>
+        <Animation Name="gAdultMiraIdleAnim" Offset="0xDE8"/>
+        <Animation Name="gAdultMiraRaisingArmsUpAnim" Offset="0xD3DC"/>
+        <Animation Name="gAdultMiraHeadTurnDownLeftAnim" Offset="0xDCAC"/>
+        <Animation Name="gAdultMiraIdleHandsOnHipsAnim" Offset="0xE630"/>
+        <Animation Name="gAdultMiraLookingDownLeftAnim" Offset="0xF03C"/>
+        <Animation Name="gAdultMiraSwimmingUpAnim" Offset="0xF8B8"/>
+    </File>
+</Root>

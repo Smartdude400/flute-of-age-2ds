@@ -1,0 +1,9 @@
+<Root>
+    <File Name="varkon_final_scene" Segment="2">
+        <Path Name="varkon_final_scenePathList_0001F4" Offset="0x01F4" NumPaths="4"/>
+        <Scene Name="varkon_final_scene" Offset="0x0"/>
+    </File>
+    <File Name="varkon_final_room_0" Segment="3">
+        <Room Name="varkon_final_room_0" Offset="0x0"/>
+    </File>
+</Root>

@@ -1,0 +1,59 @@
+<Root>
+    <File Name="object_rs" Segment="6">
+        <Animation Name="gBombmouseShopkeeperIdleAnim" Offset="0x65C"/>
+
+        <Array Name="gBombmouseShopkeeperHeadVtx" Count="163" Offset="0x670">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperLeftHandVtx" Count="47" Offset="0x10A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperLeftForearmVtx" Count="27" Offset="0x1390">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperLeftUpperArmVtx" Count="26" Offset="0x1540">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperRightHandVtx" Count="47" Offset="0x16E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperRightForearmVtx" Count="27" Offset="0x19D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperRightUpperArmVtx" Count="26" Offset="0x1B80">
+            <Vtx/>
+        </Array>
+        <Array Name="gBombmouseShopkeeperTorsoVtx" Count="40" Offset="0x1D20">
+            <Vtx/>
+        </Array>
+        <DList Name="gBombmouseShopkeeperTorsoDL" Offset="0x1FA0"/>
+        <DList Name="gBombmouseShopkeeperHeadDL" Offset="0x21F8"/>
+        <DList Name="gBombmouseShopkeeperRightUpperArmDL" Offset="0x25F8"/>
+        <DList Name="gBombmouseShopkeeperRightForearmDL" Offset="0x2730"/>
+        <DList Name="gBombmouseShopkeeperRightHandDL" Offset="0x2860"/>
+        <DList Name="gBombmouseShopkeeperLeftUpperArmDL" Offset="0x2A70"/>
+        <DList Name="gBombmouseShopkeeperLeftForearmDL" Offset="0x2BA8"/>
+        <DList Name="gBombmouseShopkeeperLeftHandDL" Offset="0x2CD8"/>
+
+        <Texture Name="gBombmouseShopkeeperTLUT" Format="rgba16" Width="16" Height="16" Offset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperSkinTex" Format="ci8" Width="8" Height="8" Offset="0x30E8" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperEarTex" Format="ci8" Width="8" Height="8" Offset="0x3128" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperTattooTex" Format="ci8" Width="32" Height="64" Offset="0x3168" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x3968" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x3D68" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x4168" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperFingersTex" Format="ci8" Width="16" Height="16" Offset="0x4568" TlutOffset="0x2EE8"/>
+        <Texture Name="gBombmouseShopkeeperVestTex" Format="i8" Width="8" Height="16" Offset="0x4668"/>
+        <Texture Name="gBombmouseShopkeeperTorsoTex" Format="ci8" Width="8" Height="32" Offset="0x46E8" TlutOffset="0x2EE8"/>
+
+        <Limb Name="gBombmouseShopkeeperTorsoLimb" LimbType="Standard" Offset="0x47E8"/>
+        <Limb Name="gBombmouseShopkeeperLeftUpperArmLimb" LimbType="Standard" Offset="0x47F4"/>
+        <Limb Name="gBombmouseShopkeeperLeftForearmLimb" LimbType="Standard" Offset="0x4800"/>
+        <Limb Name="gBombmouseShopkeeperLeftHandLimb" LimbType="Standard" Offset="0x480C"/>
+        <Limb Name="gBombmouseShopkeeperRightUpperArmLimb" LimbType="Standard" Offset="0x4818"/>
+        <Limb Name="gBombmouseShopkeeperRightForearmLimb" LimbType="Standard" Offset="0x4824"/>
+        <Limb Name="gBombmouseShopkeeperRightHandLimb" LimbType="Standard" Offset="0x4830"/>
+        <Limb Name="gBombmouseShopkeeperHeadLimb" LimbType="Standard" Offset="0x483C"/>
+        <Skeleton Name="gBombmouseShopkeeperSkel" Type="Flex" LimbType="Standard" Offset="0x4868"/>
+    </File>
+</Root>

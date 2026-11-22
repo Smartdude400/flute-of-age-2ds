@@ -1,0 +1,20 @@
+<Root>
+    <File Name="object_spot16_obj" Segment="6">
+        <Array Name="gCragjawsCavernRockVtx" Count="47" Offset="0x800">
+            <Vtx/>
+        </Array>
+        <Array Name="gCragjawsCavernRock2Vtx" Count="1" Offset="0xAF0">
+            <Vtx/>
+        </Array>
+        <DList Name="gCragjawsCavernRockDL" Offset="0x0B00"/>
+        <DList Name="gCragjawsCavernRock2DL" Offset="0x0C00"/>
+        <DList Name="gCragjawsCavernRock3DL" Offset="0x0C20"/>
+        <Array Name="gCinderMountainRingVtx" Count="4" Offset="0x1430">
+            <Vtx/>
+        </Array>
+        <DList Name="gCinderMountainRingDL" Offset="0x1470"/>
+        <Texture Name="gCragjawsCavernRockTex" Format="i4" Width="64" Height="64" Offset="0x0000"/>
+        <Texture Name="gCinderMountainRingTex" Format="ia16" Width="32" Height="32" Offset="0x0C30"/>
+
+    </File>
+</Root>

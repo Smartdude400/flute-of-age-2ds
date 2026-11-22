@@ -1,0 +1,17 @@
+<Root>
+    <File Name="ovl_End_Title">
+        <Texture Name="sFluteOfAgeTex" Format="ia8" Width="120" Height="24" Offset="0x0"/>
+        <Texture Name="sFluteOfAgeTex" Format="ia8" Width="112" Height="16" Offset="0xB40"/>
+        <Texture Name="sTheEndTex" Format="ia8" Width="80" Height="24" Offset="0x1240"/>
+        <Texture Name="sProjectLeftTex" Format="ia8" Width="64" Height="48" Offset="0x19C0"/>
+        <Texture Name="sProjectRightTex" Format="ia8" Width="64" Height="48" Offset="0x25C0"/>
+        <Texture Name="sPresentedByTex" Format="ia8" Width="96" Height="16" Offset="0x31C0"/>
+
+        <Array Name="sDawnsealVtx" Count="6" Offset="0x37C0">
+            <Vtx/>
+        </Array>
+        <DList Name="sDawnsealDL" Offset="0x3820"/>
+
+        <DList Name="sPresentedByProjectDL" Offset="0x3880"/>
+    </File>
+</Root>

@@ -1,0 +1,152 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_zo" Segment="6">
+        <Skeleton Name="gNeriSkel" Type="Flex" LimbType="Standard" LimbNone="NERI_LIMB_NONE" LimbMax="NERI_LIMB_MAX" EnumName="NeriLimb" Offset="0xBFA8"/>
+
+        <Limb Name="gNeriPelvisLimb" LimbType="Standard" EnumName="NERI_LIMB_PELVIS" Offset="0xBE78"/>
+        <Array Name="gNeriPelvisVtx" Count="31" Offset="0x8E50">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriPelvisDL" Offset="0x9040"/>
+
+        <!-- Left leg -->
+        <Limb Name="gNeriLeftThighsLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_THIGHS" Offset="0xBE84"/>
+        <Array Name="gNeriLeftThighsVtx" Count="44" Offset="0x83D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftThighsDL" Offset="0xB5F8"/>
+        <Limb Name="gNeriLeftShinLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_SHIN" Offset="0xBE90"/>
+        <Array Name="gNeriLeftShinVtx" Count="41" Offset="0x8140">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftShinDL" Offset="0xB8D8"/>
+        <Limb Name="gNeriLeftFootLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_FOOT" Offset="0xBE9C"/>
+        <Array Name="gNeriLeftFootVtx" Count="39" Offset="0x7ED0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftFootDL" Offset="0xBBB0"/>
+
+        <!-- Right leg -->
+        <Limb Name="gNeriRightThighsLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_THIGHS" Offset="0xBEA8"/>
+        <Array Name="gNeriRightThighsVtx" Count="44" Offset="0x8B90">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightThighsDL" Offset="0xAD78"/>
+        <Limb Name="gNeriRightShinLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_SHIN" Offset="0xBEB4"/>
+        <Array Name="gNeriRightShinVtx" Count="41" Offset="0x8900">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightShinDL" Offset="0xB058"/>
+        <Limb Name="gNeriRightFootLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_FOOT" Offset="0xBEC0"/>
+        <Array Name="gNeriRightFootVtx" Count="39" Offset="0x8690">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightFootDL" Offset="0xB330"/>
+
+        <Limb Name="gNeriTorsoLimb" LimbType="Standard" EnumName="NERI_LIMB_TORSO" Offset="0xBECC"/>
+        <Array Name="gNeriTorsoVtx" Count="106" Offset="0x7830">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriTorsoDL" Offset="0x91E8"/>
+
+        <!-- Left arm -->
+        <Limb Name="gNeriLeftArmLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_ARM" Offset="0xBED8"/>
+        <Array Name="gNeriLeftArmVtx" Count="38" Offset="0x6ED0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftArmDL" Offset="0xA630"/>
+        <Limb Name="gNeriLeftForearmLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_FOREARM" Offset="0xBEE4"/>
+        <Array Name="gNeriLeftForearmVtx" Count="33" Offset="0x6CC0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftForearmDL" Offset="0xA890"/>
+        <Limb Name="gNeriLeftHandLimb" LimbType="Standard" EnumName="NERI_LIMB_LEFT_HAND" Offset="0xBEF0"/>
+        <Array Name="gNeriLeftHandVtx" Count="41" Offset="0x6A30">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriLeftHandDL" Offset="0xAB70"/>
+
+        <!-- Right arm -->
+        <Limb Name="gNeriRightArmLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_ARM" Offset="0xBEFC"/>
+        <Array Name="gNeriRightArmVtx" Count="38" Offset="0x75D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightArmDL" Offset="0x9EE8"/>
+        <Limb Name="gNeriRightForearmLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_FOREARM" Offset="0xBF08"/>
+        <Array Name="gNeriRightForearmVtx" Count="33" Offset="0x73C0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightForearmDL" Offset="0xA148"/>
+        <Limb Name="gNeriRightHandLimb" LimbType="Standard" EnumName="NERI_LIMB_RIGHT_HAND" Offset="0xBF14"/>
+        <Array Name="gNeriRightHandVtx" Count="41" Offset="0x7130">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriRightHandDL" Offset="0xA428"/>
+
+        <!-- Head and head tail -->
+        <Limb Name="gNeriHeadLimb" LimbType="Standard" EnumName="NERI_LIMB_HEAD" Offset="0xBF20"/>
+        <Array Name="gNeriHeadVtx" Count="75" Offset="0x6580">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriHeadDL" Offset="0x9560"/>
+        <Limb Name="gNeriHeadTail1Limb" LimbType="Standard" EnumName="NERI_LIMB_HEAD_TAIL_1" Offset="0xBF2C"/>
+        <Array Name="gNeriHeadTail1Vtx" Count="24" Offset="0x6400">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriHeadTail1DL" Offset="0x97D8"/>
+        <Limb Name="gNeriHeadTail2Limb" LimbType="Standard" EnumName="NERI_LIMB_HEAD_TAIL_2" Offset="0xBF38"/>
+        <Array Name="gNeriHeadTail2Vtx" Count="22" Offset="0x62A0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriHeadTail2DL" Offset="0x9978"/>
+        <Limb Name="gNeriHeadTail3Limb" LimbType="Standard" EnumName="NERI_LIMB_HEAD_TAIL_3" Offset="0xBF44"/>
+        <Array Name="gNeriHeadTail3Vtx" Count="22" Offset="0x6140">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriHeadTail3DL" Offset="0x9B10"/>
+        <Limb Name="gNeriHeadTailFinLimb" LimbType="Standard" EnumName="NERI_LIMB_HEAD_TAIL_FIN" Offset="0xBF50"/>
+        <Array Name="gNeriHeadTailFinVtx" Count="28" Offset="0x5F80">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriHeadTailFinDL" Offset="0x9CA8"/>
+
+        <Animation Name="gNeriIdleAnim" Offset="0x2FE8"/>
+        <Animation Name="gNeriSurfaceAnim" Offset="0x2F10"/>
+        <Animation Name="gNeriThrowCrownsAnim" Offset="0x219C"/>
+        <Animation Name="gNeriHandsOnHipsTappingFootAnim" Offset="0x598"/>
+        <Animation Name="gNeriOpenArmsAnim" Offset="0xD48"/>
+
+        <!-- Eyes textures -->
+        <Texture Name="gNeriEyeOpenTex" Format="rgba16" Width="32" Height="32" Offset="0x3E40"/>
+        <Texture Name="gNeriEyeHalfTex" Format="rgba16" Width="32" Height="32" Offset="0x4640"/>
+        <Texture Name="gNeriEyeClosedTex" Format="rgba16" Width="32" Height="32" Offset="0x4E40"/>
+
+        <!-- Other body parts textures -->
+        <Texture Name="gNeriMouthTex" Format="rgba16" Width="32" Height="32" Offset="0x5640"/>
+        <Texture Name="gNeriHeadTailTex" Format="ci8" Width="32" Height="64" Offset="0x3600" TlutOffset="0x3000"/>
+        <Texture Name="gNeriHandTex" Format="ci8" Width="16" Height="16" Offset="0x5E40" TlutOffset="0x3000"/>
+        <Texture Name="gNeriKneeTex" Format="ci8" Width="8" Height="8" Offset="0x5F40" TlutOffset="0x3000"/>
+        <Texture Name="gNeriHeadTex" Format="ci8" Width="8" Height="8" Offset="0x3E00" TlutOffset="0x3000"/>
+        <Texture Name="gNeriFinTex" Format="ci8" Width="32" Height="32" Offset="0x3200" TlutOffset="0x3000"/>
+
+        <!-- Palette / Tlut -->
+        <Texture Name="gNeriTLUT" Format="rgba16" Width="16" Height="16" Offset="0x3000"/>
+
+        <Texture Name="gNeriWispsTex" Format="ia8" Width="16" Height="16" Offset="0x21B0"/>
+        <DList Name="gNeriWispsMaterialDL" Offset="0x22F0"/>
+        <Array Name="gNeriWispsModelVtx" Count="4" Offset="0x22B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriWispsModelDL" Offset="0x2350"/>
+
+        <Texture Name="gNeriSplashesTex" Format="i8" Width="16" Height="16" Offset="0x2370"/>
+        <DList Name="gNeriSplashesMaterialDL" Offset="0x24A0"/>
+        <Array Name="gNeriSplashesModelVtx" Count="3" Offset="0x2470">
+            <Vtx/>
+        </Array>
+        <DList Name="gNeriSplashesModelDL" Offset="0x2510"/>
+
+        <DList Name="gNeriRipplesMaterialDL" Offset="0xBFC0"/>
+        <DList Name="gNeriRipplesModelDL" Offset="0xC028"/>
+    </File>
+</Root>

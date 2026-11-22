@@ -1,0 +1,134 @@
+<Root>
+    <File Name="object_im" Segment="6">
+        <Animation Name="gIlyaRaiseArmsAnim" Offset="0x710"/>
+        <Animation Name="gIlyaPresentShadowMedallionAnim" Offset="0xAFC"/>
+        <Animation Name="gIlyaThrowRootNutAnim" Offset="0x14E4"/>
+        <Animation Name="gIlyaIdleAnim" Offset="0x1868"/>
+        <Texture Name="object_im_TLUT_001880" Format="rgba16" Width="16" Height="16" Offset="0x1880"/>
+        <Texture Name="gIlyaBrownGradientTex" Format="ci8" Width="8" Height="8" Offset="0x1A80" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaSkinAndArmGuardTex" Format="ci8" Width="16" Height="32" Offset="0x1AC0" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaElbowTex" Format="ci8" Width="16" Height="16" Offset="0x1CC0" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaShoulderPadBottomEdgeTex" Format="ci8" Width="8" Height="8" Offset="0x1DC0" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaShoulderSkinTex" Format="ci8" Width="8" Height="16" Offset="0x1E00" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaChestPlateTex" Format="ci8" Width="8" Height="16" Offset="0x1E80" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaEmblemTex" Format="ci8" Width="16" Height="32" Offset="0x1F00" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaSpearEmblemTex" Format="ci8" Width="16" Height="32" Offset="0x2100" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaChestPlateStrapTex" Format="ci8" Width="16" Height="16" Offset="0x2300" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaChestPlateEdgeTex" Format="ci8" Width="8" Height="16" Offset="0x2400" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaNeckTex" Format="ci8" Width="32" Height="32" Offset="0x2480" TlutOffset="0x1880"/>
+        <Texture Name="gIlyaSwordHandleTex" Format="rgba16" Width="8" Height="16" Offset="0x2880"/>
+        <Texture Name="gIlyaPantsAndSkinTex" Format="rgba16" Width="16" Height="32" Offset="0x2980"/>
+        <Texture Name="gIlyaBlackTex" Format="ci8" Width="8" Height="8" Offset="0x2D80" TlutOffset="0x1880"/> <!-- Used on the bottom of the leg -->
+
+        <Array Name="gIlyaLeftArmVtx" Count="32" Offset="0x2DC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaLeftShoulderVtx" Count="42" Offset="0x2FC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightArmVtx" Count="32" Offset="0x3260">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightShoulderVtx" Count="42" Offset="0x3460">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaChestVtx" Count="194" Offset="0x3700">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaLeftLegVtx" Count="37" Offset="0x4320">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaLeftThighVtx" Count="45" Offset="0x4570">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightLegVtx" Count="37" Offset="0x4840">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightThighVtx" Count="45" Offset="0x4A90">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaTorsoVtx" Count="46" Offset="0x4D60">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gIlyaChestDL" Offset="0x5040"/>
+        <DList Name="gIlyaRightShoulderDL" Offset="0x5D60"/>
+        <DList Name="gIlyaRightArmDL" Offset="0x6048"/>
+        <DList Name="gIlyaLeftShoulderDL" Offset="0x6200"/>
+        <DList Name="gIlyaLeftArmDL" Offset="0x64E8"/>
+        <DList Name="gIlyaTorsoDL" Offset="0x6720"/>
+        <DList Name="gIlyaRightThighDL" Offset="0x6880"/>
+        <DList Name="gIlyaRightLegDL" Offset="0x69E8"/>
+        <DList Name="gIlyaLeftThighDL" Offset="0x6BB8"/>
+        <DList Name="gIlyaLeftLegDL" Offset="0x6D70"/>
+        <Texture Name="gIlyaEyesTLUT" Format="rgba16" Width="16" Height="16" Offset="0x6F40"/>
+        <Texture Name="object_im_TLUT_007140" Format="rgba16" Width="26" Height="4" Offset="0x7140"/>
+        <Texture Name="gIlyaEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x7210" TlutOffset="0x6F40"/>
+        <Texture Name="gIlyaEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x7D50" TlutOffset="0x6F40"/>
+        <Texture Name="gIlyaEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x8150" TlutOffset="0x6F40"/>
+
+        <Texture Name="gIlyaEarTex" Format="ci8" Width="16" Height="16" Offset="0x7610" TlutOffset="0x7140"/> <!-- Also used in gIlyaHandPointingDL DList -->
+        <Array Name="gIlyaHeadUnmaskedVtx" Count="306" Offset="0x8550">
+            <Vtx/>
+        </Array>
+        <DList Name="gIlyaHeadUnmaskedDL" Offset="0xBDC0"/>
+        <Texture Name="gIlyaHeadGradientTex" Format="ci8" Width="8" Height="8" Offset="0x7710" TlutOffset="0x7140"/>
+
+        <Texture Name="object_im_Tex_007750" Format="rgba16" Width="8" Height="8" Offset="0x7750"/>
+        <Texture Name="gIlyaHair2Tex" Format="rgba16" Width="16" Height="16" Offset="0x77D0"/>
+        <Texture Name="object_im_Tex_0079D0" Format="ci8" Width="8" Height="8" Offset="0x79D0" TlutOffset="0x7140"/>
+        <Texture Name="gIlyaShoulderPadTopTex" Format="rgba16" Width="8" Height="16" Offset="0x7A10"/>
+        <Texture Name="object_im_Tex_007B10" Format="ci8" Width="8" Height="8" Offset="0x7B10" TlutOffset="0x7140"/>
+        <Texture Name="object_im_Tex_007B50" Format="ci8" Width="16" Height="16" Offset="0x7B50" TlutOffset="0x7140"/>
+        <Texture Name="gIlyaFingers2Tex" Format="ci8" Width="16" Height="16" Offset="0x7C50" TlutOffset="0x7140"/> <!-- Used in the gIlyaHandPointingDL DList -->
+
+        <Array Name="gIlyaHeadMaskedVtx" Count="258" Offset="0x9870">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaLeftFootVtx" Count="33" Offset="0xA890">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaLeftHandVtx" Count="70" Offset="0xAAA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightFootVtx" Count="33" Offset="0xAF00">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaRightHandVtx" Count="70" Offset="0xB110">
+            <Vtx/>
+        </Array>
+        <Array Name="gIlyaHandPointingVtx" Count="133" Offset="0xB570">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gIlyaHeadMaskedDL" Offset="0xD0D8"/>
+        <DList Name="gIlyaLeftFootDL" Offset="0xDDB8"/>
+        <DList Name="gIlyaLeftHandDL" Offset="0xE0F0"/>
+        <DList Name="gIlyaRightFootDL" Offset="0xE5D0"/>
+        <DList Name="gIlyaRightHandDL" Offset="0xE908"/>
+        <DList Name="gIlyaHandPointingDL" Offset="0xEDE8"/>
+        <Limb Name="gIlyaRootLimb" LimbType="Standard" EnumName="ILYA_LIMB_ROOT" Offset="0xF688"/>
+        <Limb Name="gIlyaTorsoLimb" LimbType="Standard" EnumName="ILYA_LIMB_TORSO" Offset="0xF694"/>
+        <Limb Name="gIlyaLeftThighLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_THIGH" Offset="0xF6A0"/>
+        <Limb Name="gIlyaLeftLegLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_LEG" Offset="0xF6AC"/>
+        <Limb Name="gIlyaLeftFootLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_FOOT" Offset="0xF6B8"/>
+        <Limb Name="gIlyaRightThighLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_THIGH" Offset="0xF6C4"/>
+        <Limb Name="gIlyaRightLegLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_LEG" Offset="0xF6D0"/>
+        <Limb Name="gIlyaRightFootLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_FOOT" Offset="0xF6DC"/>
+        <Limb Name="gIlyaChestLimb" LimbType="Standard" EnumName="ILYA_LIMB_CHEST" Offset="0xF6E8"/>
+        <Limb Name="gIlyaLeftShoulderLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_SHOULDER" Offset="0xF6F4"/>
+        <Limb Name="gIlyaLeftArmLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_ARM" Offset="0xF700"/>
+        <Limb Name="gIlyaLeftHandLimb" LimbType="Standard" EnumName="ILYA_LIMB_LEFT_HAND" Offset="0xF70C"/>
+        <Limb Name="gIlyaRightShoulderLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_SHOULDER" Offset="0xF718"/>
+        <Limb Name="gIlyaRightArmLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_ARM" Offset="0xF724"/>
+        <Limb Name="gIlyaRightHandLimb" LimbType="Standard" EnumName="ILYA_LIMB_RIGHT_HAND" Offset="0xF730"/>
+        <Limb Name="gIlyaHeadLimb" LimbType="Standard" EnumName="ILYA_LIMB_HEAD" Offset="0xF73C"/>
+        <Skeleton Name="gIlyaSkel" Type="Flex" LimbType="Standard" LimbNone="ILYA_LIMB_NONE" LimbMax="ILYA_LIMB_MAX" EnumName="IlyaLimb" Offset="0xF788"/>
+        <Animation Name="object_im_Anim_00FB10" Offset="0xFB10"/>
+        <Animation Name="object_im_Anim_0101C8" Offset="0x101C8"/>
+        <Animation Name="gIlyaStartWhistlingAnim" Offset="0x10EE0"/>
+        <Animation Name="gIlyaWhistlingAnim" Offset="0x1182C"/>
+        <Animation Name="gIlyaPrepareSealVarkonAnim" Offset="0x11C08"/>
+        <Animation Name="gIlyaSealVarkonAnim" Offset="0x12218"/>
+    </File>
+</Root>

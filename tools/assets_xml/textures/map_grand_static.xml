@@ -1,0 +1,28 @@
+<Root>
+     <File Name="map_grand_static" Segment="11">
+        <Texture Name="gEldoraFieldMinimapTex" Format="ia4" Width="80" Height="73" Offset="0x0"/>
+        <Texture Name="gOakridgeVillageMinimapTex" Format="ia4" Width="80" Height="64" Offset="0xB68"/>
+        <Texture Name="gGraveyardMinimapTex" Format="ia4" Width="80" Height="39" Offset="0x1568"/>
+        <Texture Name="gNerisRiverMinimapTex" Format="ia4" Width="96" Height="58" Offset="0x1B80"/>
+        <Texture Name="gSylvanForestMinimapTex" Format="ia4" Width="96" Height="62" Offset="0x2660"/>
+        <Texture Name="gSacredMeadowMinimapTex" Format="ia4" Width="48" Height="85" Offset="0x3200"/>
+        <Texture Name="gLakeEldenMinimapTex" Format="ia4" Width="80" Height="81" Offset="0x39F8"/>
+        <Texture Name="gNerisDomainMinimapTex" Format="ia4" Width="64" Height="73" Offset="0x46A0"/>
+        <Texture Name="gNerisFountainMinimapTex" Format="ia4" Width="64" Height="65" Offset="0x4FC0"/>
+        <Texture Name="gDuneanValleyMinimapTex" Format="ia4" Width="80" Height="65" Offset="0x57E0"/>
+        <Texture Name="gWhisperingSandsMinimapTex" Format="ia4" Width="64" Height="56" Offset="0x6208"/>
+        <Texture Name="gDesertSentinelMinimapTex" Format="ia4" Width="64" Height="59" Offset="0x6908"/>
+        <Texture Name="gDuneansFortessMinimapTex" Format="ia4" Width="80" Height="85" Offset="0x7068"/>
+        <Texture Name="gWanderingWoodsMinimapTex" Format="ia4" Width="64" Height="56" Offset="0x7DB0"/>
+        <Texture Name="gEldoraCastleAreaMinimapTex" Format="ia4" Width="64" Height="59" Offset="0x84B0"/>
+        <Texture Name="gCinderMountainTrailMinimapTex" Format="ia4" Width="48" Height="85" Offset="0x8C10"/>
+        <Texture Name="gCinderMountainCraterMinimapTex" Format="ia4" Width="80" Height="78" Offset="0x9408"/>
+        <Texture Name="gCairnCityMinimapTex" Format="ia4" Width="64" Height="72" Offset="0xA038"/>
+        <Texture Name="gSunmeadRanchMinimapTex" Format="ia4" Width="64" Height="68" Offset="0xA938"/>
+        <Texture Name="gOutsideVarkonsCastleMinimapTex" Format="ia4" Width="64" Height="59" Offset="0xB1B8"/>
+        <Texture Name="gExploredShadowGraveyardMinimapTex" Format="ia4" Width="80" Height="39" Offset="0xB918"/>
+        <Texture Name="gDrainedLakeEldenMinimapTex" Format="ia4" Width="80" Height="81" Offset="0xBF30"/>
+        <Texture Name="gDuneanValleyWithBrokenBridgeMinimapTex" Format="ia4" Width="80" Height="65" Offset="0xCBD8"/>
+        <Texture Name="gDuneansFortressMinimapTex" Format="ia4" Width="80" Height="85" Offset="0xD600"/>
+     </File>
+</Root>

@@ -1,0 +1,80 @@
+<Root>
+     <File Name="map_name_static" Segment="11">
+
+        <!-- Place names for each world map point -->
+
+        <Texture Name="gWhisperingSandsPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x0"/>
+        <Texture Name="gDuneansFortressPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x400"/>
+        <Texture Name="gDuneanValleyPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x800"/>
+        <Texture Name="gEldenLakesidePointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0xC00"/>
+        <Texture Name="gSunmeadRanchPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x1000"/>
+        <Texture Name="gMarketPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x1400"/>
+        <Texture Name="gEldoraFieldPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x1800"/>
+        <Texture Name="gCinderMountainPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x1C00"/>
+        <Texture Name="gOakridgeVillagePointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x2000"/>
+        <Texture Name="gWanderingWoodsPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x2400"/>
+        <Texture Name="gSylvanForestPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x2800"/>
+        <Texture Name="gNerisDomainPointNameJPNTex" Format="ia4" Width="128" Height="16" Offset="0x2C00"/>
+
+        <Texture Name="gWhisperingSandsPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x3000"/>
+        <Texture Name="gDuneansFortressPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x3400"/>
+        <Texture Name="gDuneanValleyPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x3800"/>
+        <Texture Name="gEldenLakesidePointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x3C00"/>
+        <Texture Name="gSunmeadRanchPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x4000"/>
+        <Texture Name="gMarketPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x4400"/>
+        <Texture Name="gEldoraFieldPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x4800"/>
+        <Texture Name="gCinderMountainPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x4C00"/>
+        <Texture Name="gOakridgeVillagePointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x5000"/>
+        <Texture Name="gWanderingWoodsPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x5400"/>
+        <Texture Name="gSylvanForestPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x5800"/>
+        <Texture Name="gNerisDomainPointNameENGTex" Format="ia4" Width="128" Height="16" Offset="0x5C00"/>
+
+        <!-- Place names for each world map area -->
+
+        <Texture Name="gEldoraFieldPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x6000"/>
+        <Texture Name="gOakridgeVillagePositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x6A00"/>
+        <Texture Name="gGraveyardPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x7400"/>
+        <Texture Name="gNerisRiverPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x7E00"/>
+        <Texture Name="gSylvanForestPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x8800"/>
+        <Texture Name="gAncientGrovePositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x9200"/>
+        <Texture Name="gLakeEldenPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x9C00"/>
+        <Texture Name="gNerisDomainPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xA600"/>
+        <Texture Name="gNerisFountainPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xB000"/>
+        <Texture Name="gDuneanValleyPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xBA00"/>
+        <Texture Name="gWanderingWoodsPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xC400"/>
+        <Texture Name="gDesertSentinelPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xCE00"/>
+        <Texture Name="gDuneansFortressPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xD800"/>
+        <Texture Name="gWhisperingSandsPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xE200"/>
+        <Texture Name="gMarketPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xEC00"/>
+        <Texture Name="gEldoraCastlePositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0xF600"/>
+        <Texture Name="gCinderMountainTrailPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x10000"/>
+        <Texture Name="gCinderMountainCraterPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x10A00"/>
+        <Texture Name="gCairnCityPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x11400"/>
+        <Texture Name="gSunmeadRanchPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x11E00"/>
+        <Texture Name="gQuestionMarkPositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x12800"/>
+        <Texture Name="gVarkonsCastlePositionNameJPNTex" Format="ia8" Width="80" Height="32" Offset="0x13200"/>
+
+        <Texture Name="gEldoraFieldPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x13C00"/>
+        <Texture Name="gOakridgeVillagePositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x14600"/>
+        <Texture Name="gGraveyardPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x15000"/>
+        <Texture Name="gNerisRiverPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x15A00"/>
+        <Texture Name="gSylvanForestPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x16400"/>
+        <Texture Name="gAncientGrovePositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x16E00"/>
+        <Texture Name="gLakeEldenPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x17800"/>
+        <Texture Name="gNerisDomainPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x18200"/>
+        <Texture Name="gNerisFountainPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x18C00"/>
+        <Texture Name="gDuneanValleyPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x19600"/>
+        <Texture Name="gWanderingWoodsPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1A000"/>
+        <Texture Name="gDesertSentinelPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1AA00"/>
+        <Texture Name="gDuneansFortressPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1B400"/>
+        <Texture Name="gWhisperingSandsPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1BE00"/>
+        <Texture Name="gMarketPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1C800"/>
+        <Texture Name="gEldoraCastlePositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1D200"/>
+        <Texture Name="gCinderMountainTrailPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1DC00"/>
+        <Texture Name="gCinderMountainCraterPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1E600"/>
+        <Texture Name="gCairnCityPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1F000"/>
+        <Texture Name="gSunmeadRanchPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x1FA00"/>
+        <Texture Name="gQuestionMarkPositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x20400"/>
+        <Texture Name="gVarkonsCastlePositionNameENGTex" Format="ia8" Width="80" Height="32" Offset="0x20E00"/>
+     </File>
+</Root>

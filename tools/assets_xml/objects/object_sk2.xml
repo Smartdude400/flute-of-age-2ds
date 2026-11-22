@@ -1,0 +1,204 @@
+﻿<Root>
+    <File Name="object_sk2" Segment="6">
+        <!-- Bonekin Vertices -->
+        <Array Name="gBonekinSkullVtx" Count="114" Offset="0x3180">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinUpperCoreVtx" Count="8" Offset="0x38A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightUpperArmVtx" Count="17" Offset="0x3920">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLowerCoreVtx" Count="8" Offset="0x3A30">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightThighVtx" Count="8" Offset="0x3AB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightHandVtx" Count="16" Offset="0x3B30">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinChestVtx" Count="23" Offset="0x3C30">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinJawVtx" Count="31" Offset="0x3DA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinUpperNeckVtx" Count="6" Offset="0x3F90">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLowerNeckVtx" Count="7" Offset="0x3FF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinShieldVtx" Count="32" Offset="0x4060">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinWaistVtx" Count="23" Offset="0x4260">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightLowerLegVtx" Count="25" Offset="0x43D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightForearmVtx" Count="20" Offset="0x4560">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightFootVtx" Count="17" Offset="0x46A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinRightShoulderArmorVtx" Count="19" Offset="0x47B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftUpperArmVtx" Count="17" Offset="0x48E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftShoulderArmorVtx" Count="19" Offset="0x49F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftFootVtx" Count="17" Offset="0x4B20">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftForearmVtx" Count="20" Offset="0x4C30">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftLowerLegVtx" Count="25" Offset="0x4D70">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftThighVtx" Count="8" Offset="0x4F00">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinLeftHandVtx" Count="16" Offset="0x4F80">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonekinSwordVtx" Count="53" Offset="0x5080">
+            <Vtx/>
+        </Array>
+
+        <!-- Bonekin DLists -->
+        <DList Name="gBonekinSkullDL" Offset="0x53D0"/>
+        <DList Name="gBonekinUpperCoreDL" Offset="0x5720"/>
+        <DList Name="gBonekinRightUpperArmDL" Offset="0x57B8"/>
+        <DList Name="gBonekinLowerCoreDL" Offset="0x5890"/>
+        <DList Name="gBonekinRightThighDL" Offset="0x5970"/>
+        <DList Name="gBonekinRightHandDL" Offset="0x5A18"/>
+        <DList Name="gBonekinChestDL" Offset="0x5AD8"/>
+        <DList Name="gBonekinJawDL" Offset="0x5B90"/>
+        <DList Name="gBonekinUpperNeckDL" Offset="0x5C78"/>
+        <DList Name="gBonekinLowerNeckDL" Offset="0x5D08"/>
+        <DList Name="gBonekinShieldDL" Offset="0x5DA0"/>
+        <DList Name="gBonekinWaistDL" Offset="0x5EA0"/>
+        <DList Name="gBonekinRightLowerLegDL" Offset="0x5FA8"/>
+        <DList Name="gBonekinRightForearmDL" Offset="0x6110"/>
+        <DList Name="gBonekinRightFootDL" Offset="0x6208"/>
+        <DList Name="gBonekinRightShoulderArmorDL" Offset="0x6308"/>
+        <DList Name="gBonekinLeftUpperArmDL" Offset="0x63D8"/>
+        <DList Name="gBonekinLeftShoulderArmorDL" Offset="0x64B0"/>
+        <DList Name="gBonekinLeftFootDL" Offset="0x6580"/>
+        <DList Name="gBonekinLeftForearmDL" Offset="0x6680"/>
+        <DList Name="gBonekinLeftLowerLegDL" Offset="0x6778"/>
+        <DList Name="gBonekinLeftThighDL" Offset="0x68E0"/>
+        <DList Name="gBonekinLeftHandDL" Offset="0x6988"/>
+        <DList Name="gBonekinSwordDL" Offset="0x6A48"/>
+
+        <!-- Bonekin textures -->
+        <Texture Name="gBonekinEyeSocketTex" Format="rgba16" Width="16" Height="16" Offset="0x6BA8"/>
+        <Texture Name="gBonekinEyeTex" Format="rgba16" Width="8" Height="8" Offset="0x6DA8"/>
+        <Texture Name="gBonekinBoneGradientTex" Format="rgba16" Width="4" Height="4" Offset="0x6E28"/>
+        <Texture Name="gBonekinNostrilTex" Format="rgba16" Width="8" Height="8" Offset="0x6E48"/>
+        <Texture Name="gBonekinBoneDetailTex" Format="rgba16" Width="8" Height="8" Offset="0x6EC8"/>
+        <Texture Name="gBonekinRibTex" Format="rgba16" Width="16" Height="16" Offset="0x6F48"/>
+        <Texture Name="gBonekinTrousersSideTex" Format="rgba16" Width="16" Height="16" Offset="0x7148"/>
+        <Texture Name="gBonekinShieldTex" Format="rgba16" Width="16" Height="16" Offset="0x7348"/>
+        <!-- Also used for shoulder armor, helm and sword hilt -->
+        <Texture Name="gBonekinLimbArmorTex" Format="rgba16" Width="16" Height="16" Offset="0x7548"/>
+        <Texture Name="gBonekinArmorBackTex" Format="rgba16" Width="8" Height="8" Offset="0x7748"/>
+        <Texture Name="gBonekinSwordBladeTex" Format="rgba16" Width="4" Height="4" Offset="0x77C8"/>
+        <Texture Name="gBonekinTrousersTopTex" Format="rgba16" Width="8" Height="8" Offset="0x77E8"/>
+
+        <!-- Bonekin limbs and skeleton -->
+        <Limb Name="gBonekinRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ROOT" Offset="0x7868"/>
+        <Limb Name="gBonekinUpperBodyRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_UPPERBODY_ROOT" Offset="0x7874"/>
+        <Limb Name="gBonekinLowerCoreRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_CORE_LOWER_ROOT" Offset="0x7880"/>
+        <Limb Name="gBonekinUpperCoreRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_CORE_UPPER_ROOT" Offset="0x788C"/>
+        <Limb Name="gBonekinLowerNeckRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_NECK_ROOT" Offset="0x7898"/>
+        <Limb Name="gBonekinSkullRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HEAD_ROOT" Offset="0x78A4"/>
+        <Limb Name="gBonekinLimb7Limb" LimbType="Standard" EnumName="BONEKIN_LIMB_7" Offset="0x78B0"/>
+        <Limb Name="gBonekinLimb8Limb" LimbType="Standard" EnumName="BONEKIN_LIMB_8" Offset="0x78BC"/>
+        <Limb Name="gBonekinJawRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_JAW_ROOT" Offset="0x78C8"/>
+        <Limb Name="gBonekinJawLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_JAW" Offset="0x78D4"/>
+        <Limb Name="gBonekinSkullLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HEAD" Offset="0x78E0"/>
+        <Limb Name="gBonekinUpperNeckLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_NECK_UPPER" Offset="0x78EC"/>
+        <Limb Name="gBonekinLowerNeckLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_NECK_LOWER" Offset="0x78F8"/>
+        <Limb Name="gBonekinUpperCoreLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_CORE_UPPER" Offset="0x7904"/>
+        <Limb Name="gBonekinChestLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_CHEST" Offset="0x7910"/>
+        <Limb Name="gBonekinRightShoulderRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_R_ROOT" Offset="0x791C"/>
+        <Limb Name="gBonekinRightShoulderArmorRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_ARMOR_R_ROOT" Offset="0x7928"/>
+        <Limb Name="gBonekinRightShoulderArmorLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_ARMOR_R" Offset="0x7934"/>
+        <Limb Name="gBonekinLeftShoulderRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_L_ROOT" Offset="0x7940"/>
+        <Limb Name="gBonekinLeftShoulderArmorRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_ARMOR_L_ROOT" Offset="0x794C"/>
+        <Limb Name="gBonekinLeftShoulderArmorLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHOULDER_ARMOR_L" Offset="0x7958"/>
+        <Limb Name="gBonekinLeftArmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ARM_L_ROOT" Offset="0x7964"/>
+        <Limb Name="gBonekinLeftUpperArmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_UPPERARM_L_ROOT" Offset="0x7970"/>
+        <Limb Name="gBonekinLeftForearmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOREARM_L_ROOT" Offset="0x797C"/>
+        <Limb Name="gBonekinLeftHandRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HAND_L_ROOT" Offset="0x7988"/>
+        <Limb Name="gBonekinLeftHandLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HAND_L" Offset="0x7994"/>
+        <Limb Name="gBonekinShieldLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SHIELD" Offset="0x79A0"/>
+        <Limb Name="gBonekinLeftForearmLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOREARM_L" Offset="0x79AC"/>
+        <Limb Name="gBonekinLeftUpperArmLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_UPPERARM_L" Offset="0x79B8"/>
+        <Limb Name="gBonekinRightArmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ARM_R_ROOT" Offset="0x79C4"/>
+        <Limb Name="gBonekinRightUpperArmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_UPPERARM_R_ROOT" Offset="0x79D0"/>
+        <Limb Name="gBonekinRightForearmRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOREARM_R_ROOT" Offset="0x79DC"/>
+        <Limb Name="gBonekinRightHandRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HAND_R_ROOT" Offset="0x79E8"/>
+        <Limb Name="gBonekinSwordLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_SWORD" Offset="0x79F4"/>
+        <Limb Name="gBonekinRightHandLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_HAND_R" Offset="0x7A00"/>
+        <Limb Name="gBonekinRightForearmLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOREARM_R" Offset="0x7A0C"/>
+        <Limb Name="gBonekinRightUpperArmLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_UPPERARM_R" Offset="0x7A18"/>
+        <Limb Name="gBonekinLowerCoreLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_CORE_LOWER" Offset="0x7A24"/>
+        <Limb Name="gBonekinLowerBodyRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LOWERBODY_ROOT" Offset="0x7A30"/>
+        <Limb Name="gBonekinWaistRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_WAIST_ROOT" Offset="0x7A3C"/>
+        <Limb Name="gBonekinLegsRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LEGS_ROOT" Offset="0x7A48"/>
+        <Limb Name="gBonekinLeftLegRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LEG_L_ROOT" Offset="0x7A54"/>
+        <Limb Name="gBonekinLeftThighRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_THIGH_L_ROOT" Offset="0x7A60"/>
+        <Limb Name="gBonekinLeftLowerLegRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LOWERLEG_L_ROOT" Offset="0x7A6C"/>
+        <Limb Name="gBonekinLeftAnkleRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ANKLE_L_ROOT" Offset="0x7A78"/>
+        <Limb Name="gBonekinLeftAnkleLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ANKLE_L" Offset="0x7A84"/>
+        <Limb Name="gBonekinLeftFootRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOOT_L_ROOT" Offset="0x7A90"/>
+        <Limb Name="gBonekinLeftFootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOOT_L" Offset="0x7A9C"/>
+        <Limb Name="gBonekinLeftLowerLegLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LOWERLEG_L" Offset="0x7AA8"/>
+        <Limb Name="gBonekinLeftThighLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_THIGH_L" Offset="0x7AB4"/>
+        <Limb Name="gBonekinRightLegRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LEG_R_ROOT" Offset="0x7AC0"/>
+        <Limb Name="gBonekinRightThighRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_THIGH_R_ROOT" Offset="0x7ACC"/>
+        <Limb Name="gBonekinRightLowerLegRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LOWERLEG_R_ROOT" Offset="0x7AD8"/>
+        <Limb Name="gBonekinRightAnkleRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ANKLE_R_ROOT" Offset="0x7AE4"/>
+        <Limb Name="gBonekinRightAnkleLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_ANKLE_R" Offset="0x7AF0"/>
+        <Limb Name="gBonekinRightFootRootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOOT_R_ROOT" Offset="0x7AFC"/>
+        <Limb Name="gBonekinRightFootLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_FOOT_R" Offset="0x7B08"/>
+        <Limb Name="gBonekinRightLowerLegLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_LOWERLEG_R" Offset="0x7B14"/>
+        <Limb Name="gBonekinRightThighLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_THIGH_R" Offset="0x7B20"/>
+        <Limb Name="gBonekinWaistLimb" LimbType="Standard" EnumName="BONEKIN_LIMB_WAIST" Offset="0x7B2C"/>
+        <Skeleton Name="gBonekinSkel" Type="Normal" LimbType="Standard" LimbNone="BONEKIN_LIMB_NONE" LimbMax="BONEKIN_LIMB_MAX" EnumName="BonekinLimb" Offset="0x7C28"/>
+
+        <!-- Bonekin Animations -->
+        <Animation Name="gBonekinFlinchFromHitBehindAnim" Offset="0x444"/>
+        <Animation Name="gBonekinFallOverBackwardsAnim" Offset="0x1420"/>
+        <Animation Name="gBonekinJumpBackwardsAnim" Offset="0x1978"/>
+        <Animation Name="gBonekinBlockWithShieldAnim" Offset="0x1C20"/>
+        <Animation Name="gBonekinStandAttentionAnim" Offset="0x2188"/><!-- Unused -->
+        <Animation Name="gBonekinFastAdvanceAnim" Offset="0x26D4"/>
+        <Animation Name="gBonekinMiddleGuardAnim" Offset="0x316C"/>
+        <Animation Name="gBonekinSlowAdvanceAnim" Offset="0x81B4"/>
+        <Animation Name="gBonekinFlinchFromHitFrontAnim" Offset="0x8604"/>
+        <Animation Name="gBonekinFallOverForwardsAnim" Offset="0x9A90"/>
+        <Animation Name="gBonekinLeapAnim" Offset="0x9E50"/><!-- Unused -->
+        <Animation Name="gBonekinJumpAnim" Offset="0xA324"/>
+        <Animation Name="gBonekinJumpslashAnim" Offset="0xA99C"/>
+        <Animation Name="gBonekinDownSlashAnim" Offset="0xB00C"/>
+        <Animation Name="gBonekinRecoverFromDownSlashAnim" Offset="0xB4E4"/>
+        <Animation Name="gBonekinUpSlashAnim" Offset="0xBE4C"/>
+        <Animation Name="gBonekinLandFromLeapAnim" Offset="0xC438"/>
+        <Animation Name="gBonekinLaughAnim" Offset="0xC8A0"/><!-- Unused -->
+        <Animation Name="gBonekinLookAroundAnim" Offset="0xDCF0"/><!-- Unused -->
+        <Animation Name="gBonekinSidestepAnim" Offset="0xE2B0"/>
+        <Animation Name="gBonekinReleaseAttentionAnim" Offset="0xE7E4"/><!-- Unused -->
+    </File>
+</Root>

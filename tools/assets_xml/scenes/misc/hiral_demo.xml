@@ -1,0 +1,21 @@
+<Root>
+    <File Name="hiral_demo_scene" Segment="2">
+        <Scene Name="hiral_demo_scene" Offset="0x0"/>
+        <Scene Name="hiral_demo_scene_unused1" Offset="0x3580"/>
+        <Scene Name="hiral_demo_scene_unused2" Offset="0x3640"/>
+        <Scene Name="hiral_demo_scene_unused3" Offset="0x3700"/>
+
+        <Cutscene Name="gCutsceneMapSylvanEmeraldPart2Cs" Offset="0x0E50"/> <!-- Varkonos riding the horse -->
+        <Cutscene Name="gCutsceneMapSylvanEmeraldPart3Cs" Offset="0x0100"/> <!-- World creation part 1 -->
+        <Cutscene Name="gCutsceneMapSylvanEmeraldPart8Cs" Offset="0x1260"/> <!-- Dawnseal creation -->
+        <Cutscene Name="gCutsceneMapVarkonosFromDawnbladeCs" Offset="0x1A60"/> <!-- Varkonos cutscene from the Dawnblade -->
+        <Cutscene Name="gCutsceneMapDawnsealVeilbornLegendCs" Offset="0x1F00"/> <!-- The Veilborn legend about the Dawnseal -->
+        <Cutscene Name="gCutsceneMapRootSproutPart2Cs" Offset="0x2310"/> <!-- The Root Tree Sprout's story -->
+        <Cutscene Name="gCutsceneMapTitleVarkonHorseCs" Offset="0x2490"/> <!-- Used for the title screen -->
+        <Cutscene Name="gCutsceneMapThreeGoddessesCs" Offset="0x2890"/> <!-- Elara's story about the Dawnseal -->
+        <Cutscene Name="gCutsceneMapVarkonosDefeatedCs" Offset="0x2FE0"/> <!-- One of the cutscenes before the credits -->
+    </File>
+    <File Name="hiral_demo_room_0" Segment="3">
+        <Room Name="hiral_demo_room_0" Offset="0x0"/>
+    </File>
+</Root>

@@ -1,0 +1,224 @@
+<Root>
+    <File Name="object_tr" Segment="6">
+        <Animation Name="gFrostEmberLookOverRightShoulderAnim" Offset="0xBFC"/>
+        <Animation Name="gFrostEmberLookingOverRightShoulderAnim" Offset="0x13CC"/>
+        <Animation Name="gFrostEmberStandingBroomOverLeftShoulderAnim" Offset="0x1CDC"/>
+        <Animation Name="gFrostEmberLookOverLeftShoulderAnim" Offset="0x2BC4"/>
+        <Animation Name="gFrostEmberLookingOverLeftShoulderAnim" Offset="0x35CC"/>
+        <Animation Name="gFrostEmberStandingBroomOverRightShoulderAnim" Offset="0x3FC8"/>
+        <Animation Name="gFrostEmberFlyAnim" Offset="0x49C8"/>
+        <Animation Name="gFrostEmberStandingBroomOverRightShoulderUnusedAnim" Offset="0x5308"/> <!-- Very similar to gFrostEmberStandingBroomOverRightShoulderAnim but not quite a duplicate -->
+
+        <Array Name="gFrostVtx" Count="288" Offset="0x5320">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gFrostPelvisDL" Offset="0x6520"/>
+        <DList Name="gFrostTorsoDL" Offset="0x66A0"/>
+        <DList Name="gFrostNeckDL" Offset="0x6800"/>
+        <DList Name="gFrostLeftBraidStartDL" Offset="0x6940"/>
+        <DList Name="gFrostLeftBraidEndDL" Offset="0x6A50"/>
+        <DList Name="gFrostRightBraidStartDL" Offset="0x6B48"/>
+        <DList Name="gFrostRightBraidEndDL" Offset="0x6C58"/>
+        <DList Name="gFrostRightSleeveStartDL" Offset="0x6D50"/>
+        <DList Name="gFrostRightSleeveFrontDL" Offset="0x6E70"/>
+        <DList Name="gFrostRightSleeveMidDL" Offset="0x6FF0"/>
+        <DList Name="gFrostRightSleeveEndDL" Offset="0x7118"/>
+        <DList Name="gFrostLeftSleeveStartDL" Offset="0x7238"/>
+        <DList Name="gFrostLeftSleeveFrontDL" Offset="0x7358"/>
+        <DList Name="gFrostLeftSleeveMidDL" Offset="0x74D8"/>
+        <DList Name="gFrostLeftSleeveEndDL" Offset="0x7600"/>
+        <DList Name="gFrostRightThighDL" Offset="0x7720"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gFrostLeftThighDL" Offset="0x7728"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+
+        <Texture Name="gFrostEmberTLUT" Format="rgba16" Width="53" Height="4" Offset="0x7730"/>
+        <Texture Name="gFrostDuneanFabricTex" Format="rgba16" Width="32" Height="32" Offset="0x78D8"/>
+        <Texture Name="gFrostRobeTex" Format="rgba16" Width="16" Height="16" Offset="0x80D8"/>
+        <Texture Name="gFrostEmberRobePatternTex" Format="rgba16" Width="16" Height="16" Offset="0x82D8"/>
+        <Texture Name="gFrostEmberRobeTrimTex" Format="rgba16" Width="16" Height="16" Offset="0x84D8"/>
+        <Texture Name="gFrostEmberEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x86D8" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberSkinTex" Format="ci8" Width="16" Height="8" Offset="0x8AD8" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberMouthTex" Format="ci8" Width="8" Height="8" Offset="0x8B58" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberHairTex" Format="rgba16" Width="8" Height="32" Offset="0x8B98"/>
+        <Texture Name="gFrostEmberEarTex" Format="ci8" Width="8" Height="8" Offset="0x8D98" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberFingerTex" Format="ci8" Width="8" Height="16" Offset="0x8DD8" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberBroomHandleTex" Format="rgba16" Width="8" Height="8" Offset="0x8E58"/>
+        <Texture Name="gFrostEmberBroomHeadTex" Format="rgba16" Width="16" Height="32" Offset="0x8ED8"/>
+        <Texture Name="gFrostEmberJewelHolderTex" Format="rgba16" Width="16" Height="8" Offset="0x92D8"/>
+        <Texture Name="gFrostJewelTex" Format="rgba16" Width="8" Height="8" Offset="0x93D8"/>
+        <Texture Name="gFrostEmberNeckTex" Format="ci8" Width="8" Height="8" Offset="0x9458" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberNostrilsTex" Format="ci8" Width="8" Height="8" Offset="0x9498" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x94D8" TlutOffset="0x7730"/>
+        <Texture Name="gFrostEmberEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x98D8" TlutOffset="0x7730"/>
+
+        <Array Name="gFrostHeadVtx" Count="159" Offset="0x9CD8">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostTeethVtx" Count="9" Offset="0xA6C8">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostRightShinVtx" Count="7" Offset="0xA758">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostLeftShinVtx" Count="7" Offset="0xA7C8">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostBroomVtx" Count="48" Offset="0xA838">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostRightFootVtx" Count="4" Offset="0xAB38">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostLeftFootVtx" Count="4" Offset="0xAB78">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostRightHandVtx" Count="28" Offset="0xABB8">
+            <Vtx/>
+        </Array>
+        <Array Name="gFrostLeftHandVtx" Count="28" Offset="0xAD78">
+            <Vtx/>
+        </Array>
+        <DList Name="gFrostHeadDL" Offset="0xAF38"/>
+        <DList Name="gFrostTeethDL" Offset="0xB568"/>
+        <DList Name="gFrostRightShinDL" Offset="0xB5C8"/>
+        <DList Name="gFrostLeftShinDL" Offset="0xB678"/>
+        <DList Name="gFrostBroomDL" Offset="0xB728"/>
+        <DList Name="gFrostRightFootDL" Offset="0xB8D0"/>
+        <DList Name="gFrostLeftFootDL" Offset="0xB968"/>
+        <DList Name="gFrostRightHandDL" Offset="0xBA00"/>
+        <DList Name="gFrostLeftHandDL" Offset="0xBB68"/>
+
+        <Texture Name="gFrostEmberBraidEndTex" Format="rgba16" Width="8" Height="8" Offset="0xBCD0"/>
+
+        <Blob Name="object_tr_Blob_00BD50" Size="0x580" Offset="0xBD50"/>
+
+        <Texture Name="gFrostCollarNeckTex" Format="rgba16" Width="4" Height="8" Offset="0xC2D0"/>
+
+        <Blob Name="object_tr_Blob_00C310" Size="0x80" Offset="0xC310"/>
+
+        <Limb Name="gFrostPelvisLimb" LimbType="Standard" Offset="0xC390"/>
+        <Limb Name="gFrostLeftThighLimb" LimbType="Standard" Offset="0xC39C"/>
+        <Limb Name="gFrostLeftShinLimb" LimbType="Standard" Offset="0xC3A8"/>
+        <Limb Name="gFrostLeftFootLimb" LimbType="Standard" Offset="0xC3B4"/>
+        <Limb Name="gFrostRightThighLimb" LimbType="Standard" Offset="0xC3C0"/>
+        <Limb Name="gFrostRightShinLimb" LimbType="Standard" Offset="0xC3CC"/>
+        <Limb Name="gFrostRightFootLimb" LimbType="Standard" Offset="0xC3D8"/>
+        <Limb Name="gFrostTorsoLimb" LimbType="Standard" Offset="0xC3E4"/>
+        <Limb Name="gFrostLeftSleeveStartLimb" LimbType="Standard" Offset="0xC3F0"/>
+        <Limb Name="gFrostLeftSleeveMidLimb" LimbType="Standard" Offset="0xC3FC"/>
+        <Limb Name="gFrostLeftSleeveEndLimb" LimbType="Standard" Offset="0xC408"/>
+        <Limb Name="gFrostLeftSleeveFrontLimb" LimbType="Standard" Offset="0xC414"/>
+        <Limb Name="gFrostLeftHandLimb" LimbType="Standard" Offset="0xC420"/>
+        <Limb Name="gFrostBroomLimb" LimbType="Standard" Offset="0xC42C"/>
+        <Limb Name="gFrostRightSleeveStartLimb" LimbType="Standard" Offset="0xC438"/>
+        <Limb Name="gFrostRightSleeveMidLimb" LimbType="Standard" Offset="0xC444"/>
+        <Limb Name="gFrostRightSleeveEndLimb" LimbType="Standard" Offset="0xC450"/>
+        <Limb Name="gFrostRightSleeveFrontLimb" LimbType="Standard" Offset="0xC45C"/>
+        <Limb Name="gFrostRightHandLimb" LimbType="Standard" Offset="0xC468"/>
+        <Limb Name="gFrostNeckLimb" LimbType="Standard" Offset="0xC474"/>
+        <Limb Name="gFrostHeadLimb" LimbType="Standard" Offset="0xC480"/>
+        <Limb Name="gFrostRightBraidStartLimb" LimbType="Standard" Offset="0xC48C"/>
+        <Limb Name="gFrostRightBraidEndLimb" LimbType="Standard" Offset="0xC498"/>
+        <Limb Name="gFrostTeethLimb" LimbType="Standard" Offset="0xC4A4"/>
+        <Limb Name="gFrostLeftBraidStartLimb" LimbType="Standard" Offset="0xC4B0"/>
+        <Limb Name="gFrostLeftBraidEndLimb" LimbType="Standard" Offset="0xC4BC"/>
+        <Skeleton Name="gFrostSkel" Type="Flex" LimbType="Standard" Offset="0xC530"/>
+
+        <Animation Name="gFrostEmberTPoseAnim" Offset="0xC60C"/>
+
+        <Array Name="gEmberVtx" Count="288" Offset="0xC620">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gEmberPelvisDL" Offset="0xD820"/>
+        <DList Name="gEmberTorsoDL" Offset="0xD9A0"/>
+        <DList Name="gEmberNeckDL" Offset="0xDB00"/>
+        <DList Name="gEmberLeftBraidStartDL" Offset="0xDC40"/>
+        <DList Name="gEmberLeftBraidEndDL" Offset="0xDD50"/>
+        <DList Name="gEmberRightBraidStartDL" Offset="0xDE48"/>
+        <DList Name="gEmberRightBraidEndDL" Offset="0xDF58"/>
+        <DList Name="gEmberRightSleeveStartDL" Offset="0xE050"/>
+        <DList Name="gEmberRightSleeveFrontDL" Offset="0xE170"/>
+        <DList Name="gEmberRightSleeveMidDL" Offset="0xE2F0"/>
+        <DList Name="gEmberRightSleeveEndDL" Offset="0xE418"/>
+        <DList Name="gEmberLeftSleeveStartDL" Offset="0xE538"/>
+        <DList Name="gEmberLeftSleeveFrontDL" Offset="0xE658"/>
+        <DList Name="gEmberLeftSleeveMidDL" Offset="0xE7D8"/>
+        <DList Name="gEmberLeftSleeveEndDL" Offset="0xE900"/>
+        <DList Name="gEmberRightThighDL" Offset="0xEA20"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+        <DList Name="gEmberLeftThighDL" Offset="0xEA28"/> <!-- Renders a single triangle instead of a normal-looking limb -->
+
+        <Texture Name="gEmberDuneanFabricTex" Format="rgba16" Width="32" Height="32" Offset="0xEA30"/>
+        <Texture Name="gEmberRobeTex" Format="rgba16" Width="16" Height="16" Offset="0xF230"/>
+        <Texture Name="gEmberJewelTex" Format="rgba16" Width="8" Height="8" Offset="0xF430"/>
+
+        <Array Name="gEmberHeadVtx" Count="159" Offset="0xF4B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberTeethVtx" Count="9" Offset="0xFEA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberRightShinVtx" Count="7" Offset="0xFF30">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberLeftShinVtx" Count="7" Offset="0xFFA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberBroomVtx" Count="48" Offset="0x10010">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberRightFootVtx" Count="4" Offset="0x10310">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberLeftFootVtx" Count="4" Offset="0x10350">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberRightHandVtx" Count="28" Offset="0x10390">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberLeftHandVtx" Count="28" Offset="0x10550">
+            <Vtx/>
+        </Array>
+        <DList Name="gEmberHeadDL" Offset="0x10710"/>
+        <DList Name="gEmberTeethDL" Offset="0x10D40"/>
+        <DList Name="gEmberRightShinDL" Offset="0x10DA0"/>
+        <DList Name="gEmberLeftShinDL" Offset="0x10E50"/>
+        <DList Name="gEmberBroomDL" Offset="0x10F00"/>
+        <DList Name="gEmberRightFootDL" Offset="0x110A8"/>
+        <DList Name="gEmberLeftFootDL" Offset="0x11140"/>
+        <DList Name="gEmberRightHandDL" Offset="0x111D8"/>
+        <DList Name="gEmberLeftHandDL" Offset="0x11340"/>
+
+        <Texture Name="gEmberCollarNeckTex" Format="rgba16" Width="4" Height="8" Offset="0x114A8"/>
+
+        <Limb Name="gEmberPelvisLimb" LimbType="Standard" Offset="0x114E8"/>
+        <Limb Name="gEmberLeftThighLimb" LimbType="Standard" Offset="0x114F4"/>
+        <Limb Name="gEmberLeftShinLimb" LimbType="Standard" Offset="0x11500"/>
+        <Limb Name="gEmberLeftFootLimb" LimbType="Standard" Offset="0x1150C"/>
+        <Limb Name="gEmberRightThighLimb" LimbType="Standard" Offset="0x11518"/>
+        <Limb Name="gEmberRightShinLimb" LimbType="Standard" Offset="0x11524"/>
+        <Limb Name="gEmberRightFootLimb" LimbType="Standard" Offset="0x11530"/>
+        <Limb Name="gEmberTorsoLimb" LimbType="Standard" Offset="0x1153C"/>
+        <Limb Name="gEmberLeftSleeveStartLimb" LimbType="Standard" Offset="0x11548"/>
+        <Limb Name="gEmberLeftSleeveMidLimb" LimbType="Standard" Offset="0x11554"/>
+        <Limb Name="gEmberLeftSleeveEndLimb" LimbType="Standard" Offset="0x11560"/>
+        <Limb Name="gEmberLeftSleeveFrontLimb" LimbType="Standard" Offset="0x1156C"/>
+        <Limb Name="gEmberLeftHandLimb" LimbType="Standard" Offset="0x11578"/>
+        <Limb Name="gEmberBroomLimb" LimbType="Standard" Offset="0x11584"/>
+        <Limb Name="gEmberRightSleeveStartLimb" LimbType="Standard" Offset="0x11590"/>
+        <Limb Name="gEmberRightSleeveMidLimb" LimbType="Standard" Offset="0x1159C"/>
+        <Limb Name="gEmberRightSleeveEndLimb" LimbType="Standard" Offset="0x115A8"/>
+        <Limb Name="gEmberRightSleeveFrontLimb" LimbType="Standard" Offset="0x115B4"/>
+        <Limb Name="gEmberRightHandLimb" LimbType="Standard" Offset="0x115C0"/>
+        <Limb Name="gEmberNeckLimb" LimbType="Standard" Offset="0x115CC"/>
+        <Limb Name="gEmberHeadLimb" LimbType="Standard" Offset="0x115D8"/>
+        <Limb Name="gEmberRightBraidStartLimb" LimbType="Standard" Offset="0x115E4"/>
+        <Limb Name="gEmberRightBraidEndLimb" LimbType="Standard" Offset="0x115F0"/>
+        <Limb Name="gEmberTeethLimb" LimbType="Standard" Offset="0x115FC"/>
+        <Limb Name="gEmberLeftBraidStartLimb" LimbType="Standard" Offset="0x11608"/>
+        <Limb Name="gEmberLeftBraidEndLimb" LimbType="Standard" Offset="0x11614"/>
+        <Skeleton Name="gEmberSkel" Type="Flex" LimbType="Standard" Offset="0x11688"/>
+
+        <Animation Name="gFrostEmberCastMagicAnim" Offset="0x12E1C"/>
+    </File>
+</Root>

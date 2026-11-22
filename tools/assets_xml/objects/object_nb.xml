@@ -1,0 +1,150 @@
+<Root>
+    <File Name="object_nb" Segment="6">
+        <Animation Name="gSorayneJoinHandsAnim" Offset="0x410"/>
+        <Animation Name="gSorayneSittingAnim" Offset="0xBC0"/>
+        <Animation Name="gSoraynePortalRaiseArmAnim" Offset="0x1104"/>
+        <Animation Name="gSoraynePortalArmRaisedAnim" Offset="0x1350"/>
+        <Animation Name="gSoraynePortalHandsOnGroundAnim" Offset="0x1E7C"/>
+        <Animation Name="gSorayneRaiseArmsAnim" Offset="0x274C"/>
+        <Animation Name="gSorayneArmsRaisedAnim" Offset="0x2B4C"/>
+        <Animation Name="gSorayneKneelingLookRightToLeftAnim" Offset="0x2DBC"/>
+        <Animation Name="gSorayneKneelingLookLeftAnim" Offset="0x35A8"/>
+        <Animation Name="gSorayneOnAllFoursToKneelingAnim" Offset="0x3954"/>
+        <Animation Name="gSorayneKneelingLookRightAnim" Offset="0x4030"/>
+        <Animation Name="gSorayneOnAllFoursAnim" Offset="0x46A8"/>
+        <Animation Name="gSorayneHandsOnHipsAnim" Offset="0x4BB4"/>
+        <Animation Name="gSorayneHandsOnHipsToWalkAnim" Offset="0x4E60"/>
+        <Animation Name="gSorayneSittingLookRightAnim" Offset="0x5614"/>
+        <Animation Name="gSorayneSittingToSittingLookRightAnim" Offset="0x5CA4"/>
+        <Animation Name="gSorayneRunAndGetHitAnim" Offset="0x6320"/>
+        <Animation Name="gSorayneKneelingBackwardsToHandsOnHipsAnim" Offset="0x676C"/>
+        <Animation Name="gSorayneKneelingBackwardsAnim" Offset="0x6E78"/>
+        <Animation Name="gSorayneFallOnAllFoursAnim" Offset="0x8BD0"/>
+        <Animation Name="gSorayneWalkAnim" Offset="0x9238"/>
+        <Animation Name="gSorayneHandsOnHipsLookDownAnim" Offset="0x9694"/>
+        <Texture Name="gSorayne1TLUT" Format="rgba16" Width="16" Height="16" Offset="0x96B0"/>
+        <Texture Name="gSorayneGloveForearmTex" Format="ci8" Width="16" Height="16" Offset="0x98B0" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneSkinTex" Format="ci8" Width="8" Height="8" Offset="0x99B0" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneBellyTex" Format="ci8" Width="16" Height="16" Offset="0x99F0" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneJewelryTex" Format="ci8" Width="32" Height="32" Offset="0x9AF0" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneCleavageTex" Format="ci8" Width="8" Height="8" Offset="0x9EF0" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneTopClothTex" Format="rgba16" Width="16" Height="16" Offset="0x9F30"/>
+        <Texture Name="gSorayneAnkleJewelryTex" Format="ci8" Width="16" Height="16" Offset="0xA130" TlutOffset="0x096B0"/>
+        <Texture Name="gSoraynePantsShadedTex" Format="ci8" Width="8" Height="8" Offset="0xA230" TlutOffset="0x096B0"/>
+        <Texture Name="gSoraynePantsUpperTex" Format="ci8" Width="16" Height="16" Offset="0xA270" TlutOffset="0x096B0"/>
+        <Texture Name="gSoraynePantsLowerTex" Format="rgba16" Width="16" Height="16" Offset="0xA370"/>
+        <Texture Name="gSorayneBeltJewelTex" Format="ci8" Width="16" Height="16" Offset="0xA570" TlutOffset="0x096B0"/>
+        <Texture Name="gSorayneBeltTex" Format="rgba16" Width="32" Height="32" Offset="0xA670"/>
+        <Texture Name="gSorayne2TLUT" Format="rgba16" Width="4" Height="59" Offset="0xAE70"/>
+        <Texture Name="gSorayneEyeTLUT" Format="rgba16" Width="16" Height="16" Offset="0xB048"/>
+        <Texture Name="gSorayneFaceSkinTex" Format="ci8" Width="8" Height="8" Offset="0xB248" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneNoseBridgeJewelryTex" Format="ci8" Width="8" Height="4" Offset="0xB288" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneNoseTopJewelryTex" Format="ci8" Width="8" Height="16" Offset="0xB2A8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneNoseSideJewelryTex" Format="ci8" Width="16" Height="16" Offset="0xB328" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0xB428" TlutOffset="0x0B048"/>
+        <Texture Name="gSorayneHairTex" Format="ci8" Width="16" Height="16" Offset="0xB828" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneForeheadJewelryTex" Format="ci8" Width="16" Height="16" Offset="0xB928" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneEarTex" Format="ci8" Width="8" Height="16" Offset="0xBA28" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneFingersTopTex" Format="ci8" Width="32" Height="32" Offset="0xBAA8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneGoldJewelryTex" Format="rgba16" Width="32" Height="32" Offset="0xBEA8"/>
+        <Texture Name="gSorayneHairJewelryTex" Format="ci8" Width="32" Height="32" Offset="0xC6A8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneGloveHandTopTex" Format="ci8" Width="16" Height="16" Offset="0xCAA8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneGloveHandPalmTex" Format="ci8" Width="8" Height="8" Offset="0xCBA8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneShoeSideTex" Format="ci8" Width="8" Height="8" Offset="0xCBE8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneShoeSoleTex" Format="ci8" Width="8" Height="8" Offset="0xCC28" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneShoeTopTex" Format="ci8" Width="8" Height="16" Offset="0xCC68" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneFingersPalmTex" Format="ci8" Width="32" Height="32" Offset="0xCCE8" TlutOffset="0x0AE70"/>
+        <Texture Name="gSorayneEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0xD0E8" TlutOffset="0x0B048"/>
+        <Texture Name="gSorayneEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0xD4E8" TlutOffset="0x0B048"/>
+        <Texture Name="gSorayneEyeWideOpenTex" Format="ci8" Width="32" Height="32" Offset="0xD8E8" TlutOffset="0x0B048"/>
+        <Texture Name="gSorayneLipsTex" Format="rgba16" Width="8" Height="8" Offset="0xDCE8"/>
+        <Array Name="gSorayneHeadVtx" Count="297" Offset="0xDD68">
+            <Vtx/>
+        </Array>
+        <Array Name="gSoraynePonytailVtx" Count="49" Offset="0xF1E8">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftHandVtx" Count="64" Offset="0xF4F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneRightHandVtx" Count="64" Offset="0xF8F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneRightFootVtx" Count="32" Offset="0xFCF8">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftFootVtx" Count="32" Offset="0xFEF8">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneHeadMouthOpenVtx" Count="315" Offset="0x100F8">
+            <Vtx/>
+        </Array>
+        <DList Name="gSorayneHeadDL" Offset="0x114A8"/>
+        <DList Name="gSorayneEmptyDL" Offset="0x125A0"/>
+        <DList Name="gSoraynePonytailDL" Offset="0x125A8"/>
+        <DList Name="gSorayneLeftHandDL" Offset="0x126B8"/>
+        <DList Name="gSorayneRightHandDL" Offset="0x12A00"/>
+        <DList Name="gSorayneRightFootDL" Offset="0x12D48"/>
+        <DList Name="gSorayneLeftFootDL" Offset="0x12F50"/>
+        <DList Name="gSorayneHeadMouthOpenDL" Offset="0x13158"/>
+        <Array Name="gSorayneRightForearmVtx" Count="32" Offset="0x142F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneRightArmVtx" Count="28" Offset="0x144F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftForearmVtx" Count="32" Offset="0x146B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftArmVtx" Count="44" Offset="0x148B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneTorsoVtx" Count="129" Offset="0x14B70">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneRightShinVtx" Count="74" Offset="0x15380">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneRightThighVtx" Count="34" Offset="0x15820">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftShinVtx" Count="74" Offset="0x15A40">
+            <Vtx/>
+        </Array>
+        <Array Name="gSorayneLeftThighVtx" Count="33" Offset="0x15EE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSoraynePelvisVtx" Count="58" Offset="0x160F0">
+            <Vtx/>
+        </Array>
+        <DList Name="gSoraynePelvisDL" Offset="0x16490"/>
+        <DList Name="gSorayneTorsoDL" Offset="0x16848"/>
+        <DList Name="gSorayneRightArmDL" Offset="0x16FE0"/>
+        <DList Name="gSorayneRightForearmDL" Offset="0x17120"/>
+        <DList Name="gSorayneLeftArmDL" Offset="0x172D8"/>
+        <DList Name="gSorayneLeftForearmDL" Offset="0x174A0"/>
+        <DList Name="gSorayneRightThighDL" Offset="0x17658"/>
+        <DList Name="gSorayneRightShinDL" Offset="0x17818"/>
+        <DList Name="gSorayneLeftThighDL" Offset="0x17B40"/>
+        <DList Name="gSorayneLeftShinDL" Offset="0x17D80"/>
+        <Limb Name="gSorayneRootLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_ROOT" Offset="0x180A8"/>
+        <Limb Name="gSorayneLeftThighLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_THIGH" Offset="0x180B4"/>
+        <Limb Name="gSorayneLeftShinLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_SHIN" Offset="0x180C0"/>
+        <Limb Name="gSorayneLeftFootLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_FOOT" Offset="0x180CC"/>
+        <Limb Name="gSorayneRightThighLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_THIGH" Offset="0x180D8"/>
+        <Limb Name="gSorayneRightShinLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_SHIN" Offset="0x180E4"/>
+        <Limb Name="gSorayneRightFootLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_FOOT" Offset="0x180F0"/>
+        <Limb Name="gSorayneTorsoLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_TORSO" Offset="0x180FC"/>
+        <Limb Name="gSorayneLeftArmLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_ARM" Offset="0x18108"/>
+        <Limb Name="gSorayneLeftForearmLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_FOREARM" Offset="0x18114"/>
+        <Limb Name="gSorayneLeftHandLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_LEFT_HAND" Offset="0x18120"/>
+        <Limb Name="gSorayneRightArmLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_ARM" Offset="0x1812C"/>
+        <Limb Name="gSorayneRightForearmLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_FOREARM" Offset="0x18138"/>
+        <Limb Name="gSorayneRightHandLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_RIGHT_HAND" Offset="0x18144"/>
+        <Limb Name="gSorayneHeadLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_HEAD" Offset="0x18150"/>
+        <Limb Name="gSorayneEmptyLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_EMPTY" Offset="0x1815C"/>
+        <Limb Name="gSoraynePonytailLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_PONYTAIL" Offset="0x18168"/>
+        <Limb Name="gSoraynePelvisLimb" LimbType="Standard" EnumName="SORAYNE_LIMB_PELVIS" Offset="0x18174"/>
+        <Skeleton Name="gSorayneSkel" Type="Flex" LimbType="Standard" LimbNone="SORAYNE_LIMB_NONE" LimbMax="SORAYNE_LIMB_MAX" EnumName="SorayneLimb" Offset="0x181C8"/>
+    </File>
+</Root>

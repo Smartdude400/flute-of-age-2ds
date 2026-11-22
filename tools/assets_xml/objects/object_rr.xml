@@ -1,0 +1,11 @@
+<Root>
+    <File Name="object_rr" Segment="6">
+        <Array Name="gGulpMawVtx" Count="71" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gGulpMawDL" Offset="0x470"/>
+        <Texture Name="gGulpMawBodyPattern1Tex" Format="rgba16" Width="16" Height="16" Offset="0x800"/>
+        <Texture Name="gGulpMawBodyPattern2Tex" Format="rgba16" Width="16" Height="16" Offset="0xA00"/>
+        <Texture Name="gGulpMawHoleTex" Format="ia16" Width="16" Height="16" Offset="0xC00"/>
+    </File>
+</Root>

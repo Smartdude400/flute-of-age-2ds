@@ -1,0 +1,24 @@
+<Root>
+    <File Name="tokinoma_scene" Segment="2">
+        <Cutscene Name="gHallOfAgesUnusedCs" Offset="0x280"/>
+        <Cutscene Name="gHallOfAgesFirstAdultCs" Offset="0x46F0"/>
+        <Cutscene Name="gHallOfAgesPreludeCs" Offset="0x6D20"/>
+        <Cutscene Name="gHallOfAgesIntroCs" Offset="0xCE00"/>
+        <Cutscene Name="gHallOfAgesSapphireRestoredUnusedCs" Offset="0xBE90"/>
+        <Cutscene Name="gHallOfAgesCreditsCs" Offset="0x3BB0"/>
+        <Cutscene Name="gHallOfAgesVeilRevealCs" Offset="0x8BC0"/>
+        <Cutscene Name="gHallOfAgesLightArrowsAndElaraCapturedCs" Offset="0x9F70"/>
+        <Cutscene Name="gHallOfAgesRubyRestoredUnusedCs" Offset="0x35D0"/>
+        <Cutscene Name="gHallOfAgesEmeraldRestoredUnusedCs" Offset="0x38C0"/>
+        <Cutscene Name="gHallOfAgesSongOfAgesCs" Offset="0x61C0"/>
+        <Cutscene Name="gHallOfAgesVeilRevealStartCs" Offset="0x84E0"/>
+        <Cutscene Name="gHallOfAgesDoorOpeningUnusedCs" Offset="0x3330"/>
+        <Scene Name="tokinoma_scene" Offset="0x0"/>
+    </File>
+    <File Name="tokinoma_room_0" Segment="3">
+        <Room Name="tokinoma_room_0" Offset="0x0"/>
+    </File>
+    <File Name="tokinoma_room_1" Segment="3">
+        <Room Name="tokinoma_room_1" Offset="0x0"/>
+    </File>
+</Root>

@@ -1,0 +1,11 @@
+<Root>
+    <File Name="varkon_tou_scene" Segment="2">
+        <Cutscene Name="gRainbowBridgeCs" Offset="0x2640"/>
+        <Cutscene Name="gVarkonsCastleIntroCs" Offset="0x4280"/>
+        <Scene Name="varkon_tou_scene" Offset="0x0"/>
+        <Scene Name="varkon_tou_scene_unused" Offset="0x3080"/>
+    </File>
+    <File Name="varkon_tou_room_0" Segment="3">
+        <Room Name="varkon_tou_room_0" Offset="0x0"/>
+    </File>
+</Root>

@@ -1,0 +1,13 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_gi_grapnel" Segment="6">
+        <Array Name="gGiGrapnelVtx" Count="117" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gGiGrapnelDL" Offset="0x0750"/>
+        <Array Name="gGiLonggrappleVtx" Count="127" Offset="0xA50">
+            <Vtx/>
+        </Array>
+        <DList Name="gGiLonggrappleDL" Offset="0x1240"/>
+    </File>
+</Root>

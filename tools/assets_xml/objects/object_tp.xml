@@ -1,0 +1,22 @@
+<Root>
+    <File Name="object_tp" Segment="6">
+        <DList Name="gSparkchainBodyElemDL" Offset="0x0"/>
+        <Array Name="gSparkchainBodyElemVtx" Count="4" Offset="0x70">
+            <Vtx/>
+        </Array>
+        <Array Name="gSparkchainHeadBodyVtx" Count="70" Offset="0xB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gSparkchainHeadElectricityVtx" Count="24" Offset="0x510">
+            <Vtx/>
+        </Array>
+        <DList Name="gSparkchainHeadBodyDL" Offset="0x690"/>
+        <DList Name="gSparkchainHeadElectricityDL" Offset="0x840"/>
+        <DList Name="gSparkchainHeadDL" Offset="0x8D0"/>
+        <Texture Name="gSparkchainHeadBackTex" Format="rgba16" Width="8" Height="16" Offset="0x8E8"/>
+        <Texture Name="gSparkchainHeadCoreTex" Format="rgba16" Width="8" Height="8" Offset="0x9E8"/>
+        <Texture Name="gSparkchainHeadClawTex" Format="rgba16" Width="16" Height="16" Offset="0xA68"/>
+        <Texture Name="gSparkchainBodyElemTex" Format="ia8" Width="64" Height="64" Offset="0xC68"/>
+        <Texture Name="gSparkchainHeadElectricityTex" Format="rgba16" Width="8" Height="8" Offset="0x1C68"/>
+    </File>
+</Root>

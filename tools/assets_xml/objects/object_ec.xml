@@ -1,0 +1,26 @@
+<Root>
+    <File Name="object_ec" Segment="6">
+        <Animation Name="gDemoEcCluckerLadyAnim" Offset="0xCD8"/>
+        <Animation Name="gDemoEcCarpenterAnim" Offset="0x164C"/>
+        <Animation Name="gDemoEcWindmillManAnim" Offset="0x196C"/>
+        <Animation Name="gDemoEcDuneanAnim" Offset="0x2254"/>
+        <Animation Name="gDemoEcCairnAnim" Offset="0x2FA0"/>
+        <Animation Name="gDemoEcCairn2Anim" Offset="0x3A98"/>
+        <Animation Name="gDemoEcOttoAnim" Offset="0x48F4"/>
+        <Animation Name="gDemoEcDancingSylvanAnim" Offset="0x513C"/>
+        <Animation Name="gDemoEcSylvanAnim" Offset="0x5670"/>
+        <Animation Name="gDemoEcOldManAnim" Offset="0x5EA8"/>
+        <Animation Name="gDemoEcAnim_006220" Offset="0x6220"/>
+        <Animation Name="gDemoEcAnim_006930" Offset="0x6930"/>
+        <Animation Name="gDemoEcKingNeriAnim" Offset="0x6C40"/>
+        <Animation Name="gDemoEcAnim_008D1C" Offset="0x8D1C"/>
+        <Animation Name="gDemoEcAnim_009234" Offset="0x9234"/>
+        <Animation Name="gDemoEcMiloAnim" Offset="0x95DC"/>
+        <Animation Name="gDemoEcJumpingCluckerAnim" Offset="0x9BB4"/>
+        <Animation Name="gDemoEcJumpingClucker2Anim" Offset="0xA07C"/>
+        <Animation Name="gDemoEcWalkingCluckerAnim" Offset="0xA474"/>
+        <Animation Name="gDemoEcPotionShopOwnerAnim" Offset="0xAFE0"/>
+        <Animation Name="gDemoEcTobinAnim" Offset="0xBD38"/>
+        <Animation Name="gDemoEcDancingNeriAnim" Offset="0xC918"/>
+    </File>
+</Root>

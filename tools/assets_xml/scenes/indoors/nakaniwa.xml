@@ -1,0 +1,15 @@
+<Root>
+    <File Name="nakaniwa_scene" Segment="2">
+        <Cutscene Name="gElarasCourtyardVarkonCs" Offset="0x104"/>
+        <Cutscene Name="gElarasCourtyardWindowCs" Offset="0x444"/>
+        <Cutscene Name="gElarasCourtyardMeetCs" Offset="0x3994"/>
+        <Cutscene Name="gElarasCourtyardLullabyCs" Offset="0x2524"/>
+        <Cutscene Name="gElarasCourtyardTheEndCs" Offset="0x1C04"/>
+        <Cutscene Name="gElarasCourtyardLullabyUnusedCs" Offset="0x34B0"/>
+
+        <Scene Name="nakaniwa_scene" Offset="0x0"/>
+    </File>
+    <File Name="nakaniwa_room_0" Segment="3">
+        <Room Name="nakaniwa_room_0" Offset="0x0"/>
+    </File>
+</Root>

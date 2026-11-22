@@ -1,0 +1,9 @@
+<Root>
+    <File Name="object_wisp" Segment="6">
+        <Texture Name="gWispTex" Format="ia8" Width="64" Height="64" Offset="0x0"/>
+        <DList Name="gWispDL" Offset="0x1000"/>
+        <Array Name="gWispVtx" Count="4" Offset="0x1080">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

@@ -1,0 +1,67 @@
+<Root>
+    <File Name="object_horse" Segment="6">
+        <Skeleton Name="gAsterSkel" Type="Normal" LimbType="Skin" Offset="0x9D74"/>
+
+        <Animation Name="gAsterIdleAnim" Offset="0x6D50"/>
+        <Animation Name="gAsterWhinnyAnim" Offset="0x5584"/>
+        <Animation Name="gAsterRefuseAnim" Offset="0x4DEC"/>
+        <Animation Name="gAsterRearingAnim" Offset="0x3CEC"/>
+        <Animation Name="gAsterWalkingAnim" Offset="0x75F0"/>
+        <Animation Name="gAsterTrottingAnim" Offset="0x32B0"/>
+        <Animation Name="gAsterGallopingAnim" Offset="0x1E2C"/>
+        <Animation Name="gAsterJumpingAnim" Offset="0x2470"/>
+        <Animation Name="gAsterJumpingHighAnim" Offset="0x2C38"/>
+
+        <Texture Name="gAsterFeatheringTex" Format="rgba16" Width="16" Height="16" Offset="0xBF10"/>
+        <Texture Name="gAsterHairTex" Format="rgba16" Width="8" Height="8" Offset="0xC190"/>
+
+        <!-- Head -->
+        <Texture Name="gAsterCrestTex" Format="rgba16" Width="16" Height="8" Offset="0xCA10"/>
+        <Texture Name="gAsterManeTex" Format="rgba16" Width="16" Height="16" Offset="0xC810"/>
+        <Texture Name="gAsterNostrilsTex" Format="rgba16" Width="16" Height="32" Offset="0xC410"/>
+        <Texture Name="gAsterForeheadTex" Format="rgba16" Width="8" Height="32" Offset="0xC210"/>
+        <Limb Name="gAsterHeadLimb" LimbType="Skin" Offset="0x9A98"/>
+
+        <!-- Body -->
+        <Texture Name="gAsterNeckTex" Format="i8" Width="16" Height="16" Offset="0xDC10"/>
+        <Texture Name="gAsterChestTex" Format="i8" Width="16" Height="16" Offset="0xDB10"/>
+        <Texture Name="gAsterShoulderTex" Format="i8" Width="16" Height="16" Offset="0xDE10"/>
+        <Texture Name="gAsterThighTex" Format="i8" Width="16" Height="16" Offset="0xDD10"/>
+        <Limb Name="gAsterBodyLimb" LimbType="Skin" Offset="0x9A18"/>
+
+        <!-- Saddle -->
+        <Texture Name="gAsterSaddleTex" Format="rgba16" Width="32" Height="32" Offset="0xCB10"/>
+        <Texture Name="gAsterSaddleFlapTex" Format="rgba16" Width="16" Height="16" Offset="0xD510"/>
+        <Texture Name="gAsterSaddleLipTex" Format="rgba16" Width="16" Height="16" Offset="0xD310"/>
+        <Texture Name="gAsterSaddleGirthTex" Format="rgba16" Width="32" Height="16" Offset="0xD710"/>
+        <Limb Name="gAsterSaddleLimb" LimbType="Skin" Offset="0x9BA8"/>
+
+        <!-- Cannons -->
+        <Limb Name="gAsterCannon1Limb" LimbType="Skin" Offset="0x9B18"/>
+        <Limb Name="gAsterCannon2Limb" LimbType="Skin" Offset="0x9B98"/>
+        <Limb Name="gAsterCannon3Limb" LimbType="Skin" Offset="0x9C28"/>
+        <Limb Name="gAsterCannon4Limb" LimbType="Skin" Offset="0x9CA8"/>
+
+        <!-- Hooves -->
+        <Texture Name="gAsterHorseshoeTex" Format="rgba16" Width="8" Height="8" Offset="0xC110"/>
+        <Limb Name="gAsterHoof1Limb" LimbType="Skin" Offset="0x9B08"/>
+        <Limb Name="gAsterHoof2Limb" LimbType="Skin" Offset="0x9B88"/>
+        <Limb Name="gAsterHoof3Limb" LimbType="Skin" Offset="0x9C18"/>
+        <Limb Name="gAsterHoof4Limb" LimbType="Skin" Offset="0x9C98"/>
+
+        <!-- Eyes textures -->
+        <Texture Name="gAsterEyeTLUT" Format="rgba16" Width="16" Height="16" Offset="0x9D80"/>
+        <Texture Name="gAsterEyeOpenTex" Format="ci8" Width="32" Height="16" Offset="0x9F80"  TlutOffset="0x9D80"/>
+        <Texture Name="gAsterEyeHalfTex" Format="ci8" Width="32" Height="16" Offset="0xA180"  TlutOffset="0x9D80"/>
+        <Texture Name="gAsterEyeClosedTex" Format="ci8" Width="32" Height="16" Offset="0xA380"  TlutOffset="0x9D80"/>
+
+        <DList Name="gAsterUnusedWhiteCubeDL" Offset="0x4C0"/>
+        <DList Name="gAsterUnusedWhiteRectangle1DL" Offset="0x580"/>
+        <DList Name="gAsterUnusedWhiteRectangle2DL" Offset="0x620"/>
+        <DList Name="gAsterUnusedWhiteRectangle3DL" Offset="0x6C0"/>
+        <DList Name="gAsterUnusedWhiteRectangle4DL" Offset="0x760"/>
+
+        <Blob Name="gAsterBlob_000000" Size="0x380" Offset="0x0"/>
+        <Blob Name="gAsterBlob_0007C0" Size="0xB0" Offset="0x7C0"/>
+    </File>
+</Root>

@@ -1,0 +1,122 @@
+<Root>
+    <File Name="object_skb" Segment="6">
+        <!-- Boneling skeleton -->
+        <Skeleton Name="gBonelingSkel" Type="Normal" LimbType="Standard" Offset="0x41F8"/>
+
+        <!-- Boneling Limbs -->
+        <Limb Name="gBonelingRootLimb" LimbType="Standard" Offset="0x40C8"/>
+        <Limb Name="gBonelingWaistLimb" LimbType="Standard" Offset="0x40D4"/>
+        <Limb Name="gBonelingRoot2Limb" LimbType="Standard" Offset="0x40E0"/>
+        <Limb Name="gBonelingRightFemurLimb" LimbType="Standard" Offset="0x40EC"/>
+        <Limb Name="gBonelingRightShinLimb" LimbType="Standard" Offset="0x40F8"/>
+        <Limb Name="gBonelingRightFootLimb" LimbType="Standard" Offset="0x4104"/>
+        <Limb Name="gBonelingLeftFemurLimb" LimbType="Standard" Offset="0x4110"/>
+        <Limb Name="gBonelingLeftShinLimb" LimbType="Standard" Offset="0x411C"/>
+        <Limb Name="gBonelingLeftFootLimb" LimbType="Standard" Offset="0x4128"/>
+        <Limb Name="gBonelingRibCageLimb" LimbType="Standard" Offset="0x4134"/>
+        <Limb Name="gBonelingHeadLimb" LimbType="Standard" Offset="0x4140"/>
+        <Limb Name="gBonelingJawLimb" LimbType="Standard" Offset="0x414C"/>
+        <Limb Name="gBonelingRightHumerusLimb" LimbType="Standard" Offset="0x4158"/>
+        <Limb Name="gBonelingRightForearmLimb" LimbType="Standard" Offset="0x4164"/>
+        <Limb Name="gBonelingRightHandLimb" LimbType="Standard" Offset="0x4170"/>
+        <Limb Name="gBonelingLeftHumerusLimb" LimbType="Standard" Offset="0x417C"/>
+        <Limb Name="gBonelingLeftForearmLimb" LimbType="Standard" Offset="0x4188"/>
+        <Limb Name="gBonelingLeftHandLimb" LimbType="Standard" Offset="0x4194"/>
+        <Limb Name="gBonelingSpineLimb" LimbType="Standard" Offset="0x41A0"/>
+
+        <!-- Boneling Vertices -->
+        <Array Name="gBonelingHeadVtx" Count="81" Offset="0x21A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingJawVtx" Count="16" Offset="0x26B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRibCageVtx" Count="18" Offset="0x27B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingSpineVtx" Count="4" Offset="0x28D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingWaistVtx" Count="22" Offset="0x2910">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftHumerusVtx" Count="15" Offset="0x2A70">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftForearmVtx" Count="9" Offset="0x2B60">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftHandVtx" Count="20" Offset="0x2BF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightHumerusVtx" Count="15" Offset="0x2D30">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightForearmVtx" Count="9" Offset="0x2E20">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightHandVtx" Count="20" Offset="0x2EB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftFemurVtx" Count="4" Offset="0x2FF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftShinVtx" Count="9" Offset="0x3030">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingLeftFootVtx" Count="5" Offset="0x30C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightFemurVtx" Count="4" Offset="0x3110">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightShinVtx" Count="9" Offset="0x3150">
+            <Vtx/>
+        </Array>
+        <Array Name="gBonelingRightFootVtx" Count="5" Offset="0x31E0">
+            <Vtx/>
+        </Array>
+
+        <!-- Boneling DisplayLists -->
+        <DList Name="gBonelingHeadDL" Offset="0x3230"/>
+        <DList Name="gBonelingJawDL" Offset="0x3598"/>
+        <DList Name="gBonelingRibCageDL" Offset="0x3640"/>
+        <DList Name="gBonelingSpineDL" Offset="0x3708"/>
+        <DList Name="gBonelingWaistDL" Offset="0x37A0"/>
+        <DList Name="gBonelingLeftHumerusDL" Offset="0x38A8"/>
+        <DList Name="gBonelingLeftForearmDL" Offset="0x3968"/>
+        <DList Name="gBonelingLeftHandDL" Offset="0x3A10"/>
+        <DList Name="gBonelingRightHumerusDL" Offset="0x3AD8"/>
+        <DList Name="gBonelingRightForearmDL" Offset="0x3B98"/>
+        <DList Name="gBonelingRightHandDL" Offset="0x3C40"/>
+        <DList Name="gBonelingLeftFemurDL" Offset="0x3D08"/>
+        <DList Name="gBonelingLeftShinDL" Offset="0x3DA0"/>
+        <DList Name="gBonelingLeftFootDL" Offset="0x3E48"/>
+        <DList Name="gBonelingRightFemurDL" Offset="0x3EE8"/>
+        <DList Name="gBonelingRightShinDL" Offset="0x3F80"/>
+        <DList Name="gBonelingRightFootDL" Offset="0x4028"/>
+
+        <!-- Boneling Textures -->
+        <Texture Name="gBonelingWaistTex" Format="rgba16" Width="16" Height="16" Offset="0x18A0"/>
+        <Texture Name="gBonelingRibCageTex" Format="rgba16" Width="8" Height="16" Offset="0x1AA0"/>
+        <Texture Name="gBonelingHeadTex" Format="rgba16" Width="8" Height="8" Offset="0x1BA0"/>
+        <Texture Name="gBonelingBoneTex" Format="rgba16" Width="8" Height="8" Offset="0x1CA0"/>
+        <Texture Name="gBonelingNostrilTex" Format="rgba16" Width="8" Height="8" Offset="0x1C20"/>
+        <Texture Name="gBonelingHandAndFeetTex" Format="rgba16" Width="8" Height="16" Offset="0x1D20"/>
+        <Texture Name="gBonelingTeethTex" Format="rgba16" Width="16" Height="8" Offset="0x1E20"/>
+        <Texture Name="gBonelingEyeSocketTex" Format="rgba16" Width="16" Height="16" Offset="0x1F20"/>
+        <Texture Name="gBonelingEyeTex" Format="rgba16" Width="8" Height="8" Offset="0x2120"/>
+
+        <!-- Boneling animations -->
+        <Animation Name="gBonelingAttackingAnim" Offset="0x460"/>
+        <Blob Name="object_skb_zeroes_Blob_470" Size="0x20" Offset="0x470"/>
+        <Animation Name="gBonelingDyingAnim" Offset="0x9DC"/>
+        <Blob Name="object_skb_zeroes_Blob_9EC" Size="0x24" Offset="0x9EC"/>
+        <Animation Name="gBonelingDamagedAnim" Offset="0xD98"/>
+        <Blob Name="object_skb_zeroes_Blob_DA8" Size="0x18" Offset="0xDA8"/>
+        <Animation Name="gBonelingUncurlingAnim" Offset="0x1854"/>
+        <Blob Name="object_skb_zeroes_Blob_1864" Size="0x3C" Offset="0x1864"/>
+        <Animation Name="gBonelingWalkingAnim" Offset="0x47E0"/>
+        <Blob Name="object_skb_zeroes_Blob_47F0" Size="0x20" Offset="0x47F0"/>
+    </File>
+</Root>

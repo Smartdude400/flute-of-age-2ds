@@ -1,0 +1,6 @@
+<Root>
+    <File Name="ovl_En_Bili">
+        <DList Name="sSparkbellCoreInvertTexCombinerDL" Offset="0x0"/>
+        <DList Name="sSparkbellCoreNormalCombinerDL" Offset="0x10"/>
+    </File>
+</Root>

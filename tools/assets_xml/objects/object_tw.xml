@@ -1,0 +1,810 @@
+﻿<Root>
+    <File Name="object_tw" Segment="6">
+        <!-- Frost and Ember animations -->
+        <Animation Name="gTwinmagiFrostEmberIdleLoopAnim" Offset="0x4A4"/> <!-- Original name is "btT_DEMOwait" -->
+        <Animation Name="gTwinmagiFrostEmberIdleEndAnim" Offset="0xAAC"/> <!-- Original name is "btT_DEMOwait_to_fly" -->
+        <Animation Name="gTwinmagiFrostEmberBickerAnim" Offset="0x12A4"/> <!-- Original name is "btT_EDikari" ("anger; rage; fury") -->
+        <Animation Name="gTwinmagiFrostEmberFloatLookUpAnim" Offset="0x17E0"/> <!-- Original name is "btT_EDmiage" ("to look up at; to raise one's eyes​") -->
+        <Animation Name="gTwinmagiFrostEmberFloatLookForwardAnim" Offset="0x1D10"/> <!-- Original name is "btT_EDwait" -->
+        <Animation Name="gTwinmagiFrostEmberShakeHandAnim" Offset="0x230C"/> <!-- Original name is "btT_EDyaruki" ("drive; motivation; enthusiasm") -->
+        <Animation Name="gTwinmagiFrostEmberAttackStartAnim" Offset="0x3614"/> <!-- Original name is "btT_atack" -->
+        <Animation Name="gTwinmagiFrostEmberAttackLoopAnim" Offset="0x3E34"/> <!-- Original name is "btT_beeem" -->
+        <Animation Name="gTwinmagiFrostEmberAttackEndAnim" Offset="0x4548"/> <!-- Original name is "btT_beeem_to_fly" -->
+        <Animation Name="gTwinmagiFrostEmberDamageStartAnim" Offset="0x578C"/> <!-- Original name is "btT_damage01" -->
+        <Animation Name="gTwinmagiFrostEmberDamageEndAnim" Offset="0x6530"/> <!-- Original name is "btT_damage02" -->
+        <Animation Name="gTwinmagiFrostEmberFlyAnim" Offset="0x6F28"/> <!-- Original name is "btT_fly" -->
+
+        <!-- Frost skeleton -->
+        <Limb Name="gTwinmagiFrostPelvisLimb" LimbType="Standard" Offset="0x6F40"/>
+        <Limb Name="gTwinmagiFrostLeftThighLimb" LimbType="Standard" Offset="0x6F4C"/>
+        <Limb Name="gTwinmagiFrostLeftShinLimb" LimbType="Standard" Offset="0x6F58"/>
+        <Limb Name="gTwinmagiFrostLeftFootLimb" LimbType="Standard" Offset="0x6F64"/>
+        <Limb Name="gTwinmagiFrostRightThighLimb" LimbType="Standard" Offset="0x6F70"/>
+        <Limb Name="gTwinmagiFrostRightShinLimb" LimbType="Standard" Offset="0x6F7C"/>
+        <Limb Name="gTwinmagiFrostRightFootLimb" LimbType="Standard" Offset="0x6F88"/>
+        <Limb Name="gTwinmagiFrostTorsoLimb" LimbType="Standard" Offset="0x6F94"/>
+        <Limb Name="gTwinmagiFrostLeftSleeveStartLimb" LimbType="Standard" Offset="0x6FA0"/>
+        <Limb Name="gTwinmagiFrostLeftSleeveMidLimb" LimbType="Standard" Offset="0x6FAC"/>
+        <Limb Name="gTwinmagiFrostLeftSleeveEndLimb" LimbType="Standard" Offset="0x6FB8"/>
+        <Limb Name="gTwinmagiFrostLeftSleeveFrontLimb" LimbType="Standard" Offset="0x6FC4"/>
+        <Limb Name="gTwinmagiFrostLeftHandLimb" LimbType="Standard" Offset="0x6FD0"/>
+        <Limb Name="gTwinmagiFrostBroomLimb" LimbType="Standard" Offset="0x6FDC"/>
+        <Limb Name="gTwinmagiFrostRightSleeveStartLimb" LimbType="Standard" Offset="0x6FE8"/>
+        <Limb Name="gTwinmagiFrostRightSleeveMidLimb" LimbType="Standard" Offset="0x6FF4"/>
+        <Limb Name="gTwinmagiFrostRightSleeveEndLimb" LimbType="Standard" Offset="0x7000"/>
+        <Limb Name="gTwinmagiFrostRightSleeveFrontLimb" LimbType="Standard" Offset="0x700C"/>
+        <Limb Name="gTwinmagiFrostRightHandLimb" LimbType="Standard" Offset="0x7018"/>
+        <Limb Name="gTwinmagiFrostNeckLimb" LimbType="Standard" Offset="0x7024"/>
+        <Limb Name="gTwinmagiFrostHeadLimb" LimbType="Standard" Offset="0x7030"/>
+        <Limb Name="gTwinmagiFrostRightBraidStartLimb" LimbType="Standard" Offset="0x703C"/>
+        <Limb Name="gTwinmagiFrostRightBraidEndLimb" LimbType="Standard" Offset="0x7048"/>
+        <Limb Name="gTwinmagiFrostTeethLimb" LimbType="Standard" Offset="0x7054"/>
+        <Limb Name="gTwinmagiFrostLeftBraidStartLimb" LimbType="Standard" Offset="0x7060"/>
+        <Limb Name="gTwinmagiFrostLeftBraidEndLimb" LimbType="Standard" Offset="0x706C"/>
+        <Skeleton Name="gTwinmagiFrostSkel" Type="Flex" LimbType="Standard" Offset="0x70E0"/>
+
+        <!-- Frost and Ember animations -->
+        <Animation Name="gTwinmagiFrostEmberChargeUpAttackStartAnim" Offset="0x7688"/> <!-- Original name is "btT_fly_to_tame" -->
+        <Animation Name="gTwinmagiFrostEmberSpinAnim" Offset="0x7CA8"/> <!-- Original name is "btT_guard" -->
+        <Animation Name="gTwinmagiFrostEmberLaughAnim" Offset="0x88C8"/> <!-- Original name is "btT_hihihi" -->
+        <Animation Name="gTwinmagiFrostEmberChargeUpAttackLoopAnim" Offset="0x9398"/> <!-- Original name is "btT_tame" ("to amass; to accumulate") -->
+        <Animation Name="gTwinmagiFrostEmberTPoseAnim" Offset="0x947C"/>
+
+        <!-- Frost and Ember textures -->
+        <Texture Name="gTwinmagiEmberFrostTLUT" Format="rgba16" Width="53" Height="4" Offset="0x9490"/>
+        <Texture Name="gTwinmagiFrostDuneanFabricTex" Format="rgba16" Width="32" Height="32" Offset="0x9638"/>
+        <Texture Name="gTwinmagiFrostRobeTex" Format="rgba16" Width="16" Height="16" Offset="0x9E38"/>
+        <Texture Name="gTwinmagiRobePatternTex" Format="rgba16" Width="16" Height="16" Offset="0xA038"/>
+        <Texture Name="gTwinmagiRobeTrimTex" Format="rgba16" Width="16" Height="16" Offset="0xA238"/>
+        <Texture Name="gTwinmagiFrostEmberEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0xA438" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberSkinTex" Format="ci8" Width="16" Height="8" Offset="0xA838" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberMouthTex" Format="ci8" Width="8" Height="8" Offset="0xA8B8" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiHairTex" Format="rgba16" Width="8" Height="32" Offset="0xA8F8"/>
+        <Texture Name="gTwinmagiFrostEmberEarTex" Format="ci8" Width="8" Height="8" Offset="0xAAF8"  TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberFingerTex" Format="ci8" Width="8" Height="16" Offset="0xAB38"  TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiBroomHandleTex" Format="rgba16" Width="8" Height="8" Offset="0xABB8"/>
+        <Texture Name="gTwinmagiBroomHeadTex" Format="rgba16" Width="16" Height="32" Offset="0xAC38"/>
+        <Texture Name="gTwinmagiFrostEmberJewelHolderTex" Format="rgba16" Width="16" Height="8" Offset="0xB038"/>
+        <Texture Name="gTwinmagiFrostJewelTex" Format="rgba16" Width="8" Height="8" Offset="0xB138"/>
+        <Texture Name="gTwinmagiFrostEmberNeckTex" Format="ci8" Width="8" Height="8" Offset="0xB1B8" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberNostrilsTex" Format="ci8" Width="8" Height="8" Offset="0xB1F8" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0xB238" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiFrostEmberEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0xB638" TlutOffset="0x9490"/>
+        <Texture Name="gTwinmagiEffectTex" Format="i8" Width="32" Height="32" Offset="0xBA38"/>
+        <Texture Name="gTwinmagiEffectMaskTex" Format="i4" Width="32" Height="64" Offset="0xBE38"/>
+        <Texture Name="gTwinmagiEmberDuneanFabricTex" Format="rgba16" Width="32" Height="32" Offset="0xC238"/>
+        <Texture Name="gTwinmagiEmberJewelTex" Format="rgba16" Width="8" Height="8" Offset="0xCA38"/>
+        <Texture Name="gTwinmagiEmberRobeTex" Format="rgba16" Width="16" Height="16" Offset="0xCAB8"/>
+
+        <!-- Frost and Ember Vertices -->
+        <Array Name="gTwinmagiFrostHeadInvisibleHairVtx" Count="157" Offset="0xCCB8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberHeadInvisibleHairVtx" Count="157" Offset="0xD688">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostBroomInvisibleHeadVtx" Count="42" Offset="0xE058">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberBroomInvisibleHeadVtx" Count="42" Offset="0xE2F8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostTeethVtx" Count="9" Offset="0xE598">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightShinVtx" Count="7" Offset="0xE628">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftShinVtx" Count="7" Offset="0xE698">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightFootVtx" Count="4" Offset="0xE708">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftFootVtx" Count="4" Offset="0xE748">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightHandVtx" Count="28" Offset="0xE788">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftHandVtx" Count="28" Offset="0xE948">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightHandVtx" Count="28" Offset="0xEB08">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftHandVtx" Count="28" Offset="0xECC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftFootVtx" Count="4" Offset="0xEE88">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightFootVtx" Count="4" Offset="0xEEC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftShinVtx" Count="7" Offset="0xEF08">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightShinVtx" Count="7" Offset="0xEF78">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberTeethVtx" Count="9" Offset="0xEFE8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostBroomVtx" Count="48" Offset="0xF078">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostHeadVtx" Count="159" Offset="0xF378">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberBroomVtx" Count="48" Offset="0xFD68">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberHeadVtx" Count="159" Offset="0x10068">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostIceHairVtx" Count="36" Offset="0x10A58">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberFireHairVtx" Count="19" Offset="0x10C98">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostIceBroomHeadOuterVtx" Count="7" Offset="0x10DC8">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostIceBroomHeadVtx" Count="17" Offset="0x10E38">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostFireBroomHeadOuterVtx" Count="10" Offset="0x10F48">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostFireBroomHeadVtx" Count="12" Offset="0x10FE8">
+            <Vtx/>
+        </Array>
+
+        <!-- Frost and Ember DLs -->
+        <DList Name="gTwinmagiFrostHeadInvisibleHairDL" Offset="0x110A8"/>
+        <DList Name="gTwinmagiEmberHeadInvisibleHairDL" Offset="0x116A0"/>
+        <DList Name="gTwinmagiFrostBroomInvisibleHeadDL" Offset="0x11C98"/>
+        <DList Name="gTwinmagiEmberBroomInvisibleHeadDL" Offset="0x11E28"/>
+        <DList Name="gTwinmagiFrostTeethDL" Offset="0x11FB8"/>
+        <DList Name="gTwinmagiFrostRightShinDL" Offset="0x12018"/>
+        <DList Name="gTwinmagiFrostLeftShinDL" Offset="0x120C8"/>
+        <DList Name="gTwinmagiFrostRightFootDL" Offset="0x12178"/>
+        <DList Name="gTwinmagiFrostLeftFootDL" Offset="0x12210"/>
+        <DList Name="gTwinmagiFrostRightHandDL" Offset="0x122A8"/>
+        <DList Name="gTwinmagiFrostLeftHandDL" Offset="0x12410"/>
+        <DList Name="gTwinmagiEmberRightHandDL" Offset="0x12578"/>
+        <DList Name="gTwinmagiEmberLeftHandDL" Offset="0x126E0"/>
+        <DList Name="gTwinmagiEmberLeftFootDL" Offset="0x12848"/>
+        <DList Name="gTwinmagiEmberRightFootDL" Offset="0x128E0"/>
+        <DList Name="gTwinmagiEmberLeftShinDL" Offset="0x12978"/>
+        <DList Name="gTwinmagiEmberRightShinDL" Offset="0x12A28"/>
+        <DList Name="gTwinmagiEmberTeethDL" Offset="0x12AD8"/>
+        <DList Name="gTwinmagiFrostBroomDL" Offset="0x12B38"/>
+        <DList Name="gTwinmagiFrostHeadDL" Offset="0x12CE0"/>
+        <DList Name="gTwinmagiEmberBroomDL" Offset="0x13310"/>
+        <DList Name="gTwinmagiEmberHeadDL" Offset="0x134B8"/>
+        <DList Name="gTwinmagiFrostIceHairDL" Offset="0x13AE8"/>
+        <DList Name="gTwinmagiEmberFireHairDL" Offset="0x13D68"/>
+        <DList Name="gTwinmagiFrostIceBroomHeadDL" Offset="0x13E98"/>
+        <DList Name="gTwinmagiFrostIceBroomHeadOuterDL" Offset="0x13F98"/>
+        <DList Name="gTwinmagiFrostFireBroomHeadDL" Offset="0x14070"/>
+        <DList Name="gTwinmagiFrostFireBroomHeadOuterDL" Offset="0x14158"/>
+
+        <!-- Frost Vertices -->
+        <Array Name="gTwinmagiFrostLeftBraidEndVtx" Count="21" Offset="0x14240">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftBraidStartVtx" Count="10" Offset="0x14390">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightBraidEndVtx" Count="21" Offset="0x14430">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightBraidStartVtx" Count="10" Offset="0x14580">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostNeckVtx" Count="24" Offset="0x14620">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftSleeveFrontVtx" Count="19" Offset="0x147A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftSleeveEndVtx" Count="12" Offset="0x148D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftSleeveMidVtx" Count="18" Offset="0x14990">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostLeftSleeveStartVtx" Count="15" Offset="0x14AB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightSleeveFrontVtx" Count="19" Offset="0x14BA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightSleeveEndVtx" Count="12" Offset="0x14CD0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightSleeveMidVtx" Count="18" Offset="0x14D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostRightSleeveStartVtx" Count="15" Offset="0x14EB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiFrostTorsoVtx" Count="38" Offset="0x14FA0">
+            <Vtx/>
+        </Array>
+        <Blob Name="object_tw_Blob_015200" Size="0x60" Offset="0x15200"/>
+        <Array Name="gTwinmagiFrostPelvisVtx" Count="30" Offset="0x15260">
+            <Vtx/>
+        </Array>
+
+        <!-- Frost DLs -->
+        <DList Name="gTwinmagiFrostLeftBraidEndDL" Offset="0x15440"/>
+        <DList Name="gTwinmagiFrostLeftBraidStartDL" Offset="0x15538"/>
+        <DList Name="gTwinmagiFrostRightBraidEndDL" Offset="0x15648"/>
+        <DList Name="gTwinmagiFrostRightBraidStartDL" Offset="0x15740"/>
+        <DList Name="gTwinmagiFrostNeckDL" Offset="0x15850"/>
+        <DList Name="gTwinmagiFrostRightSleeveFrontDL" Offset="0x15990"/>
+        <DList Name="gTwinmagiFrostRightSleeveEndDL" Offset="0x15B10"/>
+        <DList Name="gTwinmagiFrostRightSleeveMidDL" Offset="0x15C30"/>
+        <DList Name="gTwinmagiFrostRightSleeveStartDL" Offset="0x15D58"/>
+        <DList Name="gTwinmagiFrostLeftSleeveFrontDL" Offset="0x15E78"/>
+        <DList Name="gTwinmagiFrostLeftSleeveEndDL" Offset="0x15FF8"/>
+        <DList Name="gTwinmagiFrostLeftSleeveMidDL" Offset="0x16118"/>
+        <DList Name="gTwinmagiFrostLeftSleeveStartDL" Offset="0x16240"/>
+        <DList Name="gTwinmagiFrostTorsoDL" Offset="0x16360"/>
+        <DList Name="gTwinmagiFrostRightThighDL" Offset="0x164C0"/>
+        <DList Name="gTwinmagiFrostLeftThighDL" Offset="0x164C8"/>
+        <DList Name="gTwinmagiFrostPelvisDL" Offset="0x164D0"/>
+
+        <Texture Name="gTwinmagiBraidEndTex" Format="rgba16" Width="8" Height="8" Offset="0x16650"/>
+        <Texture Name="gTwinmagiLeftFootTex" Format="rgba16" Width="4" Height="8" Offset="0x166D0"/>
+
+        <!-- Ember Vertices -->
+        <Array Name="gTwinmagiEmberLeftBraidEndVtx" Count="21" Offset="0x16710">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftBraidStartVtx" Count="10" Offset="0x16860">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightBraidEndVtx" Count="21" Offset="0x16900">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightBraidStartVtx" Count="10" Offset="0x16A50">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberNeckVtx" Count="24" Offset="0x16AF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftSleeveFrontVtx" Count="19" Offset="0x16C70">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftSleeveEndVtx" Count="12" Offset="0x16DA0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftSleeveMidVtx" Count="18" Offset="0x16E60">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberLeftSleeveStartVtx" Count="15" Offset="0x16F80">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightSleeveFrontVtx" Count="19" Offset="0x17070">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightSleeveEndVtx" Count="12" Offset="0x171A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightSleeveMidVtx" Count="18" Offset="0x17260">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberRightSleeveStartVtx" Count="15" Offset="0x17380">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiEmberTorsoVtx" Count="38" Offset="0x17470">
+            <Vtx/>
+        </Array>
+        <Blob Name="object_tw_Blob_0176D0" Size="0x60" Offset="0x176D0"/>
+        <Array Name="gTwinmagiEmberPelvisVtx" Count="30" Offset="0x17730">
+            <Vtx/>
+        </Array>
+
+        <!-- Ember DLs -->
+        <DList Name="gTwinmagiEmberLeftBraidEndDL" Offset="0x17910"/>
+        <DList Name="gTwinmagiEmberLeftBraidStartDL" Offset="0x17A08"/>
+        <DList Name="gTwinmagiEmberRightBraidEndDL" Offset="0x17B18"/>
+        <DList Name="gTwinmagiEmberRightBraidStartDL" Offset="0x17C10"/>
+        <DList Name="gTwinmagiEmberNeckDL" Offset="0x17D20"/>
+        <DList Name="gTwinmagiEmberRightSleeveFrontDL" Offset="0x17E60"/>
+        <DList Name="gTwinmagiEmberRightSleeveEndDL" Offset="0x17FE0"/>
+        <DList Name="gTwinmagiEmberRightSleeveMidDL" Offset="0x18100"/>
+        <DList Name="gTwinmagiEmberRightSleeveStartDL" Offset="0x18228"/>
+        <DList Name="gTwinmagiEmberLeftSleeveFrontDL" Offset="0x18348"/>
+        <DList Name="gTwinmagiEmberLeftSleeveEndDL" Offset="0x184C8"/>
+        <DList Name="gTwinmagiEmberLeftSleeveMidDL" Offset="0x185E8"/>
+        <DList Name="gTwinmagiEmberLeftSleeveStartDL" Offset="0x18710"/>
+        <DList Name="gTwinmagiEmberTorsoDL" Offset="0x18830"/>
+        <DList Name="gTwinmagiEmberRightThighDL" Offset="0x18990"/>
+        <DList Name="gTwinmagiEmberLeftThighDL" Offset="0x18998"/>
+        <DList Name="gTwinmagiEmberPelvisDL" Offset="0x189A0"/>
+
+        <Texture Name="gTwinmagiRightFootTex" Format="rgba16" Width="4" Height="8" Offset="0x18B20"/>
+
+        <!-- Assets for the smoke that comes off of the big flame -->
+        <Texture Name="gTwinmagiFireSmokeTex" Format="i4" Width="32" Height="64" Offset="0x18B60"/>
+        <Array Name="gTwinmagiFireSmokeVtx" Count="6" Offset="0x18F60">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiFireSmokeDL" Offset="0x18FC0"/> <!-- Original name is "bt_firesmoke_modelT" -->
+
+        <!-- Assets for the big flame that appears when Ember's beam or Twinmagi's fire attack hits the ground -->
+        <Texture Name="gTwinmagiBigFlameTex" Format="i8" Width="32" Height="32" Offset="0x19078"/>
+        <Texture Name="gTwinmagiBigFlameMaskTex" Format="i4" Width="32" Height="64" Offset="0x19478"/>
+        <Array Name="gTwinmagiBigFlameVtx" Count="12" Offset="0x19878">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiBigFlameDL" Offset="0x19938"/> <!-- Original name is "bt_firewall_modelT" -->
+
+        <!-- Texture for both the pool of fire and the effect when the Prism Shield has absorbed an attack. -->
+        <Texture Name="gTwinmagiFirePoolAndShieldChargeCenterTex" Format="i4" Width="32" Height="32" Offset="0x19A20"/>
+
+        <!-- Vertices and DisplayList for the pool of fire that forms when Ember's beam or Twinmagi's fire attack hits the ground -->
+        <Array Name="gTwinmagiFirePoolVtx" Count="18" Offset="0x19C20">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiFirePoolDL" Offset="0x19D40"/> <!-- Original name is "bt_firefloor_modelT" -->
+
+        <!-- Assets for the fire effect that appears in various places -->
+        <Texture Name="gTwinmagiFireTex" Format="i4" Width="32" Height="64" Offset="0x19E00"/>
+        <Texture Name="gTwinmagiFireMaskTex" Format="i4" Width="32" Height="32" Offset="0x1A200"/>
+        <Array Name="gTwinmagiFireVtx" Count="3" Offset="0x1A400">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiFireDL" Offset="0x1A430"/> <!-- Original name is "bt_fireball_modelT" -->
+
+        <!-- Assets for the magic particles that fly off of Ember, Frost, and Twinmagi's head -->
+        <Array Name="gTwinmagiMagicParticleModelVtx" Count="3" Offset="0x1A4F8">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiMagicParticleMaterialDL" Offset="0x1A528"/>
+        <DList Name="gTwinmagiMagicParticleModelDL" Offset="0x1A5A8"/> <!-- Original name is "bt_hinoko_modelT" ("sparks") -->
+        <Texture Name="gTwinmagiMagicParticleTex" Format="i8" Width="16" Height="16" Offset="0x1A5C0"/>
+
+        <!-- Vertices and DisplayList for the wave of cold air that comes from the ice pool and the effect that appears on the shield when the player reflects a beam -->
+        <Array Name="gTwinmagiEffectHaloVtx" Count="13" Offset="0x1A6C0">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiEffectHaloDL" Offset="0x1A790"/> <!-- Original name is "bt_coolwave_modelT" -->
+
+        <!-- Vertices and DisplayLists for various ice effects -->
+        <Array Name="gTwinmagiUnusedIceSteamCloudVtx" Count="4" Offset="0x1A860">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiUnusedIceSteamCloudDL" Offset="0x1A8A0"/>
+        <Array Name="gTwinmagiIceModelVtx" Count="3" Offset="0x1A968">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiIceMaterialDL" Offset="0x1A998"/>
+        <DList Name="gTwinmagiIceSurroundingPlayerMaterialDL" Offset="0x1AA50"/>
+        <DList Name="gTwinmagiIceModelDL" Offset="0x1AB00"/> <!-- Original name is "bt_coolball_modelT" -->
+
+        <!-- Texture for the ice pool -->
+        <Texture Name="gTwinmagiIcePoolTex" Format="i8" Width="64" Height="64" Offset="0x1AB20"/>
+
+        <!-- Unused vertices. Based on its placement, this may have been originally used with the ice pool. -->
+        <Array Name="gTwinmagiUnusedVtx" Count="4" Offset="0x1BB20">
+            <Vtx/>
+        </Array>
+
+        <!-- Vertices and DisplayList for the ice pool -->
+        <Array Name="gTwinmagiIcePoolVtx" Count="10" Offset="0x1BB60">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiIcePoolDL" Offset="0x1BC00"/> <!-- Not present in OoT3D, but MM's Wizrobe has an identical DList called "wiz_icefloor03_modelT" -->
+
+        <!-- Assets for the gleam on top of the ice pool-->
+        <Texture Name="gTwinmagiIcePoolShineTex" Format="i4" Width="32" Height="64" Offset="0x1BCA0"/>
+        <Texture Name="gTwinmagiIcePoolShineMaskTex" Format="i4" Width="16" Height="16" Offset="0x1C0A0"/>
+        <Array Name="gTwinmagiIcePoolShineVtx" Count="10" Offset="0x1C120">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiIcePoolShineDL" Offset="0x1C1C0"/> <!-- Original name is "bt_icefloor03_pika_modelT" ("pika" = onomatopoeic for "sparkle, glisten") -->
+
+        <!-- Assets for the magical sigils that appear when Frost/Ember spawn or charge up an attack. -->
+        <Texture Name="gTwinmagiFrostMagicSigilMaskTex" Format="i4" Width="32" Height="64" Offset="0x1C2A0"/>
+        <Texture Name="gTwinmagiFrostMagicSigilTex" Format="i4" Width="64" Height="64" Offset="0x1C6A0"/>
+        <Array Name="gTwinmagiFrostMagicSigilVtx" Count="4" Offset="0x1CEA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiFrostMagicSigilDL" Offset="0x1CEE0"/> <!-- Original name is "btT_mahoujin_modelT" ("summoning circle; magic circle") -->
+        <Texture Name="gTwinmagiEmberMagicSigilMaskTex" Format="i4" Width="32" Height="64" Offset="0x1CFA8"/>
+        <Texture Name="gTwinmagiEmberMagicSigilTex" Format="i4" Width="64" Height="64" Offset="0x1D3A8"/>
+        <Array Name="gTwinmagiEmberMagicSigilVtx" Count="4" Offset="0x1DBA8">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiEmberMagicSigilDL" Offset="0x1DBE8"/> <!-- Original name is "btU_mahoujin_modelT" -->
+
+        <!-- Vertices and DisplayList for Ember and Frost's beam -->
+        <Array Name="gTwinmagiBeamVtx" Count="20" Offset="0x1DCB0">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiBeamDL" Offset="0x1DDF0"/> <!-- Original name is "bt_firebeam_modelT" -->
+
+        <!-- Vertices and DisplayLists for various Prism Shield effects -->
+        <Array Name="gTwinmagiPrismShieldFireChargeCenterVtx" Count="9" Offset="0x1DED0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiPrismShieldFireChargeSidesVtx" Count="12" Offset="0x1DF60">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiPrismShieldFireChargeCenterDL" Offset="0x1E020"/>
+        <DList Name="gTwinmagiPrismShieldFireChargeSidesDL" Offset="0x1E0E0"/>
+        <Array Name="gTwinmagiPrismShieldIceChargeCenterVtx" Count="9" Offset="0x1E170">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiPrismShieldIceChargeSidesVtx" Count="12" Offset="0x1E200">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiPrismShieldIceChargeCenterDL" Offset="0x1E2C0"/>
+        <DList Name="gTwinmagiPrismShieldIceChargeSidesDL" Offset="0x1E3A0"/>
+
+        <!-- Texture for the clouds of ice -->
+        <Texture Name="gTwinmagiCloudMaskTex" Format="i4" Width="32" Height="32" Offset="0x1E430"/>
+
+        <!-- Vertices and DisplayList for the effect that appears when the Prism Shield absorbs Twinmagi's attack, or when it unleashes a charged attack -->
+        <Array Name="gTwinmagiShieldAbsorbAndReflectEffectVtx" Count="60" Offset="0x1E630">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiShieldAbsorbAndReflectEffectDL" Offset="0x1E9F0"/> <!-- Original name is "btW_bacuuuum_modelT" -->
+
+        <!-- Texture of a circle, used for the spawn portal shadow and the circle of light -->
+        <Texture Name="gTwinmagiCircleTex" Format="i8" Width="16" Height="16" Offset="0x1EB28"/>
+
+        <!-- Vertices and DisplayList for the "shadow" under Ember and Frost's spawn portal -->
+        <Array Name="gTwinmagiSpawnPortalShadowVtx" Count="4" Offset="0x1EC28">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiSpawnPortalShadowDL" Offset="0x1EC68"/> <!-- Original name is "bt_under_mjin_modelT" -->
+
+        <!-- Texture for the light pillar and the halo that appear when Twinmagi is defeated -->
+        <Texture Name="gTwinmagiLightPillarAndHaloTex" Format="i4" Width="16" Height="16" Offset="0x1ECF0"/>
+
+        <!-- Vertices and DisplayLists for various effects that appear when Twinmagi is defeated -->
+        <Array Name="gTwinmagiLightPillarVtx" Count="20" Offset="0x1ED70">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiLightPillarDL" Offset="0x1EEB0"/> <!-- Original name is "bt_heavenroad_modelT" -->
+        <Array Name="gTwinmagiLightRaysVtx" Count="40" Offset="0x1EFB8">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiLightRaysDL" Offset="0x1F238"/> <!-- Original name is "bt_gokou_modelT" ("halo; aureole; aureola") -->
+        <Array Name="gTwinmagiLightCircleVtx" Count="4" Offset="0x1F350">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiLightCircleDL" Offset="0x1F390"/> <!-- Original name is "bt_heavensgate_modelT" -->
+        <Array Name="gTwinmagiHaloVtx" Count="30" Offset="0x1F428">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiHaloDL" Offset="0x1F608"/> <!-- Original name is "bt_angelring_model" -->
+
+
+        <!-- Ember skeleton -->
+        <Limb Name="gTwinmagiEmberPelvisLimb" LimbType="Standard" Offset="0x1F6E8"/>
+        <Limb Name="gTwinmagiEmberLeftThighLimb" LimbType="Standard" Offset="0x1F6F4"/>
+        <Limb Name="gTwinmagiEmberLeftShinLimb" LimbType="Standard" Offset="0x1F700"/>
+        <Limb Name="gTwinmagiEmberLeftFootLimb" LimbType="Standard" Offset="0x1F70C"/>
+        <Limb Name="gTwinmagiEmberRightThighLimb" LimbType="Standard" Offset="0x1F718"/>
+        <Limb Name="gTwinmagiEmberRightShinLimb" LimbType="Standard" Offset="0x1F724"/>
+        <Limb Name="gTwinmagiEmberRightFootLimb" LimbType="Standard" Offset="0x1F730"/>
+        <Limb Name="gTwinmagiEmberTorsoLimb" LimbType="Standard" Offset="0x1F73C"/>
+        <Limb Name="gTwinmagiEmberLeftSleeveStartLimb" LimbType="Standard" Offset="0x1F748"/>
+        <Limb Name="gTwinmagiEmberLeftSleeveMidLimb" LimbType="Standard" Offset="0x1F754"/>
+        <Limb Name="gTwinmagiEmberLeftSleeveEndLimb" LimbType="Standard" Offset="0x1F760"/>
+        <Limb Name="gTwinmagiEmberLeftSleeveFrontLimb" LimbType="Standard" Offset="0x1F76C"/>
+        <Limb Name="gTwinmagiEmberLeftHandLimb" LimbType="Standard" Offset="0x1F778"/>
+        <Limb Name="gTwinmagiEmberBroomLimb" LimbType="Standard" Offset="0x1F784"/>
+        <Limb Name="gTwinmagiEmberRightSleeveStartLimb" LimbType="Standard" Offset="0x1F790"/>
+        <Limb Name="gTwinmagiEmberRightSleeveMidLimb" LimbType="Standard" Offset="0x1F79C"/>
+        <Limb Name="gTwinmagiEmberRightSleeveEndLimb" LimbType="Standard" Offset="0x1F7A8"/>
+        <Limb Name="gTwinmagiEmberRightSleeveFrontLimb" LimbType="Standard" Offset="0x1F7B4"/>
+        <Limb Name="gTwinmagiEmberRightHandLimb" LimbType="Standard" Offset="0x1F7C0"/>
+        <Limb Name="gTwinmagiEmberNeckLimb" LimbType="Standard" Offset="0x1F7CC"/>
+        <Limb Name="gTwinmagiEmberHeadLimb" LimbType="Standard" Offset="0x1F7D8"/>
+        <Limb Name="gTwinmagiEmberRightBraidStartLimb" LimbType="Standard" Offset="0x1F7E4"/>
+        <Limb Name="gTwinmagiEmberRightBraidEndLimb" LimbType="Standard" Offset="0x1F7F0"/>
+        <Limb Name="gTwinmagiEmberTeethLimb" LimbType="Standard" Offset="0x1F7FC"/>
+        <Limb Name="gTwinmagiEmberLeftBraidStartLimb" LimbType="Standard" Offset="0x1F808"/>
+        <Limb Name="gTwinmagiEmberLeftBraidEndLimb" LimbType="Standard" Offset="0x1F814"/>
+        <Skeleton Name="gTwinmagiEmberSkel" Type="Flex" LimbType="Standard" Offset="0x1F888"/>
+
+        <!-- Twinmagi Animations -->
+        <Animation Name="gTwinmagiDeathAnim" Offset="0x216DC"/> <!-- Original name is "btW_EDdamage" -->
+        <Animation Name="gTwinmagiIceAttackAnim" Offset="0x22700"/> <!-- Original name is "btW_atackL" -->
+        <Animation Name="gTwinmagiFireAttackAnim" Offset="0x23750"/> <!-- Original name is "btW_atackR" -->
+        <Animation Name="gTwinmagiDamageAnim" Offset="0x24374"/> <!-- Original name is "btW_damage" -->
+        <Animation Name="gTwinmagiTPoseAnim" Offset="0x244B4"/> <!-- Original name is "btW_default" -->
+
+        <!-- Twinmagi Textures -->
+        <Texture Name="gTwinmagiSkinAndBangleTex" Format="rgba16" Width="4" Height="8" Offset="0x244D0"/>
+        <Texture Name="gTwinmagiEmblemTex" Format="rgba16" Width="16" Height="16" Offset="0x24510"/>
+        <Texture Name="gTwinmagiBreastTex" Format="rgba16" Width="16" Height="16" Offset="0x24710"/>
+        <Texture Name="gTwinmagiRightPantLegTex" Format="rgba16" Width="16" Height="16" Offset="0x24910"/>
+        <Texture Name="gTwinmagiLeftPantLegTex" Format="rgba16" Width="16" Height="16" Offset="0x24B10"/>
+
+        <!-- Twinmagi Limb Vertices -->
+        <Array Name="gTwinmagiLeftSleeveEndVtx" Count="8" Offset="0x24D10">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftSleeveStartVtx" Count="14" Offset="0x24D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftForearmVtx" Count="26" Offset="0x24E70">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftUpperArmVtx" Count="23" Offset="0x25010">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftShoulderVtx" Count="32" Offset="0x25180">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightSleeveEndVtx" Count="8" Offset="0x25380">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightSleeveStartVtx" Count="14" Offset="0x25400">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightForearmVtx" Count="26" Offset="0x254E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightUpperArmVtx" Count="23" Offset="0x25680">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightShoulderVtx" Count="32" Offset="0x257F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftBraidEndVtx" Count="20" Offset="0x259F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftBraidStartVtx" Count="10" Offset="0x25B30">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightBraidEndVtx" Count="20" Offset="0x25BD0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightBraidStartVtx" Count="10" Offset="0x25D10">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftBreastVtx" Count="38" Offset="0x25DB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightBreastVtx" Count="38" Offset="0x26010">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiTorsoVtx" Count="103" Offset="0x26270">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiSash4Vtx" Count="10" Offset="0x268E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiSash3Vtx" Count="12" Offset="0x26980">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiSash2Vtx" Count="8" Offset="0x26A40">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiSash1Vtx" Count="10" Offset="0x26AC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftFootVtx" Count="37" Offset="0x26B60">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftShinVtx" Count="26" Offset="0x26DB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftThighVtx" Count="17" Offset="0x26F50">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightFootVtx" Count="29" Offset="0x27060">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightShinVtx" Count="26" Offset="0x27230">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightThighVtx" Count="17" Offset="0x273D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiPelvisVtx" Count="36" Offset="0x274E0">
+            <Vtx/>
+        </Array>
+
+        <!-- Twinmagi Limb DisplayLists -->
+        <DList Name="gTwinmagiRightFootDL" Offset="0x27720"/>
+        <DList Name="gTwinmagiRightShinDL" Offset="0x27820"/>
+        <DList Name="gTwinmagiRightThighDL" Offset="0x27970"/>
+        <DList Name="gTwinmagiRightSleeveEndDL" Offset="0x27A60"/>
+        <DList Name="gTwinmagiRightSleeveStartDL" Offset="0x27B78"/>
+        <DList Name="gTwinmagiRightForearmDL" Offset="0x27C98"/>
+        <DList Name="gTwinmagiRightUpperArmDL" Offset="0x27DE8"/>
+        <DList Name="gTwinmagiRightShoulderDL" Offset="0x27EE0"/>
+        <DList Name="gTwinmagiLeftSleeveEndDL" Offset="0x27FE8"/>
+        <DList Name="gTwinmagiLeftSleeveStartDL" Offset="0x28100"/>
+        <DList Name="gTwinmagiLeftForearmDL" Offset="0x28220"/>
+        <DList Name="gTwinmagiLeftUpperArmDL" Offset="0x28370"/>
+        <DList Name="gTwinmagiLeftShoulderDL" Offset="0x28468"/>
+        <DList Name="gTwinmagiLeftBraidEndDL" Offset="0x28570"/>
+        <DList Name="gTwinmagiLeftBraidStartDL" Offset="0x28668"/>
+        <DList Name="gTwinmagiRightBraidEndDL" Offset="0x28778"/>
+        <DList Name="gTwinmagiRightBraidStartDL" Offset="0x28870"/>
+        <DList Name="gTwinmagiRightBreastDL" Offset="0x28980"/>
+        <DList Name="gTwinmagiLeftBreastDL" Offset="0x28B78"/>
+        <DList Name="gTwinmagiTorsoDL" Offset="0x28D70"/>
+        <DList Name="gTwinmagiLeftFootDL" Offset="0x29268"/>
+        <DList Name="gTwinmagiLeftShinDL" Offset="0x293E0"/>
+        <DList Name="gTwinmagiLeftThighDL" Offset="0x29530"/>
+        <DList Name="gTwinmagiSash4DL" Offset="0x29620"/>
+        <DList Name="gTwinmagiSash3DL" Offset="0x29738"/>
+        <DList Name="gTwinmagiSash2DL" Offset="0x29900"/>
+        <DList Name="gTwinmagiSash1DL" Offset="0x299F8"/>
+        <DList Name="gTwinmagiPelvisDL" Offset="0x29B10"/>
+
+        <!-- Twinmagi Textures -->
+        <Texture Name="gTwinmagiEyeAndMouthTLUT" Format="rgba16" Width="29" Height="8" Offset="0x29E50"/>
+        <Texture Name="gTwinmagiEarAndFingerTLUT" Format="rgba16" Width="8" Height="5" Offset="0x2A020"/>
+        <Texture Name="gTwinmagiEyeHalfTex" Format="ci8" Width="32" Height="32" Offset="0x2A070" TlutOffset="0x29E50"/>
+        <Texture Name="gTwinmagiEyeClosedTex" Format="ci8" Width="32" Height="32" Offset="0x2A470" TlutOffset="0x29E50"/>
+        <Texture Name="gTwinmagiGrimaceTex" Format="ci8" Width="16" Height="16" Offset="0x2A870"  TlutOffset="0x29E50"/>
+        <Texture Name="gTwinmagiEyebrowTex" Format="rgba16" Width="8" Height="4" Offset="0x2A970"/>
+        <Texture Name="gTwinmagiEyeOpenTex" Format="ci8" Width="32" Height="32" Offset="0x2A9B0" TlutOffset="0x29E50"/>
+        <Texture Name="gTwinmagiNoseTex" Format="i8" Width="8" Height="8" Offset="0x2ADB0"/>
+        <Texture Name="gTwinmagiEarTex" Format="ci8" Width="8" Height="8" Offset="0x2ADF0"  TlutOffset="0x2A020"/>
+        <Texture Name="gTwinmagiSmileTex" Format="ci8" Width="16" Height="16" Offset="0x2AE30"  TlutOffset="0x29E50"/>
+        <Texture Name="gTwinmagiFingerTex" Format="ci8" Width="8" Height="16" Offset="0x2AF30"  TlutOffset="0x2A020"/>
+
+        <!-- Twinmagi Limb Vertices -->
+        <Array Name="gTwinmagiInvisibleLeftHairBunVtx" Count="5" Offset="0x2AFB0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiInvisibleRightHairBunVtx" Count="5" Offset="0x2B000">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiHeadVtx" Count="196" Offset="0x2B050">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftHandVtx" Count="32" Offset="0x2BC90">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightBroomVtx" Count="22" Offset="0x2BE90">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftBroomVtx" Count="22" Offset="0x2BFF0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightHandVtx" Count="32" Offset="0x2C150">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiRightHairBunVtx" Count="9" Offset="0x2C350">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiLeftHairBunVtx" Count="9" Offset="0x2C3E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiHairIceJetVtx" Count="14" Offset="0x2C470">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiHairIceTrailVtx" Count="15" Offset="0x2C550">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiHairFireJetVtx" Count="14" Offset="0x2C640">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiHairFireTrailVtx" Count="18" Offset="0x2C720">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiBroomIceJetVtx" Count="7" Offset="0x2C840">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiBroomIceTrailVtx" Count="17" Offset="0x2C8B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiBroomFireJetVtx" Count="10" Offset="0x2C9C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gTwinmagiBroomFireTrailVtx" Count="9" Offset="0x2CA60">
+            <Vtx/>
+        </Array>
+
+        <!-- Twinmagi Limb DisplayLists -->
+        <DList Name="gTwinmagiInvisibleLeftHairBunDL" Offset="0x2CAF0"/>
+        <DList Name="gTwinmagiInvisibleRightHairBunDL" Offset="0x2CB50"/>
+        <DList Name="gTwinmagiHeadDL" Offset="0x2CBB0"/>
+        <DList Name="gTwinmagiLeftHandDL" Offset="0x2D320"/>
+        <DList Name="gTwinmagiRightBroomDL" Offset="0x2D4A0"/>
+        <DList Name="gTwinmagiLeftBroomDL" Offset="0x2D5D8"/>
+        <DList Name="gTwinmagiRightHandDL" Offset="0x2D710"/>
+        <DList Name="gTwinmagiRightHairBunDL" Offset="0x2D890"/>
+        <DList Name="gTwinmagiLeftHairBunDL" Offset="0x2D940"/>
+        <DList Name="gTwinmagiHairIceJetDL" Offset="0x2D9F0"/>
+        <DList Name="gTwinmagiHairIceTrailDL" Offset="0x2DAE0"/>
+        <DList Name="gTwinmagiHairFireJetDL" Offset="0x2DBC8"/>
+        <DList Name="gTwinmagiHairFireTrailDL" Offset="0x2DCB8"/>
+        <DList Name="gTwinmagiBroomIceJetDL" Offset="0x2DDD8"/>
+        <DList Name="gTwinmagiBroomIceTrailDL" Offset="0x2DEB0"/>
+        <DList Name="gTwinmagiBroomFireJetDL" Offset="0x2DFB0"/>
+        <DList Name="gTwinmagiBroomFireTrailDL" Offset="0x2E098"/>
+
+        <!-- Twinmagi Title Card -->
+        <Version Pattern="ntsc-.*|gc-jp.*|gc-us.*|ique-cn">
+            <Texture Name="gTwinmagiTitleCardTex" Format="ia8" Width="128" Height="80" Offset="0x2E170"/>
+        </Version>
+        <Version Pattern="pal-.*|gc-eu.*">
+            <Texture Name="gTwinmagiTitleCardTex" Format="ia8" Width="128" Height="120" Offset="0x2E170"/>
+        </Version>
+
+        <!-- Twinmagi Limbs -->
+        <Limb Name="gTwinmagiPelvisLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiSash1Limb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiSash2Limb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiSash3Limb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiSash4Limb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftThighLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftShinLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftFootLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightThighLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightShinLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightFootLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiTorsoLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftBreastLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightBreastLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiHairIceTrailLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiHairIceJetLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiHairFireJetLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiHairFireTrailLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftHairBunLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightHairBunLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiHeadLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightBraidStartLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightBraidEndLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftBraidStartLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftBraidEndLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftShoulderLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftUpperArmLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftForearmLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftSleeveStartLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftSleeveEndLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiBroomIceTrailLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiBroomIceJetLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftHandLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiLeftBroomLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightShoulderLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightUpperArmLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightForearmLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightSleeveStartLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightSleeveEndLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightBroomLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiBroomFireJetLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiBroomFireTrailLimb" LimbType="Standard"/>
+        <Limb Name="gTwinmagiRightHandLimb" LimbType="Standard"/>
+
+        <!-- Twinmagi Skeleton -->
+        <LimbTable Name="gTwinmagiLimbs" LimbType="Standard" Count="43"/>
+        <Skeleton Name="gTwinmagiSkel" Type="Flex" LimbType="Standard"/>
+
+        <!-- Twinmagi Animations -->
+        <Animation Name="gTwinmagiHoverAnim" Offset=".+0xBCC"/> <!-- Original name is "btW_fly" -->
+        <Animation Name="gTwinmagiChargedAttackHitAnim" Offset=".+0xCE8"/> <!-- Original name is "btW_hit" -->
+        <Animation Name="gTwinmagiStunStartAnim" Offset=".+0xAB4"/> <!-- Original name is "btW_hit_to_mahi" -->
+        <Animation Name="gTwinmagiStunLoopAnim" Offset=".+0xC6C"/> <!-- Original name is "btW_mahi" ("paralysis, stupor") -->
+        <Animation Name="gTwinmagiStunEndAnim" Offset=".+0x948"/> <!-- Original name is "btW_mahi_to_fly" -->
+        <Animation Name="gTwinmagiWindUpAnim" Offset=".+0x1624"/> <!-- Original name is "btW_preatack" -->
+        <Animation Name="gTwinmagiIntroAnim" Offset=".+0x1E60"/> <!-- Original name is "btW_start" -->
+        <Animation Name="gTwinmagiLaughAnim" Offset=".+0x1494"/> <!-- Original name is "btW_ufufu" ("tee-hee") -->
+
+        <!-- Assets for an unused red boulder -->
+        <Array Name="gTwinmagiUnusedBoulderVtx" Count="58">
+            <Vtx/>
+        </Array>
+        <DList Name="gTwinmagiUnusedBoulderDL" Length="38"/>
+        <Texture Name="gTwinmagiUnusedBoulderTex" Format="rgba16" Width="32" Height="32"/>
+    </File>
+</Root>

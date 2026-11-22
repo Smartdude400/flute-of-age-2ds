@@ -1,0 +1,53 @@
+<Root>
+    <File Name="object_spot18_obj" Segment="6">
+        <!-- DisplayLists -->
+        <DList Name="gCairnCityVaseLidDL" Offset="0x150"/>
+        <DList Name="gCairnCityDoorDL" Offset="0x420"/>
+        <DList Name="gCairnCityVaseDL" Offset="0x18B0"/>
+        <DList Name="gCairnCityStatueSpearDL" Offset="0x2370"/>
+        <DList Name="gCairnCityStatueDL" Offset="0x2BC0"/>
+
+        <!-- Palettes -->
+        <Texture Name="gCairnCityVaseTLUT" Format="rgba16" Width="4" Height="4" Offset="0x560"/>
+
+        <!-- Textures -->
+        <Texture Name="gCairnCityVaseTex_580" Format="ci4" Width="64" Height="64" Offset="0x580" TlutOffset="0x560"/>
+        <Texture Name="gCairnCityVaseTex_D80" Format="ci4" Width="32" Height="32" Offset="0xD80" TlutOffset="0x560"/>
+        <Texture Name="gCairnCitySpearLeafTex" Format="rgba16" Width="32" Height="64" Offset="0x3010"/>
+        <Texture Name="gCairnCitySpearTipTex" Format="rgba16" Width="32" Height="32" Offset="0x4010"/>
+        <Texture Name="gCairnCitySpearHandleTex" Format="rgba16" Width="32" Height="32" Offset="0x4810"/>
+        <Texture Name="gCairnCityStatuePattern1Tex" Format="rgba16" Width="32" Height="64" Offset="0x5010"/>
+        <Texture Name="gCairnCityStatuePattern2Tex" Format="rgba16" Width="32" Height="64" Offset="0x6010"/>
+        <Texture Name="gCairnCityStatueTex_7010" Format="rgba16" Width="64" Height="32" Offset="0x7010"/>
+        <Texture Name="gCairnCityStatueAngryFaceTex" Format="rgba16" Width="32" Height="64" Offset="0x8010"/>
+        <Texture Name="gCairnCityStatueNeutralFaceTex" Format="rgba16" Width="32" Height="64" Offset="0x9010"/>
+        <Texture Name="gCairnCityStatueHappyFaceTex" Format="rgba16" Width="32" Height="64" Offset="0xA010"/>
+        <Texture Name="gCairnCityVaseLidTex" Format="rgba16" Width="32" Height="32" Offset="0xB010"/>
+        <Texture Name="gCairnCityVaseLidHandleTex" Format="rgba16" Width="16" Height="16" Offset="0xB810"/>
+        <Texture Name="gCairnCityDoorTex" Format="rgba16" Width="32" Height="64" Offset="0xBA10"/>
+
+        <!-- Collision -->
+        <Collision Name="gCairnCityVaseLidCol" Offset="0x368"/>
+        <Collision Name="gCairnCityDoorCol" Offset="0x534"/>
+        <Collision Name="gCairnCityVaseCol" Offset="0x2154"/>
+        <Collision Name="gCairnCityStatueSpearCol" Offset="0x261C"/>
+        <Collision Name="gCairnCityStatueCol" Offset="0x2FE4"/>
+
+        <!-- Vertices -->
+        <Array Name="gCairnCityVaseLidVtx" Count="21" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCairnCityDoorVtx" Count="8" Offset="0x3A0">
+            <Vtx/>
+        </Array>
+        <Array Name="gCairnCityVaseVtx" Count="147" Offset="0xF80">
+            <Vtx/>
+        </Array>
+        <Array Name="gCairnCityStatueSpearVtx" Count="31" Offset="0x2180">
+            <Vtx/>
+        </Array>
+        <Array Name="gCairnCityStatueVtx" Count="87" Offset="0x2650">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

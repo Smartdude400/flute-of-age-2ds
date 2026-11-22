@@ -1,0 +1,19 @@
+<Root>
+    <File Name="object_spot15_obj" Segment="6">
+        <!-- Sunmead Milk Crate -->
+        <Array Name="gSunmeadMilkCrateVtx" Count="24" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gSunmeadMilkCrateDL" Offset="0x180"/>
+        <Texture Name="gSunmeadMilkCrateTex" Format="rgba16" Width="32" Height="64" Offset="0xD00"/>
+        <Collision Name="gSunmeadMilkCrateCol" Offset="0x348"/>
+
+        <!-- Sunmead Corral Fence -->
+        <Array Name="gSunmeadCorralFenceVtx" Count="4" Offset="0x380">
+            <Vtx/>
+        </Array>
+        <DList Name="gSunmeadCorralFenceDL" Offset="0x3C0"/>
+        <Texture Name="gSunmeadCorralFenceTex" Format="i4" Width="32" Height="128" Offset="0x500"/>
+        <Collision Name="gSunmeadCorralFenceCol" Offset="0x4D0"/>
+    </File>
+</Root>

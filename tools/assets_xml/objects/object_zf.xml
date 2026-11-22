@@ -1,0 +1,306 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_zf" Segment="6">
+        <Texture Name="gEmberonTLUT" Format="rgba16" Width="16" Height="16" Offset="0x0"/>
+        <Texture Name="gEmberonNostrilsAndEyeSocketsTex" Format="ci8" Width="8" Height="8" Offset="0x200" TlutOffset="0x0"/>
+        <Texture Name="gEmberonScalesTex" Format="ci8" Width="16" Height="16" Offset="0x240" TlutOffset="0x0"/>
+        <Texture Name="gEmberonSpikeTex" Format="rgba16" Width="8" Height="8" Offset="0x340"/>
+        <Texture Name="gEmberonRightEyeTex" Format="rgba16" Width="8" Height="8" Offset="0x3C0"/>
+        <Texture Name="gEmberonSkinTex" Format="ci8" Width="16" Height="16" Offset="0x440" TlutOffset="0x0"/>
+        <Texture Name="gEmberonAccessoriesTex" Format="i8" Width="8" Height="8" Offset="0x540"/> <!-- Used for the sword, claws, teeth, sheath and armor jewel -->
+        <Texture Name="gEmberonArmorTex" Format="i8" Width="8" Height="16" Offset="0x580"/>
+        <Texture Name="gEmberonMouthTex" Format="ci8" Width="16" Height="16" Offset="0x600" TlutOffset="0x0"/>
+        <Texture Name="gEmberonLeftEyeTex" Format="rgba16" Width="16" Height="16" Offset="0x700"/>
+        <Array Name="gEmberonRightThighVtx" Count="34" Offset="0x900">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonRightShinVtx" Count="22" Offset="0xB20">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonRightFootClawsVtx" Count="30" Offset="0xC80">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftThighVtx" Count="34" Offset="0xE60">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftShinVtx" Count="22" Offset="0x1080">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftFootClawsVtx" Count="30" Offset="0x11E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonArmVtx" Count="21" Offset="0x13C0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonForearmVtx" Count="14" Offset="0x1510">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonRightHandAndSwordVtx" Count="25" Offset="0x15F0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftArmVtx" Count="21" Offset="0x1780">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftForearmVtx" Count="14" Offset="0x18D0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonLeftHandVtx" Count="35" Offset="0x19B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonTailVtx" Count="27" Offset="0x1BE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonTailSpikeVtx" Count="14" Offset="0x1D90">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonSheathVtx" Count="16" Offset="0x1E70">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonBodyVtx" Count="50" Offset="0x1F70">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonArmorVtx" Count="72" Offset="0x2290">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonNeckVtx" Count="29" Offset="0x2710">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonJawVtx" Count="59" Offset="0x28E0">
+            <Vtx/>
+        </Array>
+        <Array Name="gEmberonHeadVtx" Count="136" Offset="0x2C90">
+            <Vtx/>
+        </Array>
+        <DList Name="gEmberonRightThighDL" Offset="0x3510"/>
+        <DList Name="gEmberonRightShinDL" Offset="0x3778"/>
+        <DList Name="gEmberonRightFootClawsDL" Offset="0x3908"/>
+        <DList Name="gEmberonLeftThighDL" Offset="0x3A60"/>
+        <DList Name="gEmberonLeftShinDL" Offset="0x3CC8"/>
+        <DList Name="gEmberonLeftFootClawsDL" Offset="0x3E58"/>
+        <DList Name="gEmberonArmDL" Offset="0x3FB0"/>
+        <DList Name="gEmberonForearmDL" Offset="0x41A8"/>
+        <DList Name="gEmberonRightHandAndSwordDL" Offset="0x4330"/>
+        <DList Name="gEmberonLeftArmDL" Offset="0x44F0"/>
+        <DList Name="gEmberonLeftForearmDL" Offset="0x46E8"/>
+        <DList Name="gEmberonLeftHandDL" Offset="0x4870"/>
+        <DList Name="gEmberonTailDL" Offset="0x4A00"/>
+        <DList Name="gEmberonTailSpikeDL" Offset="0x4D50"/>
+        <DList Name="gEmberonSheathDL" Offset="0x4DF8"/>
+        <DList Name="gEmberonBodyDL" Offset="0x4EA0"/>
+        <DList Name="gEmberonArmorDL" Offset="0x5180"/>
+        <DList Name="gEmberonNeckDL" Offset="0x5300"/>
+        <DList Name="gEmberonJawDL" Offset="0x5598"/>
+        <DList Name="gEmberonHeadDL" Offset="0x59C8"/>
+        <Limb Name="gEmberonRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ROOT_ROOT" Offset="0x6390"/>
+        <Limb Name="gEmberonRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ROOT" Offset="0x639C"/>
+        <Limb Name="gEmberonUpperBodyLimb" LimbType="Standard" EnumName="EMBERON_LIMB_UPPER_BODY" Offset="0x63A8"/>
+        <Limb Name="gEmberonNeckRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_NECK_ROOT" Offset="0x63B4"/>
+        <Limb Name="gEmberonHeadRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_HEAD_ROOT" Offset="0x63C0"/>
+        <Limb Name="gEmberonJawRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_JAW_ROOT_ROOT" Offset="0x63CC"/>
+        <Limb Name="gEmberonJawRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_JAW_ROOT" Offset="0x63D8"/>
+        <Limb Name="gEmberonJawLimb" LimbType="Standard" EnumName="EMBERON_LIMB_JAW" Offset="0x63E4"/>
+        <Limb Name="gEmberonHeadLimb" LimbType="Standard" EnumName="EMBERON_LIMB_HEAD" Offset="0x63F0"/>
+        <Limb Name="gEmberonNeckLimb" LimbType="Standard" EnumName="EMBERON_LIMB_NECK" Offset="0x63FC"/>
+        <Limb Name="gEmberonArmRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ARM_ROOT_ROOT" Offset="0x6408"/>
+        <Limb Name="gEmberonArmRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ARM_ROOT" Offset="0x6414"/>
+        <Limb Name="gEmberonForearmRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_FOREARM_ROOT" Offset="0x6420"/>
+        <Limb Name="gEmberonRightHandAndSwordRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_HAND_AND_SWORD_ROOT" Offset="0x642C"/>
+        <Limb Name="gEmberonRightHandAndSwordLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_HAND_AND_SWORD" Offset="0x6438"/>
+        <Limb Name="gEmberonForearmLimb" LimbType="Standard" EnumName="EMBERON_LIMB_FOREARM" Offset="0x6444"/>
+        <Limb Name="gEmberonArmLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ARM" Offset="0x6450"/>
+        <Limb Name="gEmberonLeftArmRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_ARM_ROOT_ROOT" Offset="0x645C"/>
+        <Limb Name="gEmberonLeftArmRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_ARM_ROOT" Offset="0x6468"/>
+        <Limb Name="gEmberonLeftForearmRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_FOREARM_ROOT" Offset="0x6474"/>
+        <Limb Name="gEmberonLeftHandRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_HAND_ROOT" Offset="0x6480"/>
+        <Limb Name="gEmberonLeftHandLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_HAND" Offset="0x648C"/>
+        <Limb Name="gEmberonLeftForearmLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_FOREARM" Offset="0x6498"/>
+        <Limb Name="gEmberonLeftArmLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_ARM" Offset="0x64A4"/>
+        <Limb Name="gEmberonArmorLimb" LimbType="Standard" EnumName="EMBERON_LIMB_ARMOR" Offset="0x64B0"/>
+        <Limb Name="gEmberonTailRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_TAIL_ROOT_ROOT" Offset="0x64BC"/>
+        <Limb Name="gEmberonTailRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_TAIL_ROOT" Offset="0x64C8"/>
+        <Limb Name="gEmberonTailEndRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_TAIL_END_ROOT" Offset="0x64D4"/>
+        <Limb Name="gEmberonTailEndLimb" LimbType="Standard" EnumName="EMBERON_LIMB_TAIL_END" Offset="0x64E0"/>
+        <Limb Name="gEmberonTailLimb" LimbType="Standard" EnumName="EMBERON_LIMB_TAIL" Offset="0x64EC"/>
+        <Limb Name="gEmberonSheathRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_SHEATH_ROOT_ROOT" Offset="0x64F8"/>
+        <Limb Name="gEmberonSheathRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_SHEATH_ROOT" Offset="0x6504"/>
+        <Limb Name="gEmberonSheathLimb" LimbType="Standard" EnumName="EMBERON_LIMB_SHEATH" Offset="0x6510"/>
+        <Limb Name="gEmberonRightThighRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_THIGH_ROOT_ROOT" Offset="0x651C"/>
+        <Limb Name="gEmberonRightThighRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_THIGH_ROOT" Offset="0x6528"/>
+        <Limb Name="gEmberonRightShinRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_SHIN_ROOT" Offset="0x6534"/>
+        <Limb Name="gEmberonRightFootClawsRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_FOOT_CLAWS_ROOT" Offset="0x6540"/>
+        <Limb Name="gEmberonRightFootClawsLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_FOOT_CLAWS" Offset="0x654C"/>
+        <Limb Name="gEmberonRightShinLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_SHIN" Offset="0x6558"/>
+        <Limb Name="gEmberonRightThighLimb" LimbType="Standard" EnumName="EMBERON_LIMB_RIGHT_THIGH" Offset="0x6564"/>
+        <Limb Name="gEmberonLeftThighRootRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_THIGH_ROOT_ROOT" Offset="0x6570"/>
+        <Limb Name="gEmberonLeftThighRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_THIGH_ROOT" Offset="0x657C"/>
+        <Limb Name="gEmberonLeftShinRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_SHIN_ROOT" Offset="0x6588"/>
+        <Limb Name="gEmberonLeftFootClawsRootLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_FOOT_CLAWS_ROOT" Offset="0x6594"/>
+        <Limb Name="gEmberonLeftFootClawsLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_FOOT_CLAWS" Offset="0x65A0"/>
+        <Limb Name="gEmberonLeftShinLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_SHIN" Offset="0x65AC"/>
+        <Limb Name="gEmberonLeftThighLimb" LimbType="Standard" EnumName="EMBERON_LIMB_LEFT_THIGH" Offset="0x65B8"/>
+        <Limb Name="gEmberonBodyLimb" LimbType="Standard" EnumName="EMBERON_LIMB_BODY" Offset="0x65C4"/>
+        <Skeleton Name="gEmberonSkel" Type="Normal" LimbType="Standard" LimbNone="EMBERON_LIMB_NONE" LimbMax="EMBERON_LIMB_MAX" EnumName="EmberonLimb" Offset="0x6690"/>
+        <Animation Name="gZfWalkAnim" Offset="0x8138"/>
+        <Animation Name="gZfLandOnFeetAnim" Offset="0x8C6C"/>
+        <Animation Name="gZfJumpAnim" Offset="0x9530"/>
+        <Animation Name="gZfSlashAnim" Offset="0xA3D4"/>
+        <Animation Name="gZfIdleAnim" Offset="0xB10C"/>
+        <Texture Name="gScaleonSkinTex" Format="rgba16" Width="32" Height="32" Offset="0xB120"/>
+        <Texture Name="gScaleonSpikeTex" Format="rgba16" Width="8" Height="8" Offset="0xB920"/>
+        <Texture Name="gScaleonMouthAndArmorSpikesTex" Format="rgba16" Width="8" Height="8" Offset="0xB9A0"/>
+        <Texture Name="gScaleonShoulderArmorTex" Format="rgba16" Width="8" Height="8" Offset="0xBA20"/>
+        <Texture Name="gScaleonArmor1Tex" Format="rgba16" Width="8" Height="8" Offset="0xBAA0"/>
+        <Texture Name="gScaleonArmor2Tex" Format="rgba16" Width="8" Height="8" Offset="0xBB20"/>
+        <Texture Name="gScaleonEyeTex" Format="rgba16" Width="16" Height="16" Offset="0xBBA0"/>
+        <Texture Name="gScaleonClawTex" Format="rgba16" Width="8" Height="8" Offset="0xBDA0"/> <!-- Also used for a tiny part of the sheath -->
+        <Texture Name="gScaleonSwordTex" Format="rgba16" Width="16" Height="16" Offset="0xBE20"/>
+        <Texture Name="gScaleonRightHandPalmTex" Format="rgba16" Width="16" Height="16" Offset="0xC020"/>
+        <Texture Name="gScaleonSheathTex" Format="rgba16" Width="8" Height="8" Offset="0xC220"/>
+        <Texture Name="object_zf_Tex_00C2A0" Format="rgba16" Width="8" Height="8" Offset="0xC2A0"/>
+        <Array Name="gScaleonLeftThighVtx" Count="15" Offset="0xC320">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftThighDL" Offset="0xC410"/>
+        <Array Name="gScaleonLeftShinVtx" Count="23" Offset="0xC4D0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftShinDL" Offset="0xC640"/>
+        <Array Name="gScaleonLeftFootClawsVtx" Count="30" Offset="0xC798">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftFootClawsDL" Offset="0xC978"/>
+        <Array Name="gScaleonLeftArmVtx" Count="11" Offset="0xCA98">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftArmDL" Offset="0xCB48"/>
+        <Array Name="gScaleonLeftForearmVtx" Count="8" Offset="0xCC00">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftForearmDL" Offset="0xCC80"/>
+        <Array Name="gScaleonLeftHandVtx" Count="39" Offset="0xCD80">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonLeftHandDL" Offset="0xCFF0"/>
+        <Array Name="gScaleonRightThighVtx" Count="15" Offset="0xD140">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonRightThighDL" Offset="0xD230"/>
+        <Array Name="gScaleonRightShinVtx" Count="23" Offset="0xD2F0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonRightShinDL" Offset="0xD460"/>
+        <Array Name="gScaleonRightFootClawsVtx" Count="30" Offset="0xD5B8">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonRightFootClawsDL" Offset="0xD798"/>
+        <Array Name="gScaleonArmVtx" Count="11" Offset="0xD8B8">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonArmDL" Offset="0xD968"/>
+        <Array Name="gScaleonForearmVtx" Count="8" Offset="0xDA20">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonForearmDL" Offset="0xDAA0"/>
+        <Array Name="gScaleonRightHandAndSwordVtx" Count="24" Offset="0xDBA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonRightHandAndSwordDL" Offset="0xDD20" RawPointers="0x07000000"/>
+        <Array Name="gScaleonRightHandVtx" Count="39" Offset="0xDF28">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonRightHandDL" Offset="0xE198"/>
+        <Array Name="gScaleonJawVtx" Count="16" Offset="0xE2E8">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonJawDL" Offset="0xE3E8"/>
+        <Array Name="gScaleonHeadVtx" Count="48" Offset="0xE4E0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonHeadDL" Offset="0xE7E0"/>
+        <Array Name="gScaleonBodyVtx" Count="32" Offset="0xE9A8">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonBodyDL" Offset="0xEBA8"/>
+        <Array Name="gScaleonNeckVtx" Count="17" Offset="0xED50">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonNeckDL" Offset="0xEE60"/>
+        <Array Name="gScaleonArmorVtx" Count="104" Offset="0xEFA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonArmorDL" Offset="0xF620"/>
+        <Array Name="gScaleonTailVtx" Count="19" Offset="0xF840">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonTailDL" Offset="0xF970"/>
+        <Array Name="gScaleonTailEndVtx" Count="15" Offset="0xFA98">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonTailEndDL" Offset="0xFB88"/>
+        <Array Name="gScaleonSheathVtx" Count="16" Offset="0xFCA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonSheathDL" Offset="0xFDA0"/>
+        <Array Name="gScaleonSheathedSwordVtx" Count="29" Offset="0xFE90">
+            <Vtx/>
+        </Array>
+        <DList Name="gScaleonSheathedSwordDL" Offset="0x10060"/>
+        <Limb Name="gScaleonRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_ROOT_ROOT" Offset="0x101B8"/>
+        <Limb Name="gScaleonRootLimb" LimbType="Standard" EnumName="ZF_LIMB_ROOT" Offset="0x101C4"/>
+        <Limb Name="gScaleonUpperBodyLimb" LimbType="Standard" EnumName="ZF_LIMB_UPPER_BODY" Offset="0x101D0"/>
+        <Limb Name="gScaleonNeckRootLimb" LimbType="Standard" EnumName="ZF_LIMB_NECK_ROOT" Offset="0x101DC"/>
+        <Limb Name="gScaleonHeadRootLimb" LimbType="Standard" EnumName="ZF_LIMB_HEAD_ROOT" Offset="0x101E8"/>
+        <Limb Name="gScaleonJawRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_JAW_ROOT_ROOT" Offset="0x101F4"/>
+        <Limb Name="gScaleonJawRootLimb" LimbType="Standard" EnumName="ZF_LIMB_JAW_ROOT" Offset="0x10200"/>
+        <Limb Name="gScaleonJawLimb" LimbType="Standard" EnumName="ZF_LIMB_JAW" Offset="0x1020C"/>
+        <Limb Name="gScaleonHeadLimb" LimbType="Standard" EnumName="ZF_LIMB_HEAD" Offset="0x10218"/>
+        <Limb Name="gScaleonNeckLimb" LimbType="Standard" EnumName="ZF_LIMB_NECK" Offset="0x10224"/>
+        <Limb Name="gScaleonArmRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_ARM_ROOT_ROOT" Offset="0x10230"/>
+        <Limb Name="gScaleonArmRootLimb" LimbType="Standard" EnumName="ZF_LIMB_ARM_ROOT" Offset="0x1023C"/>
+        <Limb Name="gScaleonForearmRootLimb" LimbType="Standard" EnumName="ZF_LIMB_FOREARM_ROOT" Offset="0x10248"/>
+        <Limb Name="gScaleonRightHandAndSwordRootLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_HAND_AND_SWORD_ROOT" Offset="0x10254"/>
+        <Limb Name="gScaleonRightHandAndSwordLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_HAND_AND_SWORD" Offset="0x10260"/>
+        <Limb Name="gScaleonForearmLimb" LimbType="Standard" EnumName="ZF_LIMB_FOREARM" Offset="0x1026C"/>
+        <Limb Name="gScaleonArmLimb" LimbType="Standard" EnumName="ZF_LIMB_ARM" Offset="0x10278"/>
+        <Limb Name="gScaleonLeftArmRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_ARM_ROOT_ROOT" Offset="0x10284"/>
+        <Limb Name="gScaleonLeftArmRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_ARM_ROOT" Offset="0x10290"/>
+        <Limb Name="gScaleonLeftForearmRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_FOREARM_ROOT" Offset="0x1029C"/>
+        <Limb Name="gScaleonLeftHandRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_HAND_ROOT" Offset="0x102A8"/>
+        <Limb Name="gScaleonLeftHandLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_HAND" Offset="0x102B4"/>
+        <Limb Name="gScaleonLeftForearmLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_FOREARM" Offset="0x102C0"/>
+        <Limb Name="gScaleonLeftArmLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_ARM" Offset="0x102CC"/>
+        <Limb Name="gScaleonArmorLimb" LimbType="Standard" EnumName="ZF_LIMB_ARMOR" Offset="0x102D8"/>
+        <Limb Name="gScaleonTailRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_TAIL_ROOT_ROOT" Offset="0x102E4"/>
+        <Limb Name="gScaleonTailRootLimb" LimbType="Standard" EnumName="ZF_LIMB_TAIL_ROOT" Offset="0x102F0"/>
+        <Limb Name="gScaleonTailEndRootLimb" LimbType="Standard" EnumName="ZF_LIMB_TAIL_END_ROOT" Offset="0x102FC"/>
+        <Limb Name="gScaleonTailEndLimb" LimbType="Standard" EnumName="ZF_LIMB_TAIL_END" Offset="0x10308"/>
+        <Limb Name="gScaleonTailLimb" LimbType="Standard" EnumName="ZF_LIMB_TAIL" Offset="0x10314"/>
+        <Limb Name="gScaleonSheathRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_SHEATH_ROOT_ROOT" Offset="0x10320"/>
+        <Limb Name="gScaleonSheathRootLimb" LimbType="Standard" EnumName="ZF_LIMB_SHEATH_ROOT" Offset="0x1032C"/>
+        <Limb Name="gScaleonSheathLimb" LimbType="Standard" EnumName="ZF_LIMB_SHEATH" Offset="0x10338"/>
+        <Limb Name="gScaleonRightThighRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_THIGH_ROOT_ROOT" Offset="0x10344"/>
+        <Limb Name="gScaleonRightThighRootLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_THIGH_ROOT" Offset="0x10350"/>
+        <Limb Name="gScaleonRightShinRootLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_SHIN_ROOT" Offset="0x1035C"/>
+        <Limb Name="gScaleonRightFootClawsRootLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_FOOT_CLAWS_ROOT" Offset="0x10368"/>
+        <Limb Name="gScaleonRightFootClawsLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_FOOT_CLAWS" Offset="0x10374"/>
+        <Limb Name="gScaleonRightShinLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_SHIN" Offset="0x10380"/>
+        <Limb Name="gScaleonRightThighLimb" LimbType="Standard" EnumName="ZF_LIMB_RIGHT_THIGH" Offset="0x1038C"/>
+        <Limb Name="gScaleonLeftThighRootRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_THIGH_ROOT_ROOT" Offset="0x10398"/>
+        <Limb Name="gScaleonLeftThighRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_THIGH_ROOT" Offset="0x103A4"/>
+        <Limb Name="gScaleonLeftShinRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_SHIN_ROOT" Offset="0x103B0"/>
+        <Limb Name="gScaleonLeftFootClawsRootLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_FOOT_CLAWS_ROOT" Offset="0x103BC"/>
+        <Limb Name="gScaleonLeftFootClawsLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_FOOT_CLAWS" Offset="0x103C8"/>
+        <Limb Name="gScaleonLeftShinLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_SHIN" Offset="0x103D4"/>
+        <Limb Name="gScaleonLeftThighLimb" LimbType="Standard" EnumName="ZF_LIMB_LEFT_THIGH" Offset="0x103E0"/>
+        <Limb Name="gScaleonBodyLimb" LimbType="Standard" EnumName="ZF_LIMB_BODY" Offset="0x103EC"/>
+        <Skeleton Name="gScaleonSkel" Type="Normal" LimbType="Standard" LimbNone="ZF_LIMB_NONE" LimbMax="ZF_LIMB_MAX" EnumName="ZfLimb" Offset="0x104B8"/>
+        <Animation Name="gZfRunAwayJumpAnim" Offset="0x1081C"/>
+        <Animation Name="gZfRunAwayAirborneAnim" Offset="0x10CAC"/>
+        <Animation Name="gZfRunAwayLandAnim" Offset="0x11070"/>
+        <Animation Name="gZfRunAwayTurnAroundAnim" Offset="0x119F4"/>
+        <Animation Name="gZfTurnAroundUnsheathSword" Offset="0x1366C"/>
+        <Animation Name="gZfDieAnim" Offset="0x14E60"/>
+        <Animation Name="gZfDamagedAnim" Offset="0x157F8"/>
+        <Animation Name="gZfWalkSidewaysAnim" Offset="0x16388"/>
+    </File>
+</Root>

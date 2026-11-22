@@ -1,0 +1,25 @@
+<Root>
+    <File Name="object_spot01_matoyab" Segment="6">
+        <Collision Name="object_spot01_matoyab_col" Offset="0x1C58"/>
+
+        <!-- Oakridge Guard Gate -->
+        <Array Name="gOakridgeGuardGateVtx" Count="4" Offset="0x1C90">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeGuardGateDL" Offset="0x1CD0"/>
+        <Texture Name="gOakridgeGuardGateMetalSidebarDL" Format="rgba16" Width="8" Height="64" Offset="0x1DE0"/>
+        <Collision Name="gOakridgeGuardGateCol" Offset="0x1DA8"/>
+
+        <!-- Oakridge Construction Site -->
+        <Array Name="gOakridgeConstructionSiteVtx" Count="154" Offset="0x888">
+            <Vtx/>
+        </Array>
+        <DList Name="gOakridgeConstructionSiteDL" Offset="0x1228"/>
+        <Texture Name="gOakridgeConstructionSiteTLUT" Format="rgba16" Width="16" Height="16" Offset="0x0"/>
+        <Blob Name="object_spot01_matoyab_000200_Blob" Size="0x8" Offset="0x200"/>
+        <Texture Name="gOakridgeConstructionSiteBrickWithGrassTex" Format="ci8" Width="16" Height="32" Offset="0x0208" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeConstructionSiteBrickTex" Format="ci8" Width="16" Height="32" Offset="0x0408" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeConstructionSitRailingTex" Format="ci8" Width="16" Height="8" Offset="0x0608" TlutOffset="0x0"/>
+        <Texture Name="gOakridgeConstructionSiteWoodTex" Format="ci8" Width="16" Height="32" Offset="0x0688" TlutOffset="0x0"/>
+    </File>
+</Root>

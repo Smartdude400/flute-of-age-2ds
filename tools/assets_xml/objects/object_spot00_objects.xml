@@ -1,0 +1,20 @@
+<Root>
+    <File Name="object_spot00_objects" Segment="6">
+        <!-- Eldora Field Castle Drawbridge -->
+        <Array Name="gEldoraFieldCastleDrawbridgeVtx" Count="24" Offset="0x2B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gEldoraFieldCastleDrawbridgeDL" Offset="0x0430"/>
+        <Texture Name="gEldoraFieldCastleDrawbridgeWoodTex" Format="rgba16" Width="32" Height="64" Offset="0x0610"/>
+        <Texture Name="gEldoraFieldCastleDrawbridgeBoltDL" Format="rgba16" Width="16" Height="16" Offset="0x1A10"/>
+        <Collision Name="gEldoraFieldCastleDrawbridgeCol" Offset="0x05E0"/>
+
+        <!-- Eldora Field Castle Drawbridge Chains -->
+        <Array Name="gEldoraFieldCastleDrawbridgeChainsVtx" Count="12" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gEldoraFieldCastleDrawbridgeChainsDL" Offset="0x00C0"/>
+        <Texture Name="gEldoraFieldCastleDrawbridgeChainsTex" Format="rgba16" Width="16" Height="32" Offset="0x1610"/>
+        <Collision Name="gEldoraFieldCastleDrawbridgeChainsCol" Offset="0x0280"/>
+    </File>
+</Root>

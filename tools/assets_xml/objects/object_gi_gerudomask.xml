@@ -1,0 +1,14 @@
+<Root>
+    <File Name="object_gi_gerudomask" Segment="6">
+        <Texture Name="gGiDuneanMaskTLUT" Format="rgba16" Width="256" Height="1" Offset="0x0"/>
+        <Blob Name="object_gi_gerudomask_000200_Blob" Size="0x8" Offset="0x200"/>
+        <Texture Name="gGiDuneanMaskSkinTex" Format="ci8" Width="8" Height="8" Offset="0x208" TlutOffset="0x0"/>
+        <Texture Name="gGiDuneanMaskHairTex" Format="ci8" Width="16" Height="16" Offset="0x248" TlutOffset="0x0"/>
+        <Texture Name="gGiDuneanMaskLipsTex" Format="ci8" Width="16" Height="16" Offset="0x348" TlutOffset="0x0"/>
+        <Texture Name="gGiDuneanMaskEyeTex" Format="ci8" Width="32" Height="32" Offset="0x448" TlutOffset="0x0"/>
+        <Array Name="gGiDuneanMaskVtx" Count="138" Offset="0x848">
+            <Vtx/>
+        </Array>
+        <DList Name="gGiDuneanMaskDL" Offset="0x10E8"/>
+    </File>
+</Root>

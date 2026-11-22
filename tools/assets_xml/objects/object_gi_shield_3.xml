@@ -1,0 +1,15 @@
+<Root>
+    <ExternalFile OutPath="assets/objects/gameplay_keep"/>
+    <File Name="object_gi_shield_3" Segment="6">
+        <Texture Name="gGiPrismShieldSymbol1Tex" Format="i4" Width="64" Height="32" Offset="0x0"/>
+        <Texture Name="gGiPrismShieldSymbol2Tex" Format="i4" Width="64" Height="64" Offset="0x400"/>
+        <Array Name="gGiPrismShieldVtx" Count="49" Offset="0xC00">
+            <Vtx/>
+        </Array>
+        <Array Name="gGiPrismShieldSymbolVtx" Count="10" Offset="0xF10">
+            <Vtx/>
+        </Array>
+        <DList Name="gGiPrismShieldDL" Offset="0x0FB0"/>
+        <DList Name="gGiPrismShieldSymbolDL" Offset="0x11C8"/>
+    </File>
+</Root>

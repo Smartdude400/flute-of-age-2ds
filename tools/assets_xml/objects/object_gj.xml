@@ -1,0 +1,71 @@
+<Root>
+    <File Name="object_gj" Segment="6">
+        <!-- This is the decorative rubble around the fight arena -->
+        <Array Name="gVarkonsCastleRubbleAroundArenaVtx" Count="220" Offset="0x0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubbleAroundArenaDL" Offset="0xDC0"/>
+        <Collision Name="gVarkonsCastleRubbleAroundArenaCol" Offset="0x1B70"/>
+
+        <!-- Those four are used as the pile of rubble from where Varkonos rises to transform into Varkon -->
+        <Array Name="gVarkonsCastleRubble4Vtx" Count="24" Offset="0x2480">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble4DL" Offset="0x2600"/>
+        <Collision Name="gVarkonsCastleRubble4Col" Offset="0x2850"/>
+
+        <Array Name="gVarkonsCastleRubble5Vtx" Count="28" Offset="0x2880">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble5DL" Offset="0x2A40"/>
+        <Collision Name="gVarkonsCastleRubble5Col" Offset="0x2D28"/>
+
+        <Array Name="gVarkonsCastleRubble6Vtx" Count="18" Offset="0x2D60">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble6DL" Offset="0x2E80"/>
+        <Collision Name="gVarkonsCastleRubble6Col" Offset="0x2FE4"/>
+
+        <Array Name="gVarkonsCastleRubble7Vtx" Count="24" Offset="0x3010">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble7DL" Offset="0x3190"/>
+        <Collision Name="gVarkonsCastleRubble7Col" Offset="0x33E0"/>
+
+        <!-- This three rubbles are the ones that Varkon can destroy during the fight -->
+        <Array Name="gVarkonsCastleRubble2Vtx" Count="24" Offset="0x1BA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble2DL" Offset="0x1D20"/>
+        <Collision Name="gVarkonsCastleRubble2Col" Offset="0x1F70"/>
+
+        <Array Name="gVarkonsCastleRubble3Vtx" Count="28" Offset="0x1FA0">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubble3DL" Offset="0x2160"/>
+        <Collision Name="gVarkonsCastleRubble3Col" Offset="0x2448"/>
+
+        <Array Name="gVarkonsCastleRubbleTallVtx" Count="48" Offset="0x3410">
+            <Vtx/>
+        </Array>
+        <DList Name="gVarkonsCastleRubbleTallDL" Offset="0x3710"/>
+        <Collision Name="gVarkonsCastleRubbleTallCol" Offset="0x3AF0"/>
+
+        <!-- The following are unused -->
+        <Texture Name="gVarkonsCastleUnusedSpikeVariantTex" Format="ia16" Width="64" Height="32" Offset="0x8B20"/>
+        <Texture Name="gVarkonsCastleUnusedWallTex" Format="rgba16" Width="32" Height="32" Offset="0x9B20"/>
+        <Texture Name="gVarkonsCastleUnusedTex_00A320" Format="ia16" Width="16" Height="32" Offset="0xA320"/>
+
+
+        <Texture Name="object_gj_003B20_Tex" Format="ia8" Width="16" Height="16" Offset="0x3B20"/>
+        <Texture Name="object_gj_003C20_Tex" Format="i4" Width="16" Height="32" Offset="0x3C20"/>
+        <Texture Name="object_gj_003D20_Tex" Format="rgba16" Width="16" Height="16" Offset="0x3D20"/>
+        <Texture Name="object_gj_003F20_Tex" Format="i8" Width="64" Height="64" Offset="0x3F20"/>
+        <Texture Name="object_gj_004F20_Tex" Format="i8" Width="64" Height="64" Offset="0x4F20"/>
+        <Texture Name="object_gj_005F20_Tex" Format="i8" Width="64" Height="64" Offset="0x5F20"/>
+        <Texture Name="object_gj_006F20_Tex" Format="i4" Width="32" Height="64" Offset="0x6F20"/>
+        <Texture Name="object_gj_007320_Tex" Format="i8" Width="64" Height="16" Offset="0x7320"/>
+        <Texture Name="object_gj_007720_Tex" Format="ia8" Width="32" Height="32" Offset="0x7720"/>
+        <Texture Name="object_gj_007B20_Tex" Format="i8" Width="128" Height="32" Offset="0x7B20"/>
+    </File>
+</Root>

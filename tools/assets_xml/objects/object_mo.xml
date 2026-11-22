@@ -1,0 +1,231 @@
+<Root>
+    <File Name="object_mo" Segment="6">
+        <Texture Name="object_mo_000000_Tex" Format="ia8" Width="16" Height="16" Offset="0x0"/>
+
+        <!-- Vertices and DLists for Undine's particles 1 -->
+        <Array Name="gUndineWispVtx" Count="4" Offset="0x100">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineWispDL" Offset="0x140"/>
+
+        <Array Name="object_mo_Vtx_0001B0" Count="58" Offset="0x1B0">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineDL_000550" Offset="0x550"/> <!-- This is the dlist for EnVbBall for some reason. -->
+
+        <Texture Name="object_mo_000680_Tex" Format="rgba16" Width="32" Height="32" Offset="0x680"/>
+
+        <Array Name="object_mo_Vtx_000E80" Count="4" Offset="0xE80">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineDL_000EC0" Offset="0xEC0"/>
+        <DList Name="gUndineDL_000EF8" Offset="0xEF8"/>
+
+        <!-- Vertices and DLists for Undine's particles 2 -->
+        <DList Name="gUndineDropletMaterialDL" Offset="0xF20"/>
+        <DList Name="gUndineDropletModelDL" Offset="0xF70"/>
+        <Array Name="gUndineDropletModelVtx" Count="4" Offset="0xF88">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineWetSpotModelDL" Offset="0xFC8"/>
+        <Array Name="gUndineWetSpotModelVtx" Count="3" Offset="0xFE0">
+            <Vtx/>
+        </Array>
+
+        <!-- Undine's Title Card -->
+        <Version Pattern="ntsc-.*|gc-jp.*|gc-us.*|ique-cn">
+            <Texture Name="gUndineTitleCardTex" Format="ia8" Width="128" Height="80" Offset="0x1010"/>
+        </Version>
+        <Version Pattern="pal-.*|gc-eu.*">
+            <Texture Name="gUndineTitleCardTex" Format="ia8" Width="128" Height="120" Offset="0x1010"/>
+        </Version>
+
+        <!-- Vertices and DList for the water in the room and in front of the camera -->
+        <Array Name="gUndineWaterVtx" Count="4">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineWaterDL" Length="25"/>
+
+        <Texture Name="object_mo_003920_Tex" Format="ia16" Width="32" Height="32" Offset=".+0x8"/>
+        <Texture Name="object_mo_004120_Tex" Format="ia16" Width="32" Height="32"/>
+        <Texture Name="object_mo_004920_Tex" Format="ia16" Width="32" Height="32"/>
+
+        <!-- Vertices and DLists for Undine's Core -->
+        <Array Name="gUndineCoreMembraneVtx" Count="15">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineCoreNucleusVtx" Count="15">
+            <Vtx/>
+        </Array>
+        <DList Name="gUndineCoreMembraneDL" Length="39"/>
+        <DList Name="gUndineCoreNucleusDL" Length="32"/>
+
+        <Array Name="gUndineVtx_006938" Count="14">
+            <Vtx/>
+        </Array>
+
+        <!-- Vertices for Undine's tentacle segments -->
+        <Array Name="gUndineTentaclePart1Vtx" Count="14">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart2Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart3Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart4Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart5Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart6Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart7Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart8Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart9Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart10Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart11Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart12Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart13Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart14Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart15Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart16Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart17Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart18Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart19Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart20Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart21Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart22Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart23Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart24Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart25Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart26Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart27Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart28Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart29Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart30Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart31Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart32Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart33Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart34Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart35Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart36Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentaclePart37Vtx" Count="7">
+            <Vtx/>
+        </Array>
+        <Array Name="gUndineTentacleVtx" Count="20">
+            <Vtx/>
+        </Array>
+
+        <DList Name="gUndineDL_007BF8" Length="1"/>
+
+        <!-- DLists for Undine's tentacle segments -->
+        <DList Name="gUndineTentacleBaseDL" Length="15"/>
+        <DList Name="gUndineTentaclePart0DL" Length="24"/>
+        <DList Name="gUndineTentaclePart1DL" Length="10"/>
+        <DList Name="gUndineTentaclePart2DL" Length="9"/>
+        <DList Name="gUndineTentaclePart3DL" Length="9"/>
+        <DList Name="gUndineTentaclePart4DL" Length="9"/>
+        <DList Name="gUndineTentaclePart5DL" Length="9"/>
+        <DList Name="gUndineTentaclePart6DL" Length="9"/>
+        <DList Name="gUndineTentaclePart7DL" Length="9"/>
+        <DList Name="gUndineTentaclePart8DL" Length="9"/>
+        <DList Name="gUndineTentaclePart9DL" Length="9"/>
+        <DList Name="gUndineTentaclePart10DL" Length="9"/>
+        <DList Name="gUndineTentaclePart11DL" Length="9"/>
+        <DList Name="gUndineTentaclePart12DL" Length="9"/>
+        <DList Name="gUndineTentaclePart13DL" Length="9"/>
+        <DList Name="gUndineTentaclePart14DL" Length="9"/>
+        <DList Name="gUndineTentaclePart15DL" Length="9"/>
+        <DList Name="gUndineTentaclePart16DL" Length="9"/>
+        <DList Name="gUndineTentaclePart17DL" Length="9"/>
+        <DList Name="gUndineTentaclePart18DL" Length="9"/>
+        <DList Name="gUndineTentaclePart19DL" Length="9"/>
+        <DList Name="gUndineTentaclePart20DL" Length="9"/>
+        <DList Name="gUndineTentaclePart21DL" Length="9"/>
+        <DList Name="gUndineTentaclePart22DL" Length="9"/>
+        <DList Name="gUndineTentaclePart23DL" Length="9"/>
+        <DList Name="gUndineTentaclePart24DL" Length="9"/>
+        <DList Name="gUndineTentaclePart25DL" Length="9"/>
+        <DList Name="gUndineTentaclePart26DL" Length="9"/>
+        <DList Name="gUndineTentaclePart27DL" Length="9"/>
+        <DList Name="gUndineTentaclePart28DL" Length="9"/>
+        <DList Name="gUndineTentaclePart29DL" Length="9"/>
+        <DList Name="gUndineTentaclePart30DL" Length="9"/>
+        <DList Name="gUndineTentaclePart31DL" Length="9"/>
+        <DList Name="gUndineTentaclePart32DL" Length="9"/>
+        <DList Name="gUndineTentaclePart33DL" Length="9"/>
+        <DList Name="gUndineTentaclePart34DL" Length="9"/>
+        <DList Name="gUndineTentaclePart35DL" Length="9"/>
+        <DList Name="gUndineTentaclePart36DL" Length="9"/>
+        <DList Name="gUndineTentaclePart37DL" Length="9"/>
+        <DList Name="gUndineTentaclePart38DL" Length="9"/>
+        <DList Name="gUndineTentaclePart39DL" Length="9"/>
+        <DList Name="gUndineTentaclePart40DL" Length="6"/>
+
+        <Texture Name="gUndineWaterTex" Format="rgba16" Width="32" Height="32" Offset=".+0x8"/>
+    </File>
+</Root>

@@ -1,0 +1,91 @@
+<Root>
+    <File Name="object_ei" Segment="6">
+        <!-- Dartfin Skeleton -->
+        <Skeleton Name="gDartfinSkel" Type="Normal" LimbType="Standard" Offset="0x3410"/>
+
+        <!-- Dartfin Limbs -->
+        <Limb Name="gDartfinRootLimb" LimbType="Standard" Offset="0x32F0"/>
+        <Limb Name="gDartfinBodyRootLimb" LimbType="Standard" Offset="0x32FC"/>
+        <Limb Name="gDartfinBodyLimb" LimbType="Standard" Offset="0x3308"/>
+        <Limb Name="gDartfinTailRootLimb" LimbType="Standard" Offset="0x3314"/>
+        <Limb Name="gDartfinTailUpperLimb" LimbType="Standard" Offset="0x3320"/>
+        <Limb Name="gDartfinTailLowerLimb" LimbType="Standard" Offset="0x332C"/>
+        <Limb Name="gDartfinLimb_3338" LimbType="Standard" Offset="0x3338"/>
+        <Limb Name="gDartfinFinRootLimb" LimbType="Standard" Offset="0x3344"/>
+        <Limb Name="gDartfinFinUpperLimb" LimbType="Standard" Offset="0x3350"/>
+        <Limb Name="gDartfinFinLowerLimb" LimbType="Standard" Offset="0x335C"/>
+        <Limb Name="gDartfinHeadRootLimb" LimbType="Standard" Offset="0x3368"/>
+        <Limb Name="gDartfinHeadLimb" LimbType="Standard" Offset="0x3374"/>
+        <Limb Name="gDartfinLeftWingRootLimb" LimbType="Standard" Offset="0x3380"/>
+        <Limb Name="gDartfinLeftWingBaseLimb" LimbType="Standard" Offset="0x338C"/>
+        <Limb Name="gDartfinLeftWingEndLimb" LimbType="Standard" Offset="0x3398"/>
+        <Limb Name="gDartfinRightWingRootLimb" LimbType="Standard" Offset="0x33A4"/>
+        <Limb Name="gDartfinRightWingBaseLimb" LimbType="Standard" Offset="0x33B0"/>
+        <Limb Name="gDartfinRightWingEndLimb" LimbType="Standard" Offset="0x33BC"/>
+
+        <!-- Dartfin Limb DisplayLists -->
+        <DList Name="gDartfinBodyDL" Offset="0x2BD0"/>
+        <DList Name="gDartfinTailRootDL" Offset="0x2D00"/>
+        <DList Name="gDartfinTailUpperDL" Offset="0x2EB0"/>
+        <DList Name="gDartfinTailLowerDL" Offset="0x2F70"/>
+        <DList Name="gDartfinFinUpperDL" Offset="0x3178"/>
+        <DList Name="gDartfinFinLowerDL" Offset="0x3238"/>
+        <DList Name="gDartfinHeadDL" Offset="0x3018"/>
+        <DList Name="gDartfinLeftWingBaseDL" Offset="0x2470"/>
+        <DList Name="gDartfinLeftWingEndDL" Offset="0x2648"/>
+        <DList Name="gDartfinRightWingBaseDL" Offset="0x2820"/>
+        <DList Name="gDartfinRightWingEndDL" Offset="0x29F8"/>
+
+        <!-- Dartfin DisplayList Textures -->
+        <Texture Name="gDartfinWingTex" Format="rgba16" Width="16" Height="8" Offset="0x12C0"/>
+        <Texture Name="gDartfinBodyGradientTex" Format="rgba16" Width="8" Height="8" Offset="0x13C0"/>
+        <Texture Name="gDartfinWingEndTex" Format="rgba16" Width="8" Height="8" Offset="0x1440"/>
+        <Texture Name="gDartfinEyeTex" Format="rgba16" Width="8" Height="16" Offset="0x14C0"/>
+        <Texture Name="gDartfinUndersideTex" Format="rgba16" Width="8" Height="8" Offset="0x15C0"/>
+        <Texture Name="gDartfinFinTex" Format="rgba16" Width="8" Height="8" Offset="0x1640"/>
+        <Texture Name="gDartfinTailGradientTex" Format="rgba16" Width="4" Height="4" Offset="0x16C0"/>
+        <Texture Name="gDartfinTailConnectionGradientTex" Format="rgba16" Width="4" Height="4" Offset="0x16E0"/>
+
+        <!-- Dartfin Animations -->
+        <Animation Name="gDartfinPopOutAnim" Offset="0x288"/>
+        <Animation Name="gDartfinDiveAnim" Offset="0x4C4"/>
+        <Animation Name="gDartfinBackflipAnim" Offset="0x704"/>
+        <Animation Name="gDartfinHitAnim" Offset="0xFC0"/>
+        <Animation Name="gDartfinIdleAnim" Offset="0x12AC"/>
+
+        <!-- Vertices -->
+        <Array Name="gDartfinLeftWingBaseVtx" Count="24" Offset="0x1700">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinLeftWingEndVtx" Count="30" Offset="0x1880">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinRightWingBaseVtx" Count="24" Offset="0x1A60">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinRightWingEndVtx" Count="30" Offset="0x1BE0">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinBodyVtx" Count="25" Offset="0x1DC0">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinTailRootVtx" Count="28" Offset="0x1F50">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinTailUpperVtx" Count="10" Offset="0x2110">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinTailLowerVtx" Count="5" Offset="0x21B0">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinHeadVtx" Count="23" Offset="0x2200">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinFinUpperVtx" Count="9" Offset="0x2370">
+            <Vtx/>
+        </Array>
+        <Array Name="gDartfinFinLowerVtx" Count="7" Offset="0x2400">
+            <Vtx/>
+        </Array>
+    </File>
+</Root>

@@ -1,0 +1,9 @@
+<Root>
+    <File Name="varkon_demo_scene" Segment="2">
+        <Scene Name="varkon_demo_scene" Offset="0x0"/>
+        <Cutscene Name="gVarkonCastleCollapseCs" Offset="0x01B0"/>
+    </File>
+    <File Name="varkon_demo_room_0" Segment="3">
+        <Room Name="varkon_demo_room_0" Offset="0x0"/>
+    </File>
+</Root>
