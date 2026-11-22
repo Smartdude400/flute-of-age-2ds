@@ -127,7 +127,7 @@ python tools/setup_assets.py
 
 This checks the ROM, then converts everything into native 2DS formats: every object, all 111 scenes,
 textures, skies, text and render presets (about 50 MB in `romfs/`). It also generates the headers that
-depend on the ROM. It takes a few minutes and only has to be run once.
+depend on the ROM. It takes about a minute and only has to be run once.
 
 ### Step 5 — Build
 
