@@ -3,7 +3,7 @@
 # 3DS toolchain on the path (C:\msys64 + /opt/devkitpro), and appends a line to build_log.csv.
 # On Linux/macOS or inside a devkitPro shell, just run `make` directly.
 cd "$(dirname "$0")"
-if command -v make >/dev/null 2>&1 && [ -n "$DEVKITARM" ]; then
+if command -v make >/dev/null 2>&1 && [ -f "$DEVKITARM/3ds_rules" ]; then
   make "$@"; exit $?
 fi
 DIR=$(pwd -W 2>/dev/null || pwd)
