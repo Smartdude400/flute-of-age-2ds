@@ -17,6 +17,7 @@ IDs continue the dsport numbering; history of S1-S9 is in dsport/STUBS.md.
 | S10 | `Player_Init/Update/Draw/Destroy` (ovl_player_actor) | 2026-11-21 | `z_player.c` translated | **closed 2026-11-22 (P3)** |
 | S11 | `KaleidoScope_Update/Draw` (pause menu) | 2026-11-21 | port ovl_kaleido_scope | open |
 | S12 | `FileSelect_Init` (ovl_file_choose): faults with a message if reached | 2026-11-21 | port ovl_file_choose | open |
+| S13 | Cutscene data (`Cutscene_ProcessScript` with an unconverted script): the cutscene ends at once. First seen: Sylva's greeting when the forest is entered on a new file | 2026-11-24 | convert cutscene command streams per command layout (P4) | open |
 
 ## Presentation stubs (P-series; all close with P2 "no graphics cuts")
 | Stub | Notes |
@@ -30,3 +31,16 @@ IDs continue the dsport numbering; history of S1-S9 is in dsport/STUBS.md.
 | `DebugDisplay_DrawObjects` | debug-only objects (retail never adds any) |
 | Lens-flare z-buffer test (`Environment_GetPixelDepth`), light glow depth test | PICA200 depth buffer can be read back (P2) |
 | `func_8002E830` (per-object texgen look-at + specular highlight tiles) | renderer uses the camera axes for texgen; highlight tiles pending |
+
+## Divergences kept on purpose (D-series)
+Places where the original read memory it did not own; the port cannot reproduce the bytes, so it uses a
+defined value and logs the event. Each one is invisible in play (the value is overwritten before use).
+| ID | Where | Original | Port |
+|---|---|---|---|
+| D-ANIMSEG | `Animation_GetLength/GetLastFrame` (z_skelanime.c) | En_Ko asks for animation lengths while segment 6 still holds gameplay_keep (before its own objects load) and reads unrelated bytes; the value is replaced when the objects load | frame count 0; `Asset_Resolve: unresolved ...` logged |
+
+## Known visual issues (open)
+| Issue | Notes |
+|---|---|
+| Forest dust motes (Object_Kankyo) draw as small squares | texture `gSun1Tex` converted and bound through segment 8 (the model list now inherits its material list's tile state); sampling still wrong, cause not found yet |
+| Sword / stick swing trail | `EffectBlure_Draw` presentation stub (listed above) |

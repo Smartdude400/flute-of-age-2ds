@@ -3,6 +3,7 @@
 #include "cutscene.h"
 #include "segmented_address.h"
 #include "engine/asset.h"
+#include "engine/stub.h"
 #include "engine/gfx3d.h"
 
 #include "actor.h"
@@ -1834,6 +1835,13 @@ void Cutscene_ProcessScript(PlayState* play, CutsceneContext* csCtx, u8* script)
     void* cmd;
     s32 csFrameCount;
     s16 j;
+
+    if (script == NULL) {
+        // (native) cutscene data not converted yet (docs/STUBS.md S-CSDATA): end the cutscene at once
+        LOGIC_STUB("Cutscene_ProcessScript: unconverted cutscene data");
+        csCtx->state = CS_STATE_STOP;
+        return;
+    }
 
     MemCopy(&totalEntries, script, sizeof(totalEntries));
     script += sizeof(totalEntries);

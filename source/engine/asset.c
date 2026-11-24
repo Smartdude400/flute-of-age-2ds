@@ -32,8 +32,12 @@ static void relocate_table(u8* table) {
 }
 
 void Asset_SetSegment(int seg, DsObj* obj) {
-    sSeg[seg & 15] = obj;
     Gfx3D_SetSegmentObj(seg, obj);
+    Asset_SetCpuSegment(seg, obj);
+}
+
+void Asset_SetCpuSegment(int seg, DsObj* obj) {
+    sSeg[seg & 15] = obj;
     if (obj == NULL) {
         return;
     }
@@ -93,7 +97,8 @@ void* Asset_Resolve(const void* p) {
     if (obj != NULL && (Asset_FindTexture(p) != NULL || DsObj_FindMesh(obj, src) != NULL)) {
         return (void*)p;
     }
-    log_printf("Asset_Resolve: unresolved %08lx\n", (unsigned long)(uintptr_t)p);
+    log_printf("Asset_Resolve: unresolved %08lx (caller %p, seg %s)\n", (unsigned long)(uintptr_t)p,
+               __builtin_return_address(0), obj != NULL ? obj->path : "-");
     return NULL;
 }
 

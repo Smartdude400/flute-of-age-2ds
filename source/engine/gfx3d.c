@@ -74,8 +74,9 @@ typedef enum { SEG_NONE, SEG_TEX, SEG_DL, SEG_REC, SEG_SCROLL, SEG_RAW } SegKind
 
 #define SEGREC_MAX 6
 typedef struct SegOp {
-    u8 op; // 1 env, 2 prim, 3 draw
+    u8 op; // 1 env, 2 prim, 3 draw, 4 render mode
     u8 rgba[4];
+    u32 mode[2]; // op 4: native MODE_* mask, value
     const DsObj* obj;
     const PMeshHdr* mesh;
 } SegOp;
@@ -119,7 +120,31 @@ static struct {
     s16 fogNear, fogFar;
     bool fogLutValid;
     bool program3D; // the 3D shader is bound
+    u32 genMtx;     // bumped whenever a matrix input of the palette changes (camera, base, limbs, segments)
+    u32 genLights;  // bumped whenever the light group changes
 } R;
+
+// ---- caches of what the GPU already has (reset at frame start and when the 2D layer takes the GPU)
+static struct {
+    bool valid;
+    const void* verts;
+    bool lit;
+    const u8* palKey; // mesh palette (type, id pairs) last uploaded
+    u8 palN;
+    u32 palGen;
+    u32 lightGen, lookGen;
+    bool lightsLoaded;
+    bool palLoaded;
+    float texA[4], texB[4];
+    int boolLit, boolTexgen;
+    const C3D_Tex* bound[2];
+    struct { u32 mode, geom; GfxCombine combine; u8 prim[4], env[4], fog[4], blend[4]; u8 primLod; bool fogValid; } rs;
+} sC;
+
+static void cache_reset(void) {
+    memset(&sC, 0, sizeof(sC));
+    sC.boolLit = sC.boolTexgen = -1;
+}
 
 static DVLB_s* sDvlb;
 static shaderProgram_s sProg;
@@ -208,6 +233,13 @@ void Gfx3D_Init(void) {
     if (sSetupDL == NULL) {
         log_printf("gfx3d: render-state presets missing\n");
     }
+    // display lists embedded in actor overlays (tools/build_overlays.py): handles are original VRAM
+    // addresses = segment 0, which the game never binds
+    DsObj* ovl = DsObj_Load("/ovl/ovldata.pobj");
+    if (ovl == NULL) {
+        log_printf("gfx3d: overlay display lists missing\n");
+    }
+    Asset_SetSegment(0, ovl);
     reset_state();
 }
 
@@ -234,12 +266,17 @@ static void apply_textures(float texA[4], float texB[4]) {
             W = tex->w;
             H = tex->h;
             C3D_Tex* ct = (C3D_Tex*)&tex->tex;
+            u32 param = ct->param;
             C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
             C3D_TexSetWrap(ct, wrap_mode(t->flags & TEXF_CLAMP_S, t->flags & TEXF_MIRROR_S),
                            wrap_mode(t->flags & TEXF_CLAMP_T, t->flags & TEXF_MIRROR_T));
-            C3D_TexBind(u, ct);
-        } else {
+            if (sC.bound[u] != ct || ct->param != param) {
+                C3D_TexBind(u, ct);
+                sC.bound[u] = ct;
+            }
+        } else if (sC.bound[u] != &sWhite) {
             C3D_TexBind(u, &sWhite);
+            sC.bound[u] = &sWhite;
         }
         int tileNo = (R.texTile + u) & 7;
         float uls = t->uls / 4.0f, ult = t->ult / 4.0f;
@@ -318,6 +355,12 @@ static const TevProgram* tev_for(const GfxCombine* c, bool two) {
 }
 
 static void apply_render_state(void) {
+    if (sC.valid && sC.rs.mode == R.mode && sC.rs.geom == R.geom && sC.rs.primLod == R.primLod &&
+        sC.rs.fogValid == R.fogLutValid && memcmp(&sC.rs.combine, &R.combine, sizeof(GfxCombine)) == 0 &&
+        memcmp(sC.rs.prim, R.prim, 4) == 0 && memcmp(sC.rs.env, R.env, 4) == 0 &&
+        memcmp(sC.rs.fog, R.fogColor, 4) == 0 && memcmp(sC.rs.blend, R.blend, 4) == 0) {
+        return;
+    }
     u32 m = R.mode;
     int cyc = MODE_CYCLE(m);
     bool two = cyc == 1;
@@ -382,11 +425,29 @@ static void apply_render_state(void) {
     } else {
         C3D_FogGasMode(GPU_NO_FOG, GPU_PLAIN_DENSITY, false);
     }
+    sC.valid = true;
+    sC.rs.mode = R.mode;
+    sC.rs.geom = R.geom;
+    sC.rs.combine = R.combine;
+    sC.rs.primLod = R.primLod;
+    sC.rs.fogValid = R.fogLutValid;
+    memcpy(sC.rs.prim, R.prim, 4);
+    memcpy(sC.rs.env, R.env, 4);
+    memcpy(sC.rs.fog, R.fogColor, 4);
+    memcpy(sC.rs.blend, R.blend, 4);
 }
 
 // Uniform rows (column-vector convention) of F * (M * V * P)^T, F = screen rotation + depth range fix:
 // x' = y, y' = -x (portrait framebuffer), z' = (z - w) / 2 (near -> -1, far -> 0).
 static void upload_palette(const PMeshHdr* mesh) {
+    if (sC.palLoaded && sC.palGen == R.genMtx && sC.palN == mesh->numPalette &&
+        (mesh->numPalette == 0 || memcmp(sC.palKey, mesh->palette, 2 * mesh->numPalette) == 0)) {
+        return;
+    }
+    sC.palLoaded = true;
+    sC.palGen = R.genMtx;
+    sC.palN = mesh->numPalette;
+    sC.palKey = &mesh->palette[0][0];
     C3D_FVec* pal = C3D_FVUnifWritePtr(GPU_VERTEX_SHADER, uPal, 56);
     int n = mesh->numPalette ? mesh->numPalette : 1;
     for (int i = 0; i < n; i++) {
@@ -424,26 +485,61 @@ static void bind_program(void) {
         C3D_BindProgram(&sProg);
         Screen_SetGameViewport();
         R.program3D = true;
+        cache_reset(); // the 2D layer shares uniform registers and render state
     }
 }
 
 static const PMeshHdr sNoPalette; // numPalette 0: every vertex uses the caller's matrix
 
+static u32 sDrawCalls, sDrawTris;
+static u64 sTickState, sTickSubmit, sTick2D;
+u32 Gfx3D_TakeDrawStats(u32* tris) {
+    u32 d = sDrawCalls;
+    *tris = sDrawTris;
+    sDrawCalls = sDrawTris = 0;
+    return d;
+}
+void Gfx3D_TakeTickStats(u64* state, u64* submit, u64* twoD) {
+    *state = sTickState;
+    *submit = sTickSubmit;
+    *twoD = sTick2D;
+    sTickState = sTickSubmit = sTick2D = 0;
+}
+
 static void draw_raw(const void* verts, const u16* idx, u32 count, const PMeshHdr* mesh) {
+    sDrawCalls++;
+    sDrawTris += count / 3;
+    u64 t0 = svcGetSystemTick();
     bind_program();
     bool lit = (R.geom & GEOM_LIGHTING) != 0;
-    C3D_SetAttrInfo(lit ? &sAttrLit : &sAttrUnlit);
-    C3D_BufInfo* bi = C3D_GetBufInfo();
-    BufInfo_Init(bi);
-    BufInfo_Add(bi, verts, sizeof(PVertex), lit ? 5 : 4, lit ? 0x43210 : 0x3210);
+    if (sC.verts != verts || sC.lit != lit || sC.verts == NULL) {
+        C3D_SetAttrInfo(lit ? &sAttrLit : &sAttrUnlit);
+        C3D_BufInfo* bi = C3D_GetBufInfo();
+        BufInfo_Init(bi);
+        BufInfo_Add(bi, verts, sizeof(PVertex), lit ? 5 : 4, lit ? 0x43210 : 0x3210);
+        sC.verts = verts;
+        sC.lit = lit;
+    }
 
     float texA[4], texB[4];
     apply_textures(texA, texB);
-    C3D_FVUnifSet(GPU_VERTEX_SHADER, uTexA, texA[0], texA[1], texA[2], texA[3]);
-    C3D_FVUnifSet(GPU_VERTEX_SHADER, uTexB, texB[0], texB[1], texB[2], texB[3]);
-    C3D_BoolUnifSet(GPU_VERTEX_SHADER, uLit, lit);
-    C3D_BoolUnifSet(GPU_VERTEX_SHADER, uTexgen, lit && (R.geom & GEOM_TEXGEN));
-    if (lit) {
+    if (!sC.valid || memcmp(texA, sC.texA, sizeof(texA)) != 0 || memcmp(texB, sC.texB, sizeof(texB)) != 0) {
+        C3D_FVUnifSet(GPU_VERTEX_SHADER, uTexA, texA[0], texA[1], texA[2], texA[3]);
+        C3D_FVUnifSet(GPU_VERTEX_SHADER, uTexB, texB[0], texB[1], texB[2], texB[3]);
+        memcpy(sC.texA, texA, sizeof(texA));
+        memcpy(sC.texB, texB, sizeof(texB));
+    }
+    int texgen = lit && (R.geom & GEOM_TEXGEN);
+    if (sC.boolLit != (int)lit || sC.boolTexgen != texgen) {
+        C3D_BoolUnifSet(GPU_VERTEX_SHADER, uLit, lit);
+        C3D_BoolUnifSet(GPU_VERTEX_SHADER, uTexgen, texgen);
+        sC.boolLit = lit;
+        sC.boolTexgen = texgen;
+    }
+    if (lit && (!sC.lightsLoaded || sC.lightGen != R.genLights || sC.lookGen != R.genMtx)) {
+        sC.lightsLoaded = true;
+        sC.lightGen = R.genLights;
+        sC.lookGen = R.genMtx;
         C3D_FVUnifSet(GPU_VERTEX_SHADER, uAmbient, R.ambient[0], R.ambient[1], R.ambient[2], 1.0f);
         for (int i = 0; i < 7; i++) {
             bool on = i < R.numLights;
@@ -458,7 +554,11 @@ static void draw_raw(const void* verts, const u16* idx, u32 count, const PMeshHd
     }
     upload_palette(mesh);
     apply_render_state();
+    u64 t1 = svcGetSystemTick();
     C3D_DrawElements(GPU_TRIANGLES, count, C3D_UNSIGNED_SHORT, idx);
+    u64 t2 = svcGetSystemTick();
+    sTickState += t1 - t0;
+    sTickSubmit += t2 - t1;
 }
 
 static void draw(const DsObj* obj, const PMeshHdr* mesh, u32 first, u32 count) {
@@ -498,6 +598,124 @@ void Gfx3D_DrawSky(const void* vtx, const u16* idx, int numIdx, const DsTexture*
 // ============================================================================ mesh programs
 static void exec_mesh(const DsObj* obj, const PMeshHdr* mesh, int depth);
 
+// ---- textures the game builds at runtime in an N64 format (e.g. the signpost shadow mask), bound to a
+// segment as a plain pointer: converted to a PICA texture at replay (the data lives in frame memory).
+#define DYNTEX_MAX 8
+static struct { const void* src; u16 fmtsiz, w, h; DsTexture t; bool init; } sDyn[DYNTEX_MAX];
+static int sDynUsed;
+
+static u32 pow2_at_least8(u32 v) {
+    u32 p = 8;
+    while (p < v && p < 1024) p <<= 1;
+    return p;
+}
+
+static void n64_texel(const u8* src, int fmt, int siz, int i, u8 out[4]) {
+    u8 v;
+    u16 c;
+    switch ((fmt << 4) | siz) {
+        case 0x40: // I4
+            v = (src[i >> 1] >> ((i & 1) ? 0 : 4)) & 15;
+            v |= v << 4;
+            out[0] = out[1] = out[2] = out[3] = v;
+            return;
+        case 0x41: // I8
+            out[0] = out[1] = out[2] = out[3] = src[i];
+            return;
+        case 0x30: // IA4: 3-bit intensity, 1-bit alpha
+            v = (src[i >> 1] >> ((i & 1) ? 0 : 4)) & 15;
+            out[0] = out[1] = out[2] = (u8)((v >> 1) * 255 / 7);
+            out[3] = (v & 1) ? 0xFF : 0;
+            return;
+        case 0x31: // IA8
+            v = src[i];
+            out[0] = out[1] = out[2] = (v >> 4) * 0x11;
+            out[3] = (v & 15) * 0x11;
+            return;
+        case 0x32: // IA16
+            out[0] = out[1] = out[2] = src[2 * i];
+            out[3] = src[2 * i + 1];
+            return;
+        case 0x02: // RGBA16 (big-endian 5551)
+            c = (src[2 * i] << 8) | src[2 * i + 1];
+            out[0] = ((c >> 11) & 31) * 255 / 31;
+            out[1] = ((c >> 6) & 31) * 255 / 31;
+            out[2] = ((c >> 1) & 31) * 255 / 31;
+            out[3] = (c & 1) ? 0xFF : 0;
+            return;
+        case 0x03: // RGBA32
+            memcpy(out, src + 4 * i, 4);
+            return;
+        default:
+            out[0] = out[1] = out[2] = out[3] = 0xFF;
+            return;
+    }
+}
+
+static const DsTexture* dyn_texture(const void* src, u32 fmt, u32 siz, u32 w, u32 h) {
+    u16 fs = (fmt << 4) | siz;
+    for (int i = 0; i < sDynUsed; i++) {
+        if (sDyn[i].src == src && sDyn[i].fmtsiz == fs && sDyn[i].w == w && sDyn[i].h == h) {
+            return &sDyn[i].t;
+        }
+    }
+    if (sDynUsed == DYNTEX_MAX || w == 0 || h == 0) {
+        return NULL;
+    }
+    int slot = sDynUsed++;
+    u32 W = pow2_at_least8(w), H = pow2_at_least8(h);
+    // same format choice as the offline converter (tools/dl2pica.py pica_format)
+    GPU_TEXCOLOR pf = fmt == 0 ? (siz == 3 ? GPU_RGBA8 : GPU_RGBA5551)
+                               : (siz == 0 || (fmt == 3 && siz == 1)) ? GPU_LA4 : GPU_LA8;
+    DsTexture* t = &sDyn[slot].t;
+    if (sDyn[slot].init && (t->w != W || t->h != H || t->format != pf)) {
+        C3D_TexDelete(&t->tex);
+        sDyn[slot].init = false;
+    }
+    if (!sDyn[slot].init) {
+        if (!C3D_TexInit(&t->tex, W, H, pf)) {
+            sDynUsed--;
+            return NULL;
+        }
+        sDyn[slot].init = true;
+        t->w = W;
+        t->h = H;
+        t->format = pf;
+        t->state = 1;
+    }
+    u8* dst = t->tex.data;
+    int bpp = pf == GPU_RGBA8 ? 4 : pf == GPU_LA4 ? 1 : 2;
+    for (u32 y = 0; y < H; y++) {
+        for (u32 x = 0; x < W; x++) {
+            u8 c[4];
+            n64_texel(src, fmt, siz, (y % h) * w + (x % w), c);
+            u32 m = (x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) | ((x & 4) << 2) | ((y & 4) << 3);
+            u8* o = dst + (((y >> 3) * (W >> 3) + (x >> 3)) * 64 + m) * bpp; // 8x8 tiles, Morton order inside
+            if (pf == GPU_RGBA8) {
+                o[0] = c[3];
+                o[1] = c[2];
+                o[2] = c[1];
+                o[3] = c[0];
+            } else if (pf == GPU_RGBA5551) {
+                u16 v = ((c[0] >> 3) << 11) | ((c[1] >> 3) << 6) | ((c[2] >> 3) << 1) | (c[3] >= 128);
+                o[0] = v;
+                o[1] = v >> 8;
+            } else if (pf == GPU_LA8) {
+                o[0] = c[3];
+                o[1] = c[0];
+            } else {
+                o[0] = (c[0] & 0xF0) | (c[3] >> 4);
+            }
+        }
+    }
+    C3D_TexFlush(&t->tex);
+    sDyn[slot].src = src;
+    sDyn[slot].fmtsiz = fs;
+    sDyn[slot].w = w;
+    sDyn[slot].h = h;
+    return t;
+}
+
 static void call_segment(int seg, u32 off, int depth) {
     Segment* s = &R.seg[seg & 15];
     switch (s->kind) {
@@ -515,6 +733,7 @@ static void call_segment(int seg, u32 off, int depth) {
                 if (o->op == 1) memcpy(R.env, o->rgba, 4);
                 else if (o->op == 2) memcpy(R.prim, o->rgba, 4);
                 else if (o->op == 3 && o->mesh != NULL) exec_mesh(o->obj, o->mesh, depth + 1);
+                else if (o->op == 4) R.mode = (R.mode & ~o->mode[0]) | (o->mode[1] & o->mode[0]);
             }
             break;
         case SEG_SCROLL:
@@ -588,7 +807,15 @@ static void exec_mesh(const DsObj* obj, const PMeshHdr* mesh, int depth) {
                 if (kind == TEXKIND_STATIC) {
                     t->tex = DsObj_Texture(obj, id);
                 } else if (kind == TEXKIND_SEGMENT) {
-                    t->tex = R.seg[id & 15].kind == SEG_TEX ? R.seg[id & 15].tex : NULL;
+                    const Segment* sg = &R.seg[id & 15];
+                    if (sg->kind == SEG_TEX) {
+                        t->tex = sg->tex;
+                    } else if (sg->kind == SEG_RAW && sg->src != 0) {
+                        t->tex = dyn_texture((const void*)(uintptr_t)sg->src, (op[2] >> 8) & 15, (op[2] >> 12) & 15,
+                                             op[3] & 0xFFFF, op[3] >> 16);
+                    } else {
+                        t->tex = NULL;
+                    }
                 } else {
                     t->tex = NULL;
                 }
@@ -620,6 +847,7 @@ static void x_camera(const void* p) {
     R.proj = c->proj;
     R.view = c->view;
     mtx_mul(&R.vp, &R.view, &R.proj);
+    R.genMtx++;
 }
 
 void Gfx3D_SetCamera(const MtxF* projection, const MtxF* viewing) {
@@ -634,6 +862,7 @@ void Gfx3D_SetCamera(const MtxF* projection, const MtxF* viewing) {
 
 static void x_mtx(const void* p) {
     R.base = *(const MtxF*)p;
+    R.genMtx++;
 }
 
 void Gfx3D_LoadMtxF(const MtxF* model) {
@@ -769,6 +998,46 @@ void Gfx3D_SetEnvColor(u8 r, u8 g, u8 b, u8 a) {
     if (c) { c->rgba[0] = r; c->rgba[1] = g; c->rgba[2] = b; c->rgba[3] = a; }
 }
 
+// RDP render-mode word (other-mode low bits 3..31) -> native MODE_* fields (same decode as tools/dl2pica.py)
+static u32 mode_from_rm(u32 l) {
+    u32 v = 0;
+    v |= ((l >> 4) & 1) << 6;
+    v |= ((l >> 5) & 1) << 7;
+    v |= ((l >> 10) & 3) << 8;
+    v |= ((l >> 12) & 1) << 10;
+    v |= ((l >> 13) & 1) << 11;
+    v |= ((l >> 14) & 1) << 12;
+    v |= ((l >> 6) & 1) << 13;
+    u32 c1 = (((l >> 30) & 3) << 6) | (((l >> 26) & 3) << 4) | (((l >> 22) & 3) << 2) | ((l >> 18) & 3);
+    u32 c2 = (((l >> 28) & 3) << 6) | (((l >> 24) & 3) << 4) | (((l >> 20) & 3) << 2) | ((l >> 16) & 3);
+    return v | (c1 << 16) | (c2 << 24);
+}
+
+typedef struct { u32 mask, value; } CmdMode;
+static void x_mode(const void* p) {
+    const CmdMode* c = p;
+    R.mode = (R.mode & ~c->mask) | (c->value & c->mask);
+}
+
+void Gfx3D_SetRenderMode(u32 c1, u32 c2) {
+    u32 mask = mode_from_rm(0xFFFFFFF8u), value = mode_from_rm(c1 | c2);
+    if (sRecSeg >= 0) {
+        if (sRecCmd != NULL && sRecCmd->s.nops < SEGREC_MAX) {
+            SegOp* o = &sRecCmd->s.ops[sRecCmd->s.nops++];
+            memset(o, 0, sizeof(*o));
+            o->op = 4;
+            o->mode[0] = mask;
+            o->mode[1] = value;
+        }
+        return;
+    }
+    CmdMode* c = rec(x_mode, sizeof(CmdMode));
+    if (c) {
+        c->mask = mask;
+        c->value = value;
+    }
+}
+
 void Gfx3D_SetPrimColor(u8 r, u8 g, u8 b, u8 a) {
     if (seg_record(2, r, g, b, a, NULL, NULL)) {
         return;
@@ -835,7 +1104,10 @@ void Gfx3D_SetSegment(int seg, const void* handle) {
         }
         return;
     }
-    rec_seg(seg, SEG_RAW); // native sentinel lists (empty list, cull-mode presets): no geometry
+    // native sentinel lists (empty list, cull-mode presets): no geometry; or texels the game built at
+    // runtime (converted at replay when a list samples this segment)
+    CmdSeg* c = rec_seg(seg, SEG_RAW);
+    if (c) c->s.src = (u32)(uintptr_t)handle;
 }
 
 typedef struct { float amb[3]; int n; float dir[7][3], col[7][3]; } CmdLights;
@@ -845,6 +1117,7 @@ static void x_lights(const void* p) {
     R.numLights = c->n;
     memcpy(R.lightDir, c->dir, sizeof(R.lightDir));
     memcpy(R.lightCol, c->col, sizeof(R.lightCol));
+    R.genLights++;
 }
 
 static void rec_lights(const u8 ambient[3], int count, const s8 (*dirs)[3], const u8 (*cols)[3], int stride) {
@@ -877,16 +1150,18 @@ void Gfx3D_SetLightsN(const struct LightsN* l, int numLights) {
 
 // ---- flexible skeletons
 #define FLEX_MAX 64
-static struct { int n; MtxF m[FLEX_MAX]; DListRef dl[FLEX_MAX]; } sFlex;
+static struct { int n; MtxF m[FLEX_MAX]; const DsObj* obj[FLEX_MAX]; const PMeshHdr* mesh[FLEX_MAX]; } sFlex;
 
 typedef struct { int n; MtxF m[FLEX_MAX]; const DsObj* obj[FLEX_MAX]; const PMeshHdr* mesh[FLEX_MAX]; } CmdFlex;
 static void x_flex(const void* p) {
     const CmdFlex* c = p;
     R.numLimb = c->n;
     memcpy(R.limb, c->m, sizeof(MtxF) * c->n);
+    R.genMtx++;
     for (int i = 0; i < c->n; i++) {
         if (c->mesh[i] != NULL) {
             R.base = c->m[i];
+            R.genMtx++;
             exec_mesh(c->obj[i], c->mesh[i], 0);
         }
     }
@@ -898,8 +1173,14 @@ void Gfx3D_FlexBegin(void) {
 
 void Gfx3D_FlexAdd(const MtxF* m, DListRef dl) {
     if (sFlex.n < FLEX_MAX) {
+        // resolved now, against the objects bound at this limb: limb callbacks may rebind segment 6
+        // between limbs (multi-object actors: the Kokiri children's head / body / legs)
         sFlex.m[sFlex.n] = *m;
-        sFlex.dl[sFlex.n] = dl;
+        sFlex.obj[sFlex.n] = NULL;
+        sFlex.mesh[sFlex.n] = NULL;
+        if (dl != NULL) {
+            resolve_dl((u32)(uintptr_t)dl, &sFlex.obj[sFlex.n], &sFlex.mesh[sFlex.n]);
+        }
         sFlex.n++;
     }
 }
@@ -911,11 +1192,8 @@ void Gfx3D_FlexEnd(void) {
     c->n = sFlex.n;
     for (int i = 0; i < sFlex.n; i++) {
         c->m[i] = sFlex.m[i];
-        c->obj[i] = NULL;
-        c->mesh[i] = NULL;
-        if (sFlex.dl[i] != NULL) {
-            resolve_dl((u32)(uintptr_t)sFlex.dl[i], &c->obj[i], &c->mesh[i]);
-        }
+        c->obj[i] = sFlex.obj[i];
+        c->mesh[i] = sFlex.mesh[i];
     }
 }
 
@@ -966,6 +1244,7 @@ typedef struct { int seg; MtxF m; } CmdSegMtx;
 static void x_segmtx(const void* p) {
     const CmdSegMtx* s = p;
     R.segMtx[s->seg][0] = s->m;
+    R.genMtx++;
 }
 
 typedef struct { int seg, n; const MtxF* m; } CmdSegMtxArr;
@@ -974,6 +1253,7 @@ static void x_segmtxarr(const void* p) {
     for (int i = 0; i < c->n && i < 4; i++) {
         R.segMtx[c->seg][i] = c->m[i]; // frame memory: filled by game code after the bind, read at replay
     }
+    R.genMtx++;
 }
 
 void Gfx3D_SetSegmentMtxArray(int seg, const MtxF* m, int count) {
@@ -1040,13 +1320,20 @@ void Gfx3D_NotifyProgramChanged(void) {
 }
 
 void Gfx3D_EndFrame(void) {
+    sDynUsed = 0;
     reset_state();
+    cache_reset();
     for (int b = 0; b < GFX_BUF_COUNT; b++) {
         u32 pos = 0;
         while (pos < sCmdLen[b]) {
             CmdHdr* h = (CmdHdr*)(sCmd[b] + pos);
             if (h->fn != NULL) {
+                bool is2D = R.program3D;
+                u64 t0 = svcGetSystemTick();
                 h->fn(h + 1);
+                if (is2D && !R.program3D) {
+                    sTick2D += svcGetSystemTick() - t0; // a 2D command took the GPU (text, rectangles, fills)
+                }
             }
             pos += sizeof(CmdHdr) + h->size;
         }

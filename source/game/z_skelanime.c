@@ -469,14 +469,25 @@ void SkelAnime_GetFrameData(AnimationHeader* animation, s32 frame, s32 limbCount
     }
 }
 
+// (native) An animation handle that does not resolve against the object bound to its segment: the original
+// read the frame count from whatever object segment 6 held (e.g. En_Ko before its own objects load; the
+// value is overwritten once they do). Native: frame count 0, see docs/STUBS.md (D-ANIMSEG).
+static const AnimationHeaderCommon sNoAnimation = { 0 };
+
 s16 Animation_GetLength(void* animation) {
     AnimationHeaderCommon* common = Asset_Resolve(animation);
 
+    if (common == NULL) {
+        common = (AnimationHeaderCommon*)&sNoAnimation;
+    }
     return common->frameCount;
 }
 
 s16 Animation_GetLastFrame(void* animation) {
     AnimationHeaderCommon* common = Asset_Resolve(animation);
+    if (common == NULL) {
+        common = (AnimationHeaderCommon*)&sNoAnimation;
+    }
     // Loads an unsigned half for some reason.
     return (u16)common->frameCount - 1;
 }

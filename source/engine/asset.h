@@ -11,6 +11,9 @@
 
 void Asset_SetSegment(int seg, DsObj* obj); // also applies relocations of the object's extras (once)
 DsObj* Asset_GetSegment(int seg);
+// CPU side only (was `gSegments[seg] = ...`): handle resolution by game code; the renderer's binding
+// (gSPSegment) is Gfx3D_SetSegmentObj.
+void Asset_SetCpuSegment(int seg, DsObj* obj);
 // Handle -> native record (skeleton, animation, ...). Non-handles (real pointers) pass through.
 void* Asset_Resolve(const void* p);
 // Standalone texture symbol (TXMP table) -> uploaded DS texture, or NULL.

@@ -45,6 +45,8 @@ void Gfx3D_SetupDLTo(GfxBuf buf, int preset); // Gfx_SetupDL_<N><Opa|Xlu|Overlay
 #define GFX_TO(buf, call) (Gfx3D_SetTarget(GFX_BUF_##buf), (call))
 void Gfx3D_ResetMaterialState(int xlu); // DS-era call sites: preset 25 into the opaque/translucent buffer
 void Gfx3D_SetPrimColor(u8 r, u8 g, u8 b, u8 a);
+// Render mode (was gDPSetRenderMode): the two original RDP mode words (engine/rdp_modes.h G_RM_*)
+void Gfx3D_SetRenderMode(u32 c1, u32 c2);
 // Geometry mode change (was gSPClearGeometryMode / gSPSetGeometryMode): native GEOM_* flags (engine/pmesh.h)
 void Gfx3D_GeometryMode(u32 clear, u32 set);
 // Segment binding: a texture handle, a display-list handle, or NULL to clear.

@@ -34,7 +34,9 @@
 | ✅ | **Skyboxes** | Day/night skies with the game's own blending logic |
 | ✅ | **20 fps fixed timestep** | Same frame pacing as the original; input sampled per retrace (deterministic replays) |
 | ✅ | **Saves** | Written to `sdmc:/3ds/foa/save.sra` |
-| 🚧 | Other actors | NPCs, objects, enemies are skipped for now (each logged once) |
+| ✅ | **First-area actors** | The 19 actors of the starting forest: Sylvan children, Sylva, Milo, the fairy companion and fairies, signs, grass, rocks, Gossip Stones, Skulltulas, room transitions, ambience |
+| 🚧 | Other actors | Actors outside the first area are skipped for now (each logged once) |
+| 🚧 | Cutscenes | Cutscene data not converted yet — cutscenes end immediately |
 | 🚧 | Title screen demo, file select, pause menu | Not ported yet — the demo boots straight into the forest |
 | 🚧 | Audio | Not ported yet (silent) |
 | 🚧 | HUD | Placeholder text for hearts / rupees |
@@ -49,6 +51,9 @@
 <tr>
 <td align="center"><img src="docs/images/sky_overview.png" width="400"><br><sub>Native skybox + scene renderer</sub></td>
 <td align="center"><img src="docs/images/player_model.png" width="400"><br><sub>The player model on the PICA200</sub></td>
+</tr>
+<tr>
+<td align="center" colspan="2"><img src="docs/images/forest_npcs.png" width="640"><br><sub>A Sylvan child (head, body and legs from three objects) and a fairy</sub></td>
 </tr>
 </table>
 
@@ -246,10 +251,11 @@ It needs a portable Azahar folder (`azahar.exe` plus a `user/` folder whose `con
 - [x] Offline display-list compiler + full-fidelity PICA200 renderer
 - [x] Skyboxes, render presets, original draw order
 - [x] The real `Play` state with the player
-- [ ] Actors of the first area (Sylvan children, the fairy companion, doors, grass, signs …)
+- [x] Actors of the first area (Sylvan children, the fairy companion, doors, grass, signs …)
 - [ ] Cutscene data → title-screen demo
 - [ ] File select, pause menu, the real HUD
 - [ ] Audio (sequence player + synthesis on the ARM11, output through the DSP)
+- [ ] 60 fps presentation (frame interpolation; game logic stays at the original 20 Hz)
 - [ ] Frame-perfect equivalence traces against the original
 
 ## ❓ Troubleshooting

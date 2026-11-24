@@ -26,6 +26,7 @@ STEPS = [
     ("debug font", "font_conv.py", []),
     ("render-state presets", "build_setupdl.py", []),
     ("skyboxes", "build_skybox.py", []),
+    ("display lists inside actor overlays", "build_overlays.py", []),
     ("plain data files", "build_rawdata.py", []),
     ("objects", "build_all.py", ["objects"]),
     ("scenes and rooms", "build_all.py", ["scenes"]),

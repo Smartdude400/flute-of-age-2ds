@@ -4,6 +4,8 @@
 //     identical to the original's "one game frame per R_UPDATE_RATE retraces"),
 //   - runs GameState_Update (logic + native drawing) inside one citro3d frame.
 #include <3ds.h>
+#include <citro3d.h>
+#include <string.h>
 #include <stdlib.h>
 #include "engine/runner.h"
 #include "engine/gfx.h"
@@ -34,6 +36,42 @@ void Runner_MarkFault(void) {
     gTestMarker[3] = 1;
 }
 
+// ---- frame timing (CPU ticks at 268 MHz; GPU times from citro3d), logged every 60 game frames
+u32 Gfx3D_TakeDrawStats(u32* tris);
+void Gfx3D_TakeTickStats(u64* state, u64* submit, u64* twoD);
+static u64 sPerfState, sPerfSubmit, sPerf2D, sPerfWait;
+static struct { u64 logic, replay, logicMax, replayMax; float gpuProc, gpuDraw; u32 draws, tris; int n; } sPerf;
+
+static void perf_sample(u64 logic, u64 replay) {
+    sPerf.logic += logic;
+    sPerf.replay += replay;
+    if (logic > sPerf.logicMax) sPerf.logicMax = logic;
+    if (replay > sPerf.replayMax) sPerf.replayMax = replay;
+    sPerf.gpuProc += C3D_GetProcessingTime();
+    sPerf.gpuDraw += C3D_GetDrawingTime();
+    u32 tris;
+    sPerf.draws += Gfx3D_TakeDrawStats(&tris);
+    {
+        u64 a, b, c;
+        Gfx3D_TakeTickStats(&a, &b, &c);
+        sPerfState += a;
+        sPerfSubmit += b;
+        sPerf2D += c;
+    }
+    sPerf.tris += tris;
+    if (++sPerf.n == 60) {
+        const float ms = 1000.0f / SYSCLOCK_ARM11;
+        log_printf("[perf] logic %.2f ms (max %.2f) | replay %.2f ms (max %.2f) | gpu proc %.2f draw %.2f ms | %lu draws %lu tris\n",
+                   sPerf.logic * ms / 60, sPerf.logicMax * ms, sPerf.replay * ms / 60, sPerf.replayMax * ms,
+                   sPerf.gpuProc / 60, sPerf.gpuDraw / 60, (unsigned long)(sPerf.draws / 60),
+                   (unsigned long)(sPerf.tris / 60));
+        log_printf("[perf]   replay split: state %.2f ms, submit %.2f ms, 2D %.2f ms, frame-start wait %.2f ms\n", sPerfState * ms / 60,
+                   sPerfSubmit * ms / 60, sPerf2D * ms / 60, sPerfWait * ms / 60);
+        sPerfState = sPerfSubmit = sPerf2D = sPerfWait = 0;
+        memset(&sPerf, 0, sizeof(sPerf));
+    }
+}
+
 static void frame(GameState* gameState) {
     // Fixed timestep: wait until R_UPDATE_RATE retrace samples exist, then consume exactly that many.
     int rate = R_UPDATE_RATE;
@@ -46,11 +84,17 @@ static void frame(GameState* gameState) {
     input_consume(rate);
 
     GameState_ReqPadData(gameState);
+    u64 t0 = svcGetSystemTick();
     Gfx3D_BeginFrame();
     GameState_Update(gameState); // records the frame's draws (opaque / translucent / overlay)
-    Screen_BeginFrame();
+    u64 tw = svcGetSystemTick();
+    Screen_BeginFrame(); // waits for the previous frame's GPU work (and vblank sync)
+    u64 t1 = svcGetSystemTick();
+    sPerfWait += t1 - tw;
     Gfx3D_EndFrame(); // replays them on the GPU in the original order
+    u64 t2 = svcGetSystemTick();
     Screen_EndFrame();
+    perf_sample(tw - t0, t2 - t1); // logic excludes the frame-start wait
 
     Gfx3D_FrameReset();
     sGfxCtx.frameCount++;

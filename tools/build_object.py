@@ -26,6 +26,20 @@ OUT_HDR = os.path.join(HERE, "..", "source", "game", "assets_agg")
 OUT_ANIM = os.path.join(HERE, "..", "romfs", "anim")
 
 KEEP_SEGMENTS = {4: "gameplay_keep"}
+
+# Lists the game only ever draws right after another list that loads their texture / material state
+# (found at the call sites; on the original the second list samples what the first left in texture memory).
+# They are compiled with that state as their starting state: {file: {list: prelude list}}.
+PRELUDES = {
+    "gameplay_keep": {
+        "gGlowCircleDL": "gGlowCircleTextureLoadDL",       # z_lights.c Lights_DrawGlow
+        "gSylvanDustMoteModelDL": "gSylvanDustMoteMaterialDL",  # z_object_kankyo.c ObjectKankyo_DrawFairies
+    },
+    "object_gs": {
+        "gEchoStoneDL": "gEchoStoneMaterialDL",            # z_en_gs.c EnGs_Draw
+        "gEchoStoneSquishedDL": "gEchoStoneMaterialDL",
+    },
+}
 TOKEN = 0x80000000  # asset handles = TOKEN | original segmented address (see asset_token.h)
 
 
@@ -60,6 +74,53 @@ def be32(b, o):
     return struct.unpack_from(">I", b, o)[0]
 
 
+_GAME_ENUMS = None
+
+
+def game_enums():
+    """Enum names the game headers define themselves (e.g. PlayerLimb in player.h): not generated again."""
+    global _GAME_ENUMS
+    if _GAME_ENUMS is None:
+        import re
+        _GAME_ENUMS = set()
+        inc = os.path.join(HERE, "..", "source", "game", "include")
+        for dp, _, files in os.walk(inc):
+            if os.path.join("include", "assets") in dp:
+                continue
+            for f in files:
+                if f.endswith(".h"):
+                    _GAME_ENUMS |= set(re.findall(r"typedef enum (\w+)", open(os.path.join(dp, f), encoding="utf-8",
+                                                                             errors="replace").read()))
+    return _GAME_ENUMS
+
+
+def limb_enums(data, seg, symbols, warns):
+    """Limb index enums of skeletons that name them in the XML (EnumName / LimbNone / LimbMax): NONE = 0,
+    then the limbs in the order of the skeleton's limb table (read from the file), then MAX."""
+    limb_enum = {off: a["EnumName"] for tag, sym, off, a in symbols if tag == "Limb" and "EnumName" in a}
+    out = []
+    for tag, sym, off, a in symbols:
+        if tag != "Skeleton" or "EnumName" not in a or "LimbNone" not in a or a["EnumName"] in game_enums():
+            continue
+        table, count = be32(data, off), data[off + 4]
+        names = []
+        for i in range(count):
+            la = be32(data, (table & 0xFFFFFF) + 4 * i)
+            if la >> 24 != seg or (la & 0xFFFFFF) not in limb_enum:
+                warns.append(f"{sym}: limb {i} has no enum name")
+                names = None
+                break
+            names.append(limb_enum[la & 0xFFFFFF])
+        if names is None:
+            continue
+        out.append(f"typedef enum {a['EnumName']} {{")
+        out.append(f"    /* 0x00 */ {a['LimbNone']},")
+        out += [f"    /* 0x{i + 1:02X} */ {n}," for i, n in enumerate(names)]
+        out.append(f"    /* 0x{count + 1:02X} */ {a['LimbMax']}")
+        out.append(f"}} {a['EnumName']};")
+    return out
+
+
 def build(fs, name, report, xml=None, more_extras=()):
     """xml: XML file name if it differs from the ROM file name (scenes: 'spot04' for 'spot04_scene').
     more_extras: additional (tag, blob) extras to store in the same .dsobj (scene command data)."""
@@ -82,6 +143,9 @@ def build(fs, name, report, xml=None, more_extras=()):
 
     meshes = {}
     bad_dl = 0
+    sym_off = {sym: off for tag, sym, off, attrs in fspec["symbols"] if tag == "DList"}
+    preludes = {sym_off[a]: (seg << 24) | sym_off[b] for a, b in PRELUDES.get(name, {}).items()
+                if a in sym_off and b in sym_off}
     for tag, sym, off, attrs in fspec["symbols"]:
         if tag == "DList" and "Length" in attrs:
             # self-check of the (possibly computed) offset: the last command must be G_ENDDL
@@ -92,7 +156,7 @@ def build(fs, name, report, xml=None, more_extras=()):
         if tag == "DList":
             addr = (seg << 24) | off
             try:
-                meshes[addr] = comp.compile(addr)
+                meshes[addr] = comp.compile(addr, prelude=preludes.get(off))
             except (KeyError, RuntimeError, IndexError, ValueError, struct.error) as e:
                 warns.append(f"DL {sym} {addr:08X}: {e}")
 
@@ -232,6 +296,7 @@ def build(fs, name, report, xml=None, more_extras=()):
         if tag in ("Scene", "Room"):
             continue  # file-level symbols are not handles
         lines.append(f"#define {sym} ASSET_TOKEN(0x{TOKEN | (seg << 24) | off:08X}) // {tag}")
+    lines += limb_enums(data, seg, fspec["symbols"], warns)
     lines.append(f"#define {name.upper()}_VROM 0x{vrom:08X} // converted file: /vrom/{vrom:08X}.pobj")
     lines.append("#endif\n")
     open(os.path.join(OUT_HDR, name + ".h"), "w", newline="\n").write("\n".join(lines))

@@ -28,6 +28,8 @@ def convert(text, rel):
     # exact game math (see game/include/exact_math.h)
     for old, new in EXACT_MATH:
         text = re.sub(r"\b" + old + r"\(", new + "(", text)
+    if re.search(r"\bExact\w+\(", text) and '#include "exact_math.h"' not in text:
+        text = re.sub(r'(#include "[^"]+"\n)', r'\1#include "exact_math.h"\n', text, count=1)
     text = re.sub(r'#pragma increment_block_number[^\n]*\n(\s+"[^\n]*\n)*', "", text)
     from rewrite_draw import rewrite
     text, _ = rewrite(text)

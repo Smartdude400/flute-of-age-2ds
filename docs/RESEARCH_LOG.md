@@ -403,3 +403,49 @@ Prepared for that:
   ROM (byte-identical output verified); the ROM layout files and asset XML specs (text metadata) are
   vendored under tools/ so the build does not need a decomp checkout;
 - absolute local paths scrubbed from the published copy of this log.
+
+## 2026-11-24 — 60 Hz question (human request) + frame timing
+The human asked whether the game can hit the 2DS refresh rate and what it would take. Added frame timing to
+the runner ([perf] log lines: logic, replay split, GPU, draws/triangles). Forest + player, Azahar:
+logic 1-2 ms; replay ~4 ms CPU (state 0.7, submission 2.6, 2D 0.14); GPU ~4 ms; ~14 ms per frame was the
+frame-start wait (vblank sync), first mis-measured as replay. Renderer state caching added (only changed
+state is re-sent; caches reset at frame start and when the 2D layer takes the GPU): GPU work -40%.
+Assessment (3dsport/docs/ARCHITECTURE.md, "60 Hz on the 2DS"): running the logic at 60 Hz would change the
+game (all per-update constants) -> rejected; interpolating the presentation between the last two 20 Hz
+logic states keeps the game bit-identical and fits the recorded-command renderer; planned as P5 after the
+first-area actors.
+
+## 2026-11-24 — P4 (part 1): first-area actors
+The human asked to continue with the next step (P4). Imported the 19 actor overlays the forest spawns
+(En_Elf, En_Holl, En_River_Sound, Object_Kankyo, En_Ko, En_Gs, En_Md, Door_Ana, En_Sw, Obj_Makekinsuta,
+En_Wonder_Item, Obj_Hana, En_Ishi, Obj_Mure2, En_Kanban, En_Kusa, En_Sa, Obj_Bean, En_Wonder_Talk2) with
+`3dsport/tools/import_actor.py`; 45 compile errors and 3 missing headers fixed by translation rules
+(added to the importer so later actors get them) and engine additions, not by hand edits where a rule
+fits:
+- Display lists inside overlays (room-transition plane, signpost shadow): new converter
+  `tools/build_overlays.py`; handles = original VRAM addresses (VRAM from the code's actor overlay table);
+  the XML offsets turned out to be relative to the data block, not to .data, so the base is found by
+  self-consistency (27 of 36 overlay XMLs pass, the 9 failures are rejected, none used in the forest).
+- Multi-object actors (Sylvan children: head/body/legs from three objects, animations from a fourth):
+  `gSegments[6]` (CPU) and `gSPSegment(6)` (GPU) are now separate native calls, and skeleton limbs
+  resolve their list when recorded -> the three-object child renders correctly (evidence/p4_forest_npcs.png).
+- Runtime-built lists: the fairy's render-mode list and the children's tunic/boot colour lists are
+  recorded segment lists (`Gfx3D_SetRenderMode` takes the original RDP mode words: render-mode constants
+  imported from gbi.h into engine/rdp_modes.h); the signpost's shadow mask (texels written by the game
+  each frame) is converted at replay.
+- Limb index enums were missing (the original build generates them from the XML): generated into the
+  object headers from the XML names + the ROM limb tables (enums the game headers define are skipped).
+- Found by testing: a grey translucent square around the companion fairy = the point-light glow; its
+  draw list samples texture memory loaded by the list before it (z_lights.c). Converter "preludes" compile
+  such lists with the previous list's state (4 lists found at the call sites).
+- Found by testing: En_Ko asks for animation lengths before its objects load (segment 6 = gameplay_keep);
+  the original reads unrelated bytes, the port read through NULL (works on the emulator, would fault on
+  hardware). Defined value + log, recorded as divergence D-ANIMSEG (value overwritten before use).
+- Sylva's greeting cutscene (new file, first entry) needs cutscene data, not converted yet: the cutscene
+  runner now ends a cutscene with no script (S13, logged) instead of reading address 0.
+- Result: 600-frame forest walk with NPCs, fairy, signs, grass, ambience, no faults
+  (3dsport/evidence/p4_forest_walk_strip.png). Known: dust motes draw as small squares (texture is bound,
+  sampling wrong; open), sword trail is a presentation stub.
+- Perf with the NPCs (Azahar): logic 3-5 ms, replay CPU ~11 ms for ~380 draws (was ~4 ms for ~150):
+  per-draw submission dominates; first target for on-device profiling (P7) and a constraint on P5.
+- Open in P4: cutscene data (S13), file select (S12), native HUD.

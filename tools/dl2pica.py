@@ -12,6 +12,7 @@ stack, TMEM loads, tiles, TLUT, combiner, other modes, geometry mode, colours) a
 
 Nothing original is interpreted at run time. Encodings: include/ultra64/gbi.h (F3DEX_GBI_2).
 """
+import copy
 import struct
 
 import n64tex
@@ -244,9 +245,15 @@ class DLCompiler:
                 (W & 0xFFFF) | (H << 16), (uls & 0xFFFF) | (ult << 16), shifts]
 
     # ------------------------------------------------------------------ main
-    def compile(self, dl_addr):
+    def compile(self, dl_addr, prelude=None):
+        """prelude: address of a list the game always runs right before this one (e.g. a texture-load list):
+        its texture memory / tile / other-mode state is the starting state here (its own ops run at runtime)."""
         st = {"vtx": [None] * 64, "tiles": [None] * 8, "img": None, "tmem": {}, "tlut": 0, "omh": 0, "oml": 0,
               "tex_tile": 0, "mstack": [("base", 0)], "rdphalf": 0, "dynsize": set()}
+        if prelude is not None:
+            self.compile(prelude)
+            for k in ("tiles", "img", "tmem", "tlut", "omh", "oml", "tex_tile"):
+                st[k] = copy.deepcopy(self.last_state[k])
         verts = []          # native vertex records (bytes)
         indices = []        # u16
         ops = []            # u32 words
@@ -446,6 +453,7 @@ class DLCompiler:
                 self.note(f"op{opc:02X}")
         flush()
         ops.append(OP_END)
+        self.last_state = st
         return {"verts": b"".join(verts), "nverts": len(verts), "indices": indices, "ops": ops, "palette": palette,
                 "ntris": len(indices) // 3}
 
