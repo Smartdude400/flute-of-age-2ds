@@ -29,4 +29,7 @@ typedef union Vtx {
     long long int force_structure_alignment;
 } Vtx;
 
+// (include/gfx.h:143) vertex initializer
+#define VTX(x,y,z,s,t,crnx,cgny,cbnz,a) { { { x, y, z }, 0, { s, t }, { crnx, cgny, cbnz, a } } }
+
 #endif

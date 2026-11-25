@@ -10,6 +10,7 @@
 #define ENGINE_RDP_GBI_H
 #include "engine/gfx3d.h"
 #include "engine/rdp_modes.h"
+#include "engine/rdp_consts.h"
 #include "engine/vtx.h"
 #include "sys_matrix.h"
 
@@ -334,7 +335,19 @@
                                           (cms), (cmt), (masks), (maskt)))
 #define gDPLoadMultiBlock_4b(pkt, timg, tmem, rtile, fmt, width, height, pal, cms, cmt, masks, maskt, shifts,  \
                              shiftt)                                                                           \
-    gDPLoadTextureBlock_4b(pkt, timg, fmt, width, height, pal, cms, cmt, masks, maskt, shifts, shiftt)
+    (RDP_EVAL(pkt) Gfx3D_LoadTextureBlockTile((rtile), (const void*)(timg), (fmt), G_IM_SIZ_4b, (width), (height),  \
+                                              (pal), (cms), (cmt), (masks), (maskt)))
+#define gDPLoadMultiBlock(pkt, timg, tmem, rtile, fmt, siz, width, height, pal, cms, cmt, masks, maskt, shifts,   \
+                          shiftt)                                                                              \
+    (RDP_EVAL(pkt) Gfx3D_LoadTextureBlockTile((rtile), (const void*)(timg), (fmt), (siz), (width), (height), (pal), \
+                                              (cms), (cmt), (masks), (maskt)))
+// (src/code/gDPLoadTextureBlock_Runtime.inc.c: the same load with runtime size arguments)
+#define gDPLoadTextureBlock_Runtime gDPLoadTextureBlock
+#define gDPSetTileSize(pkt, t, uls, ult, lrs, lrt) (RDP_EVAL(pkt) Gfx3D_RdpSetTileSize((t), (uls), (ult), (lrs), (lrt)))
+// palettes: entries stay in game memory (big-endian), read when a colour-indexed texture is converted
+#define gDPLoadTLUT_pal16(pkt, pal, dram) (RDP_EVAL(pkt) Gfx3D_LoadTLUT((pal), (const void*)(dram), 16))
+#define gDPLoadTLUT_pal256(pkt, dram) (RDP_EVAL(pkt) Gfx3D_LoadTLUT(0, (const void*)(dram), 256))
+#define gDPSetTextureFilter(pkt, type) (RDP_EVAL(pkt) Gfx3D_SetOtherModePart(1, G_MDSFT_TEXTFILT, 2, (type)))
 // tile / image commands of hand-built loads (the RDP state machine in engine/gfx3d.c turns them into texture
 // block loads when a primitive is drawn)
 #define gDPSetTextureImage(pkt, fmt, siz, width, img) \

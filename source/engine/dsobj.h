@@ -28,6 +28,9 @@ typedef struct DsObj {
     bool ownsData; // allocated here (vs placed in a caller region)
     const DsObjHeader* hdr;
     DsTexture* tex;
+    u16 numTex;    // kept here: the resident data may be overwritten while the object is unused (pause menu)
+    bool relocated; // payload pointers fixed up (engine/asset.c), once per load
+    const struct DsObj* texOwner; // another load of the same file whose loaded textures this one uses
     char path[40]; // RomFS path, for loading textures
 } DsObj;
 

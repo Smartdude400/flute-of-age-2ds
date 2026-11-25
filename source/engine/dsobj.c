@@ -74,6 +74,7 @@ DsObj* DsObj_LoadInto(const char* path, void* region, u32 regionSize, u32* outUs
     obj->ownsData = !inRegion;
     obj->hdr = (const DsObjHeader*)data;
     obj->tex = calloc(hdr.numTex ? hdr.numTex : 1, sizeof(DsTexture));
+    obj->numTex = hdr.numTex;
     strncpy(obj->path, path, sizeof(obj->path) - 1);
     if (outUsed) {
         *outUsed = inRegion ? need : 0;
@@ -89,12 +90,12 @@ void DsObj_Free(DsObj* obj) {
     if (obj == NULL) {
         return;
     }
-    free(obj->tex);
-    for (int i = 0; i < obj->hdr->numTex; i++) {
+    for (int i = 0; i < obj->numTex; i++) {
         if (obj->tex[i].state == 1) {
             C3D_TexDelete(&obj->tex[i].tex);
         }
     }
+    free(obj->tex);
     if (obj->ownsData) {
         linearFree(obj->data);
     }
@@ -102,8 +103,11 @@ void DsObj_Free(DsObj* obj) {
 }
 
 const DsTexture* DsObj_Texture(const DsObj* obj, int index) {
-    if (index < 0 || index >= obj->hdr->numTex) {
+    if (index < 0 || index >= obj->numTex) {
         return NULL;
+    }
+    if (obj->texOwner != NULL && index < obj->texOwner->numTex && obj->texOwner->tex[index].state == 1) {
+        return &obj->texOwner->tex[index];
     }
     DsTexture* t = &obj->tex[index];
     if (t->state == 0) {

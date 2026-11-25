@@ -2,7 +2,10 @@
 // Replaces Graph_ThreadEntry/Graph_Update (src/code/graph.c). One loop on the main thread:
 //   - each game frame consumes exactly R_UPDATE_RATE retrace input samples (fixed timestep,
 //     identical to the original's "one game frame per R_UPDATE_RATE retraces"),
-//   - runs GameState_Update (logic + native drawing) inside one citro3d frame.
+//   - runs GameState_Update (logic + recording of the frame's draws),
+//   - presents on every retrace until the next game frame: the recorded frame is replayed at
+//     t = 1/R_UPDATE_RATE, 2/R_UPDATE_RATE, ... 1 between the previous and this game frame (60 Hz
+//     presentation, engine/gfx3d.c "interpolation"; build with PRESENT20=1 for the original pacing).
 #include <3ds.h>
 #include <citro3d.h>
 #include <string.h>
@@ -39,6 +42,7 @@ void Runner_MarkFault(void) {
 // ---- frame timing (CPU ticks at 268 MHz; GPU times from citro3d), logged every 60 game frames
 u32 Gfx3D_TakeDrawStats(u32* tris);
 void Gfx3D_TakeTickStats(u64* state, u64* submit, u64* twoD);
+void Gfx3D_TakeInterpStats(u32* total, u32* linked);
 static u64 sPerfState, sPerfSubmit, sPerf2D, sPerfWait;
 static struct { u64 logic, replay, logicMax, replayMax; float gpuProc, gpuDraw; u32 draws, tris; int n; } sPerf;
 
@@ -67,17 +71,49 @@ static void perf_sample(u64 logic, u64 replay) {
                    (unsigned long)(sPerf.tris / 60));
         log_printf("[perf]   replay split: state %.2f ms, submit %.2f ms, 2D %.2f ms, frame-start wait %.2f ms\n", sPerfState * ms / 60,
                    sPerfSubmit * ms / 60, sPerf2D * ms / 60, sPerfWait * ms / 60);
+        {
+            u32 total, linked;
+            Gfx3D_TakeInterpStats(&total, &linked);
+            log_printf("[perf]   interpolation: %lu of %lu matrix commands matched\n", (unsigned long)linked,
+                       (unsigned long)total);
+        }
         sPerfState = sPerfSubmit = sPerf2D = sPerfWait = 0;
         memset(&sPerf, 0, sizeof(sPerf));
     }
 }
 
+static int sPresentSub, sPresentRate; // retraces presented since the last game frame / its update rate
+static bool sNewGameState;            // the next game frame starts a game state: nothing to blend from
+static u64 sLogicTicks;
+
+static void present(float t) {
+    u64 tw = svcGetSystemTick();
+    Screen_BeginFrame(); // waits for the previous frame's GPU work (and vblank sync)
+    u64 t1 = svcGetSystemTick();
+    sPerfWait += t1 - tw;
+#ifdef PORT_INTERP_TEST_T
+    t = PORT_INTERP_TEST_T; // test builds: every presented frame is a blend (shows matching errors)
+#endif
+    Gfx3D_Replay(t); // replays the recorded frame on the GPU in the original order
+    u64 t2 = svcGetSystemTick();
+    Screen_EndFrame();
+    perf_sample(sLogicTicks, t2 - t1); // per presented frame (logic: the game frame it shows)
+}
+
 static void frame(GameState* gameState) {
-    // Fixed timestep: wait until R_UPDATE_RATE retrace samples exist, then consume exactly that many.
     int rate = R_UPDATE_RATE;
     if (rate < 1) {
         rate = 1;
     }
+#ifndef PORT_PRESENT20
+    // retraces between two game frames: present the recorded frame closer to its own time
+    if (sPresentSub > 0 && sPresentSub < sPresentRate && (int)input_pending() < rate) {
+        sPresentSub++;
+        present((float)sPresentSub / sPresentRate);
+        return;
+    }
+#endif
+    // Fixed timestep: wait until R_UPDATE_RATE retrace samples exist, then consume exactly that many.
     while ((int)input_pending() < rate) {
         svcSleepThread(500000);
     }
@@ -86,15 +122,19 @@ static void frame(GameState* gameState) {
     GameState_ReqPadData(gameState);
     u64 t0 = svcGetSystemTick();
     Gfx3D_BeginFrame();
+    if (sNewGameState) {
+        sNewGameState = false;
+        Gfx3D_InterpReset();
+    }
     GameState_Update(gameState); // records the frame's draws (opaque / translucent / overlay)
-    u64 tw = svcGetSystemTick();
-    Screen_BeginFrame(); // waits for the previous frame's GPU work (and vblank sync)
-    u64 t1 = svcGetSystemTick();
-    sPerfWait += t1 - tw;
-    Gfx3D_EndFrame(); // replays them on the GPU in the original order
-    u64 t2 = svcGetSystemTick();
-    Screen_EndFrame();
-    perf_sample(tw - t0, t2 - t1); // logic excludes the frame-start wait
+    sLogicTicks = svcGetSystemTick() - t0;
+#ifndef PORT_PRESENT20
+    sPresentRate = rate;
+    sPresentSub = 1;
+    present(1.0f / rate);
+#else
+    present(1.0f);
+#endif
 
     Gfx3D_FrameReset();
     sGfxCtx.frameCount++;
@@ -141,6 +181,8 @@ void Runner_Run(void) {
             Fault_Crash("CLASS SIZE= %lu bytes", (unsigned long)ovl->instanceSize);
         }
         GameState_Init(gameState, (GameStateFunc)ovl->init, &sGfxCtx);
+        sNewGameState = true;
+        sPresentSub = 0;
         while (GameState_IsRunning(gameState)) {
             if (!aptMainLoop()) {
                 exit(0); // closed from the HOME menu

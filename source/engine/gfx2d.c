@@ -34,6 +34,7 @@ bool Gfx2D_Init(void) {
     AttrInfo_AddLoader(&sAttr, 0, GPU_FLOAT, 3);
     AttrInfo_AddLoader(&sAttr, 1, GPU_FLOAT, 2);
     AttrInfo_AddLoader(&sAttr, 2, GPU_FLOAT, 4);
+    AttrInfo_AddLoader(&sAttr, 3, GPU_FLOAT, 2); // texcoord 1 (TEXEL1 of two-texture rectangles)
     sFontOk = PTex_Load("/font/gfxprint.ptex", &sFont);
     if (sFontOk) {
         C3D_TexSetFilter(&sFont, GPU_NEAREST, GPU_NEAREST);
@@ -68,10 +69,15 @@ static void setup(bool textured) {
     }
 }
 
-static void vtx(float x, float y, float u, float v, const float c[4]) {
+static void vtx2(float x, float y, float u, float v, float ub, float vb, const float c[4]) {
     C3D_ImmSendAttrib(x, y, 0.0f, 0.0f);
     C3D_ImmSendAttrib(u, v, 0.0f, 0.0f);
     C3D_ImmSendAttrib(c[0], c[1], c[2], c[3]);
+    C3D_ImmSendAttrib(ub, vb, 0.0f, 0.0f);
+}
+
+static void vtx(float x, float y, float u, float v, const float c[4]) {
+    vtx2(x, y, u, v, u, v, c);
 }
 
 static void quad(float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, const float c[4]) {
@@ -204,4 +210,54 @@ void Gfx2D_TexTriangles(const float* xy, const float* uv, const u8* col, int n) 
         vtx(xy[2 * i], xy[2 * i + 1], uv[2 * i], uv[2 * i + 1], c);
     }
     C3D_ImmDrawEnd();
+}
+
+void Gfx2D_TexQuad2(float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float u0b,
+                    float v0b, float u1b, float v1b) {
+    static const float kWhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+    vtx2(x0, y0, u0, v0, u0b, v0b, kWhite);
+    vtx2(x1, y0, u1, v0, u1b, v0b, kWhite);
+    vtx2(x1, y1, u1, v1, u1b, v1b, kWhite);
+    vtx2(x0, y0, u0, v0, u0b, v0b, kWhite);
+    vtx2(x1, y1, u1, v1, u1b, v1b, kWhite);
+    vtx2(x0, y1, u0, v1, u0b, v1b, kWhite);
+    C3D_ImmDrawEnd();
+}
+
+// An image over the game area at (x, y), w x h pixels, texels 1:1 from the texture's top-left (first stored
+// row at t = 1); opaque, no depth test or write; texels with alpha 0 are skipped (copy mode's alpha threshold).
+void Gfx2D_DrawImage(const C3D_Tex* tex, float x, float y, float w, float h, float texW, float texH) {
+    static const float kWhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    Gfx2D_BindRectProgram();
+    C3D_DepthTest(false, GPU_ALWAYS, GPU_WRITE_COLOR);
+    C3D_CullFace(GPU_CULL_NONE);
+    C3D_AlphaTest(true, GPU_GREATER, 0);
+    C3D_FogGasMode(GPU_NO_FOG, GPU_PLAIN_DENSITY, false);
+    C3D_AlphaBlend(GPU_BLEND_ADD, GPU_BLEND_ADD, GPU_ONE, GPU_ZERO, GPU_ONE, GPU_ZERO);
+    C3D_TexEnv* env = C3D_GetTexEnv(0);
+    C3D_TexEnvInit(env);
+    C3D_TexEnvSrc(env, C3D_Both, GPU_TEXTURE0, 0, 0);
+    C3D_TexEnvFunc(env, C3D_Both, GPU_REPLACE);
+    for (int i = 1; i < 6; i++) {
+        C3D_TexEnvInit(C3D_GetTexEnv(i));
+    }
+    C3D_TexSetFilter((C3D_Tex*)tex, GPU_NEAREST, GPU_NEAREST);
+    C3D_TexSetWrap((C3D_Tex*)tex, GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
+    C3D_TexBind(0, (C3D_Tex*)tex);
+    float u1 = w / texW, v1 = 1.0f - h / texH;
+    float x1 = x + w, y1 = y + h;
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+    vtx2(x, y, 0, 1, 0, 1, kWhite);
+    vtx2(x1, y, u1, 1, u1, 1, kWhite);
+    vtx2(x1, y1, u1, v1, u1, v1, kWhite);
+    vtx2(x, y, 0, 1, 0, 1, kWhite);
+    vtx2(x1, y1, u1, v1, u1, v1, kWhite);
+    vtx2(x, y1, 0, v1, 0, v1, kWhite);
+    C3D_ImmDrawEnd();
+}
+
+// The captured frame (Screen_CaptureFrame) over the game area, opaque.
+void Gfx2D_DrawCapture(const C3D_Tex* tex) {
+    Gfx2D_DrawImage(tex, 0.0f, 0.0f, 320.0f, 240.0f, 512.0f, 256.0f);
 }

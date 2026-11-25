@@ -14,6 +14,12 @@ DsObj* Asset_GetSegment(int seg);
 // CPU side only (was `gSegments[seg] = ...`): handle resolution by game code; the renderer's binding
 // (gSPSegment) is Gfx3D_SetSegmentObj.
 void Asset_SetCpuSegment(int seg, DsObj* obj);
+// CPU side, to game memory (was `gSegments[seg] = OS_K0_TO_PHYSICAL(buffer)`): handles resolve into it
+void Asset_SetCpuSegmentRaw(int seg, void* base);
+// Copies the object's pointer-free records (arrays, player animation headers, ...) whose original offset is
+// below `size` to dst + that offset: a native-layout image of the first `size` bytes of the original file,
+// for code that kept such a chunk of a file (the pause menu's chunk of gameplay_keep).
+void Asset_CopyRecords(const DsObj* obj, u8* dst, u32 size);
 // Handle -> native record (skeleton, animation, ...). Non-handles (real pointers) pass through.
 void* Asset_Resolve(const void* p);
 // Standalone texture symbol (TXMP table) -> uploaded DS texture, or NULL.

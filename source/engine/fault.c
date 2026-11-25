@@ -15,6 +15,7 @@ void Fault_Crash(const char* fmt, ...) {
     va_start(ap, fmt);
     vsnprintf(msg, sizeof(msg), fmt, ap);
     va_end(ap);
+    log_console();
     log_printf("FAULT: %s\n", msg);
     Runner_MarkFault();
     while (aptMainLoop()) {

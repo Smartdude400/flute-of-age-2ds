@@ -17,7 +17,9 @@ typedef struct PMeshHdr {
     u32 numVerts, vertsOff;
     u32 numIdx, idxOff;
     u32 numOps, opsOff;
-    u8 numPalette, pad[3];
+    u8 numPalette;
+    u8 vtxSeg; // 0: static vertices; else the segment of a runtime vertex buffer (placeholders: x = index)
+    u8 pad[2];
     u8 palette[8][2]; // matrix source: type (MSRC_*), id
 } PMeshHdr;
 

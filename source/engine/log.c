@@ -9,9 +9,15 @@ static FILE* sFile;
 static char sLogBuf[256];
 
 void log_init(void) {
-    consoleInit(GFX_BOTTOM, NULL); // bottom screen text console (the top screen is the game)
-    sConsoleReady = true;
+    // the log goes to the SD card and the debugger; the bottom screen belongs to the game (menu and HUD)
     sFile = fopen("sdmc:/foa_log.txt", "w");
+}
+
+void log_console(void) {
+    if (!sConsoleReady) {
+        consoleInit(GFX_BOTTOM, NULL);
+        sConsoleReady = true;
+    }
 }
 
 void log_printf(const char* fmt, ...) {

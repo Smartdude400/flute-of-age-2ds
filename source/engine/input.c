@@ -10,6 +10,7 @@
 #include <3ds.h>
 #include <citro3d.h>
 #include "engine/input.h"
+#include "engine/touch.h"
 #include "padmgr.h"
 #include "controller.h"
 #include "libu64/pad.h"
@@ -19,6 +20,10 @@
 #define STICK_MAX 80   // N64 stick full deflection (game clamps relative values itself)
 
 static PadState sQueue[SAMPLE_QUEUE];
+typedef struct { s16 x, y; bool down; } TouchSample;
+static TouchSample sTouchQueue[SAMPLE_QUEUE]; // touch screen, sampled with sQueue
+static bool sTouchWasDown;
+static s32 sTap = TOUCH_NONE; // tap target of the current game frame (Touch_TakeTap)
 static volatile u32 sHead, sTail; // written by the sampling thread / consumer
 static Input sPolled[MAXCONTROLLERS]; // equivalent of the pad manager's polled inputs
 static u32 sDropped;
@@ -28,11 +33,13 @@ static volatile bool sRun;
 
 // ---- scripted input (tests / replays): sdmc:/foa_input.txt, lines "<retrace> <keys>", keys held from that
 // retrace on: A B X Y L R START SELECT, DU DD DL DR (D-pad), UP DOWN LEFT RIGHT (circle pad full deflection),
-// "-" = nothing. When the file exists it replaces the real controls for the whole run.
+// "-" = nothing, "TOUCH x y" = touch screen held at (x, y). When the file exists it replaces the real controls
+// for the whole run.
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define SCRIPT_MAX 512
-static struct { u32 at, keys; s16 cx, cy; } sScript[SCRIPT_MAX];
+static struct { u32 at, keys; s16 cx, cy, tx, ty; bool touch; } sScript[SCRIPT_MAX];
 static int sScriptLen = -1;
 static u32 sRetrace;
 
@@ -53,8 +60,19 @@ static void script_load(void) {
             continue;
         }
         u32 keys = 0;
-        s16 cx = 0, cy = 0;
+        s16 cx = 0, cy = 0, tx = 0, ty = 0;
+        bool touch = false;
         for (char* tok = strtok(line + n, " \r\n"); tok != NULL; tok = strtok(NULL, " \r\n")) {
+            if (strcmp(tok, "TOUCH") == 0) {
+                char* sx = strtok(NULL, " \r\n");
+                char* sy = sx != NULL ? strtok(NULL, " \r\n") : NULL;
+                if (sy != NULL) {
+                    tx = (s16)atoi(sx);
+                    ty = (s16)atoi(sy);
+                    touch = true;
+                }
+                continue;
+            }
             static const struct { const char* name; u32 key; } kNames[] = {
                 { "A", KEY_A }, { "B", KEY_B }, { "X", KEY_X }, { "Y", KEY_Y }, { "L", KEY_L }, { "R", KEY_R },
                 { "START", KEY_START }, { "SELECT", KEY_SELECT }, { "DU", KEY_DUP }, { "DD", KEY_DDOWN },
@@ -72,21 +90,28 @@ static void script_load(void) {
         sScript[sScriptLen].keys = keys;
         sScript[sScriptLen].cx = cx;
         sScript[sScriptLen].cy = cy;
+        sScript[sScriptLen].tx = tx;
+        sScript[sScriptLen].ty = ty;
+        sScript[sScriptLen].touch = touch;
         sScriptLen++;
     }
     fclose(f);
 }
 
-static bool script_state(u32 retrace, u32* keys, circlePosition* c) {
+static bool script_state(u32 retrace, u32* keys, circlePosition* c, TouchSample* t) {
     if (sScriptLen < 0) {
         return false;
     }
     *keys = 0;
     c->dx = c->dy = 0;
+    t->down = false;
     for (int i = 0; i < sScriptLen && sScript[i].at <= retrace; i++) {
         *keys = sScript[i].keys;
         c->dx = sScript[i].cx;
         c->dy = sScript[i].cy;
+        t->x = sScript[i].tx;
+        t->y = sScript[i].ty;
+        t->down = sScript[i].touch;
     }
     return true;
 }
@@ -96,13 +121,20 @@ static s8 stick_axis(int v) {
     return (s8)(s > STICK_MAX ? STICK_MAX : (s < -STICK_MAX ? -STICK_MAX : s));
 }
 
-static PadState sample_keys(void) {
+static PadState sample_keys(TouchSample* t) {
     PadState p = { 0 };
     hidScanInput();
     u32 k = hidKeysHeld();
     circlePosition c;
     hidCircleRead(&c);
-    script_state(sRetrace++, &k, &c);
+    touchPosition tp = { 0, 0 };
+    if (k & KEY_TOUCH) {
+        hidTouchRead(&tp);
+    }
+    t->x = tp.px;
+    t->y = tp.py;
+    t->down = (k & KEY_TOUCH) != 0;
+    script_state(sRetrace++, &k, &c, t);
     if (k & KEY_A) p.button |= BTN_A;
     if (k & KEY_B) p.button |= BTN_B;
     if (k & KEY_L) p.button |= BTN_Z;
@@ -123,7 +155,7 @@ static void push_sample(void) {
         sDropped++; // consumer is far behind; drop newest (only possible in real-time play)
         return;
     }
-    sQueue[sHead] = sample_keys();
+    sQueue[sHead] = sample_keys(&sTouchQueue[sHead]);
     sHead = next;
 }
 
@@ -169,9 +201,33 @@ static void update_inputs(const PadState* pad0) {
     }
 }
 
+// Touch screen (engine/touch.h): an on-screen button acts as that button while touched; a touch starting on
+// another target is this game frame's tap.
+static void apply_touch(PadState* p, const TouchSample* t) {
+    static const u16 kButtons[] = { 0, BTN_B, BTN_CLEFT, BTN_CDOWN, BTN_CRIGHT, BTN_START, BTN_Z, BTN_R };
+    int tag = t->down ? Gfx3D_TouchFind(t->x, t->y) : TOUCH_NONE;
+    if (tag > TOUCH_NONE && tag < (int)(sizeof(kButtons) / sizeof(kButtons[0]))) {
+        p->button |= kButtons[tag];
+    } else if (tag != TOUCH_NONE && !sTouchWasDown) {
+        sTap = tag;
+    }
+    sTouchWasDown = t->down;
+}
+
+s32 Touch_TakeTap(int first, int count) {
+    if (sTap >= first && sTap < first + count) {
+        s32 i = sTap - first;
+        sTap = TOUCH_NONE;
+        return i;
+    }
+    return -1;
+}
+
 void input_consume(int count) {
+    sTap = TOUCH_NONE; // a tap not taken by the frame it started in is dropped
     for (int n = 0; n < count; n++) {
         PadState p = sQueue[sTail];
+        apply_touch(&p, &sTouchQueue[sTail]);
         sTail = (sTail + 1) % SAMPLE_QUEUE;
         update_inputs(&p);
         sConsumed++;

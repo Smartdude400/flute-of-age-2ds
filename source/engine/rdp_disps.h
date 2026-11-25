@@ -8,6 +8,7 @@
 #ifndef ENGINE_RDP_DISPS_H
 #define ENGINE_RDP_DISPS_H
 #include "engine/gfx3d.h"
+#include "engine/gfx.h"
 
 typedef struct Gfx {
     u32 w0, w1;
@@ -18,6 +19,8 @@ Gfx** Gfx3D_DispCursor(GfxBuf buf);
 #define POLY_OPA_DISP (*Gfx3D_DispCursor(GFX_BUF_OPA))
 #define POLY_XLU_DISP (*Gfx3D_DispCursor(GFX_BUF_XLU))
 #define OVERLAY_DISP (*Gfx3D_DispCursor(GFX_BUF_OVL))
+// the work buffer ran before the others; its lists here are recorded in place (opened lists)
+#define WORK_DISP (*Gfx3D_DispCursor(GFX_BUF_OPA))
 #define OPEN_DISPS(gfxCtx, file, line) {
 #define CLOSE_DISPS(gfxCtx, file, line) }
 #define RDP_EVAL(pkt) (void)(pkt),

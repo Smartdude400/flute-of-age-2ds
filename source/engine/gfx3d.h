@@ -14,6 +14,16 @@ typedef enum { GFX_BUF_OPA, GFX_BUF_XLU, GFX_BUF_OVL, GFX_BUF_COUNT } GfxBuf;
 void Gfx3D_Init(void);
 void Gfx3D_BeginFrame(void); // clears the command buffers (called by the runner)
 void Gfx3D_EndFrame(void);   // replays opaque, translucent, overlay (called by the runner)
+// Replay of the last recorded frame at time t between the previous logic frame (0) and it (1): matched matrices
+// are blended (60 Hz presentation). Gfx3D_EndFrame is Gfx3D_Replay(1) plus marking the frame as a blend source.
+void Gfx3D_Replay(float t);
+// Draw context of the following matrix commands (record time): matrices are matched with the previous
+// frame's by context, type and order. Set by the game's draw entry points (actor, room, effect, sky).
+#define INTERP_CTX_NONE 0xFFFFFFFFu   // not interpolated (HUD, menus)
+#define INTERP_CTX_CAMERA 0xFFFFFF00u // + buffer
+void Gfx3D_InterpSetContext(u32 ctx);
+u32 Gfx3D_InterpGetContext(void);
+void Gfx3D_InterpReset(void); // nothing to blend from (scene change)
 void Gfx3D_SetTarget(GfxBuf buf);
 GfxBuf Gfx3D_GetTarget(void);
 
@@ -31,6 +41,8 @@ void Gfx3D_SetSegmentTex(int seg, const DsTexture* tex);
 bool Gfx3D_DrawDL(u32 segAddr);
 void Gfx3D_DrawMesh(const DsObj* obj, const DsMeshHdr* mesh);
 void Gfx3D_SetLights(const u8 ambient[3], int count, const s8 dirs[][3], const u8 cols[][3]);
+// the same, into the current buffer only (a light group set in one list, e.g. gSPSetLights1 on POLY_OPA_DISP)
+void Gfx3D_SetLightsHere(const u8 ambient[3], int count, const s8 dirs[][3], const u8 cols[][3]);
 void Gfx3D_SetEnvColor(u8 r, u8 g, u8 b, u8 a);
 // Flexible skeletons: limb matrices (segment 0x0D table) and limb lists, in limb order.
 void Gfx3D_FlexBegin(void);
@@ -64,6 +76,10 @@ union Vtx;
 void Gfx3D_Vertices(const union Vtx* v, int n, int v0);
 void Gfx3D_Quad(int v0, int v1, int v2, int v3);
 void Gfx3D_Tri(int v0, int v1, int v2);
+void Gfx3D_LoadTextureBlockTile(int tile, const void* img, int fmt, int siz, int w, int h, int pal, int cms, int cmt,
+                                int masks, int maskt);
+void Gfx3D_RdpSetTileSize(int tile, int uls, int ult, int lrs, int lrt);
+void Gfx3D_LoadTLUT(int slot, const void* dram, int count); // palette slots (16 entries each) from game memory
 void Gfx3D_RunDL(const void* dl); // converted handle, original list in game memory, or static native list
 void Gfx3D_SetOtherModePart(int high, int shift, int len, u32 data); // G_SETOTHERMODE_H / _L
 // hand-built texture loads (gDPSetTextureImage, gDPSetTileCustom, gDPLoadTile)
@@ -92,6 +108,24 @@ void Gfx3D_SegDLEnd(void);
 void Gfx3D_SetupFrame(u8 r, u8 g, u8 b);
 // Scene fog (was Gfx_SetFog2): colour and the original fog near/far (0..1000 depth range).
 void Gfx3D_SetFog(u8 r, u8 g, u8 b, u8 a, s16 fogNear, s16 fogFar);
+// Prerendered room background (was Room_DrawBackground2D's S2D copy): the converted image of `image` (a room
+// handle) copied over the frame at (offsetX, offsetY); depth is neither tested nor written.
+void Gfx3D_DrawBackground(const void* image, int width, int height, float offsetX, float offsetY);
+// Offscreen image (was a draw into a small colour image, Player_DrawPauseImpl): between Begin and End the
+// commands of the current buffer draw into a w x h image with this camera, cleared to opaque black (alpha
+// stays 1, as the coverage bit of the original's RGBA16 image); the render state around the pass is kept, as
+// the original drew it from a list of its own. Save (was PreRender_SaveFramebuffer) keeps the last image as
+// the content of the w x h RGBA16 buffer dst: texture loads from dst sample it.
+void Gfx3D_OffscreenBegin(int w, int h, const MtxF* proj, const MtxF* view);
+void Gfx3D_OffscreenEnd(void);
+void Gfx3D_OffscreenSave(const void* dst, int w, int h);
+// 2DS layout: the commands recorded after this in every buffer (Gfx3D_Screen) or in the current one
+// (Gfx3D_ScreenHere) draw on that screen (SCREEN_TOP / SCREEN_BOTTOM, engine/screen.h); each buffer's replay
+// starts on the top screen.
+void Gfx3D_Screen(int screen);
+void Gfx3D_ScreenHere(int screen);
+// While set, nothing is recorded (draw code run for its side effects only, e.g. pause pages not shown).
+void Gfx3D_SetDiscard(bool discard);
 // Full-screen rectangle in the current prim colour (was gDPFillRectangle over the whole screen).
 void Gfx3D_FillScreenPrim(void);
 // Segment holding a matrix (e.g. the billboard matrix in segment 1).

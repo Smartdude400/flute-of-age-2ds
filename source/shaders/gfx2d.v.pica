@@ -1,14 +1,16 @@
 ; gfx2d.v.pica (rewritten: native) - screen-space 2D layer (text, rectangles, full-screen fills).
-; Inputs: position (game 320x240 pixel space), texcoord, colour. Uniform: projection (ortho, tilted
+; Inputs: position (game 320x240 pixel space), texcoord, colour, texcoord 1 (TEXEL1). Uniform: projection (ortho, tilted
 ; for the rotated top-screen framebuffer).
 .fvec projection[4]
 .constf ones(1.0, 1.0, 1.0, 1.0)
 .out outpos position
 .out outtc0 texcoord0
+.out outtc1 texcoord1
 .out outclr color
 .alias inpos v0
 .alias intc v1
 .alias inclr v2
+.alias intc1 v3
 .proc main
 	mov r0.xyz, inpos
 	mov r0.w, ones
@@ -17,6 +19,7 @@
 	dp4 outpos.z, projection[2], r0
 	dp4 outpos.w, projection[3], r0
 	mov outtc0, intc
+	mov outtc1, intc1
 	mov outclr, inclr
 	end
 .end
