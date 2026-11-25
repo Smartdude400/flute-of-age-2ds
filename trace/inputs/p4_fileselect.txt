@@ -1,0 +1,13 @@
+# P4 file select: A on File 1 (new file) -> name entry, type two letters, then Start (confirms the name)
+120 A
+126 -
+300 A
+306 -
+340 RIGHT
+346 -
+380 A
+386 -
+460 START
+466 -
+600 A
+606 -

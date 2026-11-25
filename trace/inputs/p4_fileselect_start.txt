@@ -1,0 +1,5 @@
+# P4 file select: open File 1, Yes -> game starts
+120 A
+126 -
+300 A
+306 -
