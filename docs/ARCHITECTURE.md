@@ -46,7 +46,8 @@ game logic translated (no original-platform types or calls).
   2026-11-24 (evidence/p4_cs_greeting_strip.png). Text boxes done 2026-11-24
   (evidence/p4_text_box.png). HUD done 2026-11-24 (evidence/p4_hud.png). File select done 2026-11-24 (evidence/p4_fs.png,
   test boot `make FILESELECT=1`). Title screen done 2026-11-24 (logo, PRESS START -> file select;
-  evidence/p4_title2_strip.png). Open: skinned meshes (the title rider, Epona), intro actors (Deku Tree)
+  evidence/p4_title2_strip.png). Skinned meshes done 2026-11-24 (Epona: evidence/p4_horse_strip.png).
+  Open: intro actors (Deku Tree)
 - **P5** 60 Hz presentation (frame interpolation, see below) — game logic stays at 20 Hz
 - **P6** audio; **P7** equivalence traces + on-device performance
 
@@ -65,6 +66,33 @@ game logic translated (no original-platform types or calls).
   constant, ENV = combiner buffer colour); `shaders/gfx3d.v.pica` does the per-vertex matrix palette,
   lighting, texgen and tile texture transforms.
 - Render-state presets (`Gfx_SetupDL_*`) are compiled from the ROM table into `romfs/setupdl.pobj`.
+
+## Prerendered rooms (S7)
+Rooms of shape type IMAGE keep their background image(s) in the room file (JPEG, sometimes RGBA16/CI). The
+scene converter decodes them into RGBA5551 room textures ('TXMP', keyed by the image address); the restored
+`Room_DrawImageSingle/Multi` draw the room's own lists first (they mostly fill the depth buffer: counters,
+walls in front of characters) and then the background as the original's S2D copy: the colour is replaced,
+depth neither tested nor written, offset by the camera quake.
+
+## Two screens (2DS layout, 2026-11-24)
+- Top screen: the 3D game, text boxes, the A button. Bottom screen (320x240 = the original frame): the pause
+  menu and the HUD at their original coordinates. `Gfx3D_Screen` / `Gfx3D_ScreenHere` record a screen switch
+  into the command buffers; each buffer's replay starts on the top screen (`engine/screen.c` keeps one render
+  target per screen; the 2D projection is the same 320x240 for both).
+- Offscreen images (`Gfx3D_OffscreenBegin/End/Save`): the pause menu's player preview is drawn into a render
+  texture with its own camera; the render state around the pass is saved and restored (the original drew it
+  from a list of its own). Saving swaps two render textures and aliases the game's RGBA16 buffer to the saved
+  one, so the equipment page's texture loads from that buffer sample it.
+- The pause menu reuses the object space, where the converted objects live: as the original, the player
+  object is loaded again into the pause segment, and the needed records of gameplay_keep (pause joint tables,
+  player animation headers) are copied to their original offsets of the kept chunk (`Asset_CopyRecords`).
+  Object relocation runs once per load (objects are rebound every frame, also while overwritten).
+- The overlay camera (`View_ApplyOrthoToOverlay` / `...PerspectiveToOverlay`) also applies to display lists
+  drawn in the overlay buffer, as the original loaded it into that list (the minimap's compass arrows). Their
+  depth range is compressed to [-0.75, -0.25]: the original drew the arrows 0.16 % past the orthographic
+  near plane and the RSP kept them, the PICA200 clips there (the overlay has no depth test).
+- Touch (`engine/touch.h`): elements are tagged while recording; the renderer keeps the bottom-screen box of
+  each tagged element it drew; input hit-tests touches against the previous frame's boxes.
 
 ## Actors (P4)
 - `tools/import_actor.py Name...` brings an actor overlay's sources and headers in through the same source
@@ -105,6 +133,11 @@ game logic translated (no original-platform types or calls).
   `Gfx3D_RunDL` interprets display lists in game memory (e.g. the file select windows inside the title
   texture file) onto the native commands. Data arrays kept in code overlays are extracted at setup
   (`tools/build_overlay_data.py`, like the original build's .inc.c files).
+- Skinned meshes (horses): skin skeletons are converted into one relocatable record per skeleton
+  (limbs, animated-limb data, skin vertices, transformations). Lists that load vertices from the game's
+  runtime buffer (segment 8) compile to placeholder vertices holding the buffer index
+  (`PMeshHdr.vtxSeg`); the renderer builds them from the game's Vtx buffer at replay into a per-frame
+  ring in GPU memory. The game's own skin code (z_skin.c / z_skin_awb.c) updates the buffers.
 - ROM data the game DMA's into its own buffers (font, text box textures, item icons) is copied by
   `RomBind_Set` from raw files in RomFS (`tools/build_rawdata.py`, index `rawfiles.bin`).
 - Limb index enums (`MILO_LIMB_HEAD`, ...) are generated into the object headers from the XML names and
@@ -138,5 +171,13 @@ idle. A replay per retrace fits comfortably; real hardware must confirm (Azahar'
 instruction-count based), and more actors will add logic and draws. If logic frames ever exceed one
 retrace, the logic can move to the second CPU core (APT_SetAppCpuTimeLimit) while core 0 presents.
 
-Effort: interpolation core + keys ~ one phase (P2b-sized); hooks in ~5 game files; a settings switch keeps
+Implemented 2026-11-24 (engine/gfx3d.c "interpolation", engine/runner.c): two sets of command lists and
+frame pools; matrix commands (camera, model, flex skeleton, segment matrices) are linked at record time to
+the previous frame's command with the same key (draw context from Actor_Draw / Room_Draw / Skybox_Draw /
+EffectSs_Draw / Effect_DrawAll, type, order); the replay blends linked matrices (rotation slerp, scale and
+translation lerp; per element for non-rigid matrices); camera cuts (eye jump > 300 units or > 60 degree turn)
+and implausible pairs are drawn unblended. HUD, menus and text are not interpolated. `make PRESENT20=1`
+restores the original pacing; `make INTERP_TEST_T=0.5f` presents every frame as a blend (tests).
+
+Effort (estimate): interpolation core + keys ~ one phase (P2b-sized); hooks in ~5 game files; a settings switch keeps
 the original 20 Hz presentation available.

@@ -1,0 +1,8 @@
+# 60 Hz check: walk forward, turn, walk (after the greeting text)
+900 A
+906 -
+1000 UP
+1300 LEFT
+1450 UP
+1700 RIGHT
+1800 -

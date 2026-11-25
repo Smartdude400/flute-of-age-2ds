@@ -1,0 +1,13 @@
+# 2DS touch: open the pause menu, tap the right page arrow twice (map -> quest -> equipment), tap the boots, then the tunic
+900 A
+906 -
+1300 START
+1306 -
+1500 TOUCH 285 122
+1510 -
+1700 TOUCH 285 122
+1710 -
+1900 TOUCH 188 175
+1910 -
+2100 TOUCH 188 143
+2110 -

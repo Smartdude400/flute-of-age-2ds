@@ -1,0 +1,11 @@
+# P4 pause: open the pause menu after the greeting (A closes the text), then cycle pages with R
+900 A
+906 -
+1300 START
+1306 -
+1700 R
+1706 -
+2000 R
+2006 -
+2300 R
+2306 -

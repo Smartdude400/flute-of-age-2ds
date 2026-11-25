@@ -1,0 +1,9 @@
+# P4 pause: open the pause menu and stop on the equipment page (two R presses)
+900 A
+906 -
+1300 START
+1306 -
+1700 R
+1706 -
+2000 R
+2006 -

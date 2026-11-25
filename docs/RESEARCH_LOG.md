@@ -549,3 +549,53 @@ the debug text printer: GfxPrint now has a native implementation over the 2D lay
   (`3dsport/evidence/p4_title2_strip.png`, `p4_title_fs.png`, input `trace/inputs/p4_title.txt`).
 - Open: the rider on the horse is not drawn (skinned meshes: Skin_DrawImpl stub); object_zf fails to
   convert (limb list branching into segment 7, pre-existing).
+
+## 2026-11-24 — P4 (part 7): skinned meshes
+The human asked for skinned meshes (the title demo's Epona). Skin skeletons are converted into a relocatable
+record (limbs, SkinAnimatedLimbData, modifications, SkinVertex / SkinTransformation arrays, native layout);
+lists that load vertices from the game's runtime buffer (segment 8) compile to placeholders holding the
+buffer index, and the renderer builds those vertices from the game's Vtx buffer at replay (per-frame ring
+in GPU memory). The original Skin_UpdateVertices / Skin_ApplyLimbModifications / Skin_InitAnimatedLimb
+are restored; the limb draws load explicit model matrices (limb x skeleton) instead of push / multiply /
+pop.
+- Found while testing: the converted limb record had two stray pad bytes before segmentType (all limb types
+  read as type << 16); and a batch conversion stopped at an XML of another version before the horse.
+- Result: Link rides Epona through the attract demo (`3dsport/evidence/p4_horse_strip.png`).
+
+## 2026-11-24 — P4 (part 8): pause menu on the bottom screen
+The human asked for the pause menu, then (mid-way) for the menu to live permanently on the bottom screen,
+choosing: pause while browsing (logic unchanged), HUD and minimap on the bottom, touch plus buttons, flat
+original pages. ovl_kaleido_scope is imported with its RDP commands kept. Pages are drawn flat on the bottom
+screen (320x240, the original frame size) at their original coordinates; the A button, text boxes and the
+frozen game stay on top. Layout changes are listed as L1-L4 in STUBS.md.
+- Player preview: `Player_DrawPause` renders Link into an offscreen render texture with the original camera,
+  lights and fog; `PreRender_SaveFramebuffer` keeps it as the content of the game's RGBA16 buffer.
+- Found: the pause menu places its buffers in the object space, over the converted objects (the original did
+  the same with the object files, which is why it copied the player object first). Natively that also meant
+  (a) the per-frame segment binds re-ran relocation over overwritten tables -> relocation now once per load,
+  and (b) `DsObj_Free` read the texture count from overwritten data after freeing the texture array -> count
+  kept in the object, freed after the loop. The player object is loaded again into the pause segment (sharing
+  the textures the live copy loaded) and gameplay_keep's plain records below 0x5000 are copied to their
+  offsets (converter: number arrays such as the pause joint tables are now converted, table 'ARRY').
+- Found while testing: a stale emulator left by an interrupted run answered the screenshot requests; and
+  input scripts count 60 Hz retraces while the test marker counts 20 Hz game frames.
+- Minimap: `Minimap_Draw`, `Minimap_DrawCompassIcons` and `MapMark_DrawForDungeon` had lost their texture
+  draws in the first translation; restored from the original with native RDP commands, map_i_static and
+  map_grand_static packaged as raw files. The compass arrows are converted display lists drawn in the overlay
+  list: the overlay camera now applies to them, with a compressed depth range (they lie 0.16 % past the
+  orthographic near plane, which the RSP tolerated and the PICA200 clips).
+- Result: all four pages, the Link preview, page switching, item / equipment selection by touch
+  (`3dsport/evidence/b_equip_top.png`, `b_page_*.png`, `b_touch.png`; inputs `trace/inputs/p4_pause*.txt`,
+  `p4_touch.txt`).
+
+## 2026-11-24 — P4 (part 9): prerendered rooms; P5: 60 fps presentation
+The human asked for 60 fps and for the white building interiors; audio moves to the last step.
+- Interiors (STUB S7): rooms of shape type IMAGE were not converted. The converter now writes their image
+  shapes and decodes the backgrounds offline (baseline JPEG -> RGBA5551, the RGBA16 the game decoded to);
+  Room_DrawImage / Single / Multi / GetImageMultiBgEntry are the original logic with a native background
+  command (copy over the frame, depth untouched). 28 scenes reconverted. Result: Sylvan shop, the player's
+  house, the Hall of Ages surroundings, the back alley (`3dsport/evidence/s7_*.png`).
+- 60 fps (P5): presentation interpolation as assessed (logic unchanged at 20 Hz). Match rate in the forest
+  ~97 % of matrix commands, title demo 95-100 %; Azahar reports 59.8 presented frames per second. A test
+  build presenting every frame at t = 0.5 shows no stray geometry while walking and turning
+  (`evidence/i60_half_strip.png`, input `trace/inputs/i60_walk.txt`).

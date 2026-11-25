@@ -32,17 +32,18 @@
 | ✅ | **The player** | Walk, run, turn, roll, collide — the original `z_player.c`, all 16 000 lines |
 | ✅ | **Full-fidelity renderer** | Original draw order (opaque → translucent → overlay), the two-cycle colour combiner mapped onto the PICA200 TEV, fog, lighting, environment mapping, both texture layers, all 71 render presets |
 | ✅ | **Skyboxes** | Day/night skies with the game's own blending logic |
-| ✅ | **20 fps fixed timestep** | Same frame pacing as the original; input sampled per retrace (deterministic replays) |
+| ✅ | **60 fps** | The game logic keeps the original 20 Hz fixed timestep (input sampled per retrace, deterministic replays); every retrace is presented, blending the camera, models and skeletons between the last two game frames (`make PRESENT20=1` for the original pacing) |
+| ✅ | **Prerendered rooms** | House and shop interiors, the market, the Hall of Ages surroundings: the original background images behind the 3D characters |
 | ✅ | **Saves** | Written to `sdmc:/3ds/foa/save.sra` |
 | ✅ | **First-area actors** | The 19 actors of the starting forest: Sylvan children, Sylva, Milo, the fairy companion and fairies, signs, grass, rocks, Gossip Stones, Skulltulas, room transitions, ambience |
 | 🚧 | Other actors | Actors outside the first area are skipped for now (each logged once) |
 | ✅ | **Cutscenes** | All cutscene scripts converted; Sylva's greeting plays when you step outside |
 | ✅ | **Text boxes** | The original font, box frames, drop shadow and end-of-message icons, drawn by the game's own message code |
 | ✅ | **File select** | Files, name entry, copy / erase / options, starting a new or saved game (`make FILESELECT=1` boots straight into it) |
-| ✅ | **Title screen** | The attract demo with the title and PRESS START, then file select (the rider on the horse is not drawn yet) |
-| 🚧 | Pause menu | Not ported yet |
+| ✅ | **Title screen** | The attract demo (Link riding Epona at dawn) with the title and PRESS START, then file select |
+| ✅ | **Pause menu** | On the bottom screen: Select Item, Map, Quest Status and Equipment (with the live Link preview), flat pages, touch or buttons |
 | 🚧 | Audio | Not ported yet (silent) |
-| ✅ | **HUD** | The original interface code: hearts (with the beating heart), magic meter, B / A / C buttons, action labels, rupees; hidden during cutscenes |
+| ✅ | **HUD** | The original interface code: hearts (with the beating heart), magic meter, B / C buttons, rupees and the minimap (with the compass arrows) on the bottom screen; the A button and its action label on top; hidden during cutscenes |
 
 ## 📸 Screenshots
 
@@ -181,7 +182,8 @@ This produces **`foa_3ds_boot.3dsx`**: the playable demo, which starts in Sylvan
 | **R** | R | Shield |
 | **D-Pad** | C-buttons | Items / first-person (up) |
 | **X** / **Y** | C-up / C-left | Alternatives for the D-Pad |
-| **START** | START | Pause (not ported yet) |
+| **START** | START | Pause menu (on the bottom screen) |
+| Touch screen | — | Tap the B / C buttons to use them; in the pause menu tap the arrows to change pages, an item to select it (then tap a C button to assign it), an equipment twice to equip it |
 
 ---
 
@@ -259,9 +261,11 @@ It needs a portable Azahar folder (`azahar.exe` plus a `user/` folder whose `con
 - [x] The real HUD and text boxes
 - [x] File select
 - [x] Title screen
-- [ ] Skinned meshes (horses), pause menu
+- [x] Skinned meshes (horses)
+- [x] Pause menu (bottom screen, touch)
 - [ ] Audio (sequence player + synthesis on the ARM11, output through the DSP)
-- [ ] 60 fps presentation (frame interpolation; game logic stays at the original 20 Hz)
+- [x] Prerendered backgrounds (interiors, market)
+- [x] 60 fps presentation (frame interpolation; game logic stays at the original 20 Hz)
 - [ ] Frame-perfect equivalence traces against the original
 
 ## ❓ Troubleshooting
