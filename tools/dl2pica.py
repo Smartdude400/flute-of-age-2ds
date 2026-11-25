@@ -212,8 +212,10 @@ class DLCompiler:
         if tile["maskt"]:
             h = min(h, 1 << tile["maskt"]) if not (tile["cmt"] & 2) else h
         # bit0 clamp s, bit1 mirror s, bit2 clamp t, bit3 mirror t, bit4 tile offsets come from the runtime tile
-        flags = (1 if tile["cms"] & 2 else 0) | (2 if tile["cms"] & 1 else 0) | \
-                (4 if tile["cmt"] & 2 else 0) | (8 if tile["cmt"] & 1 else 0) | (16 if tile_no in st["dynsize"] else 0)
+        # a tile without a wrap mask is clamped to its size by the RDP, whatever its clamp bit says
+        flags = (1 if (tile["cms"] & 2) or not tile["masks"] else 0) | (2 if tile["cms"] & 1 and tile["masks"] else 0) | \
+                (4 if (tile["cmt"] & 2) or not tile["maskt"] else 0) | (8 if tile["cmt"] & 1 and tile["maskt"] else 0) | \
+                (16 if tile_no in st["dynsize"] else 0)
         seg = load["addr"] >> 24
         uls, ult = tile["uls"], tile["ult"]
         shifts = tile["shifts"] | (tile["shiftt"] << 4)

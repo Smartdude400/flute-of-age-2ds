@@ -93,6 +93,7 @@ class SceneConverter:
     def __init__(self, fs, scene_name, warn):
         self.fs, self.name, self.warn = fs, scene_name, warn
         self.scene = fs.get(scene_name + "_scene")
+        self.cutscenes = set()  # scene-file offsets of cutscene scripts (headers + XML symbols)
 
     # ------------------------------------------------------------------ header walking
     def emit_header(self, w, off, segfile, comp, is_room):
@@ -131,7 +132,11 @@ class SceneConverter:
             elif code == C_ALT:
                 w.ptr_field("althdr", p, None)
             elif code == C_CUTSCENE:
-                self.warn(f"{self.name}: cutscene data at {p:08X} not converted yet (handle kept)")
+                # handle, resolved against the converted scripts ('CSDT' table, tools/cutscene.py)
+                if (p >> 24) == 2:
+                    self.cutscenes.add(p & 0xFFFFFF)
+                else:
+                    self.warn(f"{self.name}: cutscene data outside the scene file ({p:08X})")
                 w.out += struct.pack("<I", TOKEN | p)
             else:
                 w.out += struct.pack("<I", p)
@@ -139,7 +144,9 @@ class SceneConverter:
             if code == C_END:
                 break
 
-    def convert(self, seg, data, segfile, comp, known_starts, is_room):
+    def convert(self, seg, data, segfile, comp, known_starts, is_room, root=None):
+        """root: (kind, offset) of the first converted object; default the scene / room header. Objects use
+        ("colheader", off) for their collision headers (tools/build_object.py)."""
         w = Writer(seg, data)
         starts = sorted(known_starts)
 
@@ -318,7 +325,10 @@ class SceneConverter:
             emitters[k + "_end"] = end_emitter
 
         # header first, at offset 0 of the payload
-        w.place("header", 0, None, lambda o, c: self.emit_header(w, o, segfile, comp, is_room))
+        if root is not None:
+            w.place(root[0], root[1], None, lambda o, c: emitters[root[0]](o, c))
+        else:
+            w.place("header", 0, None, lambda o, c: self.emit_header(w, o, segfile, comp, is_room))
         # resolve; handle *_end specially
         while w.pending:
             field, kind, off, count = w.pending.pop(0)
@@ -348,6 +358,31 @@ class SceneConverter:
                 starts.add(v & 0xFFFFFF)
         return starts
 
+    def cutscene_table(self, report):
+        """'CSDT': every cutscene script of the scene file (named in the XML or referenced by a header),
+        keyed by segment address; record = {u32 nRelocs = 0; native script} (engine/asset.c tables)."""
+        import cutscene
+        import xmlspec
+        spec = xmlspec.load(self.name).get(self.name + "_scene", {"symbols": []})
+        offs = set(self.cutscenes) | {off for tag, sym, off, a in spec["symbols"] if tag == "Cutscene"}
+        entries = []
+        for off in sorted(offs):
+            try:
+                native, _ = cutscene.convert(self.scene, off)
+            except (ValueError, IndexError, struct.error) as e:
+                self.warn(f"{self.name}: cutscene @{off:X} not converted: {e}")
+                continue
+            entries.append((0x02000000 | off, struct.pack("<I", 0) + native))
+        out = bytearray(struct.pack("<I", len(entries)))
+        body = bytearray()
+        base = 4 + 8 * len(entries)
+        for addr, blob in entries:
+            out += struct.pack("<II", addr, base + len(body))
+            body += blob  # scripts are whole words: stays 4-aligned
+        if entries:
+            report.append(f"{self.name}: {len(entries)} cutscene scripts, {len(body)} bytes")
+        return bytes(out + body) if entries else None
+
     def build(self, report):
         fs = self.fs
         os.makedirs(OUT, exist_ok=True)
@@ -367,8 +402,12 @@ class SceneConverter:
         # SCEN table with one entry (segment offset 0 = header). The same .pobj also carries the
         # scene file's XML-declared textures/display lists (used by the scene draw configs).
         scen_table = struct.pack("<III", 1, 0x02000000, 12) + scene_blob
+        extras = [(b"SCEN", scen_table)]
+        csdt = self.cutscene_table(report)
+        if csdt:
+            extras.append((b"CSDT", csdt))
         import build_object
-        build_object.build(fs, self.name + "_scene", report, xml=self.name, more_extras=[(b"SCEN", scen_table)])
+        build_object.build(fs, self.name + "_scene", report, xml=self.name, more_extras=extras)
 
         for rn in sorted(room_names, key=lambda n: int(n.rsplit("_", 1)[1])):
             room = fs.get(rn)

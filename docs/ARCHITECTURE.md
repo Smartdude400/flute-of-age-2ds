@@ -42,8 +42,11 @@ game logic translated (no original-platform types or calls).
 - **P3** Play state with the player in Sylvan Forest — PASS (evidence/p3_walk_strip.png; test boot `make BOOT=0xEE`)
 - **P4** first-area actors, cutscene data, file select, native HUD — actors part done 2026-11-24: 19 forest
   actors run (Sylvan children, Sylva, Milo, fairies/companion, signs, grass, rocks, Gossip Stones, Skulltula,
-  room transitions, ambience; evidence/p4_forest_npcs.png, p4_forest_walk_strip.png). Open: cutscene data
-  (S13), file select (S12), native HUD
+  room transitions, ambience; evidence/p4_forest_npcs.png, p4_forest_walk_strip.png). Cutscene data done
+  2026-11-24 (evidence/p4_cs_greeting_strip.png). Text boxes done 2026-11-24
+  (evidence/p4_text_box.png). HUD done 2026-11-24 (evidence/p4_hud.png). File select done 2026-11-24 (evidence/p4_fs.png,
+  test boot `make FILESELECT=1`). Title screen done 2026-11-24 (logo, PRESS START -> file select;
+  evidence/p4_title2_strip.png). Open: skinned meshes (the title rider, Epona), intro actors (Deku Tree)
 - **P5** 60 Hz presentation (frame interpolation, see below) — game logic stays at 20 Hz
 - **P6** audio; **P7** equivalence traces + on-device performance
 
@@ -82,6 +85,28 @@ game logic translated (no original-platform types or calls).
   texture at replay (`dyn_texture`).
 - List preludes (`build_object.py PRELUDES`): a few lists draw with texture state another list left in
   texture memory (e.g. the light-glow circle); they are compiled with that list's state as their start.
+- Cutscene scripts (`tools/cutscene.py`): the original stream packs 8/16-bit fields into 32-bit words, so
+  each field is byte-swapped at its own width following the command layouts (`CsCmd*` in cutscene.h);
+  same length and offsets, so z_demo.c walks it unchanged. Every script named in the scene XML or
+  referenced by a scene header goes into the scene's 'CSDT' table, resolved by `Asset_Resolve`.
+- 2D interface commands (text boxes, the HUD): the original drew them as RDP texture
+  rectangles. `engine/rdp_gbi.h` maps the original macros (`gDPLoadTextureBlock`, `gSPTextureRectangle`,
+  `gDPSetCombineLERP/Mode`, `gDPSetAlphaCompare`, ...) onto recorded renderer commands; rectangles are
+  drawn with the 2D shader under the game's own combiner / blender state. Texels the game keeps in its
+  own memory (font glyphs, text box frames, item icons) are converted at replay through a cache keyed by
+  address + texel hash. `tools/restore_rdp_draws.py` put the original bodies of the z_message.c draw
+  functions back (only the display-list cursor plumbing removed).
+- The HUD's action button and beating heart are vertex quads under the overlay's own camera
+  (View_Apply*ToOverlay -> `Gfx3D_SetOverlayCamera`, viewport included); the few vertices are
+  transformed on the CPU at replay and drawn as screen-space triangles. Texture handles into a segment
+  the game bound to its own memory (segment 2 = the interface texture file) resolve to those bytes.
+- Sources imported with `tools/import_source.py --rdp` keep their RDP commands: `engine/rdp_disps.h` makes
+  the display-buffer cursors select the native buffer, static `gs*` lists keep the original words, and
+  `Gfx3D_RunDL` interprets display lists in game memory (e.g. the file select windows inside the title
+  texture file) onto the native commands. Data arrays kept in code overlays are extracted at setup
+  (`tools/build_overlay_data.py`, like the original build's .inc.c files).
+- ROM data the game DMA's into its own buffers (font, text box textures, item icons) is copied by
+  `RomBind_Set` from raw files in RomFS (`tools/build_rawdata.py`, index `rawfiles.bin`).
 - Limb index enums (`MILO_LIMB_HEAD`, ...) are generated into the object headers from the XML names and
   the skeleton's limb table in the ROM.
 - Cost with the forest NPCs (Azahar): logic 3-5 ms, replay CPU ~11 ms for ~380 draw calls (was ~4 ms

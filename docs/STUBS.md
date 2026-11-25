@@ -16,8 +16,8 @@ IDs continue the dsport numbering; history of S1-S9 is in dsport/STUBS.md.
 | S9 | Message tables / text | DS | `tools/build_text.py`: tables from the ROM `code` file, symbols = original segment addresses, text bytes in RomFS | **closed 2026-11-21 (P1)** |
 | S10 | `Player_Init/Update/Draw/Destroy` (ovl_player_actor) | 2026-11-21 | `z_player.c` translated | **closed 2026-11-22 (P3)** |
 | S11 | `KaleidoScope_Update/Draw` (pause menu) | 2026-11-21 | port ovl_kaleido_scope | open |
-| S12 | `FileSelect_Init` (ovl_file_choose): faults with a message if reached | 2026-11-21 | port ovl_file_choose | open |
-| S13 | Cutscene data (`Cutscene_ProcessScript` with an unconverted script): the cutscene ends at once. First seen: Sylva's greeting when the forest is entered on a new file | 2026-11-24 | convert cutscene command streams per command layout (P4) | open |
+| S12 | `FileSelect_Init` (ovl_file_choose): faults with a message if reached | 2026-11-21 | ovl_file_choose imported with its RDP commands kept (engine/rdp_disps.h) | **closed 2026-11-24 (P4)** |
+| S13 | Cutscene data (`Cutscene_ProcessScript` with an unconverted script): the cutscene ends at once. First seen: Sylva's greeting when the forest is entered on a new file | 2026-11-24 | `tools/cutscene.py`: every script converted per field width into the scene's 'CSDT' table (161 scripts, 36 scenes); the guard stays as a safety net | **closed 2026-11-24 (P4)** |
 
 ## Presentation stubs (P-series; all close with P2 "no graphics cuts")
 | Stub | Notes |
@@ -43,4 +43,7 @@ defined value and logs the event. Each one is invisible in play (the value is ov
 | Issue | Notes |
 |---|---|
 | Forest dust motes (Object_Kankyo) draw as small squares | texture `gSun1Tex` converted and bound through segment 8 (the model list now inherits its material list's tile state); sampling still wrong, cause not found yet |
+| 2D vertex quads (HUD action button / heart, file select windows) | transformed on the CPU and drawn with affine texture mapping (no perspective correction inside a quad); overlay viewports are not scissored |
 | Sword / stick swing trail | `EffectBlure_Draw` presentation stub (listed above) |
+| Title attract demo: the rider on the horse is invisible | En_Horse runs, but skinned meshes are not drawn yet (`Skin_DrawImpl` presentation stub) |
+| object_zf (Lizalfos) not converted | a limb list branches into a runtime segment (07); the converter has no path for that yet |

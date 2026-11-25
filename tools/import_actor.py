@@ -73,7 +73,9 @@ def embedded_data(path):
 
 
 def main():
-    for name in sys.argv[1:]:
+    # --rdp: keep the RDP commands (engine/rdp_disps.h) instead of the draw rewrite; for 2D-heavy actors
+    keep_rdp = "--rdp" in sys.argv
+    for name in [a for a in sys.argv[1:] if a != "--rdp"]:
         ovl = os.path.join(SRC, "src", "overlays", "actors", "ovl_" + name)
         if not os.path.isdir(ovl):
             print(f"{name}: no overlay directory")
@@ -84,15 +86,18 @@ def main():
             if os.path.exists(dst):
                 print(f"{name}: {os.path.basename(c)} already imported")
                 continue
-            subprocess.run([sys.executable, os.path.join(HERE, "import_source.py"), rel, "actors"], check=True)
-            translate(dst)
+            subprocess.run([sys.executable, os.path.join(HERE, "import_source.py"), rel, "actors"] +
+                           (["--rdp"] if keep_rdp else []), check=True)
+            if not keep_rdp:
+                translate(dst)
             own_headers(dst, "src/overlays/actors/ovl_" + name)
             embedded_data(dst)
         for h in sorted(glob.glob(os.path.join(ovl, "*.h"))):
             rel = os.path.relpath(h, SRC).replace("\\", "/")
             if not os.path.exists(os.path.join(GAME, "include", rel)):
                 subprocess.run([sys.executable, os.path.join(HERE, "import_header.py"), rel], check=True)
-                translate(os.path.join(GAME, "include", rel))
+                if not keep_rdp:
+                    translate(os.path.join(GAME, "include", rel))
 
 
 main()

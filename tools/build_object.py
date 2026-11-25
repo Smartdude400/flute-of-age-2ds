@@ -269,7 +269,24 @@ def build(fs, name, report, xml=None, more_extras=()):
             body += blob
         return bytes(out + body)
 
+    # ---- collision headers (DynaPoly actors: CollisionHeader_GetVirtual), converted like scene collision
+    coll_blobs = []
+    for tag, sym, off, attrs in fspec["symbols"]:
+        if tag != "Collision":
+            continue
+        import build_scene
+        conv = build_scene.SceneConverter.__new__(build_scene.SceneConverter)
+        conv.name, conv.warn, conv.cutscenes = name, warns.append, set()
+        try:
+            w = conv.convert(seg, data, name, None, build_scene.SceneConverter.collect_starts(data, seg), False,
+                             root=("colheader", off))
+            coll_blobs.append(((seg << 24) | off, w.blob()))
+        except (KeyError, IndexError, ValueError, struct.error) as e:
+            warns.append(f"collision {sym}: {e}")
+
     extras = list(more_extras)
+    if coll_blobs and not any(t == b"COLL" for t, _ in extras):
+        extras.append((b"COLL", table(coll_blobs)))
     if txmp:
         extras.append((b"TXMP", struct.pack("<I", len(txmp)) + b"".join(struct.pack("<II", a, i) for a, i in sorted(txmp))))
     if skel_blobs:
@@ -296,6 +313,10 @@ def build(fs, name, report, xml=None, more_extras=()):
         if tag in ("Scene", "Room"):
             continue  # file-level symbols are not handles
         lines.append(f"#define {sym} ASSET_TOKEN(0x{TOKEN | (seg << 24) | off:08X}) // {tag}")
+        if tag == "Texture" and "Width" in attrs and "Height" in attrs:
+            # the original build's asset headers also gave each texture's size (<sym>_WIDTH / _HEIGHT)
+            lines.append(f"#define {sym}_WIDTH {int(attrs['Width'], 0)}")
+            lines.append(f"#define {sym}_HEIGHT {int(attrs['Height'], 0)}")
     lines += limb_enums(data, seg, fspec["symbols"], warns)
     lines.append(f"#define {name.upper()}_VROM 0x{vrom:08X} // converted file: /vrom/{vrom:08X}.pobj")
     lines.append("#endif\n")

@@ -21,7 +21,7 @@ EXACT_MATH = (("sinf", "ExactSinF"), ("cosf", "ExactCosF"), ("sins", "ExactSinS"
               ("lnearbyintf", "ExactLNearbyIntF"), ("lroundf", "ExactLRoundF"))
 
 
-def convert(text, rel):
+def convert(text, rel, keep_rdp=False):
     text = re.sub(r'#include "ultra64(\.h|/ultratypes\.h)"', '#include "game_types.h"', text)
     text = re.sub(r"\bbzero\(([^,]+),", r"memset(\1, 0,", text)
     text = re.sub(r"\bbcopy\(([^,]+),\s*([^,]+),", r"memmove(\2, \1,", text)
@@ -31,8 +31,12 @@ def convert(text, rel):
     if re.search(r"\bExact\w+\(", text) and '#include "exact_math.h"' not in text:
         text = re.sub(r'(#include "[^"]+"\n)', r'\1#include "exact_math.h"\n', text, count=1)
     text = re.sub(r'#pragma increment_block_number[^\n]*\n(\s+"[^\n]*\n)*', "", text)
-    from rewrite_draw import rewrite
-    text, _ = rewrite(text)
+    if keep_rdp:
+        # RDP commands kept: engine/rdp_disps.h gives them native meaning (cursors select the buffer)
+        text = re.sub(r'(#include "[^"]+"\n)', r'\1#include "engine/rdp_disps.h"\n#include "dma.h"\n', text, count=1)
+    else:
+        from rewrite_draw import rewrite
+        text, _ = rewrite(text)
     text = text.replace("SEGMENTED_TO_VIRTUAL(", "Asset_Resolve(")
     if "Asset_Resolve(" in text and '#include "engine/asset.h"' not in text:
         text = re.sub(r'(#include "[^"]+"\n)', r'\1#include "engine/asset.h"\n', text, count=1)
@@ -40,14 +44,16 @@ def convert(text, rel):
 
 
 def main():
-    rel = sys.argv[1]
-    sub = sys.argv[2] if len(sys.argv) > 2 else ""
+    args = [a for a in sys.argv[1:] if a != "--rdp"]
+    keep_rdp = "--rdp" in sys.argv
+    rel = args[0]
+    sub = args[1] if len(args) > 1 else ""
     text = open(os.path.join(SRC, rel), encoding="utf-8").read()
     dst = os.path.join(HERE, "..", "source", "game", sub, os.path.basename(rel))
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     if os.path.exists(dst):
         sys.exit("exists: " + dst)
-    open(dst, "w", encoding="utf-8", newline="\n").write(convert(text, rel))
+    open(dst, "w", encoding="utf-8", newline="\n").write(convert(text, rel, keep_rdp))
     print("->", os.path.relpath(dst, os.path.join(HERE, "..")))
 
 

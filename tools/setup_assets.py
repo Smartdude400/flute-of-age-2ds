@@ -31,6 +31,7 @@ STEPS = [
     ("objects", "build_all.py", ["objects"]),
     ("scenes and rooms", "build_all.py", ["scenes"]),
     ("asset headers used by game code", "gen_asset_headers.py", []),
+    ("data arrays inside code overlays", "build_overlay_data.py", []),
     ("RomFS manifest", "manifest.py", []),
 ]
 

@@ -74,6 +74,13 @@ BUILD	:=	build_boot
 CFLAGS	+=	-DPORT_BOOT_ENTRANCE=$(BOOT)
 endif
 
+# Test boot into file select: make FILESELECT=1
+ifdef FILESELECT
+TARGET	:=	foa_3ds_fs
+BUILD	:=	build_fs
+CFLAGS	+=	-DPORT_BOOT_FILESELECT
+endif
+
 # Test harness builds: make HARNESS=1 (player viewer) or HARNESS=2 SCENE=0x... (scene viewer)
 ifdef HARNESS
 TARGET	:=	foa_3ds_h$(HARNESS)

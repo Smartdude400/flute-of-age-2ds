@@ -449,3 +449,103 @@ fits:
 - Perf with the NPCs (Azahar): logic 3-5 ms, replay CPU ~11 ms for ~380 draws (was ~4 ms for ~150):
   per-draw submission dominates; first target for on-device profiling (P7) and a constraint on P5.
 - Open in P4: cutscene data (S13), file select (S12), native HUD.
+
+## 2026-11-24 — P4 (part 2): cutscene data
+The human asked to continue with cutscenes. Cutscene scripts are 32-bit word streams on the original, but
+most commands pack 8- and 16-bit fields into the words (CsCmd* unions), so a word swap would scramble
+them. `3dsport/tools/cutscene.py` walks each script command by command and swaps every field at its own
+width (layouts from game/include/cutscene.h and the reads in z_demo.c: counted entry lists, camera spline
+point runs ending at continueFlag -1, single-entry destination/transition, 0x30-byte skips for the
+unimplemented commands). The native script has the same length and offsets. `build_scene.py` puts every
+script named in the scene XML or referenced by a scene header into a 'CSDT' table of the scene container;
+the game's `Asset_Resolve` calls find them unchanged.
+- 161 scripts in 36 retail scenes convert (all NTSC 1.0 XML cutscenes; the XML entries for other versions
+  do not parse as scripts, as expected). S13 closed.
+- Sylva's greeting plays on a new file: camera on the house, pan down the path, Sylva runs up and waves
+  (`3dsport/evidence/p4_cs_greeting_strip.png`); its text 0x1001 opens and A closes it, then control
+  returns on the porch.
+- Found: text boxes are not drawn (open/advance/close logic works). The box and glyph draws were dropped
+  when z_message.c was translated; they need the 2D textured-rectangle layer (native HUD item).
+- Found: the title sequence now runs into its attract cutscene (camera flies over the field to the
+  castle), but the sky is white, two spheres show in the sky, and the horse rider / logo actors are not
+  ported (`3dsport/evidence/p4_title_strip.png`).
+- Note: RomFS changes do not trigger a relink; delete the .3dsx to repackage converted data.
+
+## 2026-11-24 — P4 (part 3): text boxes
+The human asked for text boxes next. Cause of the empty boxes: the first translation pass dropped the RDP
+commands of z_message.c's draw functions (texture block loads, texture rectangles, combiner words), and the
+font / box texture buffers were only "bound" to their ROM location, never filled.
+- Engine: native 2D interface commands (`Gfx3D_SetCombine` from the original G_SETCOMBINE words,
+  `Gfx3D_SetAlphaCompare`, `Gfx3D_LoadTextureBlock`, `Gfx3D_TextureRectangle` with the original
+  fixed-point arguments), replayed with the 2D shader under the game's combiner/blender state.
+  `engine/rdp_gbi.h` imports the GBI constants (texture flags, formats, combiner operands/modes, word
+  layout) from gbi.h and maps the original macros onto these calls.
+- Texels in game memory are converted at replay by a persistent cache (address, format, size, texel hash),
+  replacing the per-frame pool; glyphs are converted once per message.
+- Data: nes_font_static, kanji, message_static, message_texture_static, icon_item(_24)_static are packaged
+  as raw files; `RomBind_Set` copies the bytes where the original DMA'd them (file read once, kept).
+- `tools/restore_rdp_draws.py` restored the original bodies of 7 draw functions (only the display-list
+  cursor plumbing removed, same exact-math / segment rules as the importer).
+- Found: the port drew messages into the opaque buffer; the original builds them in POLY_OPA memory but
+  calls them from OVERLAY_DISP, so they run after the 3D scene (Navi was drawn over the box). Fixed.
+- Test boot: file select's name entry is skipped, so the test boot now gives the player the original debug
+  save's name (AREN, z_sram.c) instead of a blank name.
+- Result: "Yahoo! Hi, AREN!" in the original box, font and drop shadow, with the flashing end-of-message
+  square (`3dsport/evidence/p4_text_box.png`); replay cost with the box open ~10.7 ms (unchanged range).
+- Next: the native HUD (z_parameter.c draws with the same commands), file select (S12).
+
+## 2026-11-24 — P4 (part 4): the HUD
+The human asked for the HUD next. The DS-era port had replaced the interface drawing with a text
+placeholder (engine/hud.c) and stubbed 9 interface functions, two of which also carry game logic
+(Interface_LoadActionLabel / LoadActionLabelB set the action-label state).
+- `tools/restore_rdp_draws.py` (extended: OPEN/CLOSE_DISPS, DMA waits on removed queues, list helpers that
+  returned the cursor) restored 18 original functions: the whole Interface_Draw, Health_DrawMeter,
+  Magic_DrawMeter, item buttons, ammo counts, action button / label, item icon loads, Interface_Init,
+  plus Gfx_TextureIA8 / Gfx_TextureI8. engine/hud.c deleted.
+- Engine: vertex quads (`gSPVertex` + `gSP1Quadrangle`) from the game's own Vtx records under the overlay
+  camera (`View_ApplyPerspectiveToOverlay` / `View_ApplyOrthoToOverlay` now record a camera + viewport
+  for the overlay buffer instead of touching the scene buffers), other-mode and geometry-mode words, fill
+  rectangles, matrix loads; texture handles into a segment bound to game memory resolve to those bytes
+  (the HUD binds segment 2 to the interface texture file, as the original did for the RDP).
+- Data: DMA_REQUEST_SYNC / ASYNC are RomBind_Set copies (dma.h); parameter_static and do_action_static
+  added to the raw files. The original Vtx type (engine/vtx.h, from gbi.h) and the HUD / pause vertex
+  fields of InterfaceContext / PauseContext restored to their original types.
+- Asset headers now also carry `<texture>_WIDTH / _HEIGHT` (the original build generated them from the XML);
+  the action-label texture size constants added to interface.h for the same reason.
+- The heart's matrix: Matrix_SetTranslateScaleMtx2 wrote a fixed-point matrix directly; the same scale and
+  translation as a float matrix, truncated to 16.16.
+- Result: hearts with the beating heart, B / A / C buttons, rupee counter as on the original, hidden
+  during Sylva's greeting and shown again after (`3dsport/evidence/p4_hud.png`). Replay ~11.3 ms per frame.
+- Open in P4: file select (S12), title demo actors and sky.
+
+## 2026-11-24 — P4 (part 5): file select
+The human asked for file select (S12). ovl_file_choose (4 files, ~6400 lines) imported with its RDP
+commands kept instead of rewritten: `tools/import_source.py --rdp`, `engine/rdp_disps.h` (display-buffer
+cursors select the native buffer; static gs* lists keep their command words), and a display-list
+interpreter (`Gfx3D_RunDL`) for lists in game memory - the window frames are lists inside title_static that
+draw vertices the code loads, interpreted from the DMA'd file like the RDP did.
+- Fixes found by running it: the vertex cache holds 32 entries (the port's command copied 16: misplaced
+  window tiles); Japanese text is read in 16-bit units only, so the converted JPN text file is now stored in
+  native byte order (name entry glyphs all drew as one kanji).
+- Overlay data arrays (name entry / options vertices, character pages) are generated at setup from the ROM
+  (`tools/build_overlay_data.py`), the block located by vertex plausibility (unique match).
+- 64DD: the native n64dd.h declares only what the game code tests; no disk drive (D_80121212 = 0).
+- Result: file list, name entry, file details, starting a file -> the new-game intro runs (Deku Tree
+  narration, Link's house, the nightmare) (`3dsport/evidence/p4_fs.png`, `p4_fs_start_strip.png`).
+  The Deku Tree and some intro actors are not ported yet. Test boot: `make FILESELECT=1`.
+
+## 2026-11-24 — P4 (part 6): title screen
+The human asked for the title screen. The attract demo skipped 4 actors: En_Mag (title + PRESS START),
+En_Horse, Bg_Spot00_Hanebasi (drawbridge), En_Wood02 (trees). En_Mag imported with its RDP commands kept
+(`tools/import_actor.py --rdp`); its list built in POLY_OPA memory and called from OVERLAY_DISP is recorded
+in place (Gfx_Open marker, engine/rdp_disps.h). The renamed codebase's En_Mag prints "FLUTE OF AGE" with
+the debug text printer: GfxPrint now has a native implementation over the 2D layer (same ROM debug font).
+- Object collision headers (DynaPoly actors such as the drawbridge) are converted into a 'COLL' table with
+  the scene converter's collision emitters (78 objects).
+- Found: two moons in the night sky. The moon quad spans 128 texels of a 64-texel texture; the RDP clamps
+  a tile without a wrap mask, the converter clamped when building the texture but told the renderer to
+  repeat. Fixed in dl2pica for every texture (all data reconverted).
+- Result: night -> dawn attract demo with the title and PRESS START; Start -> file select
+  (`3dsport/evidence/p4_title2_strip.png`, `p4_title_fs.png`, input `trace/inputs/p4_title.txt`).
+- Open: the rider on the horse is not drawn (skinned meshes: Skin_DrawImpl stub); object_zf fails to
+  convert (limb list branching into segment 7, pre-existing).

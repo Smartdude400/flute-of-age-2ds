@@ -90,7 +90,13 @@ def main():
     os.makedirs(ROMFS, exist_ok=True)
     for name in ("jpn_message_data_static", "nes_message_data_static", "staff_message_data_static"):
         vrom = fs.entries[name][0]
-        open(os.path.join(ROMFS, f"{vrom:08X}.bin"), "wb").write(fs.get(name))
+        data = fs.get(name)
+        if name.startswith("jpn"):
+            # Japanese text is read in 16-bit units only (Font.msgBufWide, z_message.c / z_kanfont.c): stored
+            # in native byte order. NES / staff text is read byte by byte and stays as it is.
+            n = len(data) // 2
+            data = struct.pack(f"<{n}H", *struct.unpack(f">{n}H", data[:n * 2])) + data[n * 2:]
+        open(os.path.join(ROMFS, f"{vrom:08X}.bin"), "wb").write(data)
     print(f"text: jpn {len(jpn)} nes {len(nes)} staff {len(staff)} entries")
 
 

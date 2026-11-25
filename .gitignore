@@ -6,6 +6,7 @@ baserom.z64
 romfs/
 .cache/
 source/game/assets_agg/
+source/game/include/assets/overlays/*/*.inc.c
 source/game/include/segment_symbols.h
 source/game/include/misc_overlay_sizes.h
 source/game/include/text/message_data.h
@@ -19,6 +20,7 @@ source/game/code/kanji_tex.c
 build/
 build_boot/
 build_h*/
+build_fs/
 *.3dsx
 *.elf
 *.smdh

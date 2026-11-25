@@ -36,10 +36,13 @@
 | ✅ | **Saves** | Written to `sdmc:/3ds/foa/save.sra` |
 | ✅ | **First-area actors** | The 19 actors of the starting forest: Sylvan children, Sylva, Milo, the fairy companion and fairies, signs, grass, rocks, Gossip Stones, Skulltulas, room transitions, ambience |
 | 🚧 | Other actors | Actors outside the first area are skipped for now (each logged once) |
-| 🚧 | Cutscenes | Cutscene data not converted yet — cutscenes end immediately |
-| 🚧 | Title screen demo, file select, pause menu | Not ported yet — the demo boots straight into the forest |
+| ✅ | **Cutscenes** | All cutscene scripts converted; Sylva's greeting plays when you step outside |
+| ✅ | **Text boxes** | The original font, box frames, drop shadow and end-of-message icons, drawn by the game's own message code |
+| ✅ | **File select** | Files, name entry, copy / erase / options, starting a new or saved game (`make FILESELECT=1` boots straight into it) |
+| ✅ | **Title screen** | The attract demo with the title and PRESS START, then file select (the rider on the horse is not drawn yet) |
+| 🚧 | Pause menu | Not ported yet |
 | 🚧 | Audio | Not ported yet (silent) |
-| 🚧 | HUD | Placeholder text for hearts / rupees |
+| ✅ | **HUD** | The original interface code: hearts (with the beating heart), magic meter, B / A / C buttons, action labels, rupees; hidden during cutscenes |
 
 ## 📸 Screenshots
 
@@ -252,8 +255,11 @@ It needs a portable Azahar folder (`azahar.exe` plus a `user/` folder whose `con
 - [x] Skyboxes, render presets, original draw order
 - [x] The real `Play` state with the player
 - [x] Actors of the first area (Sylvan children, the fairy companion, doors, grass, signs …)
-- [ ] Cutscene data → title-screen demo
-- [ ] File select, pause menu, the real HUD
+- [x] Cutscene data (the title-screen demo still needs its actors and sky)
+- [x] The real HUD and text boxes
+- [x] File select
+- [x] Title screen
+- [ ] Skinned meshes (horses), pause menu
 - [ ] Audio (sequence player + synthesis on the ARM11, output through the DSP)
 - [ ] 60 fps presentation (frame interpolation; game logic stays at the original 20 Hz)
 - [ ] Frame-perfect equivalence traces against the original
