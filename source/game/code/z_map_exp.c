@@ -1,4 +1,6 @@
 // adapted from flute-of-age/src/code/z_map_exp.c
+#include "engine/rdp_gbi.h"
+#include "engine/rdp_disps.h"
 #include "gfx.h"
 #include "engine/rom_bind.h"
 #include "engine/gfx3d.h"
@@ -335,15 +337,21 @@ void Map_Init(PlayState* play) {
 }
 
 void Minimap_DrawCompassIcons(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     STACK_PAD(s32);
     Player* player = GET_PLAYER(play);
     s16 tempX, tempZ;
 
+    OPEN_DISPS(play->state.gfxCtx, "../z_map_exp.c", 565);
 
     if (play->interfaceCtx.minimapAlpha >= 0xAA) {
-        Gfx3D_SetupDLTo(GFX_BUF_OVL, 42);
+        Gfx_SetupDL_42Overlay(play->state.gfxCtx);
 
-        GFX_TO(OVL, Gfx3D_SetEnvColor(0, 0, 0, 255));
+        gSPMatrix(OVERLAY_DISP++, &gIdentityMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gDPSetCombineLERP(OVERLAY_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
+                          PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetEnvColor(OVERLAY_DISP++, 0, 0, 0, 255);
+        gDPSetCombineMode(OVERLAY_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
 
         tempX = player->actor.world.pos.x;
         tempZ = player->actor.world.pos.z;
@@ -354,10 +362,10 @@ void Minimap_DrawCompassIcons(PlayState* play) {
         Matrix_RotateX(-1.6f, MTXMODE_APPLY);
         tempX = (0x7FFF - player->actor.shape.rot.y) / 0x400;
         Matrix_RotateY(tempX / 10.0f, MTXMODE_APPLY);
-        GFX_TO(OVL, Gfx3D_LoadMtxF(Matrix_GetCurrent()));
+        MATRIX_FINALIZE_AND_LOAD(OVERLAY_DISP++, play->state.gfxCtx, "../z_map_exp.c", 585);
 
-        GFX_TO(OVL, Gfx3D_SetPrimColor(200, 255, 0, 255));
-        GFX_TO(OVL, Gfx3D_DrawDL((u32)(uintptr_t)(gCompassArrowDL)));
+        gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 200, 255, 0, 255);
+        gSPDisplayList(OVERLAY_DISP++, gCompassArrowDL);
 
         tempX = sPlayerInitialPosX;
         tempZ = sPlayerInitialPosZ;
@@ -367,19 +375,22 @@ void Minimap_DrawCompassIcons(PlayState* play) {
         Matrix_Scale(VREG(9) / 100.0f, VREG(9) / 100.0f, VREG(9) / 100.0f, MTXMODE_APPLY);
         Matrix_RotateX(VREG(52) / 10.0f, MTXMODE_APPLY);
         Matrix_RotateY(sPlayerInitialDirection / 10.0f, MTXMODE_APPLY);
-        GFX_TO(OVL, Gfx3D_LoadMtxF(Matrix_GetCurrent()));
+        MATRIX_FINALIZE_AND_LOAD(OVERLAY_DISP++, play->state.gfxCtx, "../z_map_exp.c", 603);
 
-        GFX_TO(OVL, Gfx3D_SetPrimColor(200, 0, 0, 255));
-        GFX_TO(OVL, Gfx3D_DrawDL((u32)(uintptr_t)(gCompassArrowDL)));
+        gDPSetPrimColor(OVERLAY_DISP++, 0, 0xFF, 200, 0, 0, 255);
+        gSPDisplayList(OVERLAY_DISP++, gCompassArrowDL);
     }
 
+    CLOSE_DISPS(play->state.gfxCtx, "../z_map_exp.c", 607);
 }
 
 void Minimap_Draw(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     STACK_PADS(s32, 2);
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     s32 mapIndex = gSaveContext.mapIndex;
 
+    OPEN_DISPS(play->state.gfxCtx, "../z_map_exp.c", 626);
 
     if (play->pauseCtx.state <= PAUSE_STATE_INIT) {
         switch (play->sceneId) {
@@ -394,17 +405,27 @@ void Minimap_Draw(PlayState* play) {
             case SCENE_BOTTOM_OF_THE_WELL:
             case SCENE_ICE_CAVERN:
                 if (!R_MINIMAP_DISABLED) {
-                    Gfx3D_SetupDLTo(GFX_BUF_OVL, 39);
+                    Gfx_SetupDL_39Overlay(play->state.gfxCtx);
+                    gDPSetCombineLERP(OVERLAY_DISP++, 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, 1, 0, PRIMITIVE, 0,
+                                      TEXEL0, 0, PRIMITIVE, 0);
 
                     if (CHECK_DUNGEON_ITEM(DUNGEON_MAP, mapIndex)) {
-                        GFX_TO(OVL, Gfx3D_SetPrimColor(100, 255, 255, interfaceCtx->minimapAlpha));
+                        gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 100, 255, 255, interfaceCtx->minimapAlpha);
 
+                        gDPLoadTextureBlock_4b(OVERLAY_DISP++, interfaceCtx->mapSegment, G_IM_FMT_I, MAP_I_TEX_WIDTH,
+                                               MAP_I_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                                               G_TX_NOLOD);
 
+                        gSPTextureRectangle(OVERLAY_DISP++, R_DGN_MINIMAP_X << 2, R_DGN_MINIMAP_Y << 2,
+                                            (R_DGN_MINIMAP_X + MAP_I_TEX_WIDTH) << 2,
+                                            (R_DGN_MINIMAP_Y + MAP_I_TEX_HEIGHT) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
+                                            1 << 10);
                     }
 
                     if (CHECK_DUNGEON_ITEM(DUNGEON_COMPASS, mapIndex)) {
                         Minimap_DrawCompassIcons(play); // Draw icons for the player spawn and current position
-                        Gfx3D_SetupDLTo(GFX_BUF_OVL, 39);
+                        Gfx_SetupDL_39Overlay(play->state.gfxCtx);
                         MapMark_Draw(play);
                     }
                 }
@@ -442,11 +463,21 @@ void Minimap_Draw(PlayState* play) {
             case SCENE_SUNMEAD_RANCH:
             case SCENE_OUTSIDE_VARKONS_CASTLE:
                 if (!R_MINIMAP_DISABLED) {
-                    Gfx3D_SetupDLTo(GFX_BUF_OVL, 39);
+                    Gfx_SetupDL_39Overlay(play->state.gfxCtx);
 
-                    GFX_TO(OVL, Gfx3D_SetPrimColor(R_MINIMAP_COLOR(0), R_MINIMAP_COLOR(1), R_MINIMAP_COLOR(2), interfaceCtx->minimapAlpha));
+                    gDPSetCombineMode(OVERLAY_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                    gDPSetPrimColor(OVERLAY_DISP++, 0, 0, R_MINIMAP_COLOR(0), R_MINIMAP_COLOR(1), R_MINIMAP_COLOR(2),
+                                    interfaceCtx->minimapAlpha);
 
+                    gDPLoadTextureBlock_4b(OVERLAY_DISP++, interfaceCtx->mapSegment, G_IM_FMT_IA,
+                                           gMapData->owMinimapWidth[mapIndex], gMapData->owMinimapHeight[mapIndex], 0,
+                                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
+                    gSPTextureRectangle(OVERLAY_DISP++, R_OW_MINIMAP_X << 2, R_OW_MINIMAP_Y << 2,
+                                        (R_OW_MINIMAP_X + gMapData->owMinimapWidth[mapIndex]) << 2,
+                                        (R_OW_MINIMAP_Y + gMapData->owMinimapHeight[mapIndex]) << 2, G_TX_RENDERTILE, 0,
+                                        0, 1 << 10, 1 << 10);
 
                     if (((play->sceneId != SCENE_OAKRIDGE_VILLAGE) && (play->sceneId != SCENE_SYLVAN_FOREST) &&
                          (play->sceneId != SCENE_NERIS_FOUNTAIN)) ||
@@ -456,13 +487,27 @@ void Minimap_Draw(PlayState* play) {
                              (gSaveContext.save.info.infTable[INFTABLE_INDEX_1AX] &
                               gBitFlags[gMapData->owEntranceFlag[mapIndex]]))) {
 
+                            gDPLoadTextureBlock(OVERLAY_DISP++, gMapDungeonEntranceIconTex, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                                8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                                G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
+                            gSPTextureRectangle(OVERLAY_DISP++,
+                                                gMapData->owEntranceIconPosX[sEntranceIconMapIndex] << 2,
+                                                gMapData->owEntranceIconPosY[sEntranceIconMapIndex] << 2,
+                                                (gMapData->owEntranceIconPosX[sEntranceIconMapIndex] + 8) << 2,
+                                                (gMapData->owEntranceIconPosY[sEntranceIconMapIndex] + 8) << 2,
+                                                G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
                         }
                     }
 
                     if ((play->sceneId == SCENE_NERIS_FOUNTAIN) &&
                         (gSaveContext.save.info.infTable[INFTABLE_INDEX_1AX] & gBitFlags[INFTABLE_1A9_SHIFT])) {
+                        gDPLoadTextureBlock(OVERLAY_DISP++, gMapDungeonEntranceIconTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8,
+                                            8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
+                        gSPTextureRectangle(OVERLAY_DISP++, 270 << 2, 154 << 2, 278 << 2, 162 << 2, G_TX_RENDERTILE, 0,
+                                            0, 1 << 10, 1 << 10);
                     }
 
                     Minimap_DrawCompassIcons(play); // Draw icons for the player spawn and current position
@@ -482,6 +527,7 @@ void Minimap_Draw(PlayState* play) {
         }
     }
 
+    CLOSE_DISPS(play->state.gfxCtx, "../z_map_exp.c", 782);
 }
 
 s16 Map_GetFloorTextIndexOffset(s32 mapIndex, s32 floor) {

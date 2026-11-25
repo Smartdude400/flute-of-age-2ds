@@ -5,6 +5,8 @@
 #include "engine/stub.h"
 #include "engine/asset.h"
 #include "engine/gfx3d.h"
+#include "engine/screen.h"
+#include "engine/touch.h"
 #include "attributes.h"
 #include "controller.h"
 #include "flag_set.h"
@@ -2822,10 +2824,12 @@ void Interface_DrawItemButtons(PlayState* play) {
     gDPSetCombineMode(OVERLAY_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0, R_B_BTN_COLOR(0), R_B_BTN_COLOR(1), R_B_BTN_COLOR(2), interfaceCtx->bAlpha);
     gDPSetEnvColor(OVERLAY_DISP++, 0, 0, 0, 255);
+    GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_BTN_B)); // native (2DS layout): touch targets
     Gfx_TextureIA8(gButtonBackgroundTex, 32, 32, R_ITEM_BTN_X(0), R_ITEM_BTN_Y(0),
                        R_ITEM_BTN_WIDTH(0), R_ITEM_BTN_WIDTH(0), R_ITEM_BTN_DD(0) << 1, R_ITEM_BTN_DD(0) << 1);
 
     // C-Left Button Color & Texture
+    GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_BTN_CLEFT));
     gDPPipeSync(OVERLAY_DISP++);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0, R_C_BTN_COLOR(0), R_C_BTN_COLOR(1), R_C_BTN_COLOR(2),
                     interfaceCtx->cLeftAlpha);
@@ -2834,6 +2838,7 @@ void Interface_DrawItemButtons(PlayState* play) {
                         G_TX_RENDERTILE, 0, 0, R_ITEM_BTN_DD(1) << 1, R_ITEM_BTN_DD(1) << 1);
 
     // C-Down Button Color & Texture
+    GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_BTN_CDOWN));
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0, R_C_BTN_COLOR(0), R_C_BTN_COLOR(1), R_C_BTN_COLOR(2),
                     interfaceCtx->cDownAlpha);
     gSPTextureRectangle(OVERLAY_DISP++, R_ITEM_BTN_X(2) << 2, R_ITEM_BTN_Y(2) << 2,
@@ -2841,11 +2846,13 @@ void Interface_DrawItemButtons(PlayState* play) {
                         G_TX_RENDERTILE, 0, 0, R_ITEM_BTN_DD(2) << 1, R_ITEM_BTN_DD(2) << 1);
 
     // C-Right Button Color & Texture
+    GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_BTN_CRIGHT));
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0, R_C_BTN_COLOR(0), R_C_BTN_COLOR(1), R_C_BTN_COLOR(2),
                     interfaceCtx->cRightAlpha);
     gSPTextureRectangle(OVERLAY_DISP++, R_ITEM_BTN_X(3) << 2, R_ITEM_BTN_Y(3) << 2,
                         (R_ITEM_BTN_X(3) + R_ITEM_BTN_WIDTH(3)) << 2, (R_ITEM_BTN_Y(3) + R_ITEM_BTN_WIDTH(3)) << 2,
                         G_TX_RENDERTILE, 0, 0, R_ITEM_BTN_DD(3) << 1, R_ITEM_BTN_DD(3) << 1);
+    GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_NONE));
 
     if (!IS_PAUSE_STATE_GAMEOVER(pauseCtx)) {
         if (IS_PAUSED(&play->pauseCtx)) {
@@ -2854,6 +2861,7 @@ void Interface_DrawItemButtons(PlayState* play) {
             gDPSetPrimColor(OVERLAY_DISP++, 0, 0, START_BUTTON_R, START_BUTTON_G, START_BUTTON_B,
                             interfaceCtx->startAlpha);
 
+            GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_BTN_START)); // native (2DS layout): touch target
 #if OOT_VERSION < PAL_1_0
             gSPTextureRectangle(OVERLAY_DISP++, R_START_BTN_X << 2, R_START_BTN_Y << 2, (R_START_BTN_X + 22) << 2,
                                 (R_START_BTN_Y + 22) << 2, G_TX_RENDERTILE, 0, 0, (s32)(1.4277344 * (1 << 10)),
@@ -2866,6 +2874,7 @@ void Interface_DrawItemButtons(PlayState* play) {
                                 (startButtonLeftPos[gSaveContext.language] + 22) << 2, (17 + 22) << 2, G_TX_RENDERTILE,
                                 0, 0, (s32)(1.4277344 * (1 << 10)), (s32)(1.4277344 * (1 << 10)));
 #endif
+            GFX_TO(OVL, Gfx3D_TouchTag(TOUCH_NONE));
 
             gDPPipeSync(OVERLAY_DISP++);
             gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 255, 255, 255, interfaceCtx->startAlpha);
@@ -3415,6 +3424,8 @@ void Interface_Draw(PlayState* play) {
         }
 
         // A Button
+        // native (2DS layout): the A button and its action label stay on the top screen, by the game
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_TOP));
         Gfx_SetupDL_42Overlay(play->state.gfxCtx);
         func_8008A8B8(play, R_A_BTN_Y, R_A_BTN_Y + 45, R_A_BTN_X, R_A_BTN_X + 45);
         gSPClearGeometryMode(OVERLAY_DISP++, G_CULL_BOTH);
@@ -3442,6 +3453,7 @@ void Interface_Draw(PlayState* play) {
         }
 
         gDPPipeSync(OVERLAY_DISP++);
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_BOTTOM));
 
         func_8008A994(interfaceCtx);
 
@@ -4015,6 +4027,10 @@ void Interface_Draw(PlayState* play) {
         Interface_SetupDL_80125A60();
         gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 0, 0, 0, interfaceCtx->unk_244);
         gDPFillRectangle(OVERLAY_DISP++, 0, 0, gScreenWidth - 1, gScreenHeight - 1);
+        // native (2DS layout): the fade covered the whole frame, the game included: the top screen as well
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_TOP));
+        gDPFillRectangle(OVERLAY_DISP++, 0, 0, gScreenWidth - 1, gScreenHeight - 1);
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_BOTTOM));
     }
 
 }

@@ -1,4 +1,6 @@
 // adapted from flute-of-age/src/code/z_map_mark.c
+#include "engine/rdp_gbi.h"
+#include "engine/rdp_disps.h"
 #include "libu64/debug.h"
 #include "misc_overlay_sizes.h"
 #include "engine/gfx3d.h"
@@ -74,6 +76,7 @@ void MapMark_ClearPointers(UNUSED PlayState* play) {
 }
 
 void MapMark_DrawForDungeon(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     InterfaceContext* interfaceCtx;
     MapMarkIconData* mapMarkIconData;
     MapMarkPoint* markPoint;
@@ -94,29 +97,41 @@ void MapMark_DrawForDungeon(PlayState* play) {
 
     mapMarkIconData = &sLoadedMarkDataTable[dungeon][interfaceCtx->mapRoomNum][0];
 
+    OPEN_DISPS(play->state.gfxCtx, "../z_map_mark.c", 303);
 
     while (true) {
         if (mapMarkIconData->markType == MAP_MARK_NONE) {
             break;
         }
 
-        GFX_TO(OVL, Gfx3D_SetPrimColor(255, 255, 255, interfaceCtx->minimapAlpha));
-        GFX_TO(OVL, Gfx3D_SetEnvColor(0, 0, 0, interfaceCtx->minimapAlpha));
+        gDPPipeSync(OVERLAY_DISP++);
+        gDPSetTextureLUT(OVERLAY_DISP++, G_TT_NONE);
+        gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 255, 255, 255, interfaceCtx->minimapAlpha);
+        gDPSetEnvColor(OVERLAY_DISP++, 0, 0, 0, interfaceCtx->minimapAlpha);
 
         markPoint = &mapMarkIconData->points[0];
         for (i = 0; i < mapMarkIconData->count; i++) {
             if ((mapMarkIconData->markType != MAP_MARK_CHEST) || !Flags_GetTreasure(play, markPoint->chestFlag)) {
                 markInfo = &sMapMarkInfoTable[mapMarkIconData->markType];
 
+                gDPPipeSync(OVERLAY_DISP++);
+                gDPLoadTextureBlock_Runtime(OVERLAY_DISP++, markInfo->texture, markInfo->imageFormat,
+                                            markInfo->imageSize, markInfo->textureWidth, markInfo->textureHeight, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
                 rectLeft = ((DEBUG_FEATURES ? GREG(94) : 0) + markPoint->x + 204) << 2;
                 rectTop = ((DEBUG_FEATURES ? GREG(95) : 0) + markPoint->y + 140) << 2;
+                gSPTextureRectangle(OVERLAY_DISP++, rectLeft, rectTop, markInfo->rectWidth + rectLeft,
+                                    rectTop + markInfo->rectHeight, G_TX_RENDERTILE, 0, 0, markInfo->dsdx,
+                                    markInfo->dtdy);
             }
             markPoint++;
         }
         mapMarkIconData++;
     }
 
+    CLOSE_DISPS(play->state.gfxCtx, "../z_map_mark.c", 339);
 }
 
 void MapMark_Draw(PlayState* play) {

@@ -4,6 +4,7 @@
 #include "n64dd.h"
 
 u8 D_80121212 = 0;
+n64ddStruct_80121220* B_80121220 = NULL;
 
 void n64dd_SetDiskVersion(s32 arg0) {
     (void)arg0; // only called with a disk present

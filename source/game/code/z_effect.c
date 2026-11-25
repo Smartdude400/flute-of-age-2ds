@@ -1,4 +1,5 @@
 // adapted from flute-of-age/src/code/z_effect.c
+#include "engine/gfx3d.h"
 #include "gfx.h"
 #include "attributes.h"
 #include "printf.h"
@@ -166,11 +167,13 @@ void Effect_Add(PlayState* play, s32* pIndex, s32 type, u8 arg3, u8 arg4, void* 
 
 void Effect_DrawAll(GraphicsContext* gfxCtx) {
     s32 i;
+    u32 interpCtx = Gfx3D_InterpGetContext(); // native (60 Hz presentation): matrices matched per effect slot
 
     for (i = 0; i < SPARK_COUNT; i++) {
         if (!sEffectContext.sparks[i].status.active) {
             continue;
         }
+        Gfx3D_InterpSetContext(0xEF000000u | (1 << 8) | (u32)i);
         sEffectInfoTable[EFFECT_SPARK].draw(&sEffectContext.sparks[i].effect, gfxCtx);
     }
 
@@ -178,6 +181,7 @@ void Effect_DrawAll(GraphicsContext* gfxCtx) {
         if (!sEffectContext.blures[i].status.active) {
             continue;
         }
+        Gfx3D_InterpSetContext(0xEF000000u | (2 << 8) | (u32)i);
         sEffectInfoTable[EFFECT_BLURE1].draw(&sEffectContext.blures[i].effect, gfxCtx);
     }
 
@@ -185,8 +189,10 @@ void Effect_DrawAll(GraphicsContext* gfxCtx) {
         if (!sEffectContext.shieldParticles[i].status.active) {
             continue;
         }
+        Gfx3D_InterpSetContext(0xEF000000u | (3 << 8) | (u32)i);
         sEffectInfoTable[EFFECT_SHIELD_PARTICLE].draw(&sEffectContext.shieldParticles[i].effect, gfxCtx);
     }
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 void Effect_UpdateAll(PlayState* play) {

@@ -1,5 +1,7 @@
 // adapted from flute-of-age/src/code/z_skin_awb.c
 #include "array_count.h"
+#include "dma.h"
+#include "engine/rdp_gbi.h"
 #include "engine/stub.h"
 #include "engine/asset.h"
 #include "attributes.h"
@@ -17,7 +19,33 @@
  * Initialises the Vtx buffers used for limb at index `limbIndex`
  */
 void Skin_InitAnimatedLimb(UNUSED PlayState* play, Skin* skin, s32 limbIndex) {
-    PRESENTATION_STUB("Skin_InitAnimatedLimb");
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
+    s32 i;
+    SkinLimb** skeleton = Asset_Resolve(skin->skeletonHeader->segment);
+    SkinAnimatedLimbData* animatedLimbData =
+        Asset_Resolve(((SkinLimb*)Asset_Resolve(skeleton[limbIndex]))->segment);
+    SkinLimbModif* limbModifications = Asset_Resolve(animatedLimbData->limbModifications);
+    SkinLimbModif* modifEntry;
+    SkinVertex* skinVtxEntry;
+
+    for (i = 0; i < ARRAY_COUNT(skin->vtxTable->buf); i++) {
+        Vtx* vtxBuf = skin->vtxTable[limbIndex].buf[i];
+
+        for (modifEntry = limbModifications; modifEntry < limbModifications + animatedLimbData->limbModifCount;
+             modifEntry++) {
+            SkinVertex* skinVertices = Asset_Resolve(modifEntry->skinVertices);
+
+            for (skinVtxEntry = skinVertices; skinVtxEntry < &skinVertices[modifEntry->vtxCount];) {
+                Vtx* vtx = &vtxBuf[skinVtxEntry->index];
+
+                vtx->n.flag = 0;
+                vtx->n.tc[0] = skinVtxEntry->s;
+                vtx->n.tc[1] = skinVtxEntry->t;
+                vtx->n.a = skinVtxEntry->alpha;
+                skinVtxEntry++;
+            }
+        }
+    }
 }
 
 /**

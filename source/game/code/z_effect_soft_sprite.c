@@ -1,4 +1,5 @@
 // adapted from flute-of-age/src/code/z_effect_soft_sprite.c
+#include "engine/gfx3d.h"
 #include "engine/actor_native.h"
 #include "array_count.h"
 #include "attributes.h"
@@ -300,12 +301,21 @@ void EffectSs_UpdateAll(PlayState* play) {
     }
 }
 
-void EffectSs_Draw(PlayState* play, s32 index) {
+static void EffectSs_DrawImpl(PlayState* play, s32 index) {
     EffectSs* effectSs = &sEffectSsInfo.table[index];
 
     if (effectSs->draw != NULL) {
         effectSs->draw(play, index, effectSs);
     }
+}
+
+// native (60 Hz presentation): matrices matched per effect slot and type (engine/gfx3d.h)
+void EffectSs_Draw(PlayState* play, s32 index) {
+    u32 interpCtx = Gfx3D_InterpGetContext();
+
+    Gfx3D_InterpSetContext(0xE5000000u | ((u32)sEffectSsInfo.table[index].type << 12) | (u32)index);
+    EffectSs_DrawImpl(play, index);
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 // original name: "EffectSoftSprite2_disp"

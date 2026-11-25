@@ -37,5 +37,9 @@ void PreRender_ApplyFilters(PreRender* this);
 // native: capture the frame as the pause background / draw the captured frame (engine/prerender.c)
 void PreRender_SaveFrame(PreRender* this);
 void PreRender_DrawSaved(PreRender* this);
+// region captures of the pause menu's player preview (original display-list builders; cursor unused)
+struct Gfx;
+void PreRender_SaveFramebuffer(PreRender* this, struct Gfx** gfxP);
+void PreRender_DrawCoverage(PreRender* this, struct Gfx** gfxP);
 
 #endif

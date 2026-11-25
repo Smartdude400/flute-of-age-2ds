@@ -21,7 +21,4 @@
 
 // S10 closed (P3): the player actor is translated (code/z_player.c).
 
-// S11: the pause menu (ovl_kaleido_scope).
-void KaleidoScope_Update(PlayState* play) { (void)play; LOGIC_STUB("KaleidoScope_Update"); }
-void KaleidoScope_Draw(PlayState* play) { (void)play; LOGIC_STUB("KaleidoScope_Draw"); }
 

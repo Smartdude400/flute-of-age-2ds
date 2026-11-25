@@ -4,6 +4,7 @@
 #include "engine/object_native.h"
 #include "engine/runner.h"
 #include "engine/gfx.h"
+#include "engine/screen.h"
 #include "engine/asset.h"
 #include "line_numbers.h"
 
@@ -1142,6 +1143,14 @@ void Play_DrawOverlayElements(PlayState* this) {
     STACK_PAD(s32);
 #endif
 
+    // native (2DS layout): the pause menu and the HUD are drawn on the bottom screen, at their original
+    // coordinates (it is 320x240 like the original frame); text boxes stay on the top screen with the game.
+    // Interface_Draw puts the A button and its full-screen fade back on top (z_parameter.c).
+    Gfx3D_Screen(SCREEN_BOTTOM);
+    // (60 Hz presentation: the HUD, menus and text keep the original 20 Hz steps)
+    u32 interpCtx = Gfx3D_InterpGetContext();
+    Gfx3D_InterpSetContext(INTERP_CTX_NONE);
+
     if (IS_PAUSED(&this->pauseCtx)) {
         KaleidoScopeCall_Draw(this);
     }
@@ -1150,11 +1159,14 @@ void Play_DrawOverlayElements(PlayState* this) {
         Interface_Draw(this);
     }
 
+    Gfx3D_Screen(SCREEN_TOP);
+
     Message_Draw(this);
 
     if (this->gameOverCtx.state != GAMEOVER_INACTIVE) {
         GameOver_FadeInLights(this);
     }
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 void Play_Draw(PlayState* this) {

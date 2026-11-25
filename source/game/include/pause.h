@@ -2,6 +2,7 @@
 #ifndef PAUSE_H
 #define PAUSE_H
 
+#include "engine/rdp_consts.h"
 #include "engine/vtx.h"
 #include "animation.h"
 #include "message.h"

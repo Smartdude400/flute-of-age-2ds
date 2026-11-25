@@ -3,6 +3,7 @@
 #define SKIN_H
 
 #include "animation.h"
+#include "engine/vtx.h"
 
 struct Actor;
 struct GraphicsContext;
@@ -61,7 +62,7 @@ typedef struct SkinLimb {
 
 typedef struct SkinLimbVtx {
     /* 0x000 */ u8 index; // alternates every draw cycle
-    /* 0x004 */ void* buf /* native: was Vtx* (render-only) */[2]; // number of vertices in buffer determined by `totalVtxCount`
+    /* 0x004 */ Vtx* buf[2]; // number of vertices in buffer determined by `totalVtxCount`
 } SkinLimbVtx; // size = 0xC
 
 typedef struct Skin {
@@ -80,7 +81,7 @@ typedef s32 (*SkinOverrideLimbDraw)(struct Actor*, struct PlayState*, s32, Skin*
 
 #define SKIN_TRANSFORM_IS_FHG 0x23
 
-void Skin_UpdateVertices(MtxF* mtx, SkinVertex* skinVertices, SkinLimbModif* modifEntry, void* vtxBuf /* native: was Vtx* (render-only) */, Vec3f* pos);
+void Skin_UpdateVertices(MtxF* mtx, SkinVertex* skinVertices, SkinLimbModif* modifEntry, Vtx* vtxBuf, Vec3f* pos);
 void Skin_DrawAnimatedLimb(struct GraphicsContext* gfxCtx, Skin* skin, s32 limbIndex, s32 arg3, s32 drawFlags);
 void Skin_DrawLimb(struct GraphicsContext* gfxCtx, Skin* skin, s32 limbIndex, DListRef  dlistOverride, s32 drawFlags);
 void func_800A6330(struct Actor* actor, struct PlayState* play, Skin* skin, SkinPostDraw postDraw, s32 setTranslation);

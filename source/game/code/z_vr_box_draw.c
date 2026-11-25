@@ -27,8 +27,8 @@ static void draw_face_list(SkyboxContext* skyboxCtx, s32 index, bool twoFiles) {
     Gfx3D_DrawSky(skyboxCtx->roomVtx, l->idx, l->numIdx, t0, t1);
 }
 
-void Skybox_Draw(SkyboxContext* skyboxCtx, struct GraphicsContext* gfxCtx, s16 skyboxId, s16 blend, f32 x, f32 y,
-                 f32 z) {
+static void Skybox_DrawImpl(SkyboxContext* skyboxCtx, struct GraphicsContext* gfxCtx, s16 skyboxId, s16 blend, f32 x,
+                            f32 y, f32 z) {
     (void)gfxCtx;
     Gfx3D_SetupDLTo(GFX_BUF_OPA, 40); // Gfx_SetupDL_40Opa
 
@@ -74,6 +74,16 @@ void Skybox_Draw(SkyboxContext* skyboxCtx, struct GraphicsContext* gfxCtx, s16 s
             draw_face_list(skyboxCtx, 10, true); // -y face
         }
     }
+}
+
+// native (60 Hz presentation): the sky's matrices are matched with its previous frame's (engine/gfx3d.h)
+void Skybox_Draw(SkyboxContext* skyboxCtx, struct GraphicsContext* gfxCtx, s16 skyboxId, s16 blend, f32 x, f32 y,
+                 f32 z) {
+    u32 interpCtx = Gfx3D_InterpGetContext();
+
+    Gfx3D_InterpSetContext(0xB0000000u | (u32)skyboxId);
+    Skybox_DrawImpl(skyboxCtx, gfxCtx, skyboxId, blend, x, y, z);
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 void Skybox_Update(UNUSED SkyboxContext* skyboxCtx) {

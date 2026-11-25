@@ -277,23 +277,173 @@ void Room_DrawCullable(PlayState* play, Room* room, u32 flags) {
  * If the data is JPEG, decode it and overwrite the initial data with the result.
  * Uses the depth frame buffer as temporary storage.
  */
-// Room_DrawBackground2D: not ported: prerendered background blit (see STUB S7)
+// Room_DecodeJpeg: native: the backgrounds are decoded offline (tools/build_scene.py background_texture).
+
+// native: the original built an S2D background-copy command (copy mode: the image replaces the colour, depth is
+// neither tested nor written) for the 320x240 image at the given offset (camera quake).
+void Room_DrawBackground2D(struct Gfx** gfxP, void* tex, void* tlut, u16 width, u16 height, u8 fmt, u8 siz, u16 tlutMode,
+                           u16 tlutCount, f32 offsetX, f32 offsetY) {
+    (void)gfxP;
+    (void)tlut;
+    (void)fmt;
+    (void)siz;
+    (void)tlutMode;
+    (void)tlutCount;
+    GFX_TO(OPA, Gfx3D_DrawBackground(tex, width, height, offsetX, offsetY));
+}
 
 #if OOT_VERSION < PAL_1_0
-// func_8007FF50: not ported: prerendered background blit (see STUB S7)
-
+void func_8007FF50(struct Gfx** gfxP, void* tex, void* tlut, u16 width, u16 height, u8 fmt, u8 siz, u16 tlutMode,
+                   u16 tlutCount) {
+    Room_DrawBackground2D(gfxP, tex, tlut, width, height, fmt, siz, tlutMode, tlutCount, 0.0f, 0.0f);
+}
 #endif
 
 #define ROOM_IMAGE_NODRAW_BACKGROUND (1 << 0)
 #define ROOM_IMAGE_NODRAW_OPA (1 << 1)
 #define ROOM_IMAGE_NODRAW_XLU (1 << 2)
 
-// STUB S7: prerendered-image rooms (JPEG backgrounds) are not ported yet.
+void Room_DrawImageSingle(PlayState* play, Room* room, u32 flags) {
+    Camera* activeCam;
+    RoomShapeImageSingle* roomShape;
+    RoomShapeDListsEntry* entry;
+    u32 isFixedCamera;
+    u32 drawBackground;
+    u32 drawOpa;
+    u32 drawXlu;
+
+    activeCam = GET_ACTIVE_CAM(play);
+    isFixedCamera = (activeCam->setting == CAM_SET_PREREND_FIXED);
+    roomShape = &room->roomShape->image.single;
+    entry = roomShape->base.entry;
+    drawBackground = (flags & ROOM_DRAW_OPA) && isFixedCamera && (roomShape->source != NULL) &&
+                     !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_BACKGROUND);
+    drawOpa = (flags & ROOM_DRAW_OPA) && (entry->opa != NULL) && !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_OPA);
+    drawXlu = (flags & ROOM_DRAW_XLU) && (entry->xlu != NULL) && !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_XLU);
+
+    if (drawOpa || drawBackground) {
+        RoomNative_Bind(room); // gSPSegment(POLY_OPA_DISP++, 0x03, room->segment)
+
+        if (drawOpa) {
+            Gfx_SetupDL_25Opa(play->state.gfxCtx);
+            GFX_TO(OPA, Gfx3D_LoadMtxF(&gIdentityMtxF));
+            GFX_TO(OPA, Gfx3D_DrawDL((u32)(uintptr_t)(entry->opa)));
+        }
+
+        if (drawBackground) {
+            // (native: no microcode switch; the background is a native command)
+            Vec3f quakeOffset;
+
+            quakeOffset = Camera_GetQuakeOffset(activeCam);
+            Room_DrawBackground2D(NULL, roomShape->source, roomShape->tlut, roomShape->width, roomShape->height,
+                                  roomShape->fmt, roomShape->siz, roomShape->tlutMode, roomShape->tlutCount,
+                                  (quakeOffset.x + quakeOffset.z) * 1.2f + quakeOffset.y * 0.6f,
+                                  quakeOffset.y * 2.4f + (quakeOffset.x + quakeOffset.z) * 0.3f);
+        }
+    }
+
+    if (drawXlu) {
+        RoomNative_Bind(room); // gSPSegment(POLY_XLU_DISP++, 0x03, room->segment)
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        GFX_TO(XLU, Gfx3D_LoadMtxF(&gIdentityMtxF));
+        GFX_TO(XLU, Gfx3D_DrawDL((u32)(uintptr_t)(entry->xlu)));
+    }
+}
+
+RoomShapeImageMultiBgEntry* Room_GetImageMultiBgEntry(RoomShapeImageMulti* roomShapeImageMulti, PlayState* play) {
+    Camera* activeCam = GET_ACTIVE_CAM(play);
+    s32 bgCamIndex = activeCam->bgCamIndex;
+    s16 overrideBgCamIndex;
+    Player* player;
+    RoomShapeImageMultiBgEntry* bgEntry;
+    s32 i;
+
+    overrideBgCamIndex = ((BgCamFuncData*)BgCheck_GetBgCamFuncDataImpl(&play->colCtx, bgCamIndex, BGCHECK_SCENE))
+                             ->roomImageOverrideBgCamIndex;
+    if (overrideBgCamIndex >= 0) {
+        bgCamIndex = overrideBgCamIndex;
+    }
+
+    player = GET_PLAYER(play);
+    player->actor.params = PARAMS_GET_NOSHIFT(player->actor.params, 8, 8) | bgCamIndex;
+
+    bgEntry = roomShapeImageMulti->backgrounds;
+    for (i = 0; i < roomShapeImageMulti->numBackgrounds; i++) {
+        if (bgEntry->bgCamIndex == bgCamIndex) {
+            return bgEntry;
+        }
+        bgEntry++;
+    }
+
+    PRINTF(VT_COL(RED, WHITE) T("z_room.c:カメラＩＤに一致するデータが存在しません camid=%d\n",
+                                "z_room.c: Data consistent with camera id does not exist camid=%d\n") VT_RST,
+           bgCamIndex);
+    LogUtils_HungupThread("../z_room.c", 726);
+
+    return NULL;
+}
+
+void Room_DrawImageMulti(PlayState* play, Room* room, u32 flags) {
+    Camera* activeCam;
+    RoomShapeImageMulti* roomShape;
+    RoomShapeImageMultiBgEntry* bgEntry;
+    RoomShapeDListsEntry* dListsEntry;
+    u32 isFixedCamera;
+    u32 drawBackground;
+    u32 drawOpa;
+    u32 drawXlu;
+
+    activeCam = GET_ACTIVE_CAM(play);
+    isFixedCamera = (activeCam->setting == CAM_SET_PREREND_FIXED);
+    roomShape = &room->roomShape->image.multi;
+    dListsEntry = roomShape->base.entry;
+    bgEntry = Room_GetImageMultiBgEntry(roomShape, play);
+    drawBackground = (flags & ROOM_DRAW_OPA) && isFixedCamera && (bgEntry->source != NULL) &&
+                     !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_BACKGROUND);
+    drawOpa =
+        (flags & ROOM_DRAW_OPA) && (dListsEntry->opa != NULL) && !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_OPA);
+    drawXlu =
+        (flags & ROOM_DRAW_XLU) && (dListsEntry->xlu != NULL) && !(R_ROOM_IMAGE_NODRAW_FLAGS & ROOM_IMAGE_NODRAW_XLU);
+
+    if (drawOpa || drawBackground) {
+        RoomNative_Bind(room); // gSPSegment(POLY_OPA_DISP++, 0x03, room->segment)
+
+        if (drawOpa) {
+            Gfx_SetupDL_25Opa(play->state.gfxCtx);
+            GFX_TO(OPA, Gfx3D_LoadMtxF(&gIdentityMtxF));
+            GFX_TO(OPA, Gfx3D_DrawDL((u32)(uintptr_t)(dListsEntry->opa)));
+        }
+
+        if (drawBackground) {
+            // (native: no microcode switch; the background is a native command)
+            Vec3f quakeOffset;
+
+            quakeOffset = Camera_GetQuakeOffset(activeCam);
+            Room_DrawBackground2D(NULL, bgEntry->source, bgEntry->tlut, bgEntry->width, bgEntry->height,
+                                  bgEntry->fmt, bgEntry->siz, bgEntry->tlutMode, bgEntry->tlutCount,
+                                  (quakeOffset.x + quakeOffset.z) * 1.2f + quakeOffset.y * 0.6f,
+                                  quakeOffset.y * 2.4f + (quakeOffset.x + quakeOffset.z) * 0.3f);
+        }
+    }
+
+    if (drawXlu) {
+        RoomNative_Bind(room); // gSPSegment(POLY_XLU_DISP++, 0x03, room->segment)
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        GFX_TO(XLU, Gfx3D_LoadMtxF(&gIdentityMtxF));
+        GFX_TO(XLU, Gfx3D_DrawDL((u32)(uintptr_t)(dListsEntry->xlu)));
+    }
+}
+
 void Room_DrawImage(PlayState* play, Room* room, u32 flags) {
-    (void)play;
-    (void)room;
-    (void)flags;
-    RoomNative_StubImage();
+    RoomShapeImageBase* roomShape = &room->roomShape->image.base;
+
+    if (roomShape->amountType == ROOM_SHAPE_IMAGE_AMOUNT_SINGLE) {
+        Room_DrawImageSingle(play, room, flags);
+    } else if (roomShape->amountType == ROOM_SHAPE_IMAGE_AMOUNT_MULTI) {
+        Room_DrawImageMulti(play, room, flags);
+    } else {
+        LogUtils_HungupThread("../z_room.c", 841);
+    }
 }
 
 void Room_Init(UNUSED PlayState* play, Room* room) {
@@ -445,13 +595,22 @@ s32 Room_ProcessRoomRequest(PlayState* play, RoomContext* roomCtx) {
     return true;
 }
 
-void Room_Draw(PlayState* play, Room* room, u32 flags) {
+static void Room_DrawImpl(PlayState* play, Room* room, u32 flags) {
     if (room->segment != NULL) {
         RoomNative_Bind(room);
         ASSERT(room->roomShape->base.type < ARRAY_COUNTU(sRoomDrawHandlers),
                "this->ground_shape->polygon.type < number(Room_Draw_Proc)", "../z_room.c", 1125);
         sRoomDrawHandlers[room->roomShape->base.type](play, room, flags);
     }
+}
+
+// native (60 Hz presentation): matrices matched per room (engine/gfx3d.h)
+void Room_Draw(PlayState* play, Room* room, u32 flags) {
+    u32 interpCtx = Gfx3D_InterpGetContext();
+
+    Gfx3D_InterpSetContext(0xA0000000u | ((u32)room->num << 4) | flags);
+    Room_DrawImpl(play, room, flags);
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 /**

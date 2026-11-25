@@ -3,6 +3,11 @@
 #include "engine/stub.h"
 #include "engine/asset.h"
 #include "engine/gfx3d.h"
+#include "engine/object_native.h"
+#include "engine/gfx.h"
+#include "exact_gu.h"
+#include <stdlib.h>
+#include <string.h>
 #include "attributes.h"
 #include "gfx.h"
 #include "gfx_setupdl.h"
@@ -1873,9 +1878,61 @@ void Player_PostLimbDrawGameplay(PlayState* play, s32 limbIndex, DListRef* dList
     }
 }
 
+// native: the pause menu reuses the object space, where the converted objects are placed
+// (engine/object_native.c) as the original placed the object files. As the original, the player object and
+// the first chunk of gameplay_keep are copied into the pause segment first: the converted player object is
+// loaded there (its textures already loaded by the live copy are shared), and the chunk holds the native
+// layout of gameplay_keep's plain records below PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_BUFFER_SIZE (the pause
+// joint tables, player animation headers) at their original offsets.
+static DsObj* sPauseArenObject;
+
+static void Player_BindPauseSegments(u8* segment) {
+    // gSegments[4] / gSegments[6]: the copies in the pause segment
+    Asset_SetSegment(6, sPauseArenObject);
+    Asset_SetCpuSegmentRaw(4, PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_START(segment));
+    Gfx3D_SetSegmentObj(4, NULL); // the converted gameplay_keep is overwritten by the pause menu
+}
+
 u32 Player_InitPauseDrawData(PlayState* play, u8* segment, SkelAnime* skelAnime) {
-    PRESENTATION_STUB("Player_InitPauseDrawData");
-    return 0;
+    s16 arenObjectId = gArenObjectIds[(void)0, gSaveContext.save.arenAge];
+    DsObj* keep = play->objectCtx.slots[play->objectCtx.mainKeepSlot].dsObj;
+    s32 slot = Object_GetSlot(&play->objectCtx, arenObjectId);
+    u8* chunk = PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_START(segment);
+    u32 size = 0;
+    void* ptr;
+
+    // the chunk overlaps the converted gameplay_keep: build it aside first
+    u8* tmp = malloc(PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_BUFFER_SIZE);
+    if (tmp != NULL) {
+        memset(tmp, 0, PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_BUFFER_SIZE);
+        if (keep != NULL) {
+            Asset_CopyRecords(keep, tmp, PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_BUFFER_SIZE);
+        }
+    }
+
+    if (sPauseArenObject != NULL) {
+        DsObj_Free(sPauseArenObject);
+    }
+    ptr = PAUSE_PLAYER_SEGMENT_AREN_OBJECT(segment);
+    sPauseArenObject = Vrom_LoadInto(gObjectTable[arenObjectId].vromStart, ptr,
+                                     (u32)((u8*)play->objectCtx.spaceEnd - (u8*)ptr), &size);
+    if (sPauseArenObject != NULL && slot >= 0) {
+        sPauseArenObject->texOwner = play->objectCtx.slots[slot].dsObj;
+    }
+    if (tmp != NULL) {
+        memcpy(chunk, tmp, PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_BUFFER_SIZE);
+        free(tmp);
+    }
+
+    // Joint tables are placed after the link object
+    ptr = (void*)ALIGN16((uintptr_t)ptr + size);
+
+    Player_BindPauseSegments(segment);
+
+    SkelAnime_InitAren(play, skelAnime, gPlayerSkelHeaders[(void)0, gSaveContext.save.arenAge],
+                       gPlayerAnim_aren_normal_wait, 9, ptr, ptr, PLAYER_LIMB_MAX);
+
+    return PAUSE_PLAYER_SEGMENT_TOTAL_SIZE(size);
 }
 
 u8 sPauseModelGroupBySword[] = {
@@ -1931,11 +1988,90 @@ s32 Player_OverrideLimbDrawPause(UNUSED PlayState* play, s32 limbIndex, DListRef
 void Player_DrawPauseImpl(PlayState* play, void* gameplayKeep, void* arenObject, SkelAnime* skelAnime, Vec3f* pos,
                           Vec3s* rot, f32 scale, s32 sword, s32 tunic, s32 shield, s32 boots, s32 width, s32 height,
                           Vec3f* eye, Vec3f* at, f32 fovy, void* colorFrameBuffer, void* depthFrameBuffer) {
-    PRESENTATION_STUB("Player_DrawPauseImpl");
+    // gdSPDefLights1(80, 80, 80, 255, 255, 255, 84, 84, -84)
+    static const u8 sAmbient[3] = { 80, 80, 80 };
+    static const s8 sLightDir[1][3] = { { 84, 84, -84 } };
+    static const u8 sLightColor[1][3] = { { 255, 255, 255 } };
+    static Vec3f lightDir = { 89.8f, 0.0f, 89.8f };
+    u8 playerSwordAndShield[2];
+    u16 perspNorm;
+    MtxF perspMtx;
+    MtxF lookAtMtx;
+
+    (void)gameplayKeep;
+    (void)arenObject;
+    (void)colorFrameBuffer;
+    (void)depthFrameBuffer;
+
+    // native: the original drew from a list of its own (called from the work list) into the colour image
+    // colorFrameBuffer with depth image depthFrameBuffer, both filled first (depth: farthest, colour: opaque
+    // black), viewport width x height; the offscreen pass of the renderer does the same (engine/gfx3d.h).
+    // Its setup commands before func_80093C80 (fill mode, geometry mode) are replaced by that setup.
+    ExactGuPerspectiveF(perspMtx.mf, &perspNorm, fovy, (f32)width / (f32)height, 10.0f, 4000.0f, 1.0f);
+    ExactQuantizeMtxF(perspMtx.mf);
+    ExactGuLookAtF(lookAtMtx.mf, eye->x, eye->y, eye->z, at->x, at->y, at->z, 0.0f, 1.0f, 0.0f);
+    ExactQuantizeMtxF(lookAtMtx.mf);
+
+    GFX_TO(OPA, Gfx3D_OffscreenBegin(width, height, &perspMtx, &lookAtMtx));
+
+    playerSwordAndShield[0] = sword;
+    playerSwordAndShield[1] = shield;
+
+    Matrix_SetTranslateRotateYXZ(pos->x, pos->y, pos->z, rot);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
+
+    GFX_TO(OPA, Gfx3D_SetLightsHere(sAmbient, 1, sLightDir, sLightColor));
+
+    func_80093C80(play);
+
+    GFX_TO(OPA, Gfx3D_SetFog(0, 0, 0, 0, 997, 1000));
+
+    func_8002EABC(pos, &play->view.eye, &lightDir, play->state.gfxCtx);
+
+    GFX_TO(OPA, Gfx3D_SetSegment(0x0C, (const void*)gCullBackDList));
+
+    Player_DrawImpl(play, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount, 0, tunic, boots,
+                    PLAYER_FACE_NEUTRAL, Player_OverrideLimbDrawPause, NULL, &playerSwordAndShield);
+
+    GFX_TO(OPA, Gfx3D_OffscreenEnd());
 }
 
 void Player_DrawPause(PlayState* play, u8* segment, SkelAnime* skelAnime, Vec3f* pos, Vec3s* rot, f32 scale, s32 sword,
                       s32 tunic, s32 shield, s32 boots) {
-    PRESENTATION_STUB("Player_DrawPause");
+    static Vec3f eye = { 0.0f, 0.0f, -400.0f };
+    static Vec3f at = { 0.0f, 0.0f, 0.0f };
+    Vec3s* destTable;
+    Vec3s* srcTable;
+    s32 i;
+
+    Player_BindPauseSegments(segment);
+
+    if (!AREN_IS_ADULT) {
+        if (shield == PLAYER_SHIELD_ROOT) {
+            srcTable = gArenPauseChildRootShieldJointTable;
+        } else {
+            srcTable = gArenPauseChildJointTable;
+        }
+    } else {
+        if (sword == PLAYER_SWORD_HIGHCAIRN) {
+            srcTable = gArenPauseAdultBgsJointTable;
+        } else if (shield != PLAYER_SHIELD_NONE) {
+            srcTable = gArenPauseAdultShieldJointTable;
+        } else {
+            srcTable = gArenPauseAdultJointTable;
+        }
+    }
+
+    srcTable = Asset_Resolve(srcTable);
+    destTable = skelAnime->jointTable;
+    for (i = 0; i < skelAnime->limbCount; i++) {
+        *destTable++ = *srcTable++;
+    }
+
+    Player_DrawPauseImpl(play, PAUSE_PLAYER_SEGMENT_GAMEPLAY_KEEP_START(segment),
+                         PAUSE_PLAYER_SEGMENT_AREN_OBJECT(segment), skelAnime, pos, rot, scale, sword, tunic, shield,
+                         boots, PAUSE_EQUIP_PLAYER_WIDTH, PAUSE_EQUIP_PLAYER_HEIGHT, &eye, &at, 60.0f,
+                         play->state.gfxCtx->curFrameBuffer,
+                         (u16*)play->state.gfxCtx->curFrameBuffer + (PAUSE_EQUIP_PLAYER_WIDTH * PAUSE_EQUIP_PLAYER_HEIGHT));
 }
 

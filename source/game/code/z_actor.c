@@ -2379,7 +2379,7 @@ void Actor_FaultPrint(Actor* actor, char* command) {
     PRESENTATION_STUB("Actor_FaultPrint");
 }
 
-void Actor_Draw(PlayState* play, Actor* actor) {
+static void Actor_DrawImpl(PlayState* play, Actor* actor) {
     Lights* lights;
 #if PLATFORM_IQUE
     ObjectEntry* slots;
@@ -2446,6 +2446,15 @@ void Actor_Draw(PlayState* play, Actor* actor) {
     if (actor->shape.shadowDraw != NULL) {
         actor->shape.shadowDraw(actor, lights, play);
     }
+}
+
+// native (60 Hz presentation): the actor's matrices are matched with its previous frame's (engine/gfx3d.h)
+void Actor_Draw(PlayState* play, Actor* actor) {
+    u32 interpCtx = Gfx3D_InterpGetContext();
+
+    Gfx3D_InterpSetContext((u32)(uintptr_t)actor ^ ((u32)actor->id * 0x9E3779B1u));
+    Actor_DrawImpl(play, actor);
+    Gfx3D_InterpSetContext(interpCtx);
 }
 
 void Actor_UpdateFlaggedAudio(Actor* actor) {
