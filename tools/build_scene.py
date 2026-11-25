@@ -22,6 +22,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from romfs import RomFS
 import xmlspec
 import dl2pica
+import pica_tex
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "romfs", "vrom")
@@ -94,6 +95,35 @@ class SceneConverter:
         self.fs, self.name, self.warn = fs, scene_name, warn
         self.scene = fs.get(scene_name + "_scene")
         self.cutscenes = set()  # scene-file offsets of cutscene scripts (headers + XML symbols)
+
+    def background_texture(self, room, src, tlut, width, height, fmt, siz, tlut_count):
+        """Prerendered room background -> PICA texture (Room_DrawBackground2D). The original decoded JPEG
+        backgrounds at run time into RGBA16 (Room_DecodeJpeg); here they are decoded offline (baseline JPEG, the
+        same image; the N64's microcode IDCT may round single pixels differently) and stored as RGBA5551 like
+        the RGBA16 result. Other formats are the original texels."""
+        import io
+        import n64tex
+        off = src & 0xFFFFFF
+        if (src >> 24) != 3:
+            self.warn(f"{self.name}: background {src:08X} outside the room file")
+            return None
+        if room[off:off + 4] == b"\xff\xd8\xff\xe0":
+            from PIL import Image
+            img = Image.open(io.BytesIO(room[off:])).convert("RGB")
+            if img.size != (width, height):
+                self.warn(f"{self.name}: JPEG background {img.size} != {width}x{height}")
+            px = [(r, g, b, 255) for r, g, b in img.getdata()]
+            width, height = img.size
+        else:
+            pal = None
+            if fmt == n64tex.FMT_CI:
+                toff = tlut & 0xFFFFFF
+                pal = n64tex.decode_tlut(room[toff:toff + 2 * tlut_count], tlut_count)
+            raw = room[off:off + n64tex.tex_bytes(fmt, siz, width, height)]
+            px, _ = n64tex.decode(raw, fmt, siz, width, height, pal)
+        W, H = dl2pica.pow2ceil(width), dl2pica.pow2ceil(height)
+        padded = [px[min(y, height - 1) * width + min(x, width - 1)] for y in range(H) for x in range(W)]
+        return pica_tex.ptex(padded, W, H, pica_tex.GPU_RGBA5551, flags=0)
 
     # ------------------------------------------------------------------ header walking
     def emit_header(self, w, off, segfile, comp, is_room):
@@ -227,9 +257,35 @@ class SceneConverter:
                 w.relocs.append(len(w.out))
                 w.pending.append((len(w.out), kind + "_end", ent & 0xFFFFFF, cnt))
                 w.out += b"\0\0\0\0"
+            elif typ == 1:      # IMAGE: prerendered background(s) + the room's own lists
+                amount = data[o + 1]
+                w.out += bytes([typ, amount, 0, 0])
+                w.ptr_field("dlentries", w.be("I", o + 4)[0], 1)
+                if amount == 1:  # RoomShapeImageSingle
+                    image_fields(o + 8)
+                else:            # RoomShapeImageMulti
+                    w.out += bytes([data[o + 8], 0, 0, 0])
+                    w.ptr_field("bgentries", w.be("I", o + 0xC)[0], data[o + 8])
             else:
-                self.warn(f"{self.name}: room shape type {typ} (prerendered image) not converted")
+                self.warn(f"{self.name}: room shape type {typ} not converted")
                 w.out += bytes([typ, data[o + 1], 0, 0]) + b"\0" * 8
+
+        def image_fields(b):
+            # void* source, u32 unk_0C, void* tlut, u16 width, u16 height, u8 fmt, u8 siz, u16 tlutMode,
+            # u16 tlutCount (+2 pad). source / tlut stay handles: the background is converted into a texture of
+            # the room (decoded offline, see background_texture) found through the 'TXMP' table.
+            src, unk, tlut = w.be("III", b)
+            width, height, fmt, siz, tlut_mode, tlut_count = w.be("HHBBHH", b + 12)
+            w.out += struct.pack("<III", TOKEN | src if src else 0, unk, TOKEN | tlut if tlut else 0)
+            w.out += struct.pack("<HHBBHH2x", width, height, fmt, siz, tlut_mode, tlut_count)
+            if src:
+                self.backgrounds.append((src, tlut, width, height, fmt, siz, tlut_count))
+
+        def e_bgentries(o, n):
+            for i in range(n):
+                b = o + i * 0x1C
+                w.out += struct.pack("<HBx", w.be("H", b)[0], data[b + 2])
+                image_fields(b + 4)
 
         def dl_token(addr):
             if addr == 0:
@@ -317,7 +373,7 @@ class SceneConverter:
                         paths=e_paths, vec3s=e_vec3s, althdr=e_althdr, header=e_header, mesh=e_mesh,
                         dlentries=e_dlentries, cullentries=e_cullentries, colheader=e_colheader,
                         colverts=e_colverts, colpolys=e_colpolys, surfaces=e_surfaces, bgcams=e_bgcams,
-                        bgcamdata=e_bgcamdata, waterboxes=e_waterboxes)
+                        bgcamdata=e_bgcamdata, waterboxes=e_waterboxes, bgentries=e_bgentries)
         # "<kind>_end" pointers resolve to the end of the converted array of <kind>
         for k, unit in (("dlentries", 8), ("cullentries", 16)):
             def end_emitter(o, n, k=k, unit=unit):
@@ -415,10 +471,21 @@ class SceneConverter:
             segs[3] = room
             comp = dl2pica.DLCompiler(segs, warn=self.warn)
             self.meshes = {}
+            self.backgrounds = []
             w = self.convert(3, room, rn, comp, self.collect_starts(room, 3), True)
             room_table = struct.pack("<III", 1, 0x03000000, 12) + w.blob()
             mesh_list = sorted(self.meshes.items())
-            obj = dl2pica.build_pobj(comp.textures, mesh_list, [(b"ROOM", room_table)])
+            extras = [(b"ROOM", room_table)]
+            txmp = []
+            for bg in sorted(set(self.backgrounds)):
+                tex = self.background_texture(room, *bg)
+                if tex is not None:
+                    txmp.append((bg[0], len(comp.textures)))
+                    comp.textures.append(tex)
+            if txmp:
+                extras.append((b"TXMP", struct.pack("<I", len(txmp)) +
+                               b"".join(struct.pack("<II", a, i) for a, i in sorted(txmp))))
+            obj = dl2pica.build_pobj(comp.textures, mesh_list, extras)
             vrom = fs.entries[rn][0]
             open(os.path.join(OUT, f"{vrom:08X}.pobj"), "wb").write(obj)
             ntris = sum(m["ntris"] for _, m in mesh_list if m)

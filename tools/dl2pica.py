@@ -32,6 +32,8 @@ G_MV_LIGHT = 0x0A
 
 DYNAMIC_DL_SEGMENTS = (0x01, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D)  # set at draw time by game code
 DYNAMIC_TEX_SEGMENTS = (0x08, 0x09, 0x0A, 0x0B, 0x0C)
+# vertex buffers the game fills at runtime and binds to a segment (skinned limbs: segment 8)
+DYNAMIC_VTX_SEGMENTS = (0x08,)
 MTX_SEGMENT = 0x0D
 
 # ---- native op codes (source/engine/pmesh.h)
@@ -295,7 +297,22 @@ class DLCompiler:
             w0, w1 = struct.unpack(">II", self.read(pc, 8))
             opc = w0 >> 24
             pc += 8
-            if opc == G_VTX:
+            if opc == G_VTX and (w1 >> 24) in DYNAMIC_VTX_SEGMENTS and (w1 >> 24) not in self.segments:
+                # runtime vertices: placeholders holding the index into the game's buffer (x); the renderer
+                # builds the real vertices from that buffer at replay (pmesh.h PMeshHdr.vtxSeg)
+                n = (w0 >> 12) & 0xFF
+                v0 = ((w0 >> 1) & 0x7F) - n
+                if st.get("vtxseg") not in (None, w1 >> 24) or (verts and st.get("vtxseg") is None):
+                    raise RuntimeError("static and runtime vertices in one list")
+                st["vtxseg"] = w1 >> 24
+                src = pal_index(cur_msrc())
+                base = (w1 & 0xFFFFFF) // 16
+                for i in range(n):
+                    st["vtx"][v0 + i] = len(verts)
+                    verts.append(struct.pack("<HhhBBhhBBBB", base + i, 0, 0, src, 0, 0, 0, 0, 0, 0, 0))
+            elif opc == G_VTX:
+                if st.get("vtxseg") is not None:
+                    raise RuntimeError("static and runtime vertices in one list")
                 n = (w0 >> 12) & 0xFF
                 v0 = ((w0 >> 1) & 0x7F) - n
                 data = self.read(w1, n * 16)
@@ -457,6 +474,7 @@ class DLCompiler:
         ops.append(OP_END)
         self.last_state = st
         return {"verts": b"".join(verts), "nverts": len(verts), "indices": indices, "ops": ops, "palette": palette,
+                "vtxseg": st.get("vtxseg") or 0,
                 "ntris": len(indices) // 3}
 
 
@@ -511,8 +529,8 @@ def build_pobj(textures, meshes, extras=()):
         pal = bytearray(16)
         for i, (t, v) in enumerate(m["palette"]):
             pal[2 * i], pal[2 * i + 1] = t, v
-        hdr = struct.pack("<6IB3x", m["nverts"], voff, len(m["indices"]), ioff, len(m["ops"]), ooff,
-                          len(m["palette"])) + bytes(pal)
+        hdr = struct.pack("<6IBB2x", m["nverts"], voff, len(m["indices"]), ioff, len(m["ops"]), ooff,
+                          len(m["palette"]), m.get("vtxseg", 0)) + bytes(pal)
         mesh_entries.append((src, add(hdr, 4)))
     extra_entries = [(tag, add(blob, 4), len(blob)) for tag, blob in extras]
     tex_entries = [(add(t, 16), len(t)) for t in textures]

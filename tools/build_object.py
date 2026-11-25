@@ -121,6 +121,99 @@ def limb_enums(data, seg, symbols, warns):
     return out
 
 
+
+def skin_skeleton(data, seg, off, comp, meshes, warns):
+    """A skin skeleton (SkeletonHeader + SkinLimb records, skin.h) as one relocatable record: limb table,
+    limbs, and for animated limbs (SKIN_LIMB_TYPE_ANIMATED) their SkinAnimatedLimbData, modification
+    entries, skin vertices and transformations, all in native layout. Display lists become handles; the
+    animated limbs' lists draw the game's own vertex buffer (runtime vertices, segment 8)."""
+    TOKEN_ = TOKEN
+
+    def lo(addr):
+        assert addr >> 24 == seg, f"{addr:08X} not in segment {seg}"
+        return addr & 0xFFFFFF
+
+    def dl_handle(addr):
+        if addr == 0:
+            return 0
+        if addr >> 24 == seg and addr not in meshes:
+            try:
+                meshes[addr] = comp.compile(addr)
+            except (KeyError, RuntimeError, IndexError, ValueError, struct.error) as e:
+                warns.append(f"skin DL {addr:08X}: {e}")
+        return TOKEN_ | addr
+
+    b = Blob()
+    patches = []  # (field offset, key) resolved once the target's offset is known
+    placed = {}
+
+    def ptr_to(key):
+        patches.append((len(b.data), key))
+        b.ptr(0)
+
+    limbs_ptr = be32(data, off)
+    count = data[off + 4]
+    ptr_to(("table",))
+    b.data += struct.pack("<B3x", count)
+    placed[("table",)] = len(b.data)
+    limb_addrs = [be32(data, lo(limbs_ptr) + 4 * i) for i in range(count)]
+    for a in limb_addrs:
+        ptr_to(("limb", a))
+    pending_anim = []
+    for a in limb_addrs:
+        o = lo(a)
+        placed[("limb", a)] = len(b.data)
+        jx, jy, jz = be16(data, o), be16(data, o + 2), be16(data, o + 4)
+        child, sibling = data[o + 6], data[o + 7]
+        stype = struct.unpack_from(">i", data, o + 8)[0]
+        segp = be32(data, o + 12)
+        b.data += struct.pack("<hhhBBi", jx, jy, jz, child, sibling, stype)
+        if stype == 11:  # SKIN_LIMB_TYPE_NORMAL: a display list
+            b.data += struct.pack("<I", dl_handle(segp))
+        elif stype == 4 and segp:  # SKIN_LIMB_TYPE_ANIMATED
+            ptr_to(("anim", segp))
+            pending_anim.append(segp)
+        else:
+            b.data += struct.pack("<I", 0)
+    for a in pending_anim:
+        o = lo(a)
+        total, nmod = struct.unpack_from(">HH", data, o)
+        mods, dlist = be32(data, o + 4), be32(data, o + 8)
+        b.align(4)
+        placed[("anim", a)] = len(b.data)
+        b.data += struct.pack("<HH", total, nmod)
+        ptr_to(("mods", mods))
+        b.data += struct.pack("<I", dl_handle(dlist))
+        b.align(4)
+        placed[("mods", mods)] = len(b.data)
+        arrays = []
+        for i in range(nmod):
+            mo = lo(mods) + 16 * i
+            vcount, tcount, unk4 = struct.unpack_from(">HHH", data, mo)
+            sv, lt = be32(data, mo + 8), be32(data, mo + 12)
+            b.data += struct.pack("<HHH2x", vcount, tcount, unk4)
+            ptr_to(("sv", sv))
+            ptr_to(("lt", lt))
+            arrays.append((sv, vcount, lt, tcount))
+        for sv, vcount, lt, tcount in arrays:
+            if ("sv", sv) not in placed:
+                b.align(4)
+                placed[("sv", sv)] = len(b.data)
+                for k in range(vcount):
+                    vo = lo(sv) + 10 * k
+                    b.data += struct.pack("<HhhbbbB", *struct.unpack_from(">HhhbbbB", data, vo))
+            if ("lt", lt) not in placed:
+                b.align(4)
+                placed[("lt", lt)] = len(b.data)
+                for k in range(tcount):
+                    to = lo(lt) + 10 * k
+                    li, x, y, z, sc = struct.unpack_from(">Bxhhh B", data, to)
+                    b.data += struct.pack("<Bxhhh Bx", li, x, y, z, sc)
+    for field, key in patches:
+        struct.pack_into("<I", b.data, field, placed[key])
+    return b.bytes()
+
+
 def build(fs, name, report, xml=None, more_extras=()):
     """xml: XML file name if it differs from the ROM file name (scenes: 'spot04' for 'spot04_scene').
     more_extras: additional (tag, blob) extras to store in the same .dsobj (scene command data)."""
@@ -164,6 +257,9 @@ def build(fs, name, report, xml=None, more_extras=()):
     skel_blobs = []
     for tag, sym, off, attrs in fspec["symbols"]:
         if tag != "Skeleton":
+            continue
+        if attrs.get("LimbType") == "Skin":
+            skel_blobs.append(((seg << 24) | off, skin_skeleton(data, seg, off, comp, meshes, warns)))
             continue
         limbs_ptr = be32(data, off)
         limb_count = data[off + 4]
@@ -284,7 +380,23 @@ def build(fs, name, report, xml=None, more_extras=()):
         except (KeyError, IndexError, ValueError, struct.error) as e:
             warns.append(f"collision {sym}: {e}")
 
+    # ---- plain number arrays (<Array> of <Vector>, e.g. the pause-menu joint tables in gameplay_keep):
+    # the game reads them as data, so they are stored in native byte order
+    arry = []
+    for tag, sym, off, attrs in fspec["symbols"]:
+        if tag != "Array" or attrs.get("ElemTag") != "Vector":
+            continue
+        fmt = {"s16": "h", "u16": "H", "s32": "i", "u32": "I", "f32": "f"}.get(attrs.get("ElemType"))
+        if fmt is None:
+            warns.append(f"array {sym}: element type {attrs.get('ElemType')} not converted")
+            continue
+        n = int(attrs["Count"], 0) * int(attrs.get("ElemDimensions", "1"))
+        vals = struct.unpack_from(f">{n}{fmt}", data, off)
+        arry.append(((seg << 24) | off, struct.pack("<I", 0) + struct.pack(f"<{n}{fmt}", *vals)))
+
     extras = list(more_extras)
+    if arry:
+        extras.append((b"ARRY", table(arry)))
     if coll_blobs and not any(t == b"COLL" for t, _ in extras):
         extras.append((b"COLL", table(coll_blobs)))
     if txmp:

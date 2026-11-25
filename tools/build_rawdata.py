@@ -3,7 +3,7 @@ Only files whose records are made of u8 fields only belong here (no endianness, 
 bytes are the native layout as-is:
   elf_message_field, elf_message_ydan: QuestHintCmd scripts (u8 byte0..byte3, quest_hint_commands.h),
   loaded by Play_LoadFile for the companion's hints.
-  parameter_static, do_action_static (HUD), title_static, object_mag (file select), nes_font_static, kanji, message_static, message_texture_static, icon_item_static, icon_item_24_static:
+  parameter_static, do_action_static (HUD), title_static, object_mag (file select), icon_item_* / item_name / map_name / map_48x85 (pause menu), map_i / map_grand (minimap), nes_font_static, kanji, message_static, message_texture_static, icon_item_static, icon_item_24_static:
   texture data the game copies into its own buffers (font glyphs, text box frames and backgrounds,
   item icons in text boxes); kept in the original texel order, converted at draw time by the renderer
   (engine/gfx3d.c dyn_texture). engine/rom_bind.c copies them where the original DMA'd them.
@@ -16,7 +16,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "romfs", "vrom")
 FILES = ["elf_message_field", "elf_message_ydan", "parameter_static", "do_action_static", "title_static", "object_mag",
          "nes_font_static", "kanji", "message_static", "message_texture_static", "icon_item_static",
-         "icon_item_24_static"]
+         "icon_item_24_static",
+         "icon_item_dungeon_static", "icon_item_field_static", "icon_item_gameover_static", "icon_item_jpn_static",
+         "icon_item_nes_static", "item_name_static", "map_48x85_static", "map_name_static",
+         "map_i_static", "map_grand_static"]
 
 fs = RomFS("ntsc-1.0")
 os.makedirs(OUT, exist_ok=True)

@@ -36,7 +36,7 @@ APP_TITLE	:=	Flute of Age
 APP_DESCRIPTION	:=	Native 2DS port (demo)
 APP_AUTHOR	:=	Flute of Age 2DS contributors
 BUILD		:=	build
-SOURCES		:=	source source/engine source/shaders source/test source/game source/game/code source/game/libc64 source/game/libu64 source/game/math source/game/states source/game/actors source/game/assets_agg
+SOURCES		:=	source source/engine source/shaders source/test source/game source/game/code source/game/libc64 source/game/libu64 source/game/math source/game/states source/game/actors source/game/kaleido source/game/assets_agg
 DATA		:=	data
 INCLUDES	:=	source source/game/include source/game
 GRAPHICS	:=	gfx
@@ -67,6 +67,14 @@ LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
 LIBS	:= -lcitro3d -lctru -lm
 
+# Original 20 Hz presentation (no frame interpolation): make PRESENT20=1
+ifdef PRESENT20
+CFLAGS	+=	-DPORT_PRESENT20
+endif
+# Interpolation test: every presented frame blended at t (e.g. make INTERP_TEST_T=0.5f)
+ifdef INTERP_TEST_T
+CFLAGS	+=	-DPORT_INTERP_TEST_T=$(INTERP_TEST_T)
+endif
 # Test boot into Play: make BOOT=0xEE (entrance index, e.g. ENTR_SYLVAN_FOREST_0)
 ifdef BOOT
 TARGET	:=	foa_3ds_boot

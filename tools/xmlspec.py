@@ -101,7 +101,12 @@ def walk(parent, cursor, syms, fname):
         else:
             cursor = (cursor + align - 1) & ~(align - 1)
         if el.get("Name"):
-            syms.append((el.tag, el.get("Name"), cursor, dict(el.attrib)))
+            attrs = dict(el.attrib)
+            if el.tag == "Array" and len(el):
+                # element description (e.g. <Vector Type="s16" Dimensions="3"/>)
+                attrs["ElemTag"] = el[0].tag
+                attrs.update({"Elem" + k: v for k, v in el[0].attrib.items()})
+            syms.append((el.tag, el.get("Name"), cursor, attrs))
         cursor = cursor + size if size else None if off is None else cursor + size
     return cursor
 
