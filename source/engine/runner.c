@@ -157,3 +157,10 @@ void Runner_Run(void) {
     }
     Fault_Crash("runner: no next gamestate");
 }
+
+// Screen size globals of the original main.c (gScreenWidth / gScreenHeight, set to the logical screen;
+// the original changed them only with the debug VI mode tool)
+#include "main.h"
+
+s32 gScreenWidth = 320;  // SCREEN_WIDTH (game gfx.h)
+s32 gScreenHeight = 240; // SCREEN_HEIGHT

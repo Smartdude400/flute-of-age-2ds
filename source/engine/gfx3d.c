@@ -12,6 +12,7 @@
 #include <math.h>
 #include <string.h>
 #include "engine/gfx3d.h"
+#include "engine/vtx.h"
 #include "engine/gfx2d.h"
 #include "engine/screen.h"
 #include "engine/asset.h"
@@ -598,11 +599,13 @@ void Gfx3D_DrawSky(const void* vtx, const u16* idx, int numIdx, const DsTexture*
 // ============================================================================ mesh programs
 static void exec_mesh(const DsObj* obj, const PMeshHdr* mesh, int depth);
 
-// ---- textures the game builds at runtime in an N64 format (e.g. the signpost shadow mask), bound to a
-// segment as a plain pointer: converted to a PICA texture at replay (the data lives in frame memory).
-#define DYNTEX_MAX 8
-static struct { const void* src; u16 fmtsiz, w, h; DsTexture t; bool init; } sDyn[DYNTEX_MAX];
-static int sDynUsed;
+// ---- textures in the original N64 formats that live in game memory: texels the game builds at runtime
+// (signpost shadow mask) or loads from ROM data files (font glyphs, text box frames, item icons), bound to
+// a segment or loaded for a texture rectangle. Converted to PICA textures at replay and kept in a cache
+// keyed by address, format, size and a hash of the texels, so unchanged data is not converted again.
+#define DYNTEX_MAX 192
+static struct { const void* src; u16 fmtsiz, w, h; u32 hash, frame; DsTexture t; bool init; } sDyn[DYNTEX_MAX];
+static u32 sDynFrame = 1;
 
 static u32 pow2_at_least8(u32 v) {
     u32 p = 8;
@@ -652,17 +655,36 @@ static void n64_texel(const u8* src, int fmt, int siz, int i, u8 out[4]) {
     }
 }
 
-static const DsTexture* dyn_texture(const void* src, u32 fmt, u32 siz, u32 w, u32 h) {
-    u16 fs = (fmt << 4) | siz;
-    for (int i = 0; i < sDynUsed; i++) {
-        if (sDyn[i].src == src && sDyn[i].fmtsiz == fs && sDyn[i].w == w && sDyn[i].h == h) {
-            return &sDyn[i].t;
-        }
+static u32 texel_hash(const u8* p, u32 n) {
+    u32 h = 2166136261u;
+    for (u32 i = 0; i < n; i++) {
+        h = (h ^ p[i]) * 16777619u;
     }
-    if (sDynUsed == DYNTEX_MAX || w == 0 || h == 0) {
+    return h;
+}
+
+static const DsTexture* dyn_texture(const void* src, u32 fmt, u32 siz, u32 w, u32 h) {
+    if (src == NULL || w == 0 || h == 0 || w > 1024 || h > 1024) {
         return NULL;
     }
-    int slot = sDynUsed++;
+    u16 fs = (fmt << 4) | siz;
+    u32 bytes = (w * h * (siz == 0 ? 4 : siz == 1 ? 8 : siz == 2 ? 16 : 32) + 7) / 8;
+    u32 hash = texel_hash(src, bytes);
+    int slot = -1;
+    for (int i = 0; i < DYNTEX_MAX; i++) {
+        if (sDyn[i].init && sDyn[i].src == src && sDyn[i].fmtsiz == fs && sDyn[i].w == w && sDyn[i].h == h &&
+            sDyn[i].hash == hash) {
+            sDyn[i].frame = sDynFrame;
+            return &sDyn[i].t;
+        }
+        // victim: a slot not used by this frame, least recently used (never-used slots first)
+        if (sDyn[i].frame != sDynFrame && (slot < 0 || sDyn[i].frame < sDyn[slot].frame)) {
+            slot = i;
+        }
+    }
+    if (slot < 0) {
+        return NULL; // more distinct textures in one frame than the cache holds
+    }
     u32 W = pow2_at_least8(w), H = pow2_at_least8(h);
     // same format choice as the offline converter (tools/dl2pica.py pica_format)
     GPU_TEXCOLOR pf = fmt == 0 ? (siz == 3 ? GPU_RGBA8 : GPU_RGBA5551)
@@ -674,7 +696,6 @@ static const DsTexture* dyn_texture(const void* src, u32 fmt, u32 siz, u32 w, u3
     }
     if (!sDyn[slot].init) {
         if (!C3D_TexInit(&t->tex, W, H, pf)) {
-            sDynUsed--;
             return NULL;
         }
         sDyn[slot].init = true;
@@ -713,6 +734,8 @@ static const DsTexture* dyn_texture(const void* src, u32 fmt, u32 siz, u32 w, u3
     sDyn[slot].fmtsiz = fs;
     sDyn[slot].w = w;
     sDyn[slot].h = h;
+    sDyn[slot].hash = hash;
+    sDyn[slot].frame = sDynFrame;
     return t;
 }
 
@@ -879,6 +902,7 @@ void Gfx3D_RestoreSlot(int slot) {
 }
 
 static DsObj* sSegObj[16];
+static const u8* sRawSeg[16]; // see Gfx3D_RawSegment
 
 void Gfx3D_SetSegmentObj(int seg, DsObj* obj) {
     sSegObj[seg & 15] = obj;
@@ -1087,6 +1111,7 @@ const DsTexture* Asset_FindTexture(const void* token);
 
 void Gfx3D_SetSegment(int seg, const void* handle) {
     seg &= 15;
+    sRawSeg[seg] = NULL;
     if (handle == NULL) {
         rec_seg(seg, SEG_NONE);
         return;
@@ -1108,6 +1133,7 @@ void Gfx3D_SetSegment(int seg, const void* handle) {
     // runtime (converted at replay when a list samples this segment)
     CmdSeg* c = rec_seg(seg, SEG_RAW);
     if (c) c->s.src = (u32)(uintptr_t)handle;
+    sRawSeg[seg] = handle;
 }
 
 typedef struct { float amb[3]; int n; float dir[7][3], col[7][3]; } CmdLights;
@@ -1320,7 +1346,7 @@ void Gfx3D_NotifyProgramChanged(void) {
 }
 
 void Gfx3D_EndFrame(void) {
-    sDynUsed = 0;
+    sDynFrame++;
     reset_state();
     cache_reset();
     for (int b = 0; b < GFX_BUF_COUNT; b++) {
@@ -1337,5 +1363,645 @@ void Gfx3D_EndFrame(void) {
             }
             pos += sizeof(CmdHdr) + h->size;
         }
+    }
+}
+
+// ============================================================================ 2D interface commands
+// The original drew text boxes, the HUD and menus as RDP texture rectangles: a texture block load, the
+// colour combiner words and gSPTextureRectangle in screen pixels. These are their native equivalents
+// (engine/rdp_gbi.h maps the original macros onto them), replayed in order with the other commands.
+
+// G_SETCOMBINE words -> native operands (same tables as tools/dl2pica.py combine_native)
+static const u8 kCA[16] = { CC_COMBINED, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_ONE, CC_NOISE,
+                            CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO };
+static const u8 kCB[16] = { CC_COMBINED, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_CENTER, CC_K4,
+                            CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO };
+static const u8 kCC[32] = { CC_COMBINED, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_SCALE, CC_COMBINED_A,
+                            CC_TEXEL0_A, CC_TEXEL1_A, CC_PRIM_A, CC_SHADE_A, CC_ENV_A, CC_LOD_FRAC, CC_PRIM_LOD_FRAC,
+                            CC_K5, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO,
+                            CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO, CC_ZERO };
+static const u8 kCD[8] = { CC_COMBINED, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_ONE, CC_ZERO };
+static const u8 kAABD[8] = { CC_COMBINED, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_ONE, CC_ZERO };
+static const u8 kAC[8] = { CC_LOD_FRAC, CC_TEXEL0, CC_TEXEL1, CC_PRIM, CC_SHADE, CC_ENV, CC_PRIM_LOD_FRAC, CC_ZERO };
+
+static void x_combine(const void* p) {
+    R.combine = *(const GfxCombine*)p;
+}
+
+void Gfx3D_SetCombine(u32 w0, u32 w1) {
+    GfxCombine* c = rec(x_combine, sizeof(GfxCombine));
+    if (c == NULL) {
+        return;
+    }
+    u8* o = &c->c[0][0];
+    o[0] = kCA[(w0 >> 20) & 0xF];
+    o[1] = kCB[(w1 >> 28) & 0xF];
+    o[2] = kCC[(w0 >> 15) & 0x1F];
+    o[3] = kCD[(w1 >> 15) & 7];
+    o[4] = kAABD[(w0 >> 12) & 7];
+    o[5] = kAABD[(w1 >> 12) & 7];
+    o[6] = kAC[(w0 >> 9) & 7];
+    o[7] = kAABD[(w1 >> 9) & 7];
+    o[8] = kCA[(w0 >> 5) & 0xF];
+    o[9] = kCB[(w1 >> 24) & 0xF];
+    o[10] = kCC[w0 & 0x1F];
+    o[11] = kCD[(w1 >> 6) & 7];
+    o[12] = kAABD[(w1 >> 21) & 7];
+    o[13] = kAABD[(w1 >> 3) & 7];
+    o[14] = kAC[(w1 >> 18) & 7];
+    o[15] = kAABD[w1 & 7];
+}
+
+void Gfx3D_SetAlphaCompare(u32 type) {
+    // G_AC_* (other-mode low bits 0-1) -> native MODE_ALPHACMP field (bits 4-5)
+    CmdMode* c = rec(x_mode, sizeof(CmdMode));
+    if (c) {
+        c->mask = 3u << 4;
+        c->value = (type & 3) << 4;
+    }
+}
+
+typedef struct { const void* img; u16 w, h; u8 fmt, siz, cms, cmt, masks, maskt; } CmdLoadBlock;
+static CmdLoadBlock sRectTex; // texture memory of the 2D path (replay state)
+
+static void x_loadblock(const void* p) {
+    sRectTex = *(const CmdLoadBlock*)p;
+}
+
+static void rdp_cancel(void);
+
+void Gfx3D_LoadTextureBlock(const void* img, int fmt, int siz, int w, int h, int pal, int cms, int cmt, int masks,
+                            int maskt) {
+    (void)pal; // colour-indexed textures are not used by the 2D interface code
+    rdp_cancel();
+    CmdLoadBlock* c = rec(x_loadblock, sizeof(CmdLoadBlock));
+    if (c) {
+        c->img = img;
+        c->w = w;
+        c->h = h;
+        c->fmt = fmt;
+        c->siz = siz;
+        c->cms = cms;
+        c->cmt = cmt;
+        c->masks = masks;
+        c->maskt = maskt;
+    }
+}
+
+
+// texture of the 2D path: a handle into a segment the game bound to its own memory (the HUD binds segment 2
+// to the interface texture file, as the original did for the RDP) -> those original texels; any other
+// handle -> the converted texture; a plain pointer -> original texels in game memory
+static const DsTexture* rect_texture(const CmdLoadBlock* b) {
+    if (b->img == NULL) {
+        return NULL;
+    }
+    if (ASSET_IS_TOKEN(b->img)) {
+        const Segment* sg = &R.seg[ASSET_SEG(b->img)];
+        if (sg->kind == SEG_RAW && sg->src != 0) {
+            const u8* p = (const u8*)(uintptr_t)sg->src + (ASSET_SRC(b->img) & 0xFFFFFF);
+            return dyn_texture(p, b->fmt, b->siz, b->w, b->h);
+        }
+        return Asset_FindTexture(b->img);
+    }
+    return dyn_texture(b->img, b->fmt, b->siz, b->w, b->h);
+}
+
+typedef struct { s32 xl, yl, xh, yh; s16 s, t, dsdx, dtdy; } CmdTexRect;
+
+static GPU_TEXTURE_WRAP_PARAM rect_wrap(u8 cm, u8 mask) {
+    if (mask == 0 || (cm & 2)) { // no wrap period, or G_TX_CLAMP
+        return GPU_CLAMP_TO_EDGE;
+    }
+    return (cm & 1) ? GPU_MIRRORED_REPEAT : GPU_REPEAT;
+}
+
+void Gfx2D_BindRectProgram(void);
+void Gfx2D_TexQuad(float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1);
+
+static void x_texrect(const void* p) {
+    const CmdTexRect* r = p;
+    const CmdLoadBlock* b = &sRectTex;
+    const DsTexture* tex = rect_texture(b);
+    if (tex == NULL) {
+        return;
+    }
+    Gfx2D_BindRectProgram();
+    sC.valid = false;
+    apply_render_state(); // combiner, blender, alpha compare from the current state
+    C3D_DepthTest(false, GPU_ALWAYS, GPU_WRITE_COLOR); // rectangles: no depth, no culling, no fog
+    C3D_CullFace(GPU_CULL_NONE);
+    C3D_FogGasMode(GPU_NO_FOG, GPU_PLAIN_DENSITY, false);
+    sC.valid = false;
+    C3D_Tex* ct = (C3D_Tex*)&tex->tex;
+    bool bilerp = MODE_TEXFILT(R.mode) != 0;
+    C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
+    C3D_TexSetWrap(ct, rect_wrap(b->cms, b->masks), rect_wrap(b->cmt, b->maskt));
+    C3D_TexBind(0, ct);
+    sC.bound[0] = NULL;
+    // rectangle in screen pixels (10.2), texture start in texels (10.5), step per pixel (5.10)
+    float x0 = r->xl / 4.0f, y0 = r->yl / 4.0f, x1 = r->xh / 4.0f, y1 = r->yh / 4.0f;
+    float s0 = r->s / 32.0f, t0 = r->t / 32.0f;
+    float s1 = s0 + (x1 - x0) * (r->dsdx / 1024.0f), t1 = t0 + (y1 - y0) * (r->dtdy / 1024.0f);
+    float W = tex->w, H = tex->h;
+    // the GPU samples t = 1 at the first stored row (the image top): t_gpu = 1 - t
+    Gfx2D_TexQuad(x0, y0, x1, y1, s0 / W, 1.0f - t0 / H, s1 / W, 1.0f - t1 / H);
+}
+
+static void rdp_flush(void);
+static void rdp_cancel(void);
+
+void Gfx3D_TextureRectangle(int xl, int yl, int xh, int yh, int tile, int s, int t, int dsdx, int dtdy) {
+    (void)tile;
+    rdp_flush(); // the render tile; TEXEL1 rectangles are not used by the 2D interface code
+    CmdTexRect* c = rec(x_texrect, sizeof(CmdTexRect));
+    if (c) {
+        c->xl = xl;
+        c->yl = yl;
+        c->xh = xh;
+        c->yh = yh;
+        c->s = s;
+        c->t = t;
+        c->dsdx = dsdx;
+        c->dtdy = dtdy;
+    }
+}
+
+// RDP other-mode words -> native MODE_* fields (same decode as tools/dl2pica.py mode_fields)
+static u32 mode_from_othermode(u32 h, u32 l) {
+    u32 v = 0;
+    v |= (h >> 20) & 3;
+    v |= ((h >> 12) & 3) << 2;
+    v |= (l & 3) << 4;
+    v |= ((l >> 4) & 1) << 6;
+    v |= ((l >> 5) & 1) << 7;
+    v |= ((l >> 10) & 3) << 8;
+    v |= ((l >> 12) & 1) << 10;
+    v |= ((l >> 13) & 1) << 11;
+    v |= ((l >> 14) & 1) << 12;
+    v |= ((l >> 6) & 1) << 13;
+    v |= ((h >> 14) & 3) << 14;
+    u32 c1 = (((l >> 30) & 3) << 6) | (((l >> 26) & 3) << 4) | (((l >> 22) & 3) << 2) | ((l >> 18) & 3);
+    u32 c2 = (((l >> 28) & 3) << 6) | (((l >> 24) & 3) << 4) | (((l >> 20) & 3) << 2) | ((l >> 16) & 3);
+    return v | (c1 << 16) | (c2 << 24);
+}
+
+void Gfx3D_SetOtherMode(u32 h, u32 l) {
+    CmdMode* c = rec(x_mode, sizeof(CmdMode));
+    if (c) {
+        c->mask = 0xFFFFFFFFu;
+        c->value = mode_from_othermode(h, l);
+    }
+}
+
+// original geometry-mode bits -> native GEOM_* (same map as tools/dl2pica.py GEOM_MAP)
+static u32 geom_from_n64(u32 b) {
+    u32 g = 0;
+    if (b & 0x1) g |= GEOM_ZBUFFER;
+    if (b & 0x4) g |= GEOM_SHADE;
+    if (b & 0x200) g |= GEOM_CULL_FRONT;
+    if (b & 0x400) g |= GEOM_CULL_BACK;
+    if (b & 0x10000) g |= GEOM_FOG;
+    if (b & 0x20000) g |= GEOM_LIGHTING;
+    if (b & 0x40000) g |= GEOM_TEXGEN;
+    if (b & 0x80000) g |= GEOM_TEXGEN_LINEAR;
+    if (b & 0x200000) g |= GEOM_SMOOTH;
+    return g;
+}
+
+void Gfx3D_GeometryModeN64(u32 clear, u32 set) {
+    Gfx3D_GeometryMode(geom_from_n64(clear), geom_from_n64(set));
+}
+
+static void rect_state(void) {
+    Gfx2D_BindRectProgram();
+    sC.valid = false;
+    apply_render_state(); // combiner, blender, alpha compare from the current state
+    C3D_DepthTest(false, GPU_ALWAYS, GPU_WRITE_COLOR); // overlay primitives: no depth, no culling, no fog
+    C3D_CullFace(GPU_CULL_NONE);
+    C3D_FogGasMode(GPU_NO_FOG, GPU_PLAIN_DENSITY, false);
+    sC.valid = false;
+}
+
+typedef struct { s32 ulx, uly, lrx, lry; } CmdFill;
+static void x_fillrect(const void* p) {
+    const CmdFill* f = p;
+    rect_state();
+    C3D_TexBind(0, &sWhite);
+    sC.bound[0] = NULL;
+    // 1/2-cycle mode: the lower right edge is inclusive in pixels
+    Gfx2D_TexQuad(f->ulx, f->uly, f->lrx + 1, f->lry + 1, 0, 0, 0, 0);
+}
+
+void Gfx3D_FillRectangle(int ulx, int uly, int lrx, int lry) {
+    CmdFill* c = rec(x_fillrect, sizeof(CmdFill));
+    if (c) {
+        c->ulx = ulx;
+        c->uly = uly;
+        c->lrx = lrx;
+        c->lry = lry;
+    }
+}
+
+// ---- vertex quads under the overlay camera (HUD action button, beating heart). The overlay has its own
+// projection / viewing / viewport (View_ApplyPerspectiveToOverlay, View_ApplyOrthoToOverlay); vertices
+// are transformed on the CPU at replay (a handful per frame) and drawn as screen-space triangles.
+typedef struct { MtxF proj, view; s16 vp[4]; } CmdOvlCam;
+static CmdOvlCam sOvlCam;
+typedef struct { float x, y, s, t; u8 c[4]; } ScreenVtx;
+static ScreenVtx sOvlVtx[32];
+
+static void x_ovlcam(const void* p) {
+    sOvlCam = *(const CmdOvlCam*)p;
+}
+
+void Gfx3D_SetOverlayCamera(const MtxF* projection, const MtxF* viewing, int leftX, int topY, int rightX,
+                            int bottomY) {
+    CmdOvlCam* c = Gfx3D_Record(GFX_BUF_OVL, x_ovlcam, sizeof(CmdOvlCam));
+    if (c == NULL) {
+        return;
+    }
+    c->proj = *projection;
+    if (viewing != NULL) {
+        c->view = *viewing;
+    } else {
+        memset(&c->view, 0, sizeof(MtxF));
+        c->view.mf[0][0] = c->view.mf[1][1] = c->view.mf[2][2] = c->view.mf[3][3] = 1.0f;
+    }
+    c->vp[0] = leftX;
+    c->vp[1] = topY;
+    c->vp[2] = rightX;
+    c->vp[3] = bottomY;
+}
+
+// row vector times matrix, the game convention (out[j] = sum in[i] * mf[i][j])
+static void vec4_mul(float out[4], const float in[4], const MtxF* m) {
+    for (int j = 0; j < 4; j++) {
+        out[j] = in[0] * m->mf[0][j] + in[1] * m->mf[1][j] + in[2] * m->mf[2][j] + in[3] * m->mf[3][j];
+    }
+}
+
+typedef struct { int n, v0; bool overlay; Vtx v[32]; } CmdVtx; // the original vertex cache: 32 entries
+static void x_vtx(const void* p) {
+    const CmdVtx* c = p;
+    float sx = (R.texScaleS == 0xFFFF ? 65536.0f : (float)R.texScaleS) / 65536.0f;
+    float sy = (R.texScaleT == 0xFFFF ? 65536.0f : (float)R.texScaleT) / 65536.0f;
+    // overlay buffer: the overlay camera; scene buffers: the scene camera over the full screen
+    const MtxF* view = c->overlay ? &sOvlCam.view : &R.view;
+    const MtxF* proj = c->overlay ? &sOvlCam.proj : &R.proj;
+    static const s16 kFull[4] = { 0, 0, 320, 240 };
+    const s16* vp = c->overlay ? sOvlCam.vp : kFull;
+    float hw = (vp[2] - vp[0]) * 0.5f, hh = (vp[3] - vp[1]) * 0.5f;
+    float cx = vp[0] + hw, cy = vp[1] + hh;
+    for (int i = 0; i < c->n && c->v0 + i < 32; i++) {
+        const Vtx_t* v = &c->v[i].v;
+        float a[4] = { v->ob[0], v->ob[1], v->ob[2], 1.0f }, b[4], e[4], clip[4];
+        vec4_mul(b, a, &R.base);
+        vec4_mul(e, b, view);
+        vec4_mul(clip, e, proj);
+        float w = clip[3] != 0.0f ? clip[3] : 1.0f;
+        ScreenVtx* o = &sOvlVtx[c->v0 + i];
+        o->x = cx + clip[0] / w * hw; // viewport: y grows downwards on screen
+        o->y = cy - clip[1] / w * hh;
+        o->s = v->tc[0] / 32.0f * sx;
+        o->t = v->tc[1] / 32.0f * sy;
+        memcpy(o->c, v->cn, 4);
+    }
+}
+
+void Gfx3D_Vertices(const Vtx* v, int n, int v0) {
+    if (n > 32) {
+        n = 32;
+    }
+    CmdVtx* c = rec(x_vtx, offsetof(CmdVtx, v) + sizeof(Vtx) * n);
+    if (c) {
+        c->n = n;
+        c->v0 = v0;
+        c->overlay = Gfx3D_GetTarget() == GFX_BUF_OVL;
+        memcpy(c->v, v, sizeof(Vtx) * n);
+    }
+}
+
+void Gfx2D_TexTriangles(const float* xy, const float* uv, const u8* rgba, int n);
+
+typedef struct { u8 i[4]; u8 n; } CmdQuad;
+static void x_quad(const void* p) {
+    const CmdQuad* q = p;
+    const CmdLoadBlock* b = &sRectTex;
+    const DsTexture* tex = rect_texture(b);
+    rect_state();
+    float W = 1.0f, H = 1.0f;
+    if (tex != NULL) {
+        C3D_Tex* ct = (C3D_Tex*)&tex->tex;
+        bool bilerp = MODE_TEXFILT(R.mode) != 0;
+        C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
+        C3D_TexSetWrap(ct, rect_wrap(b->cms, b->masks), rect_wrap(b->cmt, b->maskt));
+        C3D_TexBind(0, ct);
+        W = tex->w;
+        H = tex->h;
+    } else {
+        C3D_TexBind(0, &sWhite);
+    }
+    sC.bound[0] = NULL;
+    static const int kTri[6] = { 0, 1, 2, 0, 2, 3 };
+    float xy[12], uv[12];
+    u8 rgba[24];
+    for (int k = 0; k < 3 * q->n; k++) {
+        const ScreenVtx* v = &sOvlVtx[q->i[kTri[k]] & 31];
+        xy[2 * k] = v->x;
+        xy[2 * k + 1] = v->y;
+        uv[2 * k] = v->s / W;
+        uv[2 * k + 1] = 1.0f - v->t / H; // the GPU samples t = 1 at the first stored row
+        memcpy(&rgba[4 * k], v->c, 4);
+    }
+    Gfx2D_TexTriangles(xy, uv, rgba, q->n);
+}
+
+void Gfx3D_Quad(int v0, int v1, int v2, int v3) {
+    rdp_flush();
+    CmdQuad* c = rec(x_quad, sizeof(CmdQuad));
+    if (c) {
+        c->n = 2;
+        c->i[0] = v0;
+        c->i[1] = v1;
+        c->i[2] = v2;
+        c->i[3] = v3;
+    }
+}
+
+// ============================================================================ original command streams
+// Display buffer cursors of sources that keep their RDP commands (engine/rdp_disps.h).
+typedef struct Gfx { u32 w0, w1; } Gfx; // as engine/rdp_disps.h
+
+Gfx** Gfx3D_DispCursor(GfxBuf buf) {
+    static Gfx sScratch[2];
+    static Gfx* sCursor;
+    Gfx3D_SetTarget(buf);
+    sCursor = sScratch;
+    return &sCursor;
+}
+
+// Segments the game bound to its own memory, as known while recording (gSPSegment with a plain pointer):
+// lists and texels addressed through them are read from there, as the RDP did.
+
+const u8* Gfx3D_RawSegment(int seg) {
+    return sRawSeg[seg & 15];
+}
+
+// ---- texture state of hand-built loads (gDPSetTextureImage / gDPSetTile* / gDPLoadBlock / gDPLoadTile):
+// turned into a texture block load (Gfx3D_LoadTextureBlock) when the next primitive is recorded
+static struct {
+    const u8* img;
+    u8 imgFmt, imgSiz;
+    u16 imgWidth;
+    const u8* loaded; // image start of the last load
+    u16 loadUls, loadUlt;
+    struct { u8 fmt, siz, pal, cms, cmt, masks, maskt; u16 line, tmem, uls, ult, lrs, lrt; } tile[8];
+    bool dirty;
+} sRdp;
+
+static void rdp_cancel(void) {
+    sRdp.dirty = false;
+}
+
+static void rdp_flush(void) {
+    if (!sRdp.dirty || sRdp.loaded == NULL) {
+        return;
+    }
+    sRdp.dirty = false;
+    const typeof(sRdp.tile[0])* t = &sRdp.tile[0];
+    int w = ((t->lrs - t->uls) >> 2) + 1, h = ((t->lrt - t->ult) >> 2) + 1;
+    Gfx3D_LoadTextureBlock(sRdp.loaded, t->fmt, t->siz, w, h, t->pal, t->cms, t->cmt, t->masks, t->maskt);
+}
+
+static const u8* rdp_addr(u32 addr) {
+    if (ASSET_IS_TOKEN(addr)) {
+        const u8* base = sRawSeg[ASSET_SEG(addr)];
+        return base != NULL ? base + (ASSET_SRC(addr) & 0xFFFFFF) : (const u8*)(uintptr_t)addr;
+    }
+    if ((addr >> 24) < 16 && addr != 0) { // a segmented address inside a raw list
+        const u8* base = sRawSeg[addr >> 24];
+        return base != NULL ? base + (addr & 0xFFFFFF) : NULL;
+    }
+    return (const u8*)(uintptr_t)addr;
+}
+
+void Gfx3D_RdpSetTextureImage(int fmt, int siz, int width, const void* img) {
+    sRdp.img = img;
+    sRdp.imgFmt = fmt;
+    sRdp.imgSiz = siz;
+    sRdp.imgWidth = width;
+}
+
+static void rdp_set_tile(int tile, int fmt, int siz, int line, int tmem, int pal, int cmt, int maskt, int cms,
+                         int masks) {
+    typeof(sRdp.tile[0])* t = &sRdp.tile[tile & 7];
+    t->fmt = fmt;
+    t->siz = siz;
+    t->line = line;
+    t->tmem = tmem;
+    t->pal = pal;
+    t->cmt = cmt;
+    t->maskt = maskt;
+    t->cms = cms;
+    t->masks = masks;
+    sRdp.dirty = true;
+}
+
+static void rdp_set_tile_size(int tile, int uls, int ult, int lrs, int lrt) {
+    typeof(sRdp.tile[0])* t = &sRdp.tile[tile & 7];
+    t->uls = uls;
+    t->ult = ult;
+    t->lrs = lrs;
+    t->lrt = lrt;
+    sRdp.dirty = true;
+}
+
+void Gfx3D_RdpSetTileCustom(int fmt, int siz, int uls, int ult, int lrs, int lrt, int pal, int cms, int cmt, int masks,
+                            int maskt) {
+    rdp_set_tile(0, fmt, siz, 0, 0, pal, cmt, maskt, cms, masks);
+    rdp_set_tile_size(0, uls << 2, ult << 2, lrs << 2, lrt << 2);
+}
+
+void Gfx3D_RdpLoadTile(int tile, int uls, int ult, int lrs, int lrt) {
+    (void)tile;
+    (void)lrs;
+    (void)lrt;
+    // a rectangle of the image: rows of the full image width from (uls, ult) (10.2 coordinates)
+    int bpp = sRdp.imgSiz == 0 ? 4 : sRdp.imgSiz == 1 ? 8 : sRdp.imgSiz == 2 ? 16 : 32;
+    sRdp.loaded = sRdp.img + ((ult >> 2) * sRdp.imgWidth + (uls >> 2)) * bpp / 8;
+    sRdp.dirty = true;
+}
+
+static void rdp_load_block(void) {
+    sRdp.loaded = sRdp.img;
+    sRdp.dirty = true;
+}
+
+void Gfx3D_SetOtherModePart(int high, int shift, int len, u32 data) {
+    u32 bits = (len >= 32 ? 0xFFFFFFFFu : ((1u << len) - 1)) << shift;
+    CmdMode* c = rec(x_mode, sizeof(CmdMode));
+    if (c) {
+        c->mask = high ? mode_from_othermode(bits, 0) : mode_from_othermode(0, bits);
+        c->value = high ? mode_from_othermode(data & bits, 0) : mode_from_othermode(0, data & bits);
+    }
+}
+
+typedef struct { u16 s, t; } CmdTexScale;
+static void x_texscale(const void* p) {
+    const CmdTexScale* c = p;
+    R.texScaleS = c->s;
+    R.texScaleT = c->t;
+}
+
+// ---- display-list interpreter for 2D lists (title / file select windows, interface lists): the RDP
+// state commands, vertex loads and triangles, onto the native recorded commands
+static void run_dl(const u8* dl, bool bigEndian, int depth) {
+    if (dl == NULL || depth > 8) {
+        return;
+    }
+    for (int k = 0; k < 4096; k++, dl += 8) {
+        u32 w0, w1;
+        if (bigEndian) {
+            w0 = ((u32)dl[0] << 24) | (dl[1] << 16) | (dl[2] << 8) | dl[3];
+            w1 = ((u32)dl[4] << 24) | (dl[5] << 16) | (dl[6] << 8) | dl[7];
+        } else {
+            memcpy(&w0, dl, 4);
+            memcpy(&w1, dl + 4, 4);
+        }
+        switch (w0 >> 24) {
+            case 0x01: { // G_VTX: original big-endian records -> native Vtx
+                int n = (w0 >> 12) & 0xFF, v0 = ((w0 >> 1) & 0x7F) - n;
+                const u8* src = rdp_addr(w1);
+                Vtx v[32];
+                if (src == NULL || n > 32) {
+                    break;
+                }
+                for (int i = 0; i < n; i++) {
+                    const u8* s = src + 16 * i;
+                    for (int j = 0; j < 3; j++) v[i].v.ob[j] = (s16)((s[2 * j] << 8) | s[2 * j + 1]);
+                    v[i].v.flag = (s[6] << 8) | s[7];
+                    v[i].v.tc[0] = (s16)((s[8] << 8) | s[9]);
+                    v[i].v.tc[1] = (s16)((s[10] << 8) | s[11]);
+                    memcpy(v[i].v.cn, s + 12, 4);
+                }
+                Gfx3D_Vertices(v, n, v0);
+                break;
+            }
+            case 0x05: // G_TRI1
+                Gfx3D_Tri(((w0 >> 16) & 0xFF) / 2, ((w0 >> 8) & 0xFF) / 2, (w0 & 0xFF) / 2);
+                break;
+            case 0x06: // G_TRI2
+            case 0x07: // G_QUAD (as two triangles)
+                Gfx3D_Tri(((w0 >> 16) & 0xFF) / 2, ((w0 >> 8) & 0xFF) / 2, (w0 & 0xFF) / 2);
+                Gfx3D_Tri(((w1 >> 16) & 0xFF) / 2, ((w1 >> 8) & 0xFF) / 2, (w1 & 0xFF) / 2);
+                break;
+            case 0xD7: { // G_TEXTURE
+                CmdTexScale* c = rec(x_texscale, sizeof(CmdTexScale));
+                if (c) {
+                    c->s = w1 >> 16;
+                    c->t = w1 & 0xFFFF;
+                }
+                break;
+            }
+            case 0xD9: // G_GEOMETRYMODE
+                Gfx3D_GeometryModeN64(~w0 & 0xFFFFFF, w1);
+                break;
+            case 0xDE: // G_DL: call, or branch (no return)
+                if (bigEndian && (w1 >> 24) < 16 && sRawSeg[w1 >> 24] != NULL) {
+                    run_dl(rdp_addr(w1), true, depth + 1);
+                } else {
+                    Gfx3D_RunDL((const void*)(uintptr_t)w1);
+                }
+                if ((w0 >> 16) & 0xFF) {
+                    return;
+                }
+                break;
+            case 0xDF: // G_ENDDL
+                return;
+            case 0xE2: // G_SETOTHERMODE_L
+            case 0xE3: { // G_SETOTHERMODE_H
+                int len = (w0 & 0xFF) + 1, shift = 32 - ((w0 >> 8) & 0xFF) - len;
+                Gfx3D_SetOtherModePart((w0 >> 24) == 0xE3, shift, len, w1);
+                break;
+            }
+            case 0xEF: // G_RDPSETOTHERMODE
+                Gfx3D_SetOtherMode(w0 & 0xFFFFFF, w1);
+                break;
+            case 0xF2: // G_SETTILESIZE
+                rdp_set_tile_size((w1 >> 24) & 7, (w0 >> 12) & 0xFFF, w0 & 0xFFF, (w1 >> 12) & 0xFFF, w1 & 0xFFF);
+                break;
+            case 0xF3: // G_LOADBLOCK
+                rdp_load_block();
+                break;
+            case 0xF4: // G_LOADTILE
+                Gfx3D_RdpLoadTile((w1 >> 24) & 7, (w0 >> 12) & 0xFFF, w0 & 0xFFF, (w1 >> 12) & 0xFFF, w1 & 0xFFF);
+                break;
+            case 0xF5: // G_SETTILE
+                rdp_set_tile((w1 >> 24) & 7, (w0 >> 21) & 7, (w0 >> 19) & 3, (w0 >> 9) & 0x1FF, w0 & 0x1FF,
+                             (w1 >> 20) & 0xF, (w1 >> 18) & 3, (w1 >> 14) & 0xF, (w1 >> 8) & 3, (w1 >> 4) & 0xF);
+                break;
+            case 0xFA: // G_SETPRIMCOLOR
+                Gfx3D_SetPrimColor(w1 >> 24, w1 >> 16, w1 >> 8, w1);
+                break;
+            case 0xFB: // G_SETENVCOLOR
+                Gfx3D_SetEnvColor(w1 >> 24, w1 >> 16, w1 >> 8, w1);
+                break;
+            case 0xFC: // G_SETCOMBINE
+                Gfx3D_SetCombine(w0, w1);
+                break;
+            case 0xFD: // G_SETTIMG
+                Gfx3D_RdpSetTextureImage((w0 >> 21) & 7, (w0 >> 19) & 3, (w0 & 0xFFF) + 1, rdp_addr(w1));
+                break;
+            case 0xE6: // syncs
+            case 0xE7:
+            case 0xE8:
+            case 0xE9:
+            case 0x00: // G_NOOP
+                break;
+            default: {
+                static u8 sLogged[256];
+                if (!sLogged[w0 >> 24]) {
+                    sLogged[w0 >> 24] = 1;
+                    log_printf("gfx3d: list command %02lX not interpreted\n", (unsigned long)(w0 >> 24));
+                }
+                break;
+            }
+        }
+    }
+}
+
+static Gfx sOpenList[4];
+
+Gfx* Gfx3D_OpenList(void) {
+    return sOpenList;
+}
+
+void Gfx3D_RunDL(const void* dl) {
+    if ((const Gfx*)dl >= sOpenList && (const Gfx*)dl < sOpenList + 4) {
+        return; // an opened list: its commands are recorded in place (engine/rdp_disps.h)
+    }
+    u32 a = (u32)(uintptr_t)dl;
+    if (ASSET_IS_TOKEN(a)) {
+        const u8* base = sRawSeg[ASSET_SEG(a)];
+        if (base != NULL) {
+            run_dl(base + (ASSET_SRC(a) & 0xFFFFFF), true, 0); // original list in game memory
+        } else {
+            Gfx3D_DrawDL(a); // converted list
+        }
+        return;
+    }
+    run_dl(dl, false, 0); // static list of this program, native word order
+}
+
+void Gfx3D_Tri(int v0, int v1, int v2) {
+    rdp_flush();
+    CmdQuad* c = rec(x_quad, sizeof(CmdQuad));
+    if (c) {
+        c->n = 1;
+        c->i[0] = v0;
+        c->i[1] = v1;
+        c->i[2] = v2;
+        c->i[3] = v2;
     }
 }

@@ -47,6 +47,31 @@ void Gfx3D_ResetMaterialState(int xlu); // DS-era call sites: preset 25 into the
 void Gfx3D_SetPrimColor(u8 r, u8 g, u8 b, u8 a);
 // Render mode (was gDPSetRenderMode): the two original RDP mode words (engine/rdp_modes.h G_RM_*)
 void Gfx3D_SetRenderMode(u32 c1, u32 c2);
+// 2D interface commands (were G_SETCOMBINE, gDPSetAlphaCompare, gDPLoadTextureBlock, gSPTextureRectangle;
+// see engine/rdp_gbi.h): original arguments, fixed-point coordinates as in the original
+void Gfx3D_SetCombine(u32 w0, u32 w1);
+void Gfx3D_SetAlphaCompare(u32 type);
+void Gfx3D_LoadTextureBlock(const void* img, int fmt, int siz, int w, int h, int pal, int cms, int cmt, int masks,
+                            int maskt);
+void Gfx3D_TextureRectangle(int xl, int yl, int xh, int yh, int tile, int s, int t, int dsdx, int dtdy);
+void Gfx3D_FillRectangle(int ulx, int uly, int lrx, int lry);
+void Gfx3D_SetOtherMode(u32 h, u32 l);           // both other-mode words (gDPSetOtherMode)
+void Gfx3D_GeometryModeN64(u32 clear, u32 set);  // original G_* geometry bits
+// overlay camera (View_Apply*ToOverlay): projection, viewing (NULL = identity), viewport in screen pixels
+void Gfx3D_SetOverlayCamera(const MtxF* projection, const MtxF* viewing, int leftX, int topY, int rightX,
+                            int bottomY);
+union Vtx;
+void Gfx3D_Vertices(const union Vtx* v, int n, int v0);
+void Gfx3D_Quad(int v0, int v1, int v2, int v3);
+void Gfx3D_Tri(int v0, int v1, int v2);
+void Gfx3D_RunDL(const void* dl); // converted handle, original list in game memory, or static native list
+void Gfx3D_SetOtherModePart(int high, int shift, int len, u32 data); // G_SETOTHERMODE_H / _L
+// hand-built texture loads (gDPSetTextureImage, gDPSetTileCustom, gDPLoadTile)
+void Gfx3D_RdpSetTextureImage(int fmt, int siz, int width, const void* img);
+void Gfx3D_RdpSetTileCustom(int fmt, int siz, int uls, int ult, int lrs, int lrt, int pal, int cms, int cmt, int masks,
+                            int maskt);
+void Gfx3D_RdpLoadTile(int tile, int uls, int ult, int lrs, int lrt);
+const u8* Gfx3D_RawSegment(int seg); // game memory bound to a segment while recording, or NULL
 // Geometry mode change (was gSPClearGeometryMode / gSPSetGeometryMode): native GEOM_* flags (engine/pmesh.h)
 void Gfx3D_GeometryMode(u32 clear, u32 set);
 // Segment binding: a texture handle, a display-list handle, or NULL to clear.

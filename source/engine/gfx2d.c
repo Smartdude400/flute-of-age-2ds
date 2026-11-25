@@ -178,3 +178,30 @@ void Gfx2D_End(void) {
 
 void Gfx2D_Begin3DOrtho(void) {
 }
+
+// ---- texture rectangles of the 2D interface code (engine/gfx3d.c x_texrect): the 2D shader with the
+// renderer's combiner / blend state; the caller binds the texture and sets that state.
+void Gfx2D_BindRectProgram(void) {
+    Gfx3D_NotifyProgramChanged();
+    C3D_BindProgram(&sProg);
+    Screen_SetGameViewport();
+    C3D_FVUnifMtx4x4(GPU_VERTEX_SHADER, sUProj, &sProj);
+    C3D_SetAttrInfo(&sAttr);
+}
+
+void Gfx2D_TexQuad(float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1) {
+    static const float kWhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f }; // shade (unused by rectangle combiners)
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+    quad(x0, y0, x1, y1, u0, v0, u1, v1, kWhite);
+    C3D_ImmDrawEnd();
+}
+
+void Gfx2D_TexTriangles(const float* xy, const float* uv, const u8* col, int n) {
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+    for (int i = 0; i < 3 * n; i++) {
+        float c[4];
+        rgba(c, &col[4 * i]);
+        vtx(xy[2 * i], xy[2 * i + 1], uv[2 * i], uv[2 * i + 1], c);
+    }
+    C3D_ImmDrawEnd();
+}
