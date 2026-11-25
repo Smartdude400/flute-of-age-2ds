@@ -323,7 +323,12 @@ s32 View_ApplyPerspective(View* view) {
 }
 
 s32 View_ApplyPerspectiveToOverlay(View* view) {
-    return View_ApplyPerspective(view);
+    // (native) the original applied scissor, viewport, perspective and viewing to OVERLAY_DISP only
+    View_BuildPerspective(view);
+    View_BuildViewing(view);
+    Gfx3D_SetOverlayCamera(&view->projection, &view->viewing, view->viewport.leftX, view->viewport.topY,
+                           view->viewport.rightX, view->viewport.bottomY);
+    return 1;
 }
 
 s32 View_UpdateViewingMatrix(View* view) {
@@ -338,5 +343,28 @@ s32 View_ApplyOrtho(View* view) {
 }
 
 s32 View_ApplyOrthoToOverlay(View* view) {
-    return View_ApplyOrtho(view);
+    // (native) the original applied scissor, viewport and an orthographic projection (guOrtho over the
+    // screen, centred) to OVERLAY_DISP; the model matrix is loaded by the draws themselves
+    f32 l = -(f32)SCREEN_WIDTH * 0.5f, r = (f32)SCREEN_WIDTH * 0.5f;
+    f32 b = -(f32)SCREEN_HEIGHT * 0.5f, t = (f32)SCREEN_HEIGHT * 0.5f;
+    f32 n = view->zNear, f = view->zFar;
+    MtxF* mf = &view->projection;
+    memset(mf, 0, sizeof(MtxF));
+    mf->mf[0][0] = 2.0f / (r - l);
+    mf->mf[1][1] = 2.0f / (t - b);
+    mf->mf[2][2] = -2.0f / (f - n);
+    mf->mf[3][0] = -(r + l) / (r - l);
+    mf->mf[3][1] = -(t + b) / (t - b);
+    mf->mf[3][2] = -(f + n) / (f - n);
+    mf->mf[3][3] = 1.0f;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            mf->mf[i][j] *= view->scale;
+        }
+    }
+    ExactQuantizeMtxF(mf->mf);
+    view->projectionPtr = &view->projection;
+    Gfx3D_SetOverlayCamera(&view->projection, NULL, view->viewport.leftX, view->viewport.topY,
+                           view->viewport.rightX, view->viewport.bottomY);
+    return 1;
 }

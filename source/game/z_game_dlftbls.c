@@ -5,15 +5,16 @@
 #include "setup_state.h"
 #include "title_setup_state.h"
 #include "play_state.h"
+#include "file_select_state.h"
 
-// Not yet ported: MapSelect (debug), FileSelect (Phase 4). Entries are NULL until then.
+// Not yet ported: MapSelect (debug). Its entry is NULL until then.
 GameStateOverlay gGameStateOverlayTable[GAMESTATE_ID_MAX] = {
     [GAMESTATE_SETUP] = { (void*)Setup_Init, sizeof(SetupState) },
     [GAMESTATE_MAP_SELECT] = { NULL, 0 },
     [GAMESTATE_CONSOLE_LOGO] = { (void*)ConsoleLogo_Init, sizeof(ConsoleLogoState) },
     [GAMESTATE_PLAY] = { (void*)Play_Init, sizeof(PlayState) },
     [GAMESTATE_TITLE_SETUP] = { (void*)TitleSetup_Init, sizeof(TitleSetupState) },
-    [GAMESTATE_FILE_SELECT] = { NULL, 0 },
+    [GAMESTATE_FILE_SELECT] = { (void*)FileSelect_Init, sizeof(FileSelectState) },
 };
 
 GameStateOverlay* GameStateTable_FindByInit(void* init) {

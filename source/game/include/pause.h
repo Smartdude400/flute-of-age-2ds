@@ -2,6 +2,7 @@
 #ifndef PAUSE_H
 #define PAUSE_H
 
+#include "engine/vtx.h"
 #include "animation.h"
 #include "message.h"
 #include "view.h"
@@ -189,17 +190,17 @@ typedef struct PauseContext {
     /* 0x0138 */ u8* nameSegment;
     /* 0x013C */ u8* playerSegment;
     /* 0x0140 */ char unk_140[0x04];
-    /* 0x0144 */ void* itemPageVtx; // native: was a vertex buffer (render-only)
-    /* 0x0148 */ void* equipPageVtx; // native: was a vertex buffer (render-only)
-    /* 0x014C */ void* mapPageVtx; // native: was a vertex buffer (render-only)
-    /* 0x0150 */ void* questPageVtx; // native: was a vertex buffer (render-only)
-    /* 0x0154 */ void* uiOverlayVtx; // native: was a vertex buffer (render-only)
-    /* 0x0158 */ void* itemVtx; // native: was a vertex buffer (render-only)
-    /* 0x015C */ void* equipVtx; // native: was a vertex buffer (render-only)
+    /* 0x0144 */ Vtx* itemPageVtx;
+    /* 0x0148 */ Vtx* equipPageVtx;
+    /* 0x014C */ Vtx* mapPageVtx;
+    /* 0x0150 */ Vtx* questPageVtx;
+    /* 0x0154 */ Vtx* uiOverlayVtx;
+    /* 0x0158 */ Vtx* itemVtx;
+    /* 0x015C */ Vtx* equipVtx;
     /* 0x0160 */ char unk_160[0x04];
-    /* 0x0164 */ void* questVtx; // native: was a vertex buffer (render-only)
-    /* 0x0168 */ void* cursorVtx; // native: was a vertex buffer (render-only)
-    /* 0x016C */ void* promptPageVtx; // native: was a vertex buffer (render-only) // Used by both the pause menu save prompt and the gameover prompt
+    /* 0x0164 */ Vtx* questVtx;
+    /* 0x0168 */ Vtx* cursorVtx;
+    /* 0x016C */ Vtx* promptPageVtx; // Used by both the pause menu save prompt and the gameover prompt
     /* 0x0170 */ char unk_170[0x24];
     /* 0x0194 */ struct FluteStaff* fluteStaff;
     /* 0x0198 */ char unk_198[0x20];

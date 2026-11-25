@@ -157,6 +157,22 @@ void Gfx_SetupDL_42Opa(GraphicsContext* gfxCtx) {
     Gfx3D_SetupDLTo(GFX_BUF_OPA, 42);
 }
 
+void Gfx_SetupDL_39Opa(GraphicsContext* gfxCtx) {
+    (void)gfxCtx;
+    Gfx3D_SetupDLTo(GFX_BUF_OPA, 39);
+}
+
+// frame start of a state that draws a scene: fill with the colour (the original also reset the RDP state)
+void Gfx_SetupFrame(GraphicsContext* gfxCtx, u8 r, u8 g, u8 b) {
+    (void)gfxCtx;
+    Gfx3D_SetupFrame(r, g, b);
+}
+
+void Gfx_SetupDL_39Overlay(GraphicsContext* gfxCtx) {
+    (void)gfxCtx;
+    Gfx3D_SetupDLTo(GFX_BUF_OVL, 39);
+}
+
 void Gfx_SetupDL_42Overlay(GraphicsContext* gfxCtx) {
     (void)gfxCtx;
     Gfx3D_SetupDLTo(GFX_BUF_OVL, 42);

@@ -3,17 +3,30 @@
 #include "setup_state.h"
 #include "save.h"
 #include "engine/log.h"
+#ifdef PORT_BOOT_FILESELECT
+#include "file_select_state.h"
+#endif
 
 #ifdef PORT_BOOT_ENTRANCE
 #include "play_state.h"
 #include "sram.h"
 #include "sequence.h"
 #include "interface.h"
+#include "message.h"
 // Test boot (build flag BOOT=<entrance>): what file select does when a NEW file is created and started
 // (Sram_InitSave + FileSelect_LoadGame), but entering the given entrance without the intro cutscene.
 // File select itself (ovl_file_choose) is not ported yet (STUBS S12).
 static void Setup_BootIntoPlay(SetupState* this) {
     Sram_InitNewSave();
+    {
+        // the name file select's name entry would store: the original debug save's name (z_sram.c)
+        static const u8 kName[8] = { FILENAME_UPPERCASE('A'), FILENAME_UPPERCASE('R'), FILENAME_UPPERCASE('E'),
+                                     FILENAME_UPPERCASE('N'), FILENAME_SPACE,          FILENAME_SPACE,
+                                     FILENAME_SPACE,          FILENAME_SPACE };
+        for (int i = 0; i < 8; i++) {
+            gSaveContext.save.info.playerData.playerName[i] = kName[i];
+        }
+    }
     gSaveContext.save.entranceIndex = PORT_BOOT_ENTRANCE;
     gSaveContext.save.arenAge = AREN_AGE_CHILD;
     gSaveContext.save.dayTime = CLOCK_TIME(10, 0);
@@ -59,6 +72,13 @@ void Setup_InitImpl(SetupState* this) {
     this->state.running = false;
 #ifdef PORT_BOOT_ENTRANCE
     Setup_BootIntoPlay(this);
+    return;
+#endif
+#ifdef PORT_BOOT_FILESELECT
+    // Test boot (build flag FILESELECT=1): straight into file select, as after pressing Start on the title
+    // screen (whose logo actor is not ported yet)
+    log_printf("[state] Setup: test boot into file select\n");
+    SET_NEXT_GAMESTATE(&this->state, FileSelect_Init, FileSelectState);
     return;
 #endif
     SET_NEXT_GAMESTATE(&this->state, ConsoleLogo_Init, ConsoleLogoState);

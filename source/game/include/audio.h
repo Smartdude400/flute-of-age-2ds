@@ -10,6 +10,14 @@
 #include "sequence.h"
 #include "z_math.h"
 
+// (from the original audio.h) the sound setting stored in the save (options menu)
+typedef enum SoundSetting {
+    /* 0 */ SOUND_SETTING_STEREO,
+    /* 1 */ SOUND_SETTING_MONO,
+    /* 2 */ SOUND_SETTING_HEADSET,
+    /* 3 */ SOUND_SETTING_SURROUND
+} SoundSetting;
+
 void Audio_Update(void);
 void Audio_SetSfxProperties(u8 bankId, u8 entryIdx, u8 channelIndex);
 void Audio_PlayCutsceneEffectsSequence(u8 csEffectType);

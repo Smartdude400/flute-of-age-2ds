@@ -25,5 +25,3 @@
 void KaleidoScope_Update(PlayState* play) { (void)play; LOGIC_STUB("KaleidoScope_Update"); }
 void KaleidoScope_Draw(PlayState* play) { (void)play; LOGIC_STUB("KaleidoScope_Draw"); }
 
-// S12: the file select game state (ovl_file_choose). Reaching it stops with a clear fault.
-void FileSelect_Init(GameState* thisx) { (void)thisx; Fault_Crash("FileSelect (ovl_file_choose) not ported yet (S12)"); }

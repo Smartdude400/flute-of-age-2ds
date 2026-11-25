@@ -1,5 +1,7 @@
 // adapted from flute-of-age/src/code/z_construct.c
 #include "map.h"
+#include "dma.h"
+#include "engine/rdp_gbi.h"
 #include "asset_sizes.h"
 #include "segment_symbols.h"
 #include "attributes.h"
@@ -23,6 +25,7 @@ void Interface_Destroy(PlayState* play) {
 #define ICON_ITEM_SEGMENT_SIZE (4 * ITEM_ICON_SIZE)
 
 void Interface_Init(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     u32 parameterSize;
     u16 doActionOffset;
@@ -55,8 +58,8 @@ void Interface_Init(PlayState* play) {
     PRINTF("parameter->parameterSegment=%x\n", interfaceCtx->parameterSegment);
 
     ASSERT(interfaceCtx->parameterSegment != NULL, "parameter->parameterSegment != NULL", "../z_construct.c", 161);
-    // native: the HUD draws converted textures (assets_agg/parameter_static.h); the arena allocation
-    // above is kept for identical game-arena usage, its contents are unused.
+    DMA_REQUEST_SYNC(interfaceCtx->parameterSegment, (uintptr_t)_parameter_staticSegmentRomStart, parameterSize,
+                     "../z_construct.c", 162);
 
     interfaceCtx->doActionSegment = GAME_STATE_ALLOC(&play->state, 3 * DO_ACTION_TEX_SIZE, "../z_construct.c", 166);
 
@@ -80,7 +83,9 @@ void Interface_Init(PlayState* play) {
         doActionOffset = (LANGUAGE_FRA * DO_ACTION_MAX + DO_ACTION_ATTACK) * DO_ACTION_TEX_SIZE;
     }
 #endif
-    /* native: HUD/text textures come from converted files; allocation kept */
+
+    DMA_REQUEST_SYNC(interfaceCtx->doActionSegment, (uintptr_t)_do_action_staticSegmentRomStart + doActionOffset,
+                     2 * DO_ACTION_TEX_SIZE, "../z_construct.c", 174);
 
 #if OOT_NTSC
     if (gSaveContext.language == LANGUAGE_JPN) {
@@ -97,7 +102,10 @@ void Interface_Init(PlayState* play) {
         doActionOffset = (LANGUAGE_FRA * DO_ACTION_MAX + DO_ACTION_RETURN) * DO_ACTION_TEX_SIZE;
     }
 #endif
-    /* native: HUD/text textures come from converted files; allocation kept */
+
+    DMA_REQUEST_SYNC(interfaceCtx->doActionSegment + 2 * DO_ACTION_TEX_SIZE,
+                     (uintptr_t)_do_action_staticSegmentRomStart + doActionOffset, DO_ACTION_TEX_SIZE,
+                     "../z_construct.c", 178);
 
     interfaceCtx->iconItemSegment = GAME_STATE_ALLOC(&play->state, ICON_ITEM_SEGMENT_SIZE, "../z_construct.c", 190);
 
@@ -112,21 +120,33 @@ void Interface_Init(PlayState* play) {
            gSaveContext.save.info.equips.buttonItems[3]);
 
     if (gSaveContext.save.info.equips.buttonItems[0] < 0xF0) {
-    /* native: HUD/text textures come from converted files; allocation kept */
+        DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (0 * ITEM_ICON_SIZE),
+
+                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
+                         "../z_construct.c", 198);
     } else if (gSaveContext.save.info.equips.buttonItems[0] != 0xFF) {
-    /* native: HUD/text textures come from converted files; allocation kept */
+        DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (0 * ITEM_ICON_SIZE),
+
+                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[0]), ITEM_ICON_SIZE,
+                         "../z_construct.c", 203);
     }
 
     if (gSaveContext.save.info.equips.buttonItems[1] < 0xF0) {
-    /* native: HUD/text textures come from converted files; allocation kept */
+        DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (1 * ITEM_ICON_SIZE),
+                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[1]), ITEM_ICON_SIZE,
+                         "../z_construct.c", 209);
     }
 
     if (gSaveContext.save.info.equips.buttonItems[2] < 0xF0) {
-    /* native: HUD/text textures come from converted files; allocation kept */
+        DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (2 * ITEM_ICON_SIZE),
+                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[2]), ITEM_ICON_SIZE,
+                         "../z_construct.c", 214);
     }
 
     if (gSaveContext.save.info.equips.buttonItems[3] < 0xF0) {
-    /* native: HUD/text textures come from converted files; allocation kept */
+        DMA_REQUEST_SYNC(interfaceCtx->iconItemSegment + (3 * ITEM_ICON_SIZE),
+                         GET_ITEM_ICON_VROM(gSaveContext.save.info.equips.buttonItems[3]), ITEM_ICON_SIZE,
+                         "../z_construct.c", 219);
     }
 
     PRINTF("ＥＶＥＮＴ＝%d\n", ((void)0, gSaveContext.timerState));

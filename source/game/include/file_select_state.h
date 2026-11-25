@@ -2,6 +2,7 @@
 #ifndef FILE_SELECT_STATE_H
 #define FILE_SELECT_STATE_H
 
+#include "engine/vtx.h"
 #include "game_types.h"
 #include "environment.h"
 #include "game.h"
@@ -12,7 +13,7 @@
 
 typedef struct FileSelectState {
     /* 0x00000 */ GameState state;
-    /* 0x000A4 */ void* windowVtx /* native: was Vtx* (render-only) */;
+    /* 0x000A4 */ Vtx* windowVtx;
     /* 0x000A8 */ u8* staticSegment;
     /* 0x000AC */ u8* parameterSegment;
 #if OOT_PAL
@@ -26,9 +27,9 @@ typedef struct FileSelectState {
     /* 0x0E760 */ Font font;
     /* 0x1C8E8 */ EnvironmentContext envCtx;
     /* 0x1C9E4 */ char unk_1C9E4[0x4];
-    /* 0x1C9E8 */ void* windowContentVtx /* native: was Vtx* (render-only) */;
-    /* 0x1C9EC */ void* keyboardVtx /* native: was Vtx* (render-only) */;
-    /* 0x1C9F0 */ void* nameEntryVtx /* native: was Vtx* (render-only) */;
+    /* 0x1C9E8 */ Vtx* windowContentVtx;
+    /* 0x1C9EC */ Vtx* keyboardVtx;
+    /* 0x1C9F0 */ Vtx* nameEntryVtx;
     /* 0x1C9F4 */ u8 n64ddFlag;
     /* 0x1C9F6 */ u16 deaths[3];
     /* 0x1C9FC */ u8 fileNames[3][8];

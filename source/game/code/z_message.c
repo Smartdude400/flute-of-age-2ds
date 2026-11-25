@@ -1,5 +1,6 @@
 // adapted from flute-of-age/src/code/z_message.c
 #include "libu64/gfxprint.h"
+#include "engine/rdp_gbi.h"
 #include "engine/message_native.h"
 #include "engine/rom_bind.h"
 #include "engine/gfx3d.h"
@@ -408,22 +409,34 @@ void Message_HandleChoiceSelection(PlayState* play, char numChoices) {
 }
 
 void Message_DrawTextChar(PlayState* play, void* textureImage) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     MessageContext* msgCtx = &play->msgCtx;
     s16 x = msgCtx->textPosX;
     s16 y = msgCtx->textPosY;
     STACK_PAD(s32);
 
+    gDPPipeSync(gfx++);
 
     sCharTexSize = (R_TEXT_CHAR_SCALE / 100.0f) * 16.0f;
     sCharTexScale = 1024.0f / (R_TEXT_CHAR_SCALE / 100.0f);
 
+    gDPLoadTextureBlock_4b(gfx++, textureImage, G_IM_FMT_I, FONT_CHAR_TEX_WIDTH, FONT_CHAR_TEX_HEIGHT, 0,
+                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                           G_TX_NOLOD);
 
     // Draw drop shadow
     if (msgCtx->textBoxType != TEXTBOX_TYPE_NONE_NO_SHADOW) {
-        Gfx3D_SetPrimColor(0, 0, 0, msgCtx->textColorAlpha);
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, msgCtx->textColorAlpha);
+        gSPTextureRectangle(gfx++, (x + R_TEXT_DROP_SHADOW_OFFSET) << 2, (y + R_TEXT_DROP_SHADOW_OFFSET) << 2,
+                            (x + R_TEXT_DROP_SHADOW_OFFSET + sCharTexSize) << 2,
+                            (y + R_TEXT_DROP_SHADOW_OFFSET + sCharTexSize) << 2, G_TX_RENDERTILE, 0, 0, sCharTexScale,
+                            sCharTexScale);
     }
 
-    Gfx3D_SetPrimColor(msgCtx->textColorR, msgCtx->textColorG, msgCtx->textColorB, msgCtx->textColorAlpha);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, msgCtx->textColorR, msgCtx->textColorG, msgCtx->textColorB, msgCtx->textColorAlpha);
+    gSPTextureRectangle(gfx++, x << 2, y << 2, (x + sCharTexSize) << 2, (y + sCharTexSize) << 2, G_TX_RENDERTILE, 0, 0,
+                        sCharTexScale, sCharTexScale);
 }
 
 // resizes textboxes when opening them
@@ -722,6 +735,7 @@ void Message_SetTextColor(MessageContext* msgCtx, u16 colorParameter) {
 }
 
 void Message_DrawTextboxIcon(PlayState* play, s16 x, s16 y) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     static s16 sIconPrimColors[][3] = {
         { FLUTE_ICON_PRIM_1_R, FLUTE_ICON_PRIM_1_G, FLUTE_ICON_PRIM_1_B },
         { FLUTE_ICON_PRIM_2_R, FLUTE_ICON_PRIM_2_G, FLUTE_ICON_PRIM_2_B },
@@ -809,11 +823,17 @@ void Message_DrawTextboxIcon(PlayState* play, s16 x, s16 y) {
         sIconFlashColorIdx ^= 1;
     }
 
+    gDPPipeSync(gfx++);
 
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE,
+                      ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
 
-    Gfx3D_SetPrimColor(sIconPrimR, sIconPrimG, sIconPrimB, 255);
-    Gfx3D_SetEnvColor(sIconEnvR, sIconEnvG, sIconEnvB, 255);
+    gDPSetPrimColor(gfx++, 0, 0, sIconPrimR, sIconPrimG, sIconPrimB, 255);
+    gDPSetEnvColor(gfx++, sIconEnvR, sIconEnvG, sIconEnvB, 255);
 
+    gDPLoadTextureBlock_4b(gfx++, iconTexture, G_IM_FMT_I, FONT_CHAR_TEX_WIDTH, FONT_CHAR_TEX_HEIGHT, 0,
+                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                           G_TX_NOLOD);
 
 #if PLATFORM_IQUE
     R_TEXT_CHAR_SCALE = 80;
@@ -822,6 +842,8 @@ void Message_DrawTextboxIcon(PlayState* play, s16 x, s16 y) {
     sCharTexSize = 16.0f * ((f32)R_TEXT_CHAR_SCALE / 100.0f);
     sCharTexScale = 1024.0f / ((f32)R_TEXT_CHAR_SCALE / 100.0f);
 
+    gSPTextureRectangle(gfx++, x << 2, y << 2, (x + sCharTexSize) << 2, (y + sCharTexSize) << 2, G_TX_RENDERTILE, 0, 0,
+                        sCharTexScale, sCharTexScale);
 
     msgCtx->stateTimer++;
 
@@ -980,6 +1002,7 @@ f32 sFontWidths[144] = {
 };
 
 u16 Message_DrawItemIcon(PlayState* play, u16 itemId, u16 i) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     STACK_PAD(s32);
     MessageContext* msgCtx = &play->msgCtx;
 
@@ -989,11 +1012,24 @@ u16 Message_DrawItemIcon(PlayState* play, u16 itemId, u16 i) {
     }
     // clang-format on
 
-    Gfx3D_SetPrimColor(255, 255, 255, msgCtx->textColorAlpha);
+    gDPPipeSync(gfx++);
+    gDPSetCombineMode(gfx++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, msgCtx->textColorAlpha);
 
     if (itemId >= ITEM_MEDALLION_FOREST) {
+        gDPLoadTextureBlock(gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            QUEST_ICON_WIDTH, QUEST_ICON_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     } else {
+        gDPLoadTextureBlock(gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            ITEM_ICON_WIDTH, ITEM_ICON_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     }
+    gSPTextureRectangle(gfx++, (msgCtx->textPosX + R_TEXTBOX_ICON_XPOS) << 2, R_TEXTBOX_ICON_YPOS << 2,
+                        (msgCtx->textPosX + R_TEXTBOX_ICON_XPOS + R_TEXTBOX_ICON_DIMENSION) << 2,
+                        (R_TEXTBOX_ICON_YPOS + R_TEXTBOX_ICON_DIMENSION) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
 
     msgCtx->textPosX += 32;
 
@@ -1069,6 +1105,7 @@ void Message_HandleFlute(PlayState* play) {
  * been scrolled to so far.
  */
 void Message_DrawTextWide(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     MessageContext* msgCtx = &play->msgCtx;
     Font* font = &play->msgCtx.font;
     u16 character;
@@ -1184,14 +1221,57 @@ void Message_DrawTextWide(PlayState* play) {
                     SFX_PLAY_CENTERED(NA_SE_NONE);
                 }
                 // clang-format on
-                Gfx3D_SetPrimColor(sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][0], sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][1], sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][2], msgCtx->textColorAlpha);
+                gDPPipeSync(gfx++);
+                gDPSetCombineMode(gfx++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                gDPSetPrimColor(gfx++, 0, 0, sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][0],
+                                sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][1],
+                                sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][2],
+                                msgCtx->textColorAlpha);
 
+                gDPLoadTextureBlock_4b(gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE, G_IM_FMT_I, 96, 48, 0,
+                                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                       G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(
+                    gfx++, (msgCtx->textPosX + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    (msgCtx->textPosX + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + 48 + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
+                gDPLoadTextureBlock_4b(
+                    gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + MESSAGE_TEXTURE_STATIC_TEX_SIZE,
+                    G_IM_FMT_I, 96, 48, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                    G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(
+                    gfx++, (msgCtx->textPosX + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    (msgCtx->textPosX + 96 + 1 + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + 48 + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
-                Gfx3D_SetPrimColor(sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][0], sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][1], sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][2], msgCtx->textColorAlpha);
+                gDPPipeSync(gfx++);
+                gDPSetPrimColor(gfx++, 0, 0, sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][0],
+                                sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][1],
+                                sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][2],
+                                msgCtx->textColorAlpha);
 
+                gDPLoadTextureBlock_4b(gfx++, (msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE), G_IM_FMT_I, 96, 48, 0,
+                                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                       G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gfx++, msgCtx->textPosX << 2, R_TEXTBOX_BG_YPOS << 2, (msgCtx->textPosX + 96) << 2,
+                                    (R_TEXTBOX_BG_YPOS + 48) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
+                gDPLoadTextureBlock_4b(
+                    gfx++, (msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + MESSAGE_TEXTURE_STATIC_TEX_SIZE),
+                    G_IM_FMT_I, 96, 48, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                    G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gfx++, (msgCtx->textPosX + 96) << 2, R_TEXTBOX_BG_YPOS << 2,
+                                    (msgCtx->textPosX + 192) << 2, (R_TEXTBOX_BG_YPOS + 48) << 2, G_TX_RENDERTILE, 0, 0,
+                                    1 << 10, 1 << 10);
 
+                gDPPipeSync(gfx++);
+                gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
+                                  PRIMITIVE, 0);
 
                 msgCtx->textPosX += 32;
                 break;
@@ -1329,6 +1409,7 @@ void Message_DrawTextWide(PlayState* play) {
  * been scrolled to so far.
  */
 void Message_DrawText(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     MessageContext* msgCtx = &play->msgCtx;
     STACK_PAD(s16);
     u8 character;
@@ -1463,14 +1544,57 @@ void Message_DrawText(PlayState* play) {
                     SFX_PLAY_CENTERED(NA_SE_NONE);
                 }
                 // clang-format on
-                Gfx3D_SetPrimColor(sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][0], sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][1], sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][2], msgCtx->textColorAlpha);
+                gDPPipeSync(gfx++);
+                gDPSetCombineMode(gfx++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                gDPSetPrimColor(gfx++, 0, 0, sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][0],
+                                sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][1],
+                                sTextboxBackgroundBackPrimColors[msgCtx->textboxBackgroundBackColorIdx][2],
+                                msgCtx->textColorAlpha);
 
+                gDPLoadTextureBlock_4b(gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE, G_IM_FMT_I, 96, 48, 0,
+                                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                       G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(
+                    gfx++, (msgCtx->textPosX + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    (msgCtx->textPosX + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + 48 + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
+                gDPLoadTextureBlock_4b(
+                    gfx++, msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + MESSAGE_TEXTURE_STATIC_TEX_SIZE,
+                    G_IM_FMT_I, 96, 48, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                    G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(
+                    gfx++, (msgCtx->textPosX + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    (msgCtx->textPosX + 96 + 1 + 96 + 1) << 2,
+                    (R_TEXTBOX_BG_YPOS + 48 + sTextboxBackgroundYOffsets[msgCtx->textboxBackgroundYOffsetIdx]) << 2,
+                    G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
-                Gfx3D_SetPrimColor(sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][0], sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][1], sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][2], msgCtx->textColorAlpha);
+                gDPPipeSync(gfx++);
+                gDPSetPrimColor(gfx++, 0, 0, sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][0],
+                                sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][1],
+                                sTextboxBackgroundForePrimColors[msgCtx->textboxBackgroundForeColorIdx][2],
+                                msgCtx->textColorAlpha);
 
+                gDPLoadTextureBlock_4b(gfx++, (msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE), G_IM_FMT_I, 96, 48, 0,
+                                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                       G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gfx++, msgCtx->textPosX << 2, R_TEXTBOX_BG_YPOS << 2, (msgCtx->textPosX + 96) << 2,
+                                    (R_TEXTBOX_BG_YPOS + 48) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
+                gDPLoadTextureBlock_4b(
+                    gfx++, (msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + MESSAGE_TEXTURE_STATIC_TEX_SIZE),
+                    G_IM_FMT_I, 96, 48, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                    G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gfx++, (msgCtx->textPosX + 96) << 2, R_TEXTBOX_BG_YPOS << 2,
+                                    (msgCtx->textPosX + 192) << 2, (R_TEXTBOX_BG_YPOS + 48) << 2, G_TX_RENDERTILE, 0, 0,
+                                    1 << 10, 1 << 10);
 
+                gDPPipeSync(gfx++);
+                gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
+                                  PRIMITIVE, 0);
 
                 msgCtx->textPosX += 32;
                 break;
@@ -2759,28 +2883,45 @@ u8 Message_GetState(MessageContext* msgCtx) {
 }
 
 void Message_DrawTextBox(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     MessageContext* msgCtx = &play->msgCtx;
 
-    Gfx3D_SetPrimColor(msgCtx->textboxColorRed, msgCtx->textboxColorGreen, msgCtx->textboxColorBlue, msgCtx->textboxColorAlphaCurrent);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, msgCtx->textboxColorRed, msgCtx->textboxColorGreen, msgCtx->textboxColorBlue,
+                    msgCtx->textboxColorAlphaCurrent);
 
     if (!msgCtx->textBoxType /* TEXTBOX_TYPE_BLACK */ || msgCtx->textBoxType == TEXTBOX_TYPE_BLUE) {
+        gDPLoadTextureBlock_4b(gfx++, msgCtx->textboxSegment, G_IM_FMT_I, 128, 64, 0, G_TX_MIRROR, G_TX_NOMIRROR, 7, 0,
+                               G_TX_NOLOD, G_TX_NOLOD);
     } else {
         if (msgCtx->textBoxType == TEXTBOX_TYPE_FLUTE) {
-            Gfx3D_SetEnvColor(0, 0, 0, 255);
+            gDPSetEnvColor(gfx++, 0, 0, 0, 255);
         } else {
-            Gfx3D_SetEnvColor(50, 20, 0, 255);
+            gDPSetEnvColor(gfx++, 50, 20, 0, 255);
         }
 
+        gDPLoadTextureBlock_4b(gfx++, msgCtx->textboxSegment, G_IM_FMT_IA, 128, 64, 0, G_TX_MIRROR, G_TX_MIRROR, 7, 0,
+                               G_TX_NOLOD, G_TX_NOLOD);
     }
 
 #if PLATFORM_IQUE
     R_TEXTBOX_TEXHEIGHT = 442;
 #endif
 
+    gSPTextureRectangle(gfx++, R_TEXTBOX_X << 2, R_TEXTBOX_Y << 2, (R_TEXTBOX_X + R_TEXTBOX_WIDTH) << 2,
+                        (R_TEXTBOX_Y + R_TEXTBOX_HEIGHT) << 2, G_TX_RENDERTILE, 0, 0, R_TEXTBOX_TEXWIDTH << 1,
+                        R_TEXTBOX_TEXHEIGHT << 1);
 
     // Draw treble clef
     if (msgCtx->textBoxType == TEXTBOX_TYPE_FLUTE) {
-        Gfx3D_SetPrimColor(255, 100, 0, 255);
+        gDPPipeSync(gfx++);
+        gDPSetCombineLERP(gfx++, 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE,
+                          0);
+        gDPSetPrimColor(gfx++, 0, 0, 255, 100, 0, 255);
+        gDPLoadTextureBlock_4b(gfx++, gFluteTrebleClefTex, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR, G_TX_MIRROR,
+                               G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPTextureRectangle(gfx++, R_TEXTBOX_CLEF_XPOS << 2, R_TEXTBOX_CLEF_YPOS << 2, (R_TEXTBOX_CLEF_XPOS + 16) << 2,
+                            (R_TEXTBOX_CLEF_YPOS + 32) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
     }
 
 }
@@ -2802,6 +2943,7 @@ void Message_SetView(View* view) {
  * Draws the textbox in full and updates flute state
  */
 void Message_DrawMain(PlayState* play) {
+    // (restored: original body, native RDP commands via engine/rdp_gbi.h)
     static s16 sFluteEffectActorIds[] = {
         ACTOR_OCEFF_WIPE3, ACTOR_OCEFF_WIPE2, ACTOR_OCEFF_WIPE,  ACTOR_OCEFF_SPOT,
         ACTOR_OCEFF_WIPE,  ACTOR_OCEFF_STORM, ACTOR_OCEFF_WIPE4,
@@ -2850,18 +2992,23 @@ void Message_DrawMain(PlayState* play) {
     u16 buttonIndexPos;
     u16 j;
 
-    Gfx3D_SetSegment(0x02, (const void*)(play->interfaceCtx.parameterSegment));
-    Gfx3D_SetSegment(0x07, (const void*)(msgCtx->textboxSegment));
+    gSPSegment(gfx++, 0x02, play->interfaceCtx.parameterSegment);
+    gSPSegment(gfx++, 0x07, msgCtx->textboxSegment);
 
     if (msgCtx->msgLength != 0) {
         if (msgCtx->fluteAction != FLUTE_ACTION_FROGS && msgCtx->msgMode != MSGMODE_SONG_PLAYED_ACT &&
             msgCtx->msgMode >= MSGMODE_TEXT_BOX_GROWING && msgCtx->msgMode < MSGMODE_TEXT_CLOSING &&
             msgCtx->textBoxType < TEXTBOX_TYPE_NONE_BOTTOM) {
             Message_SetView(&msgCtx->view);
+            Gfx_SetupDL_39Ptr(&gfx);
             Message_DrawTextBox(play);
         }
 
+        Gfx_SetupDL_39Ptr(&gfx);
 
+        gDPSetAlphaCompare(gfx++, G_AC_NONE);
+        gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE,
+                          0);
 
         switch (msgCtx->msgMode) {
             case MSGMODE_TEXT_START:
@@ -3694,16 +3841,28 @@ void Message_DrawMain(PlayState* play) {
 
         if (msgCtx->msgMode >= MSGMODE_FLUTE_PLAYING && msgCtx->msgMode < MSGMODE_TEXT_AWAIT_NEXT &&
             msgCtx->fluteAction != FLUTE_ACTION_FREE_PLAY && msgCtx->fluteAction != FLUTE_ACTION_CHECK_NOWARP) {
+            Gfx_SetupDL_39Ptr(&gfx);
 
+            gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE,
+                              ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
 
             if (msgCtx->msgMode == MSGMODE_SONG_PLAYBACK) {
                 g = msgCtx->fluteAction - FLUTE_ACTION_PLAYBACK_MINUET;
                 r = gFluteSongButtons[g].numButtons;
                 for (notePosX = R_FLUTE_BUTTONS_XPOS, i = 0; i < r; i++) {
-                    Gfx3D_SetPrimColor(150, 150, 150, 150);
-                    Gfx3D_SetEnvColor(10, 10, 10, 0);
+                    gDPPipeSync(gfx++);
+                    gDPSetPrimColor(gfx++, 0, 0, 150, 150, 150, 150);
+                    gDPSetEnvColor(gfx++, 10, 10, 10, 0);
 
+                    gDPLoadTextureBlock(gfx++, sFluteNoteTextures[gFluteSongButtons[g].buttonsIndex[i]],
+                                        G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
+                    gSPTextureRectangle(gfx++, notePosX << 2,
+                                        R_FLUTE_BUTTONS_YPOS(gFluteSongButtons[g].buttonsIndex[i]) << 2,
+                                        (notePosX + 16) << 2,
+                                        (R_FLUTE_BUTTONS_YPOS(gFluteSongButtons[g].buttonsIndex[i]) + 16) << 2,
+                                        G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
                     notePosX += R_FLUTE_BUTTONS_XPOS_OFFSET;
                 }
             }
@@ -3723,15 +3882,25 @@ void Message_DrawMain(PlayState* play) {
                         }
                     }
 
+                    gDPPipeSync(gfx++);
                     if (sFluteButtonIndexBuf[i] == FLUTE_BTN_A) {
-                        Gfx3D_SetPrimColor(sFluteButtonAPrimR, sFluteButtonAPrimG, sFluteButtonAPrimB, sFluteButtonAlphaValues[i]);
-                        Gfx3D_SetEnvColor(sFluteButtonAEnvR, sFluteButtonAEnvG, sFluteButtonAEnvB, 0);
+                        gDPSetPrimColor(gfx++, 0, 0, sFluteButtonAPrimR, sFluteButtonAPrimG, sFluteButtonAPrimB,
+                                        sFluteButtonAlphaValues[i]);
+                        gDPSetEnvColor(gfx++, sFluteButtonAEnvR, sFluteButtonAEnvG, sFluteButtonAEnvB, 0);
                     } else {
-                        Gfx3D_SetPrimColor(sFluteButtonCPrimR, sFluteButtonCPrimG, sFluteButtonCPrimB, sFluteButtonAlphaValues[i]);
-                        Gfx3D_SetEnvColor(sFluteButtonCEnvR, sFluteButtonCEnvG, sFluteButtonCEnvB, 0);
+                        gDPSetPrimColor(gfx++, 0, 0, sFluteButtonCPrimR, sFluteButtonCPrimG, sFluteButtonCPrimB,
+                                        sFluteButtonAlphaValues[i]);
+                        gDPSetEnvColor(gfx++, sFluteButtonCEnvR, sFluteButtonCEnvG, sFluteButtonCEnvB, 0);
                     }
 
+                    gDPLoadTextureBlock(gfx++, sFluteNoteTextures[sFluteButtonIndexBuf[i]], G_IM_FMT_IA,
+                                        G_IM_SIZ_8b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                        G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
+                    gSPTextureRectangle(gfx++, notePosX << 2, R_FLUTE_BUTTONS_YPOS(sFluteButtonIndexBuf[i]) << 2,
+                                        (notePosX + 16) << 2,
+                                        (R_FLUTE_BUTTONS_YPOS(sFluteButtonIndexBuf[i]) + 16) << 2, G_TX_RENDERTILE,
+                                        0, 0, 1 << 10, 1 << 10);
                     notePosX += R_FLUTE_BUTTONS_XPOS_OFFSET;
                 }
             }
@@ -3809,8 +3978,9 @@ void Message_Draw(PlayState* play) {
     }
 #endif
 
-    // the original opened its text cursor on POLY_OPA_DISP
-    Gfx3D_SetTarget(GFX_BUF_OPA);
+    // the original built the message commands in POLY_OPA_DISP memory but called them from OVERLAY_DISP
+    // (gSPDisplayList(OVERLAY_DISP++, plusOne)): they run with the overlay, after the 3D scene
+    Gfx3D_SetTarget(GFX_BUF_OVL);
     Message_DrawMain(play);
 }
 

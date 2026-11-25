@@ -2,6 +2,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include "engine/vtx.h"
 #include "game_types.h"
 #include "romfile.h"
 #include "view.h"
@@ -69,9 +70,16 @@ typedef enum DoAction {
     /* 0x1D */ DO_ACTION_MAX
 } DoAction;
 
+// Action label textures (do_action_static, 48x16 IA4 each; the original build generated these from the
+// asset XML into the asset header)
+#define DO_ACTION_TEX_WIDTH 48
+#define DO_ACTION_TEX_HEIGHT 16
+#define DO_ACTION_TEX_SIZE ((DO_ACTION_TEX_WIDTH * DO_ACTION_TEX_HEIGHT) / 2)
+
 typedef struct InterfaceContext {
     /* 0x0000 */ View   view;
-    // native: HUD vertex buffers removed (HUD is drawn by the native 2D layer)
+    /* 0x0128 */ Vtx*   actionVtx;
+    /* 0x012C */ Vtx*   beatingHeartVtx;
     /* 0x0130 */ u8*    parameterSegment;
     /* 0x0134 */ u8*    doActionSegment;
     /* 0x0138 */ u8*    iconItemSegment;
