@@ -599,3 +599,72 @@ The human asked for 60 fps and for the white building interiors; audio moves to 
   ~97 % of matrix commands, title demo 95-100 %; Azahar reports 59.8 presented frames per second. A test
   build presenting every frame at t = 0.5 shows no stray geometry while walking and turning
   (`evidence/i60_half_strip.png`, input `trace/inputs/i60_walk.txt`).
+
+## 2026-11-25 — Asset inspector build
+The human reported misplaced or repeating assets (the treehouse ladder, some floors) and asked whether a
+better way to get the assets exists; then asked for a demo build to browse the objects, fly around them and
+capture mistakes. Findings so far: the decomp's own asset extractor is not in the tree (blinded) and there is
+no N64 renderer here; the converter reads the same ROM data the extractor would (XML offsets), and for the
+forest it reports no warnings and no unsupported commands. So mistakes are in how the data is interpreted,
+not in how it is read, and need examples. `make INSPECT=1` (source/test/inspector.c, docs/INSPECTOR.md):
+objects part by part (skeletons animated with the object's first animation), free flight through the real
+scenes, captures with camera / object / symbol / nearby actors plus a BMP; `tools/inspect_replay.py`
+re-renders any capture headlessly (verified: replay matches the capture).
+
+## 2026-11-25 — P4 (part 10): asset errors, intro cutscene actors
+The human reported misdrawn assets (the treehouse ladder's right pole too far left, the porch floor tiles
+turned the wrong way) and Ganondorf missing from the drawbridge cutscene; asked first for a better way to
+get the assets, then (after a runtime display-list compiler) to just make them look right.
+- Extraction checked: all 544 asset files of the NTSC 1.0 ROM use exactly the XML the decomp's own NTSC 1.0
+  extraction config names (byte-identical copies; no version-specific variants needed). Z64Utils v3.1.1 was
+  looked at: it exports PNG textures, display-list disassembly and JSON, no 3D models.
+- Runtime display-list compiler (engine/f3d.c, raw asset files, cached by list and texture state): same images
+  as the offline meshes in every comparison, ~2.5 ms more CPU per game frame: kept as `make F3D=1`.
+- Cause of the ladder and porch errors: the ladder's material sets tile 0 mirrored (shown) and tile 1
+  repeating on the same texture memory; both units got the same PICA texture object, whose wrap mode is part
+  of the object, so binding unit 1 replaced unit 0's mirror by repeat (found by switching unit 0's mode: no
+  change; switching both: change). Fix: each unit binds its own view of the texture. The porch floor (tile 0
+  mirrored on both axes) is fixed by the same change, and every material with two tiles on one texture.
+- The drawbridge cutscene is the new-game intro's nightmare (scene hiral_demo): its actors En_Viewer (the
+  riders: Zelda and Impa, Ganondorf on his horse), Demo_Kankyo (rain, lightning) and Demo_Effect were not
+  ported; imported (Demo_* with their RDP commands kept). Their compiled-in cutscene scripts use a native
+  cutscene_commands.h whose packing macros put every field in native byte order (as tools/cutscene.py does
+  for the ROM's scripts).
+- The riders were still invisible after the import (the human: "these character are missing", with reference
+  images of Ganondorf, and of Zelda and Impa on the white horse). The asset inspector drew nothing for their
+  skeletons while each limb list drew alone: `SkelAnime_DrawFlexOpa` began a flexible-skeleton batch but never
+  submitted it (`Gfx3D_FlexEnd` missing; En_Viewer is its first user). Fixed; all three riders show.
+- Ganondorf's cape (En_Varkon_Mant) imported: its cloak list loads its vertices from segment 0x0C, which the
+  actor binds to two vertex arrays it rewrites each frame. Runtime vertices (as for skinned horses) now also
+  on segment 0x0C; the overlay's data block located by its texture address (the list loads no overlay
+  vertices); the cloak list compiled with its material list as prelude (it was drawn untextured, near-white,
+  before). As in the original, only Ganondorf's galloping variant attaches the cape to his shoulders; the
+  nightmare's rearing variant leaves it at the scene origin. Item_Flute (the ocarina, spawned by Impa's
+  actor in this cutscene) imported.
+- Result: ladder and porch as in the original (`3dsport/evidence/ladder_before_after.png`,
+  `porch_fixed.png`); the nightmare with all riders (`rider_skels.png`, `nm9_grid.png`, `nm7_horse.png`).
+
+## 2026-11-25 — P4 (part 11): HUD on the top screen, lock-on reticle, letterbox, asset survey
+The human asked for the hearts and rupees on the top screen: "when targeting someone the [reticle] appears on
+the bottom screen not the top".
+- The lock-on reticle (`Attention_Draw`, triangles in the overlay list) is drawn from `Interface_Draw`, which
+  draws to the bottom screen since the 2DS layout: it now draws on the top screen. Hearts, magic meter,
+  crowns, small keys, horse carrots, archery score and timers moved to the top screen too; the B / C buttons
+  (touch targets) and the minimap stay on the bottom screen.
+- The beating heart (a vertex quad under the overlay's orthographic camera) was never drawn (only 2 of 3
+  hearts showed): its quad lies in front of the orthographic near plane, and the CPU clip rejected it. The
+  original's microcode (F3DZEX2 NoN) does no near-plane clipping; the clip now rejects only what is behind
+  the eye (w > 0).
+- The letterbox (Z-targeting, cutscenes) was not drawn at all: the native view code dropped
+  `View_ApplyLetterbox`'s scissor. The renderer has no scissor; the bars are filled black over the game view
+  at the start of the overlay list (STUBS R1).
+- Asset survey (the human: compare the asset viewer's models with pictures online): `tools/inspect_survey.py`
+  captured all 382 objects into contact sheets; suspects were compared with Zelda Wiki's in-game model
+  renders (Kokiri, Know-It-All brother, Malon, Dampé, Ganondorf, Kaepora Gaebora, Kokiri Sword, Cucco,
+  Mirror Shield, Bombchu, Mad Scrub) and, where the render differed, with the textures decoded from the ROM
+  (Jabu-Jabu tentacle, Mad Scrub leaves). No conversion error found: every difference was the viewer drawing
+  a part without its actor (eye textures, runtime texture segments, animations kept in other objects,
+  material-only lists, models made of several lists). The Models Resource (all-model thumbnails) answered
+  with a human-verification check and was not used.
+- Result: `3dsport/evidence/t5_grid.png` (lock-on in the Know-It-All brothers' house: reticle, bars, hearts
+  on top), `gr_grid.png` (greeting cutscene with bars).

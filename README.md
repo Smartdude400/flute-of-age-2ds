@@ -4,11 +4,12 @@
 
 **A from-source, native Nintendo 2DS / 3DS port of the *Flute of Age* decompilation —<br>no emulator, no N64 compatibility layer: the game's own code, translated and running on the 3DS hardware.**
 
-<img src="docs/images/hero_forest.png" width="640" alt="The player standing in Sylvan Forest, rendered natively on the 2DS">
+<img src="docs/images/hero_dual.png" width="440" alt="Both screens of the 2DS: the forest on top, the B/C buttons and minimap below">
 
 ![platform](https://img.shields.io/badge/platform-2DS%20%7C%203DS-d12228?style=for-the-badge&logo=nintendo3ds&logoColor=white)
 ![language](https://img.shields.io/badge/language-C11-00599C?style=for-the-badge&logo=c&logoColor=white)
 ![gpu](https://img.shields.io/badge/GPU-PICA200%20via%20citro3d-6f42c1?style=for-the-badge)
+![fps](https://img.shields.io/badge/60%20fps-interpolated-2ea44f?style=for-the-badge)
 ![status](https://img.shields.io/badge/status-playable%20demo-f0a500?style=for-the-badge)
 
 [What works](#-what-works) · [Screenshots](#-screenshots) · [Setup guide](#-setup-guide) · [How to play](#-how-to-play) · [How it works](#-how-it-works) · [Roadmap](#-roadmap)
@@ -25,49 +26,56 @@
 
 ## ✨ What works
 
-| | Feature | Notes |
-|:-:|---|---|
-| ✅ | **Game logic runs natively** | The decompiled game code is translated to C for the ARM11 (hardware float, original math order) |
-| ✅ | **The real `Play` state** | Scene + room loading, collision, camera, environment / time of day, actor system |
-| ✅ | **The player** | Walk, run, turn, roll, collide — the original `z_player.c`, all 16 000 lines |
-| ✅ | **Full-fidelity renderer** | Original draw order (opaque → translucent → overlay), the two-cycle colour combiner mapped onto the PICA200 TEV, fog, lighting, environment mapping, both texture layers, all 71 render presets |
-| ✅ | **Skyboxes** | Day/night skies with the game's own blending logic |
-| ✅ | **60 fps** | The game logic keeps the original 20 Hz fixed timestep (input sampled per retrace, deterministic replays); every retrace is presented, blending the camera, models and skeletons between the last two game frames (`make PRESENT20=1` for the original pacing) |
-| ✅ | **Prerendered rooms** | House and shop interiors, the market, the Hall of Ages surroundings: the original background images behind the 3D characters |
-| ✅ | **Saves** | Written to `sdmc:/3ds/foa/save.sra` |
-| ✅ | **First-area actors** | The 19 actors of the starting forest: Sylvan children, Sylva, Milo, the fairy companion and fairies, signs, grass, rocks, Gossip Stones, Skulltulas, room transitions, ambience |
-| 🚧 | Other actors | Actors outside the first area are skipped for now (each logged once) |
-| ✅ | **Cutscenes** | All cutscene scripts converted; Sylva's greeting plays when you step outside |
-| ✅ | **Text boxes** | The original font, box frames, drop shadow and end-of-message icons, drawn by the game's own message code |
-| ✅ | **File select** | Files, name entry, copy / erase / options, starting a new or saved game (`make FILESELECT=1` boots straight into it) |
-| ✅ | **Title screen** | The attract demo (Link riding Epona at dawn) with the title and PRESS START, then file select |
-| ✅ | **Pause menu** | On the bottom screen: Select Item, Map, Quest Status and Equipment (with the live Link preview), flat pages, touch or buttons |
-| 🚧 | Audio | Not ported yet (silent) |
-| ✅ | **HUD** | The original interface code: hearts (with the beating heart), magic meter, B / C buttons, rupees and the minimap (with the compass arrows) on the bottom screen; the A button and its action label on top; hidden during cutscenes |
+<table>
+<tr><td valign="top" width="50%">
+
+**🎮 Game**
+- ✅ The decompiled game code, translated to C and running natively (hardware float, original math order)
+- ✅ The real `Play` state: scenes, rooms, collision, camera, time of day, actors
+- ✅ The player: the original `z_player.c`, all 16 000 lines
+- ✅ Title screen with the attract demo, file select, name entry, saves
+- ✅ All cutscene scripts; the new-game intro nightmare with Zelda, Impa and Ganondorf
+- ✅ The first area's actors: Sylvan children, Sylva, Milo, fairies, signs, grass, rocks, Gossip Stones, Skulltulas
+- 🚧 Actors outside the first area are skipped for now (each logged once)
+- 🚧 Audio (silent for now)
+
+</td><td valign="top" width="50%">
+
+**🖼 Graphics & presentation**
+- ✅ Full-fidelity renderer: original draw order, the two-cycle colour combiner on the PICA200 TEV, fog, lighting, environment maps, both texture layers, all 71 render presets
+- ✅ **60 fps**: logic at the original 20 Hz, every retrace presented with camera, models and skeletons blended between game frames
+- ✅ Skyboxes, skinned meshes (horses), cloth (Ganondorf's cape)
+- ✅ Prerendered rooms: interiors, the market, behind the 3D characters
+- ✅ **Two screens**: the game, hearts, rupees and the A button on top; the B / C buttons, the minimap and the **pause menu** on the bottom, by touch or buttons
+- ✅ Text boxes, lock-on reticle, letterbox bars, the beating heart
+
+</td></tr>
+</table>
 
 ## 📸 Screenshots
 
 <table>
 <tr>
+<td align="center"><img src="docs/images/title_demo.png" width="400"><br><sub>The title screen's attract demo</sub></td>
+<td align="center"><img src="docs/images/file_select.png" width="400"><br><sub>File select</sub></td>
+</tr>
+<tr>
+<td align="center" colspan="2"><img src="docs/images/nightmare.png" width="800"><br><sub>The new-game intro: Zelda and Impa flee the castle, Ganondorf gives chase</sub></td>
+</tr>
+<tr>
+<td align="center" colspan="2"><img src="docs/images/pause_pages.png" width="800"><br><sub>The pause menu lives on the bottom screen: Select Item, Map, Quest Status, Equipment (with the live preview)</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/images/lockon.png" width="400"><br><sub>Locked on: reticle and letterbox bars</sub></td>
+<td align="center"><img src="docs/images/market.png" width="400"><br><sub>A prerendered background (the market)</sub></td>
+</tr>
+<tr>
 <td align="center"><img src="docs/images/walk.png" width="400"><br><sub>Running through Sylvan Forest</sub></td>
-<td align="center"><img src="docs/images/roll.png" width="400"><br><sub>Rolling (A while running)</sub></td>
-</tr>
-<tr>
-<td align="center"><img src="docs/images/sky_overview.png" width="400"><br><sub>Native skybox + scene renderer</sub></td>
-<td align="center"><img src="docs/images/player_model.png" width="400"><br><sub>The player model on the PICA200</sub></td>
-</tr>
-<tr>
-<td align="center" colspan="2"><img src="docs/images/forest_npcs.png" width="640"><br><sub>A Sylvan child (head, body and legs from three objects) and a fairy</sub></td>
+<td align="center"><img src="docs/images/forest_npcs.png" width="400"><br><sub>A Sylvan child (head, body and legs from three objects) and a fairy</sub></td>
 </tr>
 </table>
 
 <p align="center"><img src="docs/images/gameplay_strip.png" width="900"><br><sub>A scripted run, captured headlessly every ~2 s</sub></p>
-
-<details>
-<summary>📱 Both screens, as on the console</summary>
-<p align="center"><img src="docs/images/dual_screen.png" width="400"><br>
-<sub>Top: the game at its original 320×240, centred on the 400×240 screen. Bottom: the engine log console.</sub></p>
-</details>
 
 ---
 
@@ -148,10 +156,12 @@ This produces **`foa_3ds_boot.3dsx`**: the playable demo, which starts in Sylvan
 
 | Command | Output | What it is |
 |---|---|---|
-| `make BOOT=0xEE` | `foa_3ds_boot.3dsx` | **The demo** — new game, straight into Sylvan Forest |
-| `make` | `foa_3ds.3dsx` | The normal boot flow (logo → title setup); the title demo isn't ported yet, so it stops there |
-| `make HARNESS=1` | `foa_3ds_h1.3dsx` | Player-model viewer (renderer test) |
-| `make HARNESS=2` | `foa_3ds_h2.3dsx` | Free-fly scene viewer (renderer test) |
+| `make BOOT=0xEE` | `foa_3ds_boot.3dsx` | **The demo**: a new file, straight into Sylvan Forest |
+| `make` | `foa_3ds.3dsx` | The full boot: title screen, file select, the intro |
+| `make FILESELECT=1` | `foa_3ds_fs.3dsx` | Boots straight into file select |
+| `make INSPECT=1` | `foa_3ds_inspect.3dsx` | The [asset inspector](docs/INSPECTOR.md): every object and scene, with captures |
+| `make HARNESS=1` / `HARNESS=2` | `foa_3ds_h1/h2.3dsx` | Renderer tests: player-model viewer, free-fly scene viewer |
+| `make PRESENT20=1` | | The original 20 fps pacing instead of 60 fps |
 
 > [!NOTE]
 > On Windows without the devkitPro shell, `./build.sh BOOT=0xEE` runs the same `make` through MSYS2.
@@ -250,6 +260,10 @@ python tools/run_test.py foa_3ds_boot.3dsx --frames 240 --script trace/inputs/p3
 It needs a portable Azahar folder (`azahar.exe` plus a `user/` folder whose `config/qt-config.ini` has
 `enable_rpc_server=true` and `use_vsync=false`); point `FOA_AZAHAR_DIR` at it.
 
+## 🔍 Asset inspector
+
+`./build.sh INSPECT=1` builds `foa_3ds_inspect.3dsx`. Use it to browse every object part by part, fly through the scenes and capture graphics mistakes with the exact camera position (see [docs/INSPECTOR.md](docs/INSPECTOR.md)).
+
 ## 🧭 Roadmap
 
 - [x] Native engine layer, fixed-timestep runner, saves
@@ -263,6 +277,8 @@ It needs a portable Azahar folder (`azahar.exe` plus a `user/` folder whose `con
 - [x] Title screen
 - [x] Skinned meshes (horses)
 - [x] Pause menu (bottom screen, touch)
+- [x] The new-game intro (nightmare cutscene actors, cloth)
+- [x] Asset inspector (browse, capture, survey every object)
 - [ ] Audio (sequence player + synthesis on the ARM11, output through the DSP)
 - [x] Prerendered backgrounds (interiors, market)
 - [x] 60 fps presentation (frame interpolation; game logic stays at the original 20 Hz)
@@ -295,9 +311,9 @@ Those headers are generated from your ROM: run `python tools/setup_assets.py` be
 </details>
 
 <details>
-<summary><b>The bottom screen shows “[ACTOR] id … not ported”</b></summary>
+<summary><b>The log shows “[ACTOR] id … not ported”</b></summary>
 
-Expected: only the player is ported so far. Everything else in the scene is skipped and logged once.
+Expected outside the first area: actors that are not ported yet are skipped and logged once.
 </details>
 
 ---

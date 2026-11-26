@@ -39,7 +39,7 @@ The pause menu and HUD live on the bottom screen; game logic is unchanged (the m
 | ID | Where | Original | Port |
 |---|---|---|---|
 | L1 | `Play_DrawOverlayElements` (z_play.c) | pause menu and HUD drawn over the frame | drawn on the bottom screen (320x240, the original frame size) at their original coordinates; text boxes stay on top |
-| L2 | `Interface_Draw` (z_parameter.c) | one HUD layer | the A button with its action label, and the full-screen fade, are drawn on the top screen (the fade on both) |
+| L2 | `Interface_Draw` (z_parameter.c) | one HUD layer | top screen: hearts, magic meter, crowns (rupees), small keys, horse carrots, archery score and timers (the human's decision of 2026-11-25), the A button with its action label, the lock-on reticle (`Attention_Draw`) and the full-screen fade (on both screens); bottom screen: the B / C buttons and the minimap |
 | L3 | `KaleidoScope_Draw/DrawPages`, page switch (z_kaleido_scope.c) | four pages on a turning cube, 16-step scroll between pages | the active page drawn flat facing the view (inactive pages' draw code still runs, output discarded); the 16 switch steps run in one frame |
 | L4 | `engine/input.c`, `engine/touch.h` | no touch screen | tapping the B / C / START icons or the page arrows acts as that button; tapping an item or equipment moves the cursor there (a second tap on an equipment equips it) |
 
@@ -50,10 +50,16 @@ defined value and logs the event. Each one is invisible in play (the value is ov
 |---|---|---|---|
 | D-ANIMSEG | `Animation_GetLength/GetLastFrame` (z_skelanime.c) | En_Ko asks for animation lengths while segment 6 still holds gameplay_keep (before its own objects load) and reads unrelated bytes; the value is replaced when the objects load | frame count 0; `Asset_Resolve: unresolved ...` logged |
 
+## Native replacements (R-series, presentation)
+| ID | Where | Original | Port |
+|---|---|---|---|
+| R1 | Play_Draw (z_play.c), `View_ApplyLetterbox` | the letterbox (Z-targeting, cutscenes) scissors the game's opaque / translucent lists | the renderer has no scissor: the bars are filled black over the game view at the start of the overlay list (overlay elements draw over them, as on the original) |
+
 ## Known visual issues (open)
 | Issue | Notes |
 |---|---|
 | Forest dust motes (Object_Kankyo) draw as small squares | texture `gSun1Tex` converted and bound through segment 8 (the model list now inherits its material list's tile state); sampling still wrong, cause not found yet |
 | 2D vertex quads (HUD action button / heart, file select windows) | transformed on the CPU and drawn with affine texture mapping (no perspective correction inside a quad); overlay viewports are not scissored |
 | Sword / stick swing trail | `EffectBlure_Draw` presentation stub (listed above) |
+| Ganondorf's cape tears (final battle) | `EnVarkonMant_Tear` clears texels of a game-memory copy of the cape texture; the drawn texture is the converted one, so the holes do not show yet |
 | object_zf (Lizalfos) not converted | a limb list branches into a runtime segment (07); the converter has no path for that yet |

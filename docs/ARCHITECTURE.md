@@ -67,6 +67,19 @@ game logic translated (no original-platform types or calls).
   lighting, texgen and tile texture transforms.
 - Render-state presets (`Gfx_SetupDL_*`) are compiled from the ROM table into `romfs/setupdl.pobj`.
 
+## Texture units
+A texture's filter and wrap modes are part of its PICA200 state. The original's two tiles (TEXEL0 / TEXEL1)
+often address the same texture memory with different clamp / mirror / mask settings, so both units can be
+given the same texture with different modes: each unit binds its own view of the texture (same texels, its
+own filter and wrap), engine/gfx3d.c bind_view.
+
+## Runtime display-list compiler (optional)
+`make F3D=1` compiles the original display lists of the asset files (romfs/vrom/<vrom>.raw, written by
+tools/build_rawassets.py) when they are drawn, with the actual segment bindings and the texture state left by
+earlier lists and game texture loads (engine/f3d.c); it also follows matrices of the asset data and vertex
+modifications. In every comparison so far (forest, 40 objects, title, pause, shop) it drew the same images as
+the offline-compiled meshes, at about 2.5 ms more CPU time per game frame, so the default stays offline.
+
 ## Prerendered rooms (S7)
 Rooms of shape type IMAGE keep their background image(s) in the room file (JPEG, sometimes RGBA16/CI). The
 scene converter decodes them into RGBA5551 room textures ('TXMP', keyed by the image address); the restored
@@ -125,6 +138,7 @@ depth neither tested nor written, offset by the camera quake.
   address + texel hash. `tools/restore_rdp_draws.py` put the original bodies of the z_message.c draw
   functions back (only the display-list cursor plumbing removed).
 - The HUD's action button and beating heart are vertex quads under the overlay's own camera
+  (clipped only behind the eye, w > 0: the original's microcode, F3DZEX2 NoN, does no near-plane clipping)
   (View_Apply*ToOverlay -> `Gfx3D_SetOverlayCamera`, viewport included); the few vertices are
   transformed on the CPU at replay and drawn as screen-space triangles. Texture handles into a segment
   the game bound to its own memory (segment 2 = the interface texture file) resolve to those bytes.
@@ -138,6 +152,12 @@ depth neither tested nor written, offset by the camera quake.
   runtime buffer (segment 8) compile to placeholder vertices holding the buffer index
   (`PMeshHdr.vtxSeg`); the renderer builds them from the game's Vtx buffer at replay into a per-frame
   ring in GPU memory. The game's own skin code (z_skin.c / z_skin_awb.c) updates the buffers.
+  The same path draws cloth whose vertices the actor rewrites every frame and binds to segment 0x0C
+  (Ganondorf's cape, En_Varkon_Mant: its two vertex arrays stay in game memory, double-buffered as on
+  the original).
+- Overlay lists drawn right after a material list of the same overlay are compiled with that list's
+  texture state as their start (`build_overlays.py PRELUDES`, as `build_object.py PRELUDES`). Overlays
+  whose lists load no vertices of their own locate their data block by texture image addresses instead.
 - ROM data the game DMA's into its own buffers (font, text box textures, item icons) is copied by
   `RomBind_Set` from raw files in RomFS (`tools/build_rawdata.py`, index `rawfiles.bin`).
 - Limb index enums (`MILO_LIMB_HEAD`, ...) are generated into the object headers from the XML names and
