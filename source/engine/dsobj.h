@@ -31,6 +31,8 @@ typedef struct DsObj {
     u16 numTex;    // kept here: the resident data may be overwritten while the object is unused (pause menu)
     bool relocated; // payload pointers fixed up (engine/asset.c), once per load
     const struct DsObj* texOwner; // another load of the same file whose loaded textures this one uses
+    const u8* raw;  // the original file (romfs/vrom/<vrom>.raw, big-endian), for the runtime list compiler
+    u32 rawSize;
     char path[40]; // RomFS path, for loading textures
 } DsObj;
 

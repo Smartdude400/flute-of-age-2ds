@@ -13,6 +13,7 @@
 #include "engine/runner.h"
 #include "engine/gfx.h"
 #include "engine/gfx3d.h"
+#include "engine/f3d.h"
 #include "engine/screen.h"
 #include "engine/input.h"
 #include "engine/log.h"
@@ -21,6 +22,9 @@
 #include "game.h"
 #include "regs.h"
 #include "z_game_dlftbls.h"
+#ifdef PORT_INSPECT
+#include "test/inspector.h"
+#endif
 
 static struct GraphicsContext sGfxCtx;
 
@@ -74,6 +78,10 @@ static void perf_sample(u64 logic, u64 replay) {
         {
             u32 total, linked;
             Gfx3D_TakeInterpStats(&total, &linked);
+            u32 fc, fh, ff;
+            F3D_Stats(&fc, &fh, &ff);
+            log_printf("[perf]   runtime lists: %lu compiled, %lu cached, %lu failed\n", (unsigned long)fc,
+                       (unsigned long)fh, (unsigned long)ff);
             log_printf("[perf]   interpolation: %lu of %lu matrix commands matched\n", (unsigned long)linked,
                        (unsigned long)total);
         }
@@ -91,10 +99,14 @@ static void present(float t) {
     Screen_BeginFrame(); // waits for the previous frame's GPU work (and vblank sync)
     u64 t1 = svcGetSystemTick();
     sPerfWait += t1 - tw;
+    if (Screen_SnapshotPending()) {
+        t = 1.0f; // the snapshot shows the recorded frame itself
+    }
 #ifdef PORT_INTERP_TEST_T
     t = PORT_INTERP_TEST_T; // test builds: every presented frame is a blend (shows matching errors)
 #endif
     Gfx3D_Replay(t); // replays the recorded frame on the GPU in the original order
+    Screen_SetFrameExact(t >= 1.0f);
     u64 t2 = svcGetSystemTick();
     Screen_EndFrame();
     perf_sample(sLogicTicks, t2 - t1); // per presented frame (logic: the game frame it shows)
@@ -120,6 +132,11 @@ static void frame(GameState* gameState) {
     input_consume(rate);
 
     GameState_ReqPadData(gameState);
+#ifdef PORT_INSPECT
+    if (Inspector_Input(&gameState->input[0])) {
+        memset(&gameState->input[0], 0, sizeof(gameState->input[0])); // the inspector took it
+    }
+#endif
     u64 t0 = svcGetSystemTick();
     Gfx3D_BeginFrame();
     if (sNewGameState) {

@@ -18,6 +18,7 @@
 #include "engine/asset.h"
 #include "engine/tev.h"
 #include "engine/touch.h"
+#include "engine/f3d.h"
 #include "engine/log.h"
 #include "light.h"
 #include "gfx3d_shbin.h"
@@ -148,6 +149,7 @@ static struct {
     const void* verts;
     bool lit;
     const u8* palKey; // mesh palette (type, id pairs) last uploaded
+    const PMeshHdr* palMesh;
     u8 palN;
     u32 palGen;
     u32 lightGen, lookGen;
@@ -517,6 +519,23 @@ static GPU_TEXTURE_WRAP_PARAM wrap_mode(bool clamp, bool mirror) {
     return clamp ? GPU_CLAMP_TO_EDGE : GPU_REPEAT;
 }
 
+// Texture unit views: the filter and wrap modes are part of a PICA texture's state, so a texture bound to both
+// units (the original's two tiles often address the same texture memory with different clamp / mirror / mask
+// settings) needs one copy of that state per unit; each unit binds its own view of the texture (same texels).
+static C3D_Tex sUnitView[2];
+
+static void bind_view(int u, const C3D_Tex* tex, GPU_TEXTURE_FILTER_PARAM filter, GPU_TEXTURE_WRAP_PARAM wrapS,
+                      GPU_TEXTURE_WRAP_PARAM wrapT) {
+    C3D_Tex v = *tex;
+    C3D_TexSetFilter(&v, filter, filter);
+    C3D_TexSetWrap(&v, wrapS, wrapT);
+    if (sC.bound[u] != &sUnitView[u] || memcmp(&sUnitView[u], &v, sizeof(v)) != 0) {
+        sUnitView[u] = v; // the registers are written from the view at the next draw: safe to reuse it later
+        C3D_TexBind(u, &sUnitView[u]);
+        sC.bound[u] = &sUnitView[u];
+    }
+}
+
 static void apply_textures(float texA[4], float texB[4]) {
     bool bilerp = MODE_TEXFILT(R.mode) != 0;
     float scaleS = (R.texScaleS == 0xFFFF ? 65536.0f : (float)R.texScaleS) / 65536.0f;
@@ -528,15 +547,9 @@ static void apply_textures(float texA[4], float texB[4]) {
         if (tex != NULL) {
             W = tex->w;
             H = tex->h;
-            C3D_Tex* ct = (C3D_Tex*)&tex->tex;
-            u32 param = ct->param;
-            C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
-            C3D_TexSetWrap(ct, wrap_mode(t->flags & TEXF_CLAMP_S, t->flags & TEXF_MIRROR_S),
-                           wrap_mode(t->flags & TEXF_CLAMP_T, t->flags & TEXF_MIRROR_T));
-            if (sC.bound[u] != ct || ct->param != param) {
-                C3D_TexBind(u, ct);
-                sC.bound[u] = ct;
-            }
+            bind_view(u, &tex->tex, bilerp ? GPU_LINEAR : GPU_NEAREST,
+                      wrap_mode(t->flags & TEXF_CLAMP_S, t->flags & TEXF_MIRROR_S),
+                      wrap_mode(t->flags & TEXF_CLAMP_T, t->flags & TEXF_MIRROR_T));
         } else if (sC.bound[u] != &sWhite) {
             C3D_TexBind(u, &sWhite);
             sC.bound[u] = &sWhite;
@@ -703,11 +716,24 @@ static void apply_render_state(void) {
 
 // Uniform rows (column-vector convention) of F * (M * V * P)^T, F = screen rotation + depth range fix:
 // x' = y, y' = -x (portrait framebuffer), z' = (z - w) / 2 (near -> -1, far -> 0).
+// runtime meshes (engine/f3d.c): matrices of the asset data, stored after the mesh header
+#define MSRC_CONSTMUL 3
+#define MSRC_CONSTLOAD 4
+static const MtxF* const_mtx(const PMeshHdr* mesh, int id) {
+    return (const MtxF*)((const u8*)mesh + ((sizeof(PMeshHdr) + 15) & ~15u)) + id;
+}
+
 static void upload_palette(const PMeshHdr* mesh) {
+    bool hasConst = false;
+    for (int i = 0; i < mesh->numPalette; i++) {
+        hasConst |= mesh->palette[i][0] >= MSRC_CONSTMUL;
+    }
     if (sC.palLoaded && sC.palGen == R.genMtx && sC.palN == mesh->numPalette &&
+        (!hasConst || sC.palMesh == mesh) &&
         (mesh->numPalette == 0 || memcmp(sC.palKey, mesh->palette, 2 * mesh->numPalette) == 0)) {
         return;
     }
+    sC.palMesh = mesh;
     sC.palLoaded = true;
     sC.palGen = R.genMtx;
     sC.palN = mesh->numPalette;
@@ -726,6 +752,11 @@ static void upload_palette(const PMeshHdr* mesh) {
         } else if (type == MSRC_SEGMUL) {
             mtx_mul(&tmp, &R.segMtx[id & 15][(id >> 4) & 3], &R.base);
             model = &tmp;
+        } else if (type == MSRC_CONSTMUL) {
+            mtx_mul(&tmp, const_mtx(mesh, id), &R.base);
+            model = &tmp;
+        } else if (type == MSRC_CONSTLOAD) {
+            model = const_mtx(mesh, id);
         }
         MtxF r;
         mtx_mul(&r, model, &R.vp);
@@ -1191,7 +1222,9 @@ static void exec_mesh(const DsObj* obj, const PMeshHdr* mesh, int depth) {
                 t->ult = (s16)(op[4] >> 16);
                 t->shiftS = op[5] & 0xF;
                 t->shiftT = (op[5] >> 4) & 0xF;
-                if (kind == TEXKIND_STATIC) {
+                if (kind == 3) { // runtime mesh: the decoded texture itself (engine/f3d.c)
+                    t->tex = (const DsTexture*)(uintptr_t)op[3];
+                } else if (kind == TEXKIND_STATIC) {
                     t->tex = DsObj_Texture(obj, id);
                 } else if (kind == TEXKIND_SEGMENT) {
                     const Segment* sg = &R.seg[id & 15];
@@ -1364,6 +1397,10 @@ static bool seg_record(u8 op, u8 r, u8 g, u8 b, u8 a, const DsObj* obj, const PM
 }
 
 static bool resolve_dl(u32 segAddr, const DsObj** outObj, const PMeshHdr** outMesh) {
+    // the original list, compiled at run time with the actual state (engine/f3d.c); else the offline mesh
+    if (F3D_Resolve(segAddr & 0x0FFFFFFF, sRecSeg >= 0 ? -1 : (int)sTarget, outObj, outMesh)) {
+        return true;
+    }
     DsObj* obj = sSegObj[(segAddr >> 24) & 15];
     if (obj == NULL) {
         return false;
@@ -2005,6 +2042,7 @@ void Gfx3D_BeginFrame(void) {
     }
     sCmdCur ^= 1;
     sInterpPrevValid = hadFrame; // (Gfx3D_InterpReset during this frame clears it)
+    F3D_BeginFrame();
     interp_begin_record();
     sFramePos = 0;
     for (int i = 0; i < GFX_BUF_COUNT; i++) {
@@ -2024,6 +2062,7 @@ void Gfx3D_EndFrame(void) {
 }
 
 void Gfx3D_Replay(float t) {
+    F3D_ReleaseRetired(); // the GPU is idle here (Screen_BeginFrame)
     sInterpT = t;
     sDynFrame++;
     sDynVtxPos = 0; // the previous frame's GPU work is done (Screen_BeginFrame)
@@ -2161,6 +2200,19 @@ static void rdp_cancel(void);
 void Gfx3D_LoadTextureBlockTile(int tile, const void* img, int fmt, int siz, int w, int h, int pal, int cms, int cmt,
                                 int masks, int maskt) {
     rdp_cancel();
+    {
+        // following lists of this buffer find the image in texture memory, as on the original
+        const void* p = img;
+        if (ASSET_IS_TOKEN(img)) {
+            DsObj* o = sSegObj[ASSET_SEG(img)];
+            u32 off = ASSET_SRC(img) & 0xFFFFFF;
+            p = (o != NULL && o->raw != NULL && off < o->rawSize) ? o->raw + off
+                : sRawSeg[ASSET_SEG(img)] != NULL ? sRawSeg[ASSET_SEG(img)] + off : NULL;
+        }
+        if (p != NULL) {
+            F3D_NoteTextureBlock(sTarget, tile, p, fmt, siz, w, h, pal, cms, cmt, masks, maskt);
+        }
+    }
     CmdLoadBlock* c = rec(x_loadblock, sizeof(CmdLoadBlock));
     if (c) {
         c->tile = tile;
@@ -2237,12 +2289,8 @@ static void x_texrect(const void* p) {
     C3D_CullFace(GPU_CULL_NONE);
     C3D_FogGasMode(GPU_NO_FOG, GPU_PLAIN_DENSITY, false);
     sC.valid = false;
-    C3D_Tex* ct = (C3D_Tex*)&tex->tex;
     bool bilerp = MODE_TEXFILT(R.mode) != 0;
-    C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
-    C3D_TexSetWrap(ct, rect_wrap(b->cms, b->masks), rect_wrap(b->cmt, b->maskt));
-    C3D_TexBind(0, ct);
-    sC.bound[0] = NULL;
+    bind_view(0, &tex->tex, bilerp ? GPU_LINEAR : GPU_NEAREST, rect_wrap(b->cms, b->masks), rect_wrap(b->cmt, b->maskt));
     // rectangle in screen pixels (10.2), texture start in texels (10.5), step per pixel (5.10)
     float x0 = r->xl / 4.0f, y0 = r->yl / 4.0f, x1 = r->xh / 4.0f, y1 = r->yh / 4.0f;
     float s0 = r->s / 32.0f, t0 = r->t / 32.0f + sRectRow;
@@ -2252,11 +2300,8 @@ static void x_texrect(const void* p) {
     const DsTexture* tex1 = sRectTex1.img != NULL ? rect_texture(&sRectTex1) : NULL;
     if (tex1 != NULL) {
         // TEXEL1: the same rectangle coordinates, relative to tile 1's origin
-        C3D_Tex* ct1 = (C3D_Tex*)&tex1->tex;
-        C3D_TexSetFilter(ct1, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
-        C3D_TexSetWrap(ct1, rect_wrap(sRectTex1.cms, sRectTex1.masks), rect_wrap(sRectTex1.cmt, sRectTex1.maskt));
-        C3D_TexBind(1, ct1);
-        sC.bound[1] = NULL;
+        bind_view(1, &tex1->tex, bilerp ? GPU_LINEAR : GPU_NEAREST, rect_wrap(sRectTex1.cms, sRectTex1.masks),
+                  rect_wrap(sRectTex1.cmt, sRectTex1.maskt));
         float ds = (sRectTileOrigin[1][0] - sRectTileOrigin[0][0]) / 4.0f;
         float dt = (sRectTileOrigin[1][1] - sRectTileOrigin[0][1]) / 4.0f;
         float W1 = tex1->w, H1 = tex1->h;
@@ -2470,21 +2515,22 @@ static void x_quad(const void* p) {
     rect_state();
     float W = 1.0f, H = 1.0f;
     if (tex != NULL) {
-        C3D_Tex* ct = (C3D_Tex*)&tex->tex;
         bool bilerp = MODE_TEXFILT(R.mode) != 0;
-        C3D_TexSetFilter(ct, bilerp ? GPU_LINEAR : GPU_NEAREST, bilerp ? GPU_LINEAR : GPU_NEAREST);
-        C3D_TexSetWrap(ct, rect_wrap(b->cms, b->masks), rect_wrap(b->cmt, b->maskt));
-        C3D_TexBind(0, ct);
+        bind_view(0, &tex->tex, bilerp ? GPU_LINEAR : GPU_NEAREST, rect_wrap(b->cms, b->masks),
+                  rect_wrap(b->cmt, b->maskt));
         W = tex->w;
         H = tex->h;
     } else {
         C3D_TexBind(0, &sWhite);
+        sC.bound[0] = &sWhite;
     }
     float row = sRectRow;
     sC.bound[0] = NULL;
     static const int kTri[6] = { 0, 1, 2, 0, 2, 3 };
     for (int tri = 0; tri < q->n; tri++) {
-        // clip against the near plane (z >= -w, as the RSP's near clip) before the perspective divide
+        // clip only what lies behind the eye (w > 0) before the perspective divide: the original's microcode
+        // (F3DZEX2 NoN) does no near-plane clipping, and the beating heart's quad lies in front of the
+        // orthographic near plane
         ScreenVtx in[3], poly[4];
         for (int k = 0; k < 3; k++) {
             in[k] = sOvlVtx[q->i[kTri[3 * tri + k]] & 31];
@@ -2493,7 +2539,7 @@ static void x_quad(const void* p) {
         for (int k = 0; k < 3; k++) {
             const ScreenVtx* a = &in[k];
             const ScreenVtx* b = &in[(k + 1) % 3];
-            float da = a->cz + a->cw, db = b->cz + b->cw;
+            float da = a->cw - 1e-4f, db = b->cw - 1e-4f;
             if (da >= 0.0f) {
                 poly[n++] = *a;
             }

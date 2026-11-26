@@ -22,3 +22,8 @@ void Screen_DrawOnScreen(void);
 #include <citro3d.h>
 void Screen_CaptureFrame(void);
 const C3D_Tex* Screen_CaptureTexture(void);
+// the top screen's game area as presented at the end of the next frame, written to `path` (24-bit BMP)
+void Screen_RequestSnapshot(const char* path);
+// the frame being presented is a recorded game frame (t = 1), not an interpolated one (snapshots wait for one)
+void Screen_SetFrameExact(bool exact);
+bool Screen_SnapshotPending(void); // a snapshot waits for an exact frame: present one

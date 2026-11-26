@@ -20,7 +20,7 @@
 #define STICK_MAX 80   // N64 stick full deflection (game clamps relative values itself)
 
 static PadState sQueue[SAMPLE_QUEUE];
-typedef struct { s16 x, y; bool down; } TouchSample;
+typedef struct { s16 x, y; bool down; u32 keys; } TouchSample; // + the 2DS keys of the sample
 static TouchSample sTouchQueue[SAMPLE_QUEUE]; // touch screen, sampled with sQueue
 static bool sTouchWasDown;
 static s32 sTap = TOUCH_NONE; // tap target of the current game frame (Touch_TakeTap)
@@ -135,6 +135,7 @@ static PadState sample_keys(TouchSample* t) {
     t->y = tp.py;
     t->down = (k & KEY_TOUCH) != 0;
     script_state(sRetrace++, &k, &c, t);
+    t->keys = k;
     if (k & KEY_A) p.button |= BTN_A;
     if (k & KEY_B) p.button |= BTN_B;
     if (k & KEY_L) p.button |= BTN_Z;
@@ -223,10 +224,51 @@ s32 Touch_TakeTap(int first, int count) {
     return -1;
 }
 
+// The 2DS keys and touch of the samples of the current game frame (tools that need keys the N64 layout
+// merges, e.g. the asset inspector): held = last sample, pressed = went down during the frame.
+static u32 sRawHeld, sRawPressed, sRawPrev;
+static TouchSample sRawTouch;
+static bool sRawTapped;
+static s16 sRawTapX, sRawTapY;
+
+u32 input_keys_held(void) {
+    return sRawHeld;
+}
+
+u32 input_keys_pressed(void) {
+    return sRawPressed;
+}
+
+bool input_touch_held(s16* x, s16* y) {
+    *x = sRawTouch.x;
+    *y = sRawTouch.y;
+    return sRawTouch.down;
+}
+
+bool input_touch_tapped(s16* x, s16* y) {
+    *x = sRawTapX;
+    *y = sRawTapY;
+    return sRawTapped;
+}
+
+static void raw_sample(const TouchSample* t) {
+    sRawPressed |= t->keys & ~sRawPrev;
+    if (t->down && !sRawTouch.down) {
+        sRawTapped = true;
+        sRawTapX = t->x;
+        sRawTapY = t->y;
+    }
+    sRawPrev = sRawHeld = t->keys;
+    sRawTouch = *t;
+}
+
 void input_consume(int count) {
     sTap = TOUCH_NONE; // a tap not taken by the frame it started in is dropped
+    sRawPressed = 0;
+    sRawTapped = false;
     for (int n = 0; n < count; n++) {
         PadState p = sQueue[sTail];
+        raw_sample(&sTouchQueue[sTail]);
         apply_touch(&p, &sTouchQueue[sTail]);
         sTail = (sTail + 1) % SAMPLE_QUEUE;
         update_inputs(&p);

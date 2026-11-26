@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "engine/dsobj.h"
+#include "engine/f3d.h"
 #include "engine/res.h"
 #include "engine/crc32.h"
 #include "engine/log.h"
@@ -76,6 +77,29 @@ DsObj* DsObj_LoadInto(const char* path, void* region, u32 regionSize, u32* outUs
     obj->tex = calloc(hdr.numTex ? hdr.numTex : 1, sizeof(DsTexture));
     obj->numTex = hdr.numTex;
     strncpy(obj->path, path, sizeof(obj->path) - 1);
+    // the original file next to it (engine/f3d.c): <...>.pobj -> <...>.raw
+    {
+        char rawPath[80];
+        snprintf(rawPath, sizeof(rawPath), "romfs:%s", path);
+        char* dot = strrchr(rawPath, '.');
+        if (gF3DEnabled && dot != NULL && strcmp(dot, ".pobj") == 0) {
+            strcpy(dot, ".raw");
+            FILE* rf = fopen(rawPath, "rb");
+            if (rf != NULL) {
+                fseek(rf, 0, SEEK_END);
+                long n = ftell(rf);
+                fseek(rf, 0, SEEK_SET);
+                u8* raw = n > 0 ? malloc(n) : NULL;
+                if (raw != NULL && fread(raw, 1, n, rf) == (size_t)n) {
+                    obj->raw = raw;
+                    obj->rawSize = n;
+                } else {
+                    free(raw);
+                }
+                fclose(rf);
+            }
+        }
+    }
     if (outUsed) {
         *outUsed = inRegion ? need : 0;
     }
@@ -98,6 +122,10 @@ void DsObj_Free(DsObj* obj) {
     free(obj->tex);
     if (obj->ownsData) {
         linearFree(obj->data);
+    }
+    if (obj->raw != NULL) {
+        F3D_FlushCache(); // compiled lists may point into it (released once the GPU is done with them)
+        free((void*)obj->raw);
     }
     free(obj);
 }
