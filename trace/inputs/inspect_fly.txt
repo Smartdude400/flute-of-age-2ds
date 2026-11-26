@@ -1,0 +1,8 @@
+# inspector: fly mode in the forest, turn and rise, capture
+300 START
+306 -
+400 R
+430 DL
+470 -
+520 SELECT
+526 -

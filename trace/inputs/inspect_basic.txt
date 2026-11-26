@@ -1,0 +1,13 @@
+# inspector: capture, next part, capture, fly mode, move, capture
+300 SELECT
+306 -
+400 X
+406 -
+500 SELECT
+506 -
+600 START
+606 -
+700 UP
+800 -
+850 SELECT
+856 -
