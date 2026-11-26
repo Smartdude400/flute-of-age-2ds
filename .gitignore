@@ -21,6 +21,8 @@ build/
 build_boot/
 build_h*/
 build_fs/
+build_inspect/
+build*_f3d/
 *.3dsx
 *.elf
 *.smdh
@@ -29,6 +31,7 @@ build_fs/
 
 # ---- local test artefacts
 evidence/
+captures/
 build_log.csv
 build_all_report.txt
 __pycache__/

@@ -28,6 +28,12 @@ OUT = os.path.join(HERE, "..", "romfs", "ovl")
 OUT_HDR = os.path.join(HERE, "..", "source", "game", "assets_agg")
 OVERLAY_XML = os.path.join(xmlspec.XML_ROOT, "overlays")
 
+# Lists the game only ever draws right after another list that sets their texture / material state (as
+# build_object.py PRELUDES): compiled with that state as their start. {overlay: {list: prelude list}}
+PRELUDES = {
+    "ovl_En_Varkon_Mant": {"gMantDL": "gMantMaterialDL"},  # z_en_varkon_mant.c EnVarkonMant_DrawCloak
+}
+
 
 class VramMem:
     """Overlay images placed at their VRAM addresses; DLCompiler reads them as segment 0x80."""
@@ -70,16 +76,30 @@ def dl_ok(data, off):
 def find_base(data, vram, symbols):
     dls = [off for tag, sym, off, a in symbols if tag == "DList"]
     arrays = {off for tag, sym, off, a in symbols if tag == "Array"}
+    textures = {off for tag, sym, off, a in symbols if tag == "Texture"}
     if not dls:
         return None
-    cands = []
+    cands, tcands = [], []
     for p in range(0, len(data) - 8, 8):
         w0, w1 = struct.unpack_from(">II", data, p)
         if w0 >> 24 == 0x01 and vram <= w1 < vram + len(data):
             for a in arrays or {0}:
                 cands.append(w1 - vram - a)
+        elif w0 >> 24 == 0xFD and vram <= w1 < vram + len(data):
+            for a in textures:
+                tcands.append(w1 - vram - a)
+    # vertex loads first; texture images only for blocks whose lists load no overlay vertices (runtime
+    # vertices: Ganondorf's cape), each texture candidate confirmed by a list that loads that image
     for base in sorted(set(cands)) or range(0, len(data), 8):
         if base >= 0 and all(dl_ok(data, base + off) for off in dls):
+            if cands or not tcands:
+                return base
+            break
+    for base in sorted(set(tcands)):
+        if base >= 0 and all(dl_ok(data, base + off) for off in dls) and any(
+                struct.unpack_from(">I", data, base + off + 8 * k)[0] >> 24 == 0xFD
+                and struct.unpack_from(">I", data, base + off + 8 * k + 4)[0] - vram - base in textures
+                for off in dls for k in range(16) if base + off + 8 * k + 8 <= len(data)):
             return base
     return None
 
@@ -115,13 +135,15 @@ def main():
                  "// (original VRAM addresses, resolved against /ovl/ovldata.pobj bound as segment 0).",
                  f"#ifndef ASSET_{name.upper()}_H", f"#define ASSET_{name.upper()}_H", '#include "asset_token.h"', ""]
         unsup0, w_start, ovl_meshes, n = dict(comp.unsupported), len(warns), {}, 0
+        sym_addr = {sym: vram + base + off for tag, sym, off, attrs in symbols}
+        preludes = {sym_addr[a]: sym_addr[b] for a, b in PRELUDES.get(name, {}).items()}
         for tag, sym, off, attrs in symbols:
             addr = vram + base + off
             lines.append(f"#define {sym} ASSET_TOKEN(0x{addr:08X}) // {tag}")
             if tag == "DList":
                 n += 1
                 try:
-                    ovl_meshes[addr & 0x0FFFFFFF] = comp.compile(addr)
+                    ovl_meshes[addr & 0x0FFFFFFF] = comp.compile(addr, prelude=preludes.get(addr))
                 except (KeyError, RuntimeError, IndexError, ValueError, struct.error) as e:
                     warns.append(f"{name} DL {sym}: {e}")
         new_unsup = {k: v - unsup0.get(k, 0) for k, v in comp.unsupported.items() if v != unsup0.get(k, 0)}

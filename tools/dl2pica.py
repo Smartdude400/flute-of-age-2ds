@@ -33,7 +33,7 @@ G_MV_LIGHT = 0x0A
 DYNAMIC_DL_SEGMENTS = (0x01, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D)  # set at draw time by game code
 DYNAMIC_TEX_SEGMENTS = (0x08, 0x09, 0x0A, 0x0B, 0x0C)
 # vertex buffers the game fills at runtime and binds to a segment (skinned limbs: segment 8)
-DYNAMIC_VTX_SEGMENTS = (0x08,)
+DYNAMIC_VTX_SEGMENTS = (0x08, 0x0C)  # skin buffers; cloth (Ganondorf's cape)
 MTX_SEGMENT = 0x0D
 
 # ---- native op codes (source/engine/pmesh.h)

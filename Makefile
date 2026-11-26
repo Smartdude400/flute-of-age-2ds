@@ -76,10 +76,18 @@ ifdef INTERP_TEST_T
 CFLAGS	+=	-DPORT_INTERP_TEST_T=$(INTERP_TEST_T)
 endif
 # Test boot into Play: make BOOT=0xEE (entrance index, e.g. ENTR_SYLVAN_FOREST_0)
+# Asset inspector (source/test/inspector.c): make INSPECT=1 [BOOT=<entrance>]; needs romfs/inspect/catalog.txt
+# (python tools/build_inspect_catalog.py)
+ifdef INSPECT
+TARGET	:=	foa_3ds_inspect
+BUILD	:=	build_inspect
+CFLAGS	+=	-DPORT_INSPECT -DPORT_BOOT_ENTRANCE=$(if $(BOOT),$(BOOT),0xEE)
+else
 ifdef BOOT
 TARGET	:=	foa_3ds_boot
 BUILD	:=	build_boot
 CFLAGS	+=	-DPORT_BOOT_ENTRANCE=$(BOOT)
+endif
 endif
 
 # Test boot into file select: make FILESELECT=1
@@ -94,6 +102,12 @@ ifdef HARNESS
 TARGET	:=	foa_3ds_h$(HARNESS)
 BUILD	:=	build_h$(HARNESS)
 CFLAGS	+=	-DPORT_TEST_HARNESS=$(HARNESS) -DPORT_TEST_SCENE=$(if $(SCENE),$(SCENE),0x0206F000)
+endif
+# Runtime display-list compiler (engine/f3d.c) instead of the offline-compiled meshes: make F3D=1
+ifdef F3D
+CFLAGS	+=	-DPORT_F3D
+TARGET	:=	$(TARGET)_f3d
+BUILD	:=	$(BUILD)_f3d
 endif
 
 #---------------------------------------------------------------------------------

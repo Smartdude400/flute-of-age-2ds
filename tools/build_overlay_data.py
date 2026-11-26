@@ -43,7 +43,7 @@ def elem(attrs_el):
     return a
 
 
-def locate(data, symbols, start, end):
+def locate(data, symbols, start, end, limit=1000):
     vtx = [(off, int(a["Count"], 0)) for tag, sym, off, a in symbols if tag == "Array" and a.get("_elem") == "Vtx"]
     span = max(off + array_size(a) for tag, sym, off, a in symbols if tag == "Array")
     hits = []
@@ -52,7 +52,7 @@ def locate(data, symbols, start, end):
         for off, n in vtx:
             for i in range(n):
                 x, y, z, flag = struct.unpack_from(">hhhH", data, base + off + 16 * i)
-                if flag != 0 or max(abs(x), abs(y), abs(z)) > 1000:
+                if flag != 0 or max(abs(x), abs(y), abs(z)) > limit:
                     ok = False
                     break
             if not ok:
@@ -87,6 +87,10 @@ def main():
         tail = struct.unpack_from(">I", data, len(data) - 4)[0]
         text, dsize = struct.unpack_from(">II", data, len(data) - tail)
         hits = locate(data, spec, text, text + dsize)
+        if not hits:  # model-space vertices (Ganondorf's cloak: rest layout up to 11000): any s16, no all-zero block
+            hits = [h for h in locate(data, spec, text, text + dsize, 0x7FFF)
+                    if any(data[h + off:h + off + 16 * int(a["Count"], 0)].strip(b"\0")
+                           for tag, sym, off, a in spec if tag == "Array" and a.get("_elem") == "Vtx")]
         if len(hits) != 1:
             print(f"{ovl}: data block not located uniquely ({[hex(h) for h in hits][:4]})")
             continue
