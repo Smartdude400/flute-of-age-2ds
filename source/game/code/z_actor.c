@@ -372,7 +372,6 @@ void Attention_Draw(Attention* attention, PlayState* play) {
 
     actor = attention->reticleActor;
 
-
     if (attention->reticleFadeAlphaControl != 0) {
         LockOnReticle* reticle;
         Player* player = GET_PLAYER(play);

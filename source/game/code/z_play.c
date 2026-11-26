@@ -5,6 +5,9 @@
 #include "engine/runner.h"
 #include "engine/gfx.h"
 #include "engine/screen.h"
+#ifdef PORT_INSPECT
+#include "test/inspector.h"
+#endif
 #include "engine/asset.h"
 #include "line_numbers.h"
 
@@ -1155,6 +1158,11 @@ void Play_DrawOverlayElements(PlayState* this) {
         KaleidoScopeCall_Draw(this);
     }
 
+#ifdef PORT_INSPECT
+    if (!IS_PAUSED(&this->pauseCtx)) {
+        Inspector_DrawUI(this); // the inspector panel instead of the HUD
+    } else
+#endif
     if (gSaveContext.gameMode == GAMEMODE_NORMAL) {
         Interface_Draw(this);
     }
@@ -1180,9 +1188,13 @@ void Play_Draw(PlayState* this) {
     Asset_SetSegment(5, this->objectCtx.slots[this->objectCtx.subKeepSlot].dsObj);
     Asset_SetSegment(2, (DsObj*)this->sceneSegment);
 
-
-
-
+#ifdef PORT_INSPECT
+    // asset inspector build (source/test/inspector.c): OBJECTS mode draws instead of the scene
+    Inspector_PlayFrame(this);
+    if (Inspector_DrawObjects(this)) {
+        return;
+    }
+#endif
 
     Gfx3D_SetupFrame(0, 0, 0);
 
@@ -1190,7 +1202,23 @@ void Play_Draw(PlayState* this) {
         Play_SetFog(this);
 
         View_SetPerspective(&this->view, this->view.fovy, this->view.zNear, this->lightCtx.zFar);
+#ifdef PORT_INSPECT
+        Inspector_OverrideView(this);
+#endif
         View_Apply(&this->view, VIEW_ALL);
+
+        {
+            // (native) View_ApplyLetterbox scissored the game's opaque and translucent lists to the letterbox
+            // (Z-targeting, cutscenes); the renderer has no scissor, so the bars are filled black over them at
+            // the start of the overlay list, under everything the overlay draws (as on the original)
+            s32 letterboxSize = CLAMP(Letterbox_GetSize(), 0, SCREEN_HEIGHT / 2);
+            if (letterboxSize > 0) {
+                Gfx3D_SetupDLTo(GFX_BUF_OVL, 57);
+                GFX_TO(OVL, Gfx3D_SetPrimColor(0, 0, 0, 255));
+                GFX_TO(OVL, Gfx3D_FillRectangle(0, 0, SCREEN_WIDTH - 1, letterboxSize - 1));
+                GFX_TO(OVL, Gfx3D_FillRectangle(0, SCREEN_HEIGHT - letterboxSize, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1));
+            }
+        }
 
         // The billboard matrix temporarily stores the viewing matrix
         // native: view->viewing / view->projection are already the s15.16-quantized float matrices

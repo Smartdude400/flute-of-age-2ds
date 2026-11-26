@@ -434,6 +434,7 @@ void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, 
     }
 
     Matrix_Pop();
+    Gfx3D_FlexEnd(); // native pass 2: store matrices to GX slots and draw
 }
 
 /**

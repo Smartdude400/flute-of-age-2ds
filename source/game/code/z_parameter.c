@@ -3234,6 +3234,9 @@ void Interface_Draw(PlayState* play) {
     if (pauseCtx->debugState == PAUSE_DEBUG_STATE_CLOSED) {
         Interface_InitVertices(play);
         func_8008A994(interfaceCtx);
+        // native (2DS layout): hearts, magic, crowns and keys on the top screen with the game; the item buttons
+        // and the minimap on the bottom screen
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_TOP));
         Health_DrawMeter(play);
 
         Gfx_SetupDL_39Overlay(play->state.gfxCtx);
@@ -3337,11 +3340,15 @@ void Interface_Draw(PlayState* play) {
         }
 
         Magic_DrawMeter(play);
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_BOTTOM));
         Minimap_Draw(play);
 
         if ((R_PAUSE_BG_PRERENDER_STATE != PAUSE_BG_PRERENDER_PROCESS) &&
             (R_PAUSE_BG_PRERENDER_STATE != PAUSE_BG_PRERENDER_READY)) {
+            // native (2DS layout): the target reticle marks an actor of the game view: top screen
+            GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_TOP));
             Attention_Draw(&play->actorCtx.attention, play);
+            GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_BOTTOM));
         }
 
         Gfx_SetupDL_39Overlay(play->state.gfxCtx);
@@ -3510,6 +3517,10 @@ void Interface_Draw(PlayState* play) {
         }
 
         Gfx_SetupDL_39Overlay(play->state.gfxCtx);
+
+        // native (2DS layout): horse carrots, archery score and timers are placed around the hearts and the A
+        // button: top screen
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_TOP));
 
         if (!IS_PAUSED(&play->pauseCtx)) {
             if (gSaveContext.minigameState != 1) {
@@ -4014,6 +4025,7 @@ void Interface_Draw(PlayState* play) {
                 }
             }
         }
+        GFX_TO(OVL, Gfx3D_ScreenHere(SCREEN_BOTTOM));
     }
 
 #if DEBUG_FEATURES
